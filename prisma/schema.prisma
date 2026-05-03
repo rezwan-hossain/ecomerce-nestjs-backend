@@ -39,3 +39,10 @@ enum Role {
   ADMIN
   SUPER_ADMIN
 }
+
+model Product {
+  id               String  @id @default(uuid())
+  name             String
+  description      String
+  shortDescription String?
+}
