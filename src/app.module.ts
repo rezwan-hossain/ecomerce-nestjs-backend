@@ -7,6 +7,7 @@ import { ZodValidationPipe } from 'nestjs-zod';
 import { ProductsModule } from './modules/products/products.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { AppLoggerModule } from './common/logger/logger.module';
+import 'dotenv/config';
 
 @Module({
   imports: [AppLoggerModule, UsersModule, ProductsModule, PrismaModule],
