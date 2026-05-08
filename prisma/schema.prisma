@@ -1,8 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Get a free hosted Postgres database in seconds: `npx create-db`
-
 generator client {
   provider     = "prisma-client"
   output       = "../src/generated/prisma"
@@ -14,7 +9,7 @@ datasource db {
 }
 
 model User {
-  id         String    @id @default(uuid())
+  id         String    @id @default(uuid(7))
   email      String    @unique
   firstName  String?
   lastName   String?
@@ -41,7 +36,7 @@ enum Role {
 }
 
 model Category {
-  id   String @id @default(uuid())
+  id   String @id @default(uuid(7))
   name String @unique
   slug String @unique
 
@@ -49,14 +44,16 @@ model Category {
   parent   Category?  @relation("CategoryTree", fields: [parentId], references: [id])
   children Category[] @relation("CategoryTree")
 
-  products Product[]
+  products ProductCategory[]
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+  
+  @@map("categories")
 }
 
 model Product {
-  id               String  @id @default(uuid())
+  id               String  @id @default(uuid(7))
   name             String
   description      String
   shortDescription String?
@@ -68,11 +65,14 @@ model Product {
   brandId String?
   brand   Brand?  @relation(fields: [brandId], references: [id])
 
-  tags     ProductTag[]
-  category Category[]
+  categories ProductCategory[]
+  tags       ProductTag[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@map("products")
+
 }
 
 enum productStatus {
@@ -82,28 +82,58 @@ enum productStatus {
 }
 
 model Brand {
-  id      String  @id @default(uuid())
+  id      String  @id @default(uuid(7))
   name    String  @unique
   slug    String
   logoUrl String?
 
-  products    Product[]
-  productTags ProductTag[]
+  products Product[]
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  @@map("brands")
+}
+
+model Tag {
+  id          String        @id @default(uuid())
+
+  name        String        @unique
+  slug        String        @unique
+
+  products    ProductTag[]
+
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  @@map("tags")
 }
 
 model ProductTag {
-  id   String @id @default(uuid())
-  tag  String
-  slug String
+  productId   String
+  tagId       String
 
-  productId String
-  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
-  brand     Brand?  @relation(fields: [brandId], references: [id])
-  brandId   String?
+  product     Product   @relation(fields: [productId], references: [id], onDelete: Cascade)
+  tag         Tag       @relation(fields: [tagId], references: [id], onDelete: Cascade)
 
-  @@unique([productId, slug])
-  @@index([tag])
+  assignedAt  DateTime  @default(now())
+
+  @@id([productId, tagId])
+
+  @@index([tagId])
+
+  @@map("product_tags")
+}
+
+model ProductCategory {
+  productId  String
+  categoryId String
+
+  product  Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  category Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  assignedAt DateTime @default(now())
+
+  @@id([productId, categoryId])
+  @@map("product_categories")
 }
