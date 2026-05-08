@@ -40,10 +40,70 @@ enum Role {
   SUPER_ADMIN
 }
 
+model Category {
+  id   String @id @default(uuid())
+  name String @unique
+  slug String @unique
+
+  parentId String?
+  parent   Category?  @relation("CategoryTree", fields: [parentId], references: [id])
+  children Category[] @relation("CategoryTree")
+
+  products Product[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 model Product {
   id               String  @id @default(uuid())
   name             String
   description      String
   shortDescription String?
-  slug             String
+  slug             String  @unique
+
+  status   productStatus @default(ACTIVE)
+  isActive Boolean       @default(true)
+
+  brandId String?
+  brand   Brand?  @relation(fields: [brandId], references: [id])
+
+  tags     ProductTag[]
+  category Category[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum productStatus {
+  DRAFT
+  ACTIVE
+  ARCHIVED
+}
+
+model Brand {
+  id      String  @id @default(uuid())
+  name    String  @unique
+  slug    String
+  logoUrl String?
+
+  products    Product[]
+  productTags ProductTag[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ProductTag {
+  id   String @id @default(uuid())
+  tag  String
+  slug String
+
+  productId String
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  brand     Brand?  @relation(fields: [brandId], references: [id])
+  brandId   String?
+
+  @@unique([productId, slug])
+  @@index([tag])
 }
