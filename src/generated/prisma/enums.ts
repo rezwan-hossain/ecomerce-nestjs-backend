@@ -19,10 +19,10 @@ export const Role = {
 export type Role = (typeof Role)[keyof typeof Role]
 
 
-export const productStatus = {
+export const ProductStatus = {
   DRAFT: 'DRAFT',
   ACTIVE: 'ACTIVE',
   ARCHIVED: 'ARCHIVED'
 } as const
 
-export type productStatus = (typeof productStatus)[keyof typeof productStatus]
+export type ProductStatus = (typeof ProductStatus)[keyof typeof ProductStatus]

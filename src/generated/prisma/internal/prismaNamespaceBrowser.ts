@@ -54,10 +54,20 @@ export const ModelName = {
   User: 'User',
   Category: 'Category',
   Product: 'Product',
+  ProductImage: 'ProductImage',
   Brand: 'Brand',
   Tag: 'Tag',
   ProductTag: 'ProductTag',
-  ProductCategory: 'ProductCategory'
+  ProductCategory: 'ProductCategory',
+  Option: 'Option',
+  OptionValue: 'OptionValue',
+  ProductOption: 'ProductOption',
+  ProductVariant: 'ProductVariant',
+  VariantOptionValue: 'VariantOptionValue',
+  VariantImage: 'VariantImage',
+  VariantTemplate: 'VariantTemplate',
+  TemplateOption: 'TemplateOption',
+  TemplateOptionValue: 'TemplateOptionValue'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -124,6 +134,19 @@ export const ProductScalarFieldEnum = {
 export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeof ProductScalarFieldEnum]
 
 
+export const ProductImageScalarFieldEnum = {
+  id: 'id',
+  productId: 'productId',
+  url: 'url',
+  altText: 'altText',
+  isPrimary: 'isPrimary',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ProductImageScalarFieldEnum = (typeof ProductImageScalarFieldEnum)[keyof typeof ProductImageScalarFieldEnum]
+
+
 export const BrandScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -163,6 +186,98 @@ export const ProductCategoryScalarFieldEnum = {
 } as const
 
 export type ProductCategoryScalarFieldEnum = (typeof ProductCategoryScalarFieldEnum)[keyof typeof ProductCategoryScalarFieldEnum]
+
+
+export const OptionScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type OptionScalarFieldEnum = (typeof OptionScalarFieldEnum)[keyof typeof OptionScalarFieldEnum]
+
+
+export const OptionValueScalarFieldEnum = {
+  id: 'id',
+  optionId: 'optionId',
+  value: 'value'
+} as const
+
+export type OptionValueScalarFieldEnum = (typeof OptionValueScalarFieldEnum)[keyof typeof OptionValueScalarFieldEnum]
+
+
+export const ProductOptionScalarFieldEnum = {
+  productId: 'productId',
+  optionId: 'optionId'
+} as const
+
+export type ProductOptionScalarFieldEnum = (typeof ProductOptionScalarFieldEnum)[keyof typeof ProductOptionScalarFieldEnum]
+
+
+export const ProductVariantScalarFieldEnum = {
+  id: 'id',
+  productId: 'productId',
+  sku: 'sku',
+  price: 'price',
+  stock: 'stock',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ProductVariantScalarFieldEnum = (typeof ProductVariantScalarFieldEnum)[keyof typeof ProductVariantScalarFieldEnum]
+
+
+export const VariantOptionValueScalarFieldEnum = {
+  variantId: 'variantId',
+  optionValueId: 'optionValueId'
+} as const
+
+export type VariantOptionValueScalarFieldEnum = (typeof VariantOptionValueScalarFieldEnum)[keyof typeof VariantOptionValueScalarFieldEnum]
+
+
+export const VariantImageScalarFieldEnum = {
+  id: 'id',
+  variantId: 'variantId',
+  url: 'url',
+  altText: 'altText',
+  position: 'position',
+  isPrimary: 'isPrimary',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type VariantImageScalarFieldEnum = (typeof VariantImageScalarFieldEnum)[keyof typeof VariantImageScalarFieldEnum]
+
+
+export const VariantTemplateScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type VariantTemplateScalarFieldEnum = (typeof VariantTemplateScalarFieldEnum)[keyof typeof VariantTemplateScalarFieldEnum]
+
+
+export const TemplateOptionScalarFieldEnum = {
+  id: 'id',
+  templateId: 'templateId',
+  optionId: 'optionId'
+} as const
+
+export type TemplateOptionScalarFieldEnum = (typeof TemplateOptionScalarFieldEnum)[keyof typeof TemplateOptionScalarFieldEnum]
+
+
+export const TemplateOptionValueScalarFieldEnum = {
+  id: 'id',
+  templateOptionId: 'templateOptionId',
+  optionValueId: 'optionValueId'
+} as const
+
+export type TemplateOptionValueScalarFieldEnum = (typeof TemplateOptionValueScalarFieldEnum)[keyof typeof TemplateOptionValueScalarFieldEnum]
 
 
 export const SortOrder = {

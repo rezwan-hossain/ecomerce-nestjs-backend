@@ -55,6 +55,11 @@ export type Category = Prisma.CategoryModel
  */
 export type Product = Prisma.ProductModel
 /**
+ * Model ProductImage
+ * 
+ */
+export type ProductImage = Prisma.ProductImageModel
+/**
  * Model Brand
  * 
  */
@@ -74,3 +79,48 @@ export type ProductTag = Prisma.ProductTagModel
  * 
  */
 export type ProductCategory = Prisma.ProductCategoryModel
+/**
+ * Model Option
+ * 
+ */
+export type Option = Prisma.OptionModel
+/**
+ * Model OptionValue
+ * 
+ */
+export type OptionValue = Prisma.OptionValueModel
+/**
+ * Model ProductOption
+ * 
+ */
+export type ProductOption = Prisma.ProductOptionModel
+/**
+ * Model ProductVariant
+ * 
+ */
+export type ProductVariant = Prisma.ProductVariantModel
+/**
+ * Model VariantOptionValue
+ * 
+ */
+export type VariantOptionValue = Prisma.VariantOptionValueModel
+/**
+ * Model VariantImage
+ * 
+ */
+export type VariantImage = Prisma.VariantImageModel
+/**
+ * Model VariantTemplate
+ * 
+ */
+export type VariantTemplate = Prisma.VariantTemplateModel
+/**
+ * Model TemplateOption
+ * 
+ */
+export type TemplateOption = Prisma.TemplateOptionModel
+/**
+ * Model TemplateOptionValue
+ * 
+ */
+export type TemplateOptionValue = Prisma.TemplateOptionValueModel

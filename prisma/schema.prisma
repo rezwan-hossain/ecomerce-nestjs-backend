@@ -55,11 +55,11 @@ model Category {
 model Product {
   id               String  @id @default(uuid(7))
   name             String
-  description      String
+  description      String?
   shortDescription String?
   slug             String  @unique
 
-  status   productStatus @default(ACTIVE)
+  status   ProductStatus @default(ACTIVE)
   isActive Boolean       @default(true)
 
   brandId String?
@@ -93,7 +93,7 @@ model ProductImage {
   @@map("product_images")
 }
 
-enum productStatus {
+enum ProductStatus {
   DRAFT
   ACTIVE
   ARCHIVED
@@ -160,6 +160,7 @@ model Option {
 
   values         OptionValue[] // all possible values
   productOptions ProductOption[] // which products use this option
+  templateOptions TemplateOption[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -175,6 +176,7 @@ model OptionValue {
   option Option @relation(fields: [optionId], references: [id], onDelete: Cascade)
 
   variantValues VariantOptionValue[] // which variants use this value
+  templateOptionValues TemplateOptionValue[]
 
   @@unique([optionId, value]) // no duplicate "Red" under Color
   @@index([optionId])
@@ -238,4 +240,48 @@ model VariantImage {
 
   @@index([variantId])
   @@map("variant_images")
+}
+
+// ═══════════════════════════════════════════════════
+//  VARIANT TEMPLATE
+//  e.g. "Shoe Sizes", "T-Shirt", "Beauty Product"
+// ═══════════════════════════════════════════════════
+
+model VariantTemplate {
+  id          String  @id @default(uuid(7))
+  name        String  @unique
+  description String?
+
+  options TemplateOption[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("variant_templates")
+}
+
+model TemplateOption {
+  id         String @id @default(uuid(7))
+  templateId String
+  optionId   String
+
+  template VariantTemplate @relation(fields: [templateId], references: [id], onDelete: Cascade)
+  option   Option          @relation(fields: [optionId],   references: [id], onDelete: Cascade)
+
+  values TemplateOptionValue[]
+
+  @@unique([templateId, optionId])
+  @@map("template_options")
+}
+
+model TemplateOptionValue {
+  id               String @id @default(uuid(7))
+  templateOptionId String
+  optionValueId    String
+
+  templateOption TemplateOption @relation(fields: [templateOptionId], references: [id], onDelete: Cascade)
+  optionValue    OptionValue    @relation(fields: [optionValueId],    references: [id], onDelete: Cascade)
+
+  @@unique([templateOptionId, optionValueId])
+  @@map("template_option_values")
 }
