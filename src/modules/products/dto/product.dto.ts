@@ -141,3 +141,20 @@ export class CreateProductDto extends createZodDto(createProductSchema) {}
 export const updateProductSchema = createProductSchema.partial();
 
 export class UpdateProductDto extends createZodDto(updateProductSchema) {}
+
+export const productQuerySchema = z.object({
+  page: z.coerce.number().int().min(1).default(1),
+  limit: z.coerce.number().int().min(1).max(100).default(10),
+
+  status: productStatusEnum.optional(),
+
+  isActive: z.preprocess((value) => {
+    if (value === 'true') return true;
+    if (value === 'false') return false;
+    return value;
+  }, z.boolean().optional()),
+
+  brandId: z.string().uuid().optional(),
+});
+
+export class ProductQueryDto extends createZodDto(productQuerySchema) {}

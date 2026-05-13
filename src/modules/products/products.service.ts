@@ -5,13 +5,14 @@ import {
   InternalServerErrorException,
 } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { CreateProductDto } from './dto/product.dto';
+import { CreateProductDto, ProductQueryDto } from './dto/product.dto';
 import { createSlug, generateSlugWithUUID } from 'src/common/utils/slug.util';
 // import { Prisma } from '@prisma/client';
 import {
   Decimal,
   PrismaClientKnownRequestError,
 } from '@prisma/client/runtime/client';
+import { ProductWhereInput } from 'src/generated/prisma/models/Product';
 
 @Injectable()
 export class ProductsService {
@@ -27,8 +28,20 @@ export class ProductsService {
       select: { id: true },
     });
 
+    let slug: string;
+
+    if (slugTaken) {
+      if (data.slug ?? data.name) {
+        throw new ConflictException(`Slug '${baseSlug}' is already taken`);
+      }
+
+      slug = generateSlugWithUUID(data.slug ?? data.name);
+    } else {
+      slug = baseSlug;
+    }
+
     // Rare race condition still possible → caught as P2002 below
-    const slug = slugTaken ? generateSlugWithUUID(data.name) : baseSlug;
+    // const slug = slugTaken ? generateSlugWithUUID(data.name) : baseSlug;
 
     //-----------------VALIDATIONS if id exists---------------------------
 
@@ -258,5 +271,103 @@ export class ProductsService {
         'Product creation failed unexpectedly',
       );
     }
+  }
+
+  async findAll(query: ProductQueryDto) {
+    const page = query.page ?? 1;
+    const limit = query.limit ?? 10;
+    const skip = (page - 1) * limit;
+
+    const where: ProductWhereInput = {
+      status: query.status,
+      isActive: query.isActive,
+      brandId: query.brandId,
+    };
+
+    const [total, products] = await Promise.all([
+      this.prisma.product.count({ where }),
+      this.prisma.product.findMany({
+        where,
+        skip,
+        take: limit,
+        orderBy: { createdAt: 'desc' },
+        select: {
+          id: true,
+          name: true,
+          slug: true,
+          description: true,
+          shortDescription: true,
+          status: true,
+          isActive: true,
+          createdAt: true,
+
+          brand: {
+            select: {
+              id: true,
+              name: true,
+              slug: true,
+              logoUrl: true,
+            },
+          },
+
+          categories: {
+            select: {
+              category: {
+                select: {
+                  id: true,
+                  name: true,
+                  slug: true,
+                },
+              },
+            },
+          },
+
+          tags: {
+            select: {
+              tag: {
+                select: {
+                  id: true,
+                  name: true,
+                  slug: true,
+                },
+              },
+            },
+          },
+
+          images: {
+            where: { isPrimary: true },
+            select: {
+              id: true,
+              url: true,
+              altText: true,
+              isPrimary: true,
+            },
+            take: 1,
+          },
+
+          variants: {
+            select: {
+              id: true,
+              sku: true,
+              price: true,
+              stock: true,
+              isActive: true,
+            },
+          },
+        },
+      }),
+    ]);
+
+    return {
+      data: products,
+      meta: {
+        total,
+        page,
+        limit,
+        totalPages: Math.ceil(total / limit),
+        hasNext: page * limit < total,
+        hasPrev: page > 1,
+      },
+    };
   }
 }
