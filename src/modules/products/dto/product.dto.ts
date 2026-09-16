@@ -63,6 +63,7 @@ const productImageSchema = z.object({
   url: z.url(),
   altText: z.string().max(255).optional(),
   isPrimary: z.boolean().optional(),
+  position: z.number().int().nonnegative().optional(),
 });
 
 const variantImageSchema = z.object({
@@ -158,3 +159,28 @@ export const productQuerySchema = z.object({
 });
 
 export class ProductQueryDto extends createZodDto(productQuerySchema) {}
+
+export const addProductImagesSchema = z.object({
+  images: z.array(productImageSchema).min(1, 'At least one image is required'),
+});
+
+export class AddProductImagesDto extends createZodDto(addProductImagesSchema) {}
+
+export const addVariantSchema = z.object({
+  sku: z.string().min(1).max(100),
+  price: z.coerce.number().nonnegative().multipleOf(0.01),
+  stock: z.number().int().nonnegative().default(0),
+  isActive: z.boolean().optional(),
+  optionValueIds: z.array(z.string().uuid()).optional(),
+  images: z
+    .array(
+      z.object({
+        url: z.string().url(),
+        altText: z.string().max(255).optional(),
+        isPrimary: z.boolean().optional(),
+        position: z.number().int().nonnegative().optional(),
+      }),
+    )
+    .optional(),
+});
+export class AddVariantDto extends createZodDto(addVariantSchema) {}

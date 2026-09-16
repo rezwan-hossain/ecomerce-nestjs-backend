@@ -3,9 +3,15 @@ import {
   ConflictException,
   Injectable,
   InternalServerErrorException,
+  NotFoundException,
 } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { CreateProductDto, ProductQueryDto } from './dto/product.dto';
+import {
+  AddProductImagesDto,
+  AddVariantDto,
+  CreateProductDto,
+  ProductQueryDto,
+} from './dto/product.dto';
 import { createSlug, generateSlugWithUUID } from 'src/common/utils/slug.util';
 // import { Prisma } from '@prisma/client';
 import {
@@ -17,6 +23,83 @@ import { ProductWhereInput } from 'src/generated/prisma/models/Product';
 @Injectable()
 export class ProductsService {
   constructor(private prisma: PrismaService) {}
+
+  private async validateOptionValueIds(
+    optionIds: string[],
+    variants: CreateProductDto['variants'],
+  ): Promise<void> {
+    const allValueIds = [
+      ...new Set(variants.flatMap((v) => v.optionValueIds ?? [])),
+    ];
+
+    if (!allValueIds.length) return;
+
+    // 1. Fetch all from DB in one query
+    const dbValues = await this.prisma.optionValue.findMany({
+      where: { id: { in: allValueIds } },
+      select: { id: true, optionId: true },
+    });
+
+    // 1. Values exist in DB
+    if (dbValues.length !== allValueIds.length) {
+      const foundIds = new Set(dbValues.map((v) => v.id));
+      const missing = allValueIds.filter((id) => !foundIds.has(id));
+      throw new BadRequestException(
+        `Option values not found: ${missing.join(', ')}`,
+      );
+    }
+
+    // Build lookup: valueId → optionId
+    const valueToOptionId = new Map(dbValues.map((v) => [v.id, v.optionId]));
+    const declaredOptionIds = new Set(optionIds);
+
+    // 2. Values belong to declared optionIds
+    for (const { id, optionId } of dbValues) {
+      if (!declaredOptionIds.has(optionId)) {
+        throw new BadRequestException(
+          `Option value "${id}" belongs to undeclared option "${optionId}"`,
+        );
+      }
+    }
+
+    // 3 & 4. Per-variant checks
+    const variantCombinations = new Set<string>();
+
+    for (const variant of variants) {
+      const valueIds = variant.optionValueIds ?? [];
+      const seenOptionIds = new Map<string, string>(); // optionId → valueId
+
+      // 3. Exactly one value per option
+      for (const valueId of valueIds) {
+        const optionId = valueToOptionId.get(valueId)!;
+
+        if (seenOptionIds.has(optionId)) {
+          throw new BadRequestException(
+            `Variant "${variant.sku}" has duplicate values for option "${optionId}"`,
+          );
+        }
+        seenOptionIds.set(optionId, valueId);
+      }
+
+      // 3. All declared options must be covered
+      for (const optionId of declaredOptionIds) {
+        if (!seenOptionIds.has(optionId)) {
+          throw new BadRequestException(
+            `Variant "${variant.sku}" is missing a value for option "${optionId}"`,
+          );
+        }
+      }
+
+      // 4. No duplicate combinations across variants
+      const combo = [...valueIds].sort().join('|');
+      if (variantCombinations.has(combo)) {
+        throw new BadRequestException(
+          `Variant "${variant.sku}" has a duplicate option combination`,
+        );
+      }
+      variantCombinations.add(combo);
+    }
+  }
 
   async createProduct(data: CreateProductDto) {
     const { slug: providedSlug, name, ...productData } = data;
@@ -149,6 +232,7 @@ export class ProductsService {
               url: img.url,
               altText: img.altText ?? null,
               isPrimary: img.isPrimary ?? index === 0,
+              position: img.position ?? index,
             })),
           });
         }
@@ -369,5 +453,237 @@ export class ProductsService {
         hasPrev: page > 1,
       },
     };
+  }
+
+  async findOneById(id: string) {
+    const product = await this.prisma.product.findUnique({
+      where: { id },
+      include: {
+        brand: true,
+        categories: { include: { category: true } },
+        tags: { include: { tag: true } },
+        options: { include: { option: { include: { values: true } } } },
+        images: true,
+        variants: {
+          include: {
+            optionValues: {
+              include: { optionValue: { include: { option: true } } },
+            },
+            images: true,
+          },
+        },
+      },
+    });
+    if (!product) {
+      throw new NotFoundException('Product not found');
+    }
+    return product;
+  }
+
+  async findOneBySlug(slug: string) {
+    const product = await this.prisma.product.findUnique({
+      where: { slug },
+      include: {
+        brand: true,
+        categories: { include: { category: true } },
+        tags: { include: { tag: true } },
+        options: { include: { option: { include: { values: true } } } },
+        images: true,
+        variants: {
+          include: {
+            optionValues: {
+              include: { optionValue: { include: { option: true } } },
+            },
+            images: true,
+          },
+        },
+      },
+    });
+    if (!product) {
+      throw new NotFoundException('Product not found');
+    }
+    return product;
+  }
+
+  async removeProduct(id: string) {
+    try {
+      const product = await this.prisma.product.update({
+        where: { id },
+        data: {
+          deletedAt: new Date(),
+        },
+      });
+
+      return {
+        message: 'Product deleted successfully',
+        product,
+      };
+    } catch (error) {
+      if (
+        error instanceof PrismaClientKnownRequestError &&
+        error.code === 'P2025'
+      ) {
+        throw new NotFoundException('Product not found');
+      }
+
+      throw error;
+    }
+  }
+
+  // ── POST /products/:id/images ─────────────────────
+  async addProductImages(productId: string, data: AddProductImagesDto) {
+    try {
+      const existingCount = await this.prisma.productImage.count({
+        where: { productId },
+      });
+
+      await this.prisma.productImage.createMany({
+        data: data.images.map((img, index) => ({
+          productId,
+          url: img.url,
+          altText: img.altText ?? null,
+          isPrimary: img.isPrimary ?? existingCount + index === 0,
+          position: img.position ?? existingCount + index,
+        })),
+      });
+
+      return this.prisma.productImage.findMany({
+        where: { productId },
+        orderBy: { position: 'asc' },
+      });
+    } catch (error) {
+      if (
+        error instanceof PrismaClientKnownRequestError &&
+        error.code === 'P2025'
+      ) {
+        throw new NotFoundException('Product not found');
+      }
+
+      throw error;
+    }
+  }
+
+  async removeProductImage(productId: string, imageId: string) {
+    try {
+      const image = await this.prisma.productImage.findUnique({
+        where: { id: imageId },
+        select: { id: true, productId: true, isPrimary: true, position: true },
+      });
+
+      await this.prisma.productImage.delete({
+        where: { id: imageId },
+      });
+
+      if (image?.isPrimary) {
+        const nextImage = await this.prisma.productImage.findFirst({
+          where: { productId },
+          orderBy: { position: 'asc' },
+          select: { id: true },
+        });
+
+        if (nextImage) {
+          await this.prisma.productImage.update({
+            where: { id: nextImage.id },
+            data: { isPrimary: true },
+          });
+        }
+      }
+    } catch (error) {
+      if (
+        error instanceof PrismaClientKnownRequestError &&
+        error.code === 'P2025'
+      ) {
+        throw new NotFoundException('Image not found');
+      }
+    }
+  }
+
+  async reorderProductImages() {
+    //todo
+  }
+
+  async addVariant(id: string, dto: AddVariantDto) {
+    // If product has options → validate optionValueIds
+    const productOptions = await this.prisma.productOption.findMany({
+      where: { productId: id },
+      select: { optionId: true },
+    });
+
+    if (productOptions.length) {
+      const optionIds = productOptions.map((o) => o.optionId);
+
+      if (!dto.optionValueIds?.length) {
+        throw new BadRequestException(
+          'This product has options — variant must include optionValueIds',
+        );
+      }
+
+      // Reuse existing deep validation
+      await this.validateOptionValueIds(optionIds, [
+        { sku: dto.sku, optionValueIds: dto.optionValueIds },
+      ]);
+
+      // Check combination not already used by existing variants
+      const existingVariants = await this.prisma.productVariant.findMany({
+        where: { productId: id },
+        include: { optionValues: true },
+      });
+
+      const newCombo = [...dto.optionValueIds].sort().join('|');
+      const duplicate = existingVariants.find((v) => {
+        const combo = v.optionValues
+          .map((ov) => ov.optionValueId)
+          .sort()
+          .join('|');
+        return combo === newCombo;
+      });
+
+      if (duplicate) {
+        throw new ConflictException(
+          `Variant with this option combination already exists (SKU: ${duplicate.sku})`,
+        );
+      }
+    }
+
+    return this.prisma.$transaction(async (tx) => {
+      const variant = await tx.productVariant.create({
+        data: {
+          productId: id,
+          sku: dto.sku,
+          price: new Decimal(dto.price),
+          stock: dto.stock ?? 0,
+          isActive: dto.isActive ?? true,
+        },
+      });
+
+      if (dto.optionValueIds?.length) {
+        await tx.variantOptionValue.createMany({
+          data: dto.optionValueIds.map((optionValueId) => ({
+            variantId: variant.id,
+            optionValueId,
+          })),
+        });
+      }
+
+      if (dto.images?.length) {
+        await tx.variantImage.createMany({
+          data: dto.images.map((img, index) => ({
+            variantId: variant.id,
+            url: img.url,
+            altText: img.altText ?? null,
+            isPrimary: img.isPrimary ?? index === 0,
+            position: img.position ?? index,
+          })),
+        });
+      }
+
+      return tx.productVariant.findUnique({
+        where: { id: variant.id },
+        include: {
+          optionValues: { include: { optionValue: true } },
+          images: true,
+        },
+      });
+    });
   }
 }

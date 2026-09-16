@@ -128,7 +128,8 @@ export const ProductScalarFieldEnum = {
   isActive: 'isActive',
   brandId: 'brandId',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
 } as const
 
 export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeof ProductScalarFieldEnum]
@@ -140,6 +141,7 @@ export const ProductImageScalarFieldEnum = {
   url: 'url',
   altText: 'altText',
   isPrimary: 'isPrimary',
+  position: 'position',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
