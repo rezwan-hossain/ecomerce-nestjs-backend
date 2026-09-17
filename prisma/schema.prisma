@@ -74,7 +74,7 @@ model Product {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  deletedAt DateTime?     
+  deletedAt DateTime?
 
   @@map("products")
 }
@@ -105,7 +105,7 @@ enum ProductStatus {
 model Brand {
   id      String  @id @default(uuid(7))
   name    String  @unique
-  slug    String
+  slug    String  @unique
   logoUrl String?
 
   products Product[]

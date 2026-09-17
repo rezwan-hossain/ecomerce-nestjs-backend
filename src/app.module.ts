@@ -8,11 +8,13 @@ import { ProductsModule } from './modules/products/products.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { AppLoggerModule } from './common/logger/logger.module';
 import { CategoriesModule } from './modules/categories/categories.module';
+import { BrandsModule } from './modules/brands/brands.module';
+import { TagsModule } from './modules/tags/tags.module';
 
 import 'dotenv/config';
 
 @Module({
-  imports: [AppLoggerModule, UsersModule, ProductsModule, PrismaModule, CategoriesModule],
+  imports: [AppLoggerModule, UsersModule, ProductsModule, PrismaModule, CategoriesModule, BrandsModule, TagsModule],
   controllers: [AppController],
   providers: [
     AppService,

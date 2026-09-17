@@ -26,7 +26,7 @@ export class ProductsService {
 
   private async validateOptionValueIds(
     optionIds: string[],
-    variants: CreateProductDto['variants'],
+    variants: Array<{ sku: string; optionValueIds?: string[] }>,
   ): Promise<void> {
     const allValueIds = [
       ...new Set(variants.flatMap((v) => v.optionValueIds ?? [])),
@@ -686,4 +686,5 @@ export class ProductsService {
       });
     });
   }
+
 }

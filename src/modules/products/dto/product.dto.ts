@@ -166,11 +166,31 @@ export const addProductImagesSchema = z.object({
 
 export class AddProductImagesDto extends createZodDto(addProductImagesSchema) {}
 
+// export const addVariantSchema = z.object({
+//   sku: z.string().min(1).max(100),
+//   price: z.coerce.number().nonnegative().multipleOf(0.01),
+//   stock: z.number().int().nonnegative().default(0),
+//   isActive: z.boolean().optional(),
+//   optionValueIds: z.array(z.string().uuid()).optional(),
+//   images: z
+//     .array(
+//       z.object({
+//         url: z.string().url(),
+//         altText: z.string().max(255).optional(),
+//         isPrimary: z.boolean().optional(),
+//         position: z.number().int().nonnegative().optional(),
+//       }),
+//     )
+//     .optional(),
+// });
+
 export const addVariantSchema = z.object({
   sku: z.string().min(1).max(100),
+  // Make price optional if creating a variant without specifying price directly
   price: z.coerce.number().nonnegative().multipleOf(0.01),
-  stock: z.number().int().nonnegative().default(0),
-  isActive: z.boolean().optional(),
+  // Add .optional() alongside .default() so TypeScript marks the property as optional (stock?: number)
+  stock: z.number().int().nonnegative().optional().default(0),
+  isActive: z.boolean().optional().default(true),
   optionValueIds: z.array(z.string().uuid()).optional(),
   images: z
     .array(
@@ -183,4 +203,7 @@ export const addVariantSchema = z.object({
     )
     .optional(),
 });
+
+
+
 export class AddVariantDto extends createZodDto(addVariantSchema) {}
