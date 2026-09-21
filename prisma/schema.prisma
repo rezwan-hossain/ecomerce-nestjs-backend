@@ -37,8 +37,10 @@ enum Role {
 
 model Category {
   id   String @id @default(uuid(7))
-  name String @unique
+  name String
   slug String @unique
+  isActive Boolean @default(true)
+  position Int     @default(0)
 
   parentId String?
   parent   Category?  @relation("CategoryTree", fields: [parentId], references: [id])
@@ -46,9 +48,15 @@ model Category {
 
   products ProductCategory[]
 
+
+  campaignRules CampaignSectionRule[]
+
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  @@unique([parentId, name])
+  @@index([parentId])
   @@map("categories")
 }
 
@@ -70,6 +78,11 @@ model Product {
   images     ProductImage[]
   variants   ProductVariant[]
   options    ProductOption[]
+
+  // Campaign relationship
+  campaignSections CampaignSectionProduct[]
+
+  promotionTargets PromotionTarget[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -110,6 +123,9 @@ model Brand {
 
   products Product[]
 
+  campaignRules CampaignSectionRule[]
+
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -123,6 +139,9 @@ model Tag {
   slug String @unique
 
   products ProductTag[]
+
+  campaignRules CampaignSectionRule[]
+
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -147,12 +166,15 @@ model ProductTag {
 model ProductCategory {
   productId  String
   categoryId String
+  isPrimary  Boolean @default(false)
+
 
   product  Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
   category Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
 
   assignedAt DateTime @default(now())
 
+  @@index([categoryId])
   @@id([productId, categoryId])
   @@map("product_categories")
 }
@@ -209,6 +231,8 @@ model ProductVariant {
 
   optionValues VariantOptionValue[] // which option values define this variant
   images       VariantImage[] // variant-specific images (optional)
+
+  promotionTargets PromotionTarget[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -287,4 +311,230 @@ model TemplateOptionValue {
 
   @@unique([templateOptionId, optionValueId])
   @@map("template_option_values")
+}
+
+
+model Campaign {
+  id          String         @id @default(uuid())
+  name        String
+  slug        String         @unique
+  description String?
+
+  status CampaignStatus @default(DRAFT)
+
+  startsAt DateTime?
+  endsAt   DateTime?
+
+  bannerUrl    String?
+  thumbnailUrl String?
+
+  isActive Boolean @default(true)
+
+  banners     CampaignBanner[]
+  sections    CampaignSection[]
+  promotions  PromotionCampaign[]
+
+
+  // SEO
+  metaTitle       String?
+  metaDescription String?
+  metaImageUrl    String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([status])
+  @@index([startsAt, endsAt])
+  @@index([isActive])
+  @@map("campaigns")
+}
+
+model CampaignBanner {
+  id         String @id @default(uuid(7))
+  campaignId String
+
+  title          String?
+  imageUrl       String
+  mobileImageUrl String?
+
+  linkUrl String?
+
+  position Int @default(0)
+  isActive Boolean @default(true)
+
+  campaign Campaign @relation(fields: [campaignId],references: [id],onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([campaignId, position])
+  @@index([campaignId, isActive])
+  @@map("campaign_banners")
+}
+
+model CampaignSection {
+  id         String @id @default(uuid())
+  campaignId String
+
+  title       String
+  slug        String?
+  description String?
+
+  isActive    Boolean @default(true)
+  position    Int @default(0)
+
+  bannerUrl   String?
+
+  campaign Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+
+  products CampaignSectionProduct[]
+
+  campaignRules CampaignSectionRule[]
+
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([campaignId, position])
+  @@index([campaignId, isActive])
+  @@map("campaign_sections")
+}
+
+model CampaignSectionProduct {
+  sectionId String
+  productId String
+
+  position Int @default(0)
+
+  section CampaignSection @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+  product Product         @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@id([sectionId, productId])
+  @@index([productId])
+  @@index([sectionId, position])
+  @@map("campaign_section_products")
+}
+
+model CampaignSectionRule {
+  id        String @id @default(uuid(7))
+  sectionId String
+
+  categoryId String?
+  brandId    String?
+  tagId      String?
+
+  minPrice Decimal? @db.Decimal(10, 2)
+  maxPrice Decimal? @db.Decimal(10, 2)
+
+  section CampaignSection @relation(fields: [sectionId],references: [id],onDelete: Cascade)
+  category Category? @relation(fields: [categoryId],references: [id],onDelete: SetNull)
+  brand Brand? @relation(fields: [brandId],references: [id],onDelete: SetNull)
+  tag Tag? @relation(fields: [tagId],references: [id],onDelete: SetNull)
+
+  createdAt DateTime @default(now())
+
+  @@index([sectionId])
+  @@index([categoryId])
+  @@index([brandId])
+  @@index([tagId])
+  @@map("campaign_section_rules")
+}
+
+enum CampaignStatus {
+  DRAFT
+  SCHEDULED
+  ACTIVE
+  ENDED
+  ARCHIVED
+}
+
+
+model Promotion {
+  id          String          @id @default(uuid(7))
+
+  name        String
+  description String?
+
+  type        PromotionType
+  status      PromotionStatus @default(DRAFT)
+  value       Decimal? @db.Decimal(10, 2)
+
+  // for buy x get y
+  buyQuantity  Int?
+  getQuantity  Int?
+
+  minOrderAmount    Decimal? @db.Decimal(10, 2)
+  maxDiscountAmount Decimal? @db.Decimal(10, 2)
+
+  startsAt DateTime?
+  endsAt   DateTime?
+
+  isActive Boolean @default(true)
+
+  priority Int @default(0)
+
+  campaigns PromotionCampaign[]
+  targets   PromotionTarget[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([status])
+  @@index([startsAt, endsAt])
+  @@index([isActive])
+  @@map("promotions")
+}
+
+model PromotionCampaign {
+  promotionId String
+  campaignId  String
+
+  promotion Promotion @relation(fields: [promotionId],references: [id],onDelete: Cascade)
+  campaign Campaign @relation(fields: [campaignId],references: [id],onDelete: Cascade)
+
+  @@id([promotionId, campaignId])
+  @@index([campaignId])
+  @@map("promotion_campaigns")
+}
+
+model PromotionTarget {
+  id String @id @default(uuid(7))
+
+  promotionId String
+
+  productId String?
+  variantId String?
+
+  promotion Promotion @relation(fields: [promotionId],references: [id],onDelete: Cascade)
+  product Product? @relation(fields: [productId],references: [id],onDelete: Cascade)
+  variant ProductVariant? @relation(fields: [variantId],references: [id],onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  // Prevent duplicate product targets
+  @@unique([promotionId, productId])
+  // Prevent duplicate variant targets
+  @@unique([promotionId, variantId])
+
+  @@index([promotionId])
+  @@index([productId])
+  @@index([variantId])
+  @@map("promotion_targets")
+}
+
+enum PromotionType {
+  PERCENTAGE
+  FIXED_AMOUNT
+  FIXED_PRICE
+  BUY_X_GET_Y
+  FREE_SHIPPING
+  SHIPPING_DISCOUNT
+}
+
+enum PromotionStatus {
+  DRAFT
+  SCHEDULED
+  ACTIVE
+  ENDED
+  ARCHIVED
 }
