@@ -191,6 +191,8 @@ export type BrandWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Brand"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Brand"> | Date | string
   products?: Prisma.ProductListRelationFilter
+  campaignRules?: Prisma.CampaignSectionRuleListRelationFilter
+  promotionTargets?: Prisma.PromotionTargetListRelationFilter
 }
 
 export type BrandOrderByWithRelationInput = {
@@ -201,6 +203,8 @@ export type BrandOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   products?: Prisma.ProductOrderByRelationAggregateInput
+  campaignRules?: Prisma.CampaignSectionRuleOrderByRelationAggregateInput
+  promotionTargets?: Prisma.PromotionTargetOrderByRelationAggregateInput
 }
 
 export type BrandWhereUniqueInput = Prisma.AtLeast<{
@@ -214,6 +218,8 @@ export type BrandWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Brand"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Brand"> | Date | string
   products?: Prisma.ProductListRelationFilter
+  campaignRules?: Prisma.CampaignSectionRuleListRelationFilter
+  promotionTargets?: Prisma.PromotionTargetListRelationFilter
 }, "id" | "name" | "slug">
 
 export type BrandOrderByWithAggregationInput = {
@@ -248,6 +254,8 @@ export type BrandCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   products?: Prisma.ProductCreateNestedManyWithoutBrandInput
+  campaignRules?: Prisma.CampaignSectionRuleCreateNestedManyWithoutBrandInput
+  promotionTargets?: Prisma.PromotionTargetCreateNestedManyWithoutBrandInput
 }
 
 export type BrandUncheckedCreateInput = {
@@ -258,6 +266,8 @@ export type BrandUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   products?: Prisma.ProductUncheckedCreateNestedManyWithoutBrandInput
+  campaignRules?: Prisma.CampaignSectionRuleUncheckedCreateNestedManyWithoutBrandInput
+  promotionTargets?: Prisma.PromotionTargetUncheckedCreateNestedManyWithoutBrandInput
 }
 
 export type BrandUpdateInput = {
@@ -268,6 +278,8 @@ export type BrandUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   products?: Prisma.ProductUpdateManyWithoutBrandNestedInput
+  campaignRules?: Prisma.CampaignSectionRuleUpdateManyWithoutBrandNestedInput
+  promotionTargets?: Prisma.PromotionTargetUpdateManyWithoutBrandNestedInput
 }
 
 export type BrandUncheckedUpdateInput = {
@@ -278,6 +290,8 @@ export type BrandUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   products?: Prisma.ProductUncheckedUpdateManyWithoutBrandNestedInput
+  campaignRules?: Prisma.CampaignSectionRuleUncheckedUpdateManyWithoutBrandNestedInput
+  promotionTargets?: Prisma.PromotionTargetUncheckedUpdateManyWithoutBrandNestedInput
 }
 
 export type BrandCreateManyInput = {
@@ -355,6 +369,38 @@ export type BrandUpdateOneWithoutProductsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.BrandUpdateToOneWithWhereWithoutProductsInput, Prisma.BrandUpdateWithoutProductsInput>, Prisma.BrandUncheckedUpdateWithoutProductsInput>
 }
 
+export type BrandCreateNestedOneWithoutCampaignRulesInput = {
+  create?: Prisma.XOR<Prisma.BrandCreateWithoutCampaignRulesInput, Prisma.BrandUncheckedCreateWithoutCampaignRulesInput>
+  connectOrCreate?: Prisma.BrandCreateOrConnectWithoutCampaignRulesInput
+  connect?: Prisma.BrandWhereUniqueInput
+}
+
+export type BrandUpdateOneWithoutCampaignRulesNestedInput = {
+  create?: Prisma.XOR<Prisma.BrandCreateWithoutCampaignRulesInput, Prisma.BrandUncheckedCreateWithoutCampaignRulesInput>
+  connectOrCreate?: Prisma.BrandCreateOrConnectWithoutCampaignRulesInput
+  upsert?: Prisma.BrandUpsertWithoutCampaignRulesInput
+  disconnect?: Prisma.BrandWhereInput | boolean
+  delete?: Prisma.BrandWhereInput | boolean
+  connect?: Prisma.BrandWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BrandUpdateToOneWithWhereWithoutCampaignRulesInput, Prisma.BrandUpdateWithoutCampaignRulesInput>, Prisma.BrandUncheckedUpdateWithoutCampaignRulesInput>
+}
+
+export type BrandCreateNestedOneWithoutPromotionTargetsInput = {
+  create?: Prisma.XOR<Prisma.BrandCreateWithoutPromotionTargetsInput, Prisma.BrandUncheckedCreateWithoutPromotionTargetsInput>
+  connectOrCreate?: Prisma.BrandCreateOrConnectWithoutPromotionTargetsInput
+  connect?: Prisma.BrandWhereUniqueInput
+}
+
+export type BrandUpdateOneWithoutPromotionTargetsNestedInput = {
+  create?: Prisma.XOR<Prisma.BrandCreateWithoutPromotionTargetsInput, Prisma.BrandUncheckedCreateWithoutPromotionTargetsInput>
+  connectOrCreate?: Prisma.BrandCreateOrConnectWithoutPromotionTargetsInput
+  upsert?: Prisma.BrandUpsertWithoutPromotionTargetsInput
+  disconnect?: Prisma.BrandWhereInput | boolean
+  delete?: Prisma.BrandWhereInput | boolean
+  connect?: Prisma.BrandWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BrandUpdateToOneWithWhereWithoutPromotionTargetsInput, Prisma.BrandUpdateWithoutPromotionTargetsInput>, Prisma.BrandUncheckedUpdateWithoutPromotionTargetsInput>
+}
+
 export type BrandCreateWithoutProductsInput = {
   id?: string
   name: string
@@ -362,6 +408,8 @@ export type BrandCreateWithoutProductsInput = {
   logoUrl?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  campaignRules?: Prisma.CampaignSectionRuleCreateNestedManyWithoutBrandInput
+  promotionTargets?: Prisma.PromotionTargetCreateNestedManyWithoutBrandInput
 }
 
 export type BrandUncheckedCreateWithoutProductsInput = {
@@ -371,6 +419,8 @@ export type BrandUncheckedCreateWithoutProductsInput = {
   logoUrl?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  campaignRules?: Prisma.CampaignSectionRuleUncheckedCreateNestedManyWithoutBrandInput
+  promotionTargets?: Prisma.PromotionTargetUncheckedCreateNestedManyWithoutBrandInput
 }
 
 export type BrandCreateOrConnectWithoutProductsInput = {
@@ -396,6 +446,8 @@ export type BrandUpdateWithoutProductsInput = {
   logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  campaignRules?: Prisma.CampaignSectionRuleUpdateManyWithoutBrandNestedInput
+  promotionTargets?: Prisma.PromotionTargetUpdateManyWithoutBrandNestedInput
 }
 
 export type BrandUncheckedUpdateWithoutProductsInput = {
@@ -405,6 +457,128 @@ export type BrandUncheckedUpdateWithoutProductsInput = {
   logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  campaignRules?: Prisma.CampaignSectionRuleUncheckedUpdateManyWithoutBrandNestedInput
+  promotionTargets?: Prisma.PromotionTargetUncheckedUpdateManyWithoutBrandNestedInput
+}
+
+export type BrandCreateWithoutCampaignRulesInput = {
+  id?: string
+  name: string
+  slug: string
+  logoUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  products?: Prisma.ProductCreateNestedManyWithoutBrandInput
+  promotionTargets?: Prisma.PromotionTargetCreateNestedManyWithoutBrandInput
+}
+
+export type BrandUncheckedCreateWithoutCampaignRulesInput = {
+  id?: string
+  name: string
+  slug: string
+  logoUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  products?: Prisma.ProductUncheckedCreateNestedManyWithoutBrandInput
+  promotionTargets?: Prisma.PromotionTargetUncheckedCreateNestedManyWithoutBrandInput
+}
+
+export type BrandCreateOrConnectWithoutCampaignRulesInput = {
+  where: Prisma.BrandWhereUniqueInput
+  create: Prisma.XOR<Prisma.BrandCreateWithoutCampaignRulesInput, Prisma.BrandUncheckedCreateWithoutCampaignRulesInput>
+}
+
+export type BrandUpsertWithoutCampaignRulesInput = {
+  update: Prisma.XOR<Prisma.BrandUpdateWithoutCampaignRulesInput, Prisma.BrandUncheckedUpdateWithoutCampaignRulesInput>
+  create: Prisma.XOR<Prisma.BrandCreateWithoutCampaignRulesInput, Prisma.BrandUncheckedCreateWithoutCampaignRulesInput>
+  where?: Prisma.BrandWhereInput
+}
+
+export type BrandUpdateToOneWithWhereWithoutCampaignRulesInput = {
+  where?: Prisma.BrandWhereInput
+  data: Prisma.XOR<Prisma.BrandUpdateWithoutCampaignRulesInput, Prisma.BrandUncheckedUpdateWithoutCampaignRulesInput>
+}
+
+export type BrandUpdateWithoutCampaignRulesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  products?: Prisma.ProductUpdateManyWithoutBrandNestedInput
+  promotionTargets?: Prisma.PromotionTargetUpdateManyWithoutBrandNestedInput
+}
+
+export type BrandUncheckedUpdateWithoutCampaignRulesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  products?: Prisma.ProductUncheckedUpdateManyWithoutBrandNestedInput
+  promotionTargets?: Prisma.PromotionTargetUncheckedUpdateManyWithoutBrandNestedInput
+}
+
+export type BrandCreateWithoutPromotionTargetsInput = {
+  id?: string
+  name: string
+  slug: string
+  logoUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  products?: Prisma.ProductCreateNestedManyWithoutBrandInput
+  campaignRules?: Prisma.CampaignSectionRuleCreateNestedManyWithoutBrandInput
+}
+
+export type BrandUncheckedCreateWithoutPromotionTargetsInput = {
+  id?: string
+  name: string
+  slug: string
+  logoUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  products?: Prisma.ProductUncheckedCreateNestedManyWithoutBrandInput
+  campaignRules?: Prisma.CampaignSectionRuleUncheckedCreateNestedManyWithoutBrandInput
+}
+
+export type BrandCreateOrConnectWithoutPromotionTargetsInput = {
+  where: Prisma.BrandWhereUniqueInput
+  create: Prisma.XOR<Prisma.BrandCreateWithoutPromotionTargetsInput, Prisma.BrandUncheckedCreateWithoutPromotionTargetsInput>
+}
+
+export type BrandUpsertWithoutPromotionTargetsInput = {
+  update: Prisma.XOR<Prisma.BrandUpdateWithoutPromotionTargetsInput, Prisma.BrandUncheckedUpdateWithoutPromotionTargetsInput>
+  create: Prisma.XOR<Prisma.BrandCreateWithoutPromotionTargetsInput, Prisma.BrandUncheckedCreateWithoutPromotionTargetsInput>
+  where?: Prisma.BrandWhereInput
+}
+
+export type BrandUpdateToOneWithWhereWithoutPromotionTargetsInput = {
+  where?: Prisma.BrandWhereInput
+  data: Prisma.XOR<Prisma.BrandUpdateWithoutPromotionTargetsInput, Prisma.BrandUncheckedUpdateWithoutPromotionTargetsInput>
+}
+
+export type BrandUpdateWithoutPromotionTargetsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  products?: Prisma.ProductUpdateManyWithoutBrandNestedInput
+  campaignRules?: Prisma.CampaignSectionRuleUpdateManyWithoutBrandNestedInput
+}
+
+export type BrandUncheckedUpdateWithoutPromotionTargetsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  products?: Prisma.ProductUncheckedUpdateManyWithoutBrandNestedInput
+  campaignRules?: Prisma.CampaignSectionRuleUncheckedUpdateManyWithoutBrandNestedInput
 }
 
 
@@ -414,10 +588,14 @@ export type BrandUncheckedUpdateWithoutProductsInput = {
 
 export type BrandCountOutputType = {
   products: number
+  campaignRules: number
+  promotionTargets: number
 }
 
 export type BrandCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   products?: boolean | BrandCountOutputTypeCountProductsArgs
+  campaignRules?: boolean | BrandCountOutputTypeCountCampaignRulesArgs
+  promotionTargets?: boolean | BrandCountOutputTypeCountPromotionTargetsArgs
 }
 
 /**
@@ -437,6 +615,20 @@ export type BrandCountOutputTypeCountProductsArgs<ExtArgs extends runtime.Types.
   where?: Prisma.ProductWhereInput
 }
 
+/**
+ * BrandCountOutputType without action
+ */
+export type BrandCountOutputTypeCountCampaignRulesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CampaignSectionRuleWhereInput
+}
+
+/**
+ * BrandCountOutputType without action
+ */
+export type BrandCountOutputTypeCountPromotionTargetsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PromotionTargetWhereInput
+}
+
 
 export type BrandSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -446,6 +638,8 @@ export type BrandSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   createdAt?: boolean
   updatedAt?: boolean
   products?: boolean | Prisma.Brand$productsArgs<ExtArgs>
+  campaignRules?: boolean | Prisma.Brand$campaignRulesArgs<ExtArgs>
+  promotionTargets?: boolean | Prisma.Brand$promotionTargetsArgs<ExtArgs>
   _count?: boolean | Prisma.BrandCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["brand"]>
 
@@ -479,6 +673,8 @@ export type BrandSelectScalar = {
 export type BrandOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "slug" | "logoUrl" | "createdAt" | "updatedAt", ExtArgs["result"]["brand"]>
 export type BrandInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   products?: boolean | Prisma.Brand$productsArgs<ExtArgs>
+  campaignRules?: boolean | Prisma.Brand$campaignRulesArgs<ExtArgs>
+  promotionTargets?: boolean | Prisma.Brand$promotionTargetsArgs<ExtArgs>
   _count?: boolean | Prisma.BrandCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type BrandIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -488,6 +684,8 @@ export type $BrandPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   name: "Brand"
   objects: {
     products: Prisma.$ProductPayload<ExtArgs>[]
+    campaignRules: Prisma.$CampaignSectionRulePayload<ExtArgs>[]
+    promotionTargets: Prisma.$PromotionTargetPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -891,6 +1089,8 @@ readonly fields: BrandFieldRefs;
 export interface Prisma__BrandClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   products<T extends Prisma.Brand$productsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Brand$productsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  campaignRules<T extends Prisma.Brand$campaignRulesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Brand$campaignRulesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CampaignSectionRulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  promotionTargets<T extends Prisma.Brand$promotionTargetsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Brand$promotionTargetsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PromotionTargetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1340,6 +1540,54 @@ export type Brand$productsArgs<ExtArgs extends runtime.Types.Extensions.Internal
   take?: number
   skip?: number
   distinct?: Prisma.ProductScalarFieldEnum | Prisma.ProductScalarFieldEnum[]
+}
+
+/**
+ * Brand.campaignRules
+ */
+export type Brand$campaignRulesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CampaignSectionRule
+   */
+  select?: Prisma.CampaignSectionRuleSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CampaignSectionRule
+   */
+  omit?: Prisma.CampaignSectionRuleOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CampaignSectionRuleInclude<ExtArgs> | null
+  where?: Prisma.CampaignSectionRuleWhereInput
+  orderBy?: Prisma.CampaignSectionRuleOrderByWithRelationInput | Prisma.CampaignSectionRuleOrderByWithRelationInput[]
+  cursor?: Prisma.CampaignSectionRuleWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CampaignSectionRuleScalarFieldEnum | Prisma.CampaignSectionRuleScalarFieldEnum[]
+}
+
+/**
+ * Brand.promotionTargets
+ */
+export type Brand$promotionTargetsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PromotionTarget
+   */
+  select?: Prisma.PromotionTargetSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PromotionTarget
+   */
+  omit?: Prisma.PromotionTargetOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PromotionTargetInclude<ExtArgs> | null
+  where?: Prisma.PromotionTargetWhereInput
+  orderBy?: Prisma.PromotionTargetOrderByWithRelationInput | Prisma.PromotionTargetOrderByWithRelationInput[]
+  cursor?: Prisma.PromotionTargetWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PromotionTargetScalarFieldEnum | Prisma.PromotionTargetScalarFieldEnum[]
 }
 
 /**

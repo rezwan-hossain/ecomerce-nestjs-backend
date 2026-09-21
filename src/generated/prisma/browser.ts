@@ -102,3 +102,43 @@ export type TemplateOption = Prisma.TemplateOptionModel
  * 
  */
 export type TemplateOptionValue = Prisma.TemplateOptionValueModel
+/**
+ * Model Campaign
+ * 
+ */
+export type Campaign = Prisma.CampaignModel
+/**
+ * Model CampaignBanner
+ * 
+ */
+export type CampaignBanner = Prisma.CampaignBannerModel
+/**
+ * Model CampaignSection
+ * 
+ */
+export type CampaignSection = Prisma.CampaignSectionModel
+/**
+ * Model CampaignSectionProduct
+ * 
+ */
+export type CampaignSectionProduct = Prisma.CampaignSectionProductModel
+/**
+ * Model CampaignSectionRule
+ * 
+ */
+export type CampaignSectionRule = Prisma.CampaignSectionRuleModel
+/**
+ * Model Promotion
+ * 
+ */
+export type Promotion = Prisma.PromotionModel
+/**
+ * Model PromotionCampaign
+ * 
+ */
+export type PromotionCampaign = Prisma.PromotionCampaignModel
+/**
+ * Model PromotionTarget
+ * 
+ */
+export type PromotionTarget = Prisma.PromotionTargetModel

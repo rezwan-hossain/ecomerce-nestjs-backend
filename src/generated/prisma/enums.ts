@@ -26,3 +26,57 @@ export const ProductStatus = {
 } as const
 
 export type ProductStatus = (typeof ProductStatus)[keyof typeof ProductStatus]
+
+
+export const RuleMatchType = {
+  ANY: 'ANY',
+  ALL: 'ALL'
+} as const
+
+export type RuleMatchType = (typeof RuleMatchType)[keyof typeof RuleMatchType]
+
+
+export const CampaignStatus = {
+  DRAFT: 'DRAFT',
+  SCHEDULED: 'SCHEDULED',
+  ACTIVE: 'ACTIVE',
+  ENDED: 'ENDED',
+  ARCHIVED: 'ARCHIVED'
+} as const
+
+export type CampaignStatus = (typeof CampaignStatus)[keyof typeof CampaignStatus]
+
+
+export const PromotionType = {
+  PERCENTAGE: 'PERCENTAGE',
+  FIXED_AMOUNT: 'FIXED_AMOUNT',
+  FIXED_PRICE: 'FIXED_PRICE',
+  BUY_X_GET_Y: 'BUY_X_GET_Y',
+  FREE_SHIPPING: 'FREE_SHIPPING',
+  SHIPPING_DISCOUNT: 'SHIPPING_DISCOUNT'
+} as const
+
+export type PromotionType = (typeof PromotionType)[keyof typeof PromotionType]
+
+
+export const PromotionStatus = {
+  DRAFT: 'DRAFT',
+  SCHEDULED: 'SCHEDULED',
+  ACTIVE: 'ACTIVE',
+  ENDED: 'ENDED',
+  ARCHIVED: 'ARCHIVED'
+} as const
+
+export type PromotionStatus = (typeof PromotionStatus)[keyof typeof PromotionStatus]
+
+
+export const PromotionTargetType = {
+  PRODUCT: 'PRODUCT',
+  VARIANT: 'VARIANT',
+  CATEGORY: 'CATEGORY',
+  BRAND: 'BRAND',
+  TAG: 'TAG',
+  ALL_PRODUCTS: 'ALL_PRODUCTS'
+} as const
+
+export type PromotionTargetType = (typeof PromotionTargetType)[keyof typeof PromotionTargetType]

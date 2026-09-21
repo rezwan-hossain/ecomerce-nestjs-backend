@@ -27,18 +27,21 @@ export type AggregateProductCategory = {
 export type ProductCategoryMinAggregateOutputType = {
   productId: string | null
   categoryId: string | null
+  isPrimary: boolean | null
   assignedAt: Date | null
 }
 
 export type ProductCategoryMaxAggregateOutputType = {
   productId: string | null
   categoryId: string | null
+  isPrimary: boolean | null
   assignedAt: Date | null
 }
 
 export type ProductCategoryCountAggregateOutputType = {
   productId: number
   categoryId: number
+  isPrimary: number
   assignedAt: number
   _all: number
 }
@@ -47,18 +50,21 @@ export type ProductCategoryCountAggregateOutputType = {
 export type ProductCategoryMinAggregateInputType = {
   productId?: true
   categoryId?: true
+  isPrimary?: true
   assignedAt?: true
 }
 
 export type ProductCategoryMaxAggregateInputType = {
   productId?: true
   categoryId?: true
+  isPrimary?: true
   assignedAt?: true
 }
 
 export type ProductCategoryCountAggregateInputType = {
   productId?: true
   categoryId?: true
+  isPrimary?: true
   assignedAt?: true
   _all?: true
 }
@@ -138,6 +144,7 @@ export type ProductCategoryGroupByArgs<ExtArgs extends runtime.Types.Extensions.
 export type ProductCategoryGroupByOutputType = {
   productId: string
   categoryId: string
+  isPrimary: boolean
   assignedAt: Date
   _count: ProductCategoryCountAggregateOutputType | null
   _min: ProductCategoryMinAggregateOutputType | null
@@ -165,6 +172,7 @@ export type ProductCategoryWhereInput = {
   NOT?: Prisma.ProductCategoryWhereInput | Prisma.ProductCategoryWhereInput[]
   productId?: Prisma.StringFilter<"ProductCategory"> | string
   categoryId?: Prisma.StringFilter<"ProductCategory"> | string
+  isPrimary?: Prisma.BoolFilter<"ProductCategory"> | boolean
   assignedAt?: Prisma.DateTimeFilter<"ProductCategory"> | Date | string
   product?: Prisma.XOR<Prisma.ProductScalarRelationFilter, Prisma.ProductWhereInput>
   category?: Prisma.XOR<Prisma.CategoryScalarRelationFilter, Prisma.CategoryWhereInput>
@@ -173,6 +181,7 @@ export type ProductCategoryWhereInput = {
 export type ProductCategoryOrderByWithRelationInput = {
   productId?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
+  isPrimary?: Prisma.SortOrder
   assignedAt?: Prisma.SortOrder
   product?: Prisma.ProductOrderByWithRelationInput
   category?: Prisma.CategoryOrderByWithRelationInput
@@ -185,6 +194,7 @@ export type ProductCategoryWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.ProductCategoryWhereInput | Prisma.ProductCategoryWhereInput[]
   productId?: Prisma.StringFilter<"ProductCategory"> | string
   categoryId?: Prisma.StringFilter<"ProductCategory"> | string
+  isPrimary?: Prisma.BoolFilter<"ProductCategory"> | boolean
   assignedAt?: Prisma.DateTimeFilter<"ProductCategory"> | Date | string
   product?: Prisma.XOR<Prisma.ProductScalarRelationFilter, Prisma.ProductWhereInput>
   category?: Prisma.XOR<Prisma.CategoryScalarRelationFilter, Prisma.CategoryWhereInput>
@@ -193,6 +203,7 @@ export type ProductCategoryWhereUniqueInput = Prisma.AtLeast<{
 export type ProductCategoryOrderByWithAggregationInput = {
   productId?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
+  isPrimary?: Prisma.SortOrder
   assignedAt?: Prisma.SortOrder
   _count?: Prisma.ProductCategoryCountOrderByAggregateInput
   _max?: Prisma.ProductCategoryMaxOrderByAggregateInput
@@ -205,10 +216,12 @@ export type ProductCategoryScalarWhereWithAggregatesInput = {
   NOT?: Prisma.ProductCategoryScalarWhereWithAggregatesInput | Prisma.ProductCategoryScalarWhereWithAggregatesInput[]
   productId?: Prisma.StringWithAggregatesFilter<"ProductCategory"> | string
   categoryId?: Prisma.StringWithAggregatesFilter<"ProductCategory"> | string
+  isPrimary?: Prisma.BoolWithAggregatesFilter<"ProductCategory"> | boolean
   assignedAt?: Prisma.DateTimeWithAggregatesFilter<"ProductCategory"> | Date | string
 }
 
 export type ProductCategoryCreateInput = {
+  isPrimary?: boolean
   assignedAt?: Date | string
   product: Prisma.ProductCreateNestedOneWithoutCategoriesInput
   category: Prisma.CategoryCreateNestedOneWithoutProductsInput
@@ -217,10 +230,12 @@ export type ProductCategoryCreateInput = {
 export type ProductCategoryUncheckedCreateInput = {
   productId: string
   categoryId: string
+  isPrimary?: boolean
   assignedAt?: Date | string
 }
 
 export type ProductCategoryUpdateInput = {
+  isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   assignedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   product?: Prisma.ProductUpdateOneRequiredWithoutCategoriesNestedInput
   category?: Prisma.CategoryUpdateOneRequiredWithoutProductsNestedInput
@@ -229,22 +244,26 @@ export type ProductCategoryUpdateInput = {
 export type ProductCategoryUncheckedUpdateInput = {
   productId?: Prisma.StringFieldUpdateOperationsInput | string
   categoryId?: Prisma.StringFieldUpdateOperationsInput | string
+  isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   assignedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ProductCategoryCreateManyInput = {
   productId: string
   categoryId: string
+  isPrimary?: boolean
   assignedAt?: Date | string
 }
 
 export type ProductCategoryUpdateManyMutationInput = {
+  isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   assignedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ProductCategoryUncheckedUpdateManyInput = {
   productId?: Prisma.StringFieldUpdateOperationsInput | string
   categoryId?: Prisma.StringFieldUpdateOperationsInput | string
+  isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   assignedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -266,18 +285,21 @@ export type ProductCategoryProductIdCategoryIdCompoundUniqueInput = {
 export type ProductCategoryCountOrderByAggregateInput = {
   productId?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
+  isPrimary?: Prisma.SortOrder
   assignedAt?: Prisma.SortOrder
 }
 
 export type ProductCategoryMaxOrderByAggregateInput = {
   productId?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
+  isPrimary?: Prisma.SortOrder
   assignedAt?: Prisma.SortOrder
 }
 
 export type ProductCategoryMinOrderByAggregateInput = {
   productId?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
+  isPrimary?: Prisma.SortOrder
   assignedAt?: Prisma.SortOrder
 }
 
@@ -366,12 +388,14 @@ export type ProductCategoryUncheckedUpdateManyWithoutProductNestedInput = {
 }
 
 export type ProductCategoryCreateWithoutCategoryInput = {
+  isPrimary?: boolean
   assignedAt?: Date | string
   product: Prisma.ProductCreateNestedOneWithoutCategoriesInput
 }
 
 export type ProductCategoryUncheckedCreateWithoutCategoryInput = {
   productId: string
+  isPrimary?: boolean
   assignedAt?: Date | string
 }
 
@@ -407,16 +431,19 @@ export type ProductCategoryScalarWhereInput = {
   NOT?: Prisma.ProductCategoryScalarWhereInput | Prisma.ProductCategoryScalarWhereInput[]
   productId?: Prisma.StringFilter<"ProductCategory"> | string
   categoryId?: Prisma.StringFilter<"ProductCategory"> | string
+  isPrimary?: Prisma.BoolFilter<"ProductCategory"> | boolean
   assignedAt?: Prisma.DateTimeFilter<"ProductCategory"> | Date | string
 }
 
 export type ProductCategoryCreateWithoutProductInput = {
+  isPrimary?: boolean
   assignedAt?: Date | string
   category: Prisma.CategoryCreateNestedOneWithoutProductsInput
 }
 
 export type ProductCategoryUncheckedCreateWithoutProductInput = {
   categoryId: string
+  isPrimary?: boolean
   assignedAt?: Date | string
 }
 
@@ -448,41 +475,49 @@ export type ProductCategoryUpdateManyWithWhereWithoutProductInput = {
 
 export type ProductCategoryCreateManyCategoryInput = {
   productId: string
+  isPrimary?: boolean
   assignedAt?: Date | string
 }
 
 export type ProductCategoryUpdateWithoutCategoryInput = {
+  isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   assignedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   product?: Prisma.ProductUpdateOneRequiredWithoutCategoriesNestedInput
 }
 
 export type ProductCategoryUncheckedUpdateWithoutCategoryInput = {
   productId?: Prisma.StringFieldUpdateOperationsInput | string
+  isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   assignedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ProductCategoryUncheckedUpdateManyWithoutCategoryInput = {
   productId?: Prisma.StringFieldUpdateOperationsInput | string
+  isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   assignedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ProductCategoryCreateManyProductInput = {
   categoryId: string
+  isPrimary?: boolean
   assignedAt?: Date | string
 }
 
 export type ProductCategoryUpdateWithoutProductInput = {
+  isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   assignedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   category?: Prisma.CategoryUpdateOneRequiredWithoutProductsNestedInput
 }
 
 export type ProductCategoryUncheckedUpdateWithoutProductInput = {
   categoryId?: Prisma.StringFieldUpdateOperationsInput | string
+  isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   assignedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ProductCategoryUncheckedUpdateManyWithoutProductInput = {
   categoryId?: Prisma.StringFieldUpdateOperationsInput | string
+  isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
   assignedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -491,6 +526,7 @@ export type ProductCategoryUncheckedUpdateManyWithoutProductInput = {
 export type ProductCategorySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   productId?: boolean
   categoryId?: boolean
+  isPrimary?: boolean
   assignedAt?: boolean
   product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
   category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
@@ -499,6 +535,7 @@ export type ProductCategorySelect<ExtArgs extends runtime.Types.Extensions.Inter
 export type ProductCategorySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   productId?: boolean
   categoryId?: boolean
+  isPrimary?: boolean
   assignedAt?: boolean
   product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
   category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
@@ -507,6 +544,7 @@ export type ProductCategorySelectCreateManyAndReturn<ExtArgs extends runtime.Typ
 export type ProductCategorySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   productId?: boolean
   categoryId?: boolean
+  isPrimary?: boolean
   assignedAt?: boolean
   product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
   category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
@@ -515,10 +553,11 @@ export type ProductCategorySelectUpdateManyAndReturn<ExtArgs extends runtime.Typ
 export type ProductCategorySelectScalar = {
   productId?: boolean
   categoryId?: boolean
+  isPrimary?: boolean
   assignedAt?: boolean
 }
 
-export type ProductCategoryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"productId" | "categoryId" | "assignedAt", ExtArgs["result"]["productCategory"]>
+export type ProductCategoryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"productId" | "categoryId" | "isPrimary" | "assignedAt", ExtArgs["result"]["productCategory"]>
 export type ProductCategoryInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
   category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
@@ -541,6 +580,7 @@ export type $ProductCategoryPayload<ExtArgs extends runtime.Types.Extensions.Int
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     productId: string
     categoryId: string
+    isPrimary: boolean
     assignedAt: Date
   }, ExtArgs["result"]["productCategory"]>
   composites: {}
@@ -969,6 +1009,7 @@ export interface Prisma__ProductCategoryClient<T, Null = never, ExtArgs extends 
 export interface ProductCategoryFieldRefs {
   readonly productId: Prisma.FieldRef<"ProductCategory", 'String'>
   readonly categoryId: Prisma.FieldRef<"ProductCategory", 'String'>
+  readonly isPrimary: Prisma.FieldRef<"ProductCategory", 'Boolean'>
   readonly assignedAt: Prisma.FieldRef<"ProductCategory", 'DateTime'>
 }
     
