@@ -223,6 +223,25 @@ export class CartsService {
   //   INTERNAL API (for other modules — no HTTP route)
   // ═════════════════════════════════════════════════
 
+  /**
+   * The identity's active cart with its items, for checkout. Unlike
+   * getOrCreateCart, this never creates a cart — an empty/missing cart
+   * at checkout time is a real error, not something to paper over.
+   */
+  async getCheckoutCart(identity: CartIdentity) {
+    const cart = await this.findActiveCart(identity);
+    if (!cart) throw new NotFoundException('No active cart found');
+
+    const items = await this.prisma.cartItem.findMany({
+      where: { cartId: cart.id },
+    });
+    if (items.length === 0) {
+      throw new BadRequestException('Cart is empty');
+    }
+
+    return { ...cart, items };
+  }
+
   /** Raw lookup by cart id. No ownership check — callers must be trusted internal code. */
   async findById(cartId: string) {
     const cart = await this.prisma.cart.findUnique({ where: { id: cartId } });
