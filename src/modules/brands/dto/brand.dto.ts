@@ -6,7 +6,7 @@ import { z } from 'zod';
    ========================================== */
 
 export const createBrandSchema = z.object({
-  name: z.string().min(2).max(100),
+  name: z.string().min(2).max(100).meta({ example: 'ADIDAS' }),
   slug: z
     .string()
     .min(2)
@@ -14,8 +14,14 @@ export const createBrandSchema = z.object({
     .regex(/^[a-z0-9-]+$/, {
       message:
         'Slug must contain only lowercase alphanumeric characters and hyphens',
-    }),
-  logoUrl: z.string().url().optional().or(z.literal('')),
+    })
+    .meta({ example: 'adidas' }),
+  logoUrl: z
+    .string()
+    .url()
+    .optional()
+    .or(z.literal(''))
+    .describe('https://example.com/logo.png'),
 });
 
 export class CreateBrandDto extends createZodDto(createBrandSchema) {}

@@ -14,11 +14,13 @@ import { CampaignsModule } from './modules/campaigns/campaigns.module';
 import { PromotionsModule } from './modules/promotions/promotions.module';
 
 import 'dotenv/config';
+import { PricingModule } from './modules/pricings/pricing.module';
 
 @Module({
   imports: [
     AppLoggerModule,
     UsersModule,
+    PricingModule,
     ProductsModule,
     PrismaModule,
     CategoriesModule,

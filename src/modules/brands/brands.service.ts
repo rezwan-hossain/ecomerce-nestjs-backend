@@ -9,8 +9,6 @@ import { BrandWhereInput } from 'src/generated/prisma/models/Brand';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/client';
 
 
-
-
 @Injectable()
 export class BrandsService {
   constructor(private readonly prisma: PrismaService) {}

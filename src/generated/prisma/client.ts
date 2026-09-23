@@ -125,6 +125,56 @@ export type TemplateOption = Prisma.TemplateOptionModel
  */
 export type TemplateOptionValue = Prisma.TemplateOptionValueModel
 /**
+ * Model Cart
+ * 
+ */
+export type Cart = Prisma.CartModel
+/**
+ * Model CartItem
+ * 
+ */
+export type CartItem = Prisma.CartItemModel
+/**
+ * Model Order
+ * 
+ */
+export type Order = Prisma.OrderModel
+/**
+ * Model OrderItem
+ * 
+ */
+export type OrderItem = Prisma.OrderItemModel
+/**
+ * Model OrderAddress
+ * 
+ */
+export type OrderAddress = Prisma.OrderAddressModel
+/**
+ * Model OrderDiscount
+ * 
+ */
+export type OrderDiscount = Prisma.OrderDiscountModel
+/**
+ * Model Shipment
+ * 
+ */
+export type Shipment = Prisma.ShipmentModel
+/**
+ * Model OrderStatusHistory
+ * 
+ */
+export type OrderStatusHistory = Prisma.OrderStatusHistoryModel
+/**
+ * Model Payment
+ * 
+ */
+export type Payment = Prisma.PaymentModel
+/**
+ * Model RefundRequest
+ * 
+ */
+export type RefundRequest = Prisma.RefundRequestModel
+/**
  * Model Campaign
  * 
  */

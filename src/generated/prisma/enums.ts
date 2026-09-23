@@ -28,6 +28,101 @@ export const ProductStatus = {
 export type ProductStatus = (typeof ProductStatus)[keyof typeof ProductStatus]
 
 
+export const CartStatus = {
+  ACTIVE: 'ACTIVE',
+  CONVERTED: 'CONVERTED',
+  ABANDONED: 'ABANDONED',
+  EXPIRED: 'EXPIRED'
+} as const
+
+export type CartStatus = (typeof CartStatus)[keyof typeof CartStatus]
+
+
+export const OrderStatus = {
+  PENDING: 'PENDING',
+  CONFIRMED: 'CONFIRMED',
+  PROCESSING: 'PROCESSING',
+  READY_TO_SHIP: 'READY_TO_SHIP',
+  SHIPPED: 'SHIPPED',
+  DELIVERED: 'DELIVERED',
+  COMPLETED: 'COMPLETED',
+  CANCELLED: 'CANCELLED',
+  FAILED: 'FAILED',
+  REFUNDED: 'REFUNDED'
+} as const
+
+export type OrderStatus = (typeof OrderStatus)[keyof typeof OrderStatus]
+
+
+export const OrderAddressType = {
+  SHIPPING: 'SHIPPING',
+  BILLING: 'BILLING'
+} as const
+
+export type OrderAddressType = (typeof OrderAddressType)[keyof typeof OrderAddressType]
+
+
+export const ShipmentStatus = {
+  PENDING: 'PENDING',
+  PROCESSING: 'PROCESSING',
+  SHIPPED: 'SHIPPED',
+  IN_TRANSIT: 'IN_TRANSIT',
+  OUT_FOR_DELIVERY: 'OUT_FOR_DELIVERY',
+  DELIVERED: 'DELIVERED',
+  FAILED: 'FAILED',
+  RETURNED: 'RETURNED',
+  CANCELLED: 'CANCELLED'
+} as const
+
+export type ShipmentStatus = (typeof ShipmentStatus)[keyof typeof ShipmentStatus]
+
+
+export const PaymentProvider = {
+  STRIPE: 'STRIPE',
+  SSLCOMMERZ: 'SSLCOMMERZ',
+  BKASH: 'BKASH',
+  NAGAD: 'NAGAD',
+  COD: 'COD',
+  OTHER: 'OTHER'
+} as const
+
+export type PaymentProvider = (typeof PaymentProvider)[keyof typeof PaymentProvider]
+
+
+export const PaymentMethod = {
+  CARD: 'CARD',
+  MOBILE_BANKING: 'MOBILE_BANKING',
+  BANK_TRANSFER: 'BANK_TRANSFER',
+  CASH_ON_DELIVERY: 'CASH_ON_DELIVERY',
+  OTHER: 'OTHER'
+} as const
+
+export type PaymentMethod = (typeof PaymentMethod)[keyof typeof PaymentMethod]
+
+
+export const PaymentStatus = {
+  PENDING: 'PENDING',
+  PROCESSING: 'PROCESSING',
+  PAID: 'PAID',
+  FAILED: 'FAILED',
+  CANCELLED: 'CANCELLED',
+  REFUNDED: 'REFUNDED',
+  PARTIALLY_REFUNDED: 'PARTIALLY_REFUNDED'
+} as const
+
+export type PaymentStatus = (typeof PaymentStatus)[keyof typeof PaymentStatus]
+
+
+export const RefundStatus = {
+  PENDING: 'PENDING',
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED',
+  PROCESSED: 'PROCESSED'
+} as const
+
+export type RefundStatus = (typeof RefundStatus)[keyof typeof RefundStatus]
+
+
 export const RuleMatchType = {
   ANY: 'ANY',
   ALL: 'ALL'
