@@ -25,6 +25,7 @@ model User {
   carts                Cart[]
   orders               Order[]
   orderStatusHistories OrderStatusHistory[]
+  processedRefunds     RefundRequest[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -47,7 +48,9 @@ model Category {
   position Int     @default(0)
 
   parentId String?
-  parent   Category?  @relation("CategoryTree", fields: [parentId], references: [id])
+  // Deleting a parent orphans its children to top-level rather than cascading
+  // the delete through the whole subtree.
+  parent   Category?  @relation("CategoryTree", fields: [parentId], references: [id], onDelete: SetNull)
   children Category[] @relation("CategoryTree")
 
   products ProductCategory[]
@@ -75,7 +78,7 @@ model Product {
   isActive Boolean       @default(true)
 
   brandId String?
-  brand   Brand?  @relation(fields: [brandId], references: [id])
+  brand   Brand?  @relation(fields: [brandId], references: [id], onDelete: SetNull)
 
   categories ProductCategory[]
   tags       ProductTag[]
@@ -138,7 +141,7 @@ model Brand {
 }
 
 model Tag {
-  id String @id @default(uuid())
+  id String @id @default(uuid(7))
 
   name String @unique
   slug String @unique
@@ -368,6 +371,10 @@ model CartItem {
 
   cart Cart @relation(fields: [cartId], references: [id], onDelete: Cascade)
 
+  // Intentionally Restrict, not SetNull: a variant still referenced by ANY
+  // cart (including abandoned/expired ones — nothing purges old CartItem
+  // rows yet) can't be hard-deleted. Use ProductVariant.isActive to retire
+  // it from sale instead. Revisit if a cart-expiry sweep job is ever added.
   variant ProductVariant @relation(fields: [variantId], references: [id], onDelete: Restrict)
 
   createdAt DateTime @default(now())
@@ -430,6 +437,7 @@ model Order {
   @@index([customerEmail])
   @@index([status])
   @@index([createdAt])
+  @@index([status, createdAt])
   @@map("orders")
 }
 
@@ -640,6 +648,7 @@ model Payment {
   updatedAt DateTime @updatedAt
 
   @@index([orderId])
+  @@index([orderId, status])
   @@index([transactionId])
   @@index([status])
   @@map("payments")
@@ -682,11 +691,12 @@ model RefundRequest {
   status  RefundStatus @default(PENDING)
 
   reason String
-  amount Decimal @db.Decimal(10, 2) // Requested refund amount
+  amount Decimal @db.Decimal(12, 2) // Requested refund amount — matches Order.totalAmount / Payment.amount precision
 
   // Admin response
-  adminNote   String?
-  processedBy String? // Admin user ID
+  adminNote         String?
+  processedByUserId String?
+  processedByUser   User?   @relation(fields: [processedByUserId], references: [id], onDelete: SetNull)
 
   order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
 
@@ -695,6 +705,7 @@ model RefundRequest {
 
   @@index([orderId])
   @@index([status])
+  @@index([processedByUserId])
   @@map("refund_requests")
 }
 
@@ -709,7 +720,7 @@ enum RefundStatus {
 //  CAMPAIGN
 // ───────────────────────────────────────────────────
 model Campaign {
-  id          String  @id @default(uuid())
+  id          String  @id @default(uuid(7))
   name        String
   slug        String  @unique
   description String?
@@ -769,7 +780,7 @@ model CampaignBanner {
 }
 
 model CampaignSection {
-  id         String @id @default(uuid())
+  id         String @id @default(uuid(7))
   campaignId String
 
   title       String

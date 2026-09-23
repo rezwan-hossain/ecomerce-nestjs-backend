@@ -16,7 +16,7 @@ export class CreateRefundRequestDto extends createZodDto(
 
 export const reviewRefundRequestSchema = z.object({
   adminNote: z.string().max(500).optional(),
-  processedBy: z.string().max(150).optional(),
+  processedByUserId: z.string().uuid().optional(),
 });
 
 export class ReviewRefundRequestDto extends createZodDto(

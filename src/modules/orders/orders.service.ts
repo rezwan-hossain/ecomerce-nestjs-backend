@@ -686,7 +686,7 @@ export class OrdersService {
       data: {
         status: decision === 'APPROVE' ? 'APPROVED' : 'REJECTED',
         adminNote: dto.adminNote,
-        processedBy: dto.processedBy,
+        processedByUserId: dto.processedByUserId,
       },
     });
 
@@ -714,7 +714,7 @@ export class OrdersService {
         data: {
           status: 'PROCESSED',
           adminNote: dto.adminNote ?? refund.adminNote,
-          processedBy: dto.processedBy ?? refund.processedBy,
+          processedByUserId: dto.processedByUserId ?? refund.processedByUserId,
         },
       });
 

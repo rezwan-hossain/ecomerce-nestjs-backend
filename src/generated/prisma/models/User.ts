@@ -257,6 +257,7 @@ export type UserWhereInput = {
   carts?: Prisma.CartListRelationFilter
   orders?: Prisma.OrderListRelationFilter
   orderStatusHistories?: Prisma.OrderStatusHistoryListRelationFilter
+  processedRefunds?: Prisma.RefundRequestListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -277,6 +278,7 @@ export type UserOrderByWithRelationInput = {
   carts?: Prisma.CartOrderByRelationAggregateInput
   orders?: Prisma.OrderOrderByRelationAggregateInput
   orderStatusHistories?: Prisma.OrderStatusHistoryOrderByRelationAggregateInput
+  processedRefunds?: Prisma.RefundRequestOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -300,6 +302,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   carts?: Prisma.CartListRelationFilter
   orders?: Prisma.OrderListRelationFilter
   orderStatusHistories?: Prisma.OrderStatusHistoryListRelationFilter
+  processedRefunds?: Prisma.RefundRequestListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -360,6 +363,7 @@ export type UserCreateInput = {
   carts?: Prisma.CartCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
   orderStatusHistories?: Prisma.OrderStatusHistoryCreateNestedManyWithoutChangedByUserInput
+  processedRefunds?: Prisma.RefundRequestCreateNestedManyWithoutProcessedByUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -380,6 +384,7 @@ export type UserUncheckedCreateInput = {
   carts?: Prisma.CartUncheckedCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
   orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedCreateNestedManyWithoutChangedByUserInput
+  processedRefunds?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutProcessedByUserInput
 }
 
 export type UserUpdateInput = {
@@ -400,6 +405,7 @@ export type UserUpdateInput = {
   carts?: Prisma.CartUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
   orderStatusHistories?: Prisma.OrderStatusHistoryUpdateManyWithoutChangedByUserNestedInput
+  processedRefunds?: Prisma.RefundRequestUpdateManyWithoutProcessedByUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -420,6 +426,7 @@ export type UserUncheckedUpdateInput = {
   carts?: Prisma.CartUncheckedUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
   orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedUpdateManyWithoutChangedByUserNestedInput
+  processedRefunds?: Prisma.RefundRequestUncheckedUpdateManyWithoutProcessedByUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -601,6 +608,22 @@ export type UserUpdateOneWithoutOrderStatusHistoriesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutOrderStatusHistoriesInput, Prisma.UserUpdateWithoutOrderStatusHistoriesInput>, Prisma.UserUncheckedUpdateWithoutOrderStatusHistoriesInput>
 }
 
+export type UserCreateNestedOneWithoutProcessedRefundsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutProcessedRefundsInput, Prisma.UserUncheckedCreateWithoutProcessedRefundsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutProcessedRefundsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutProcessedRefundsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutProcessedRefundsInput, Prisma.UserUncheckedCreateWithoutProcessedRefundsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutProcessedRefundsInput
+  upsert?: Prisma.UserUpsertWithoutProcessedRefundsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutProcessedRefundsInput, Prisma.UserUpdateWithoutProcessedRefundsInput>, Prisma.UserUncheckedUpdateWithoutProcessedRefundsInput>
+}
+
 export type UserCreateWithoutCartsInput = {
   id?: string
   email: string
@@ -618,6 +641,7 @@ export type UserCreateWithoutCartsInput = {
   updatedAt?: Date | string
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
   orderStatusHistories?: Prisma.OrderStatusHistoryCreateNestedManyWithoutChangedByUserInput
+  processedRefunds?: Prisma.RefundRequestCreateNestedManyWithoutProcessedByUserInput
 }
 
 export type UserUncheckedCreateWithoutCartsInput = {
@@ -637,6 +661,7 @@ export type UserUncheckedCreateWithoutCartsInput = {
   updatedAt?: Date | string
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
   orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedCreateNestedManyWithoutChangedByUserInput
+  processedRefunds?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutProcessedByUserInput
 }
 
 export type UserCreateOrConnectWithoutCartsInput = {
@@ -672,6 +697,7 @@ export type UserUpdateWithoutCartsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
   orderStatusHistories?: Prisma.OrderStatusHistoryUpdateManyWithoutChangedByUserNestedInput
+  processedRefunds?: Prisma.RefundRequestUpdateManyWithoutProcessedByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCartsInput = {
@@ -691,6 +717,7 @@ export type UserUncheckedUpdateWithoutCartsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
   orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedUpdateManyWithoutChangedByUserNestedInput
+  processedRefunds?: Prisma.RefundRequestUncheckedUpdateManyWithoutProcessedByUserNestedInput
 }
 
 export type UserCreateWithoutOrdersInput = {
@@ -710,6 +737,7 @@ export type UserCreateWithoutOrdersInput = {
   updatedAt?: Date | string
   carts?: Prisma.CartCreateNestedManyWithoutUserInput
   orderStatusHistories?: Prisma.OrderStatusHistoryCreateNestedManyWithoutChangedByUserInput
+  processedRefunds?: Prisma.RefundRequestCreateNestedManyWithoutProcessedByUserInput
 }
 
 export type UserUncheckedCreateWithoutOrdersInput = {
@@ -729,6 +757,7 @@ export type UserUncheckedCreateWithoutOrdersInput = {
   updatedAt?: Date | string
   carts?: Prisma.CartUncheckedCreateNestedManyWithoutUserInput
   orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedCreateNestedManyWithoutChangedByUserInput
+  processedRefunds?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutProcessedByUserInput
 }
 
 export type UserCreateOrConnectWithoutOrdersInput = {
@@ -764,6 +793,7 @@ export type UserUpdateWithoutOrdersInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   carts?: Prisma.CartUpdateManyWithoutUserNestedInput
   orderStatusHistories?: Prisma.OrderStatusHistoryUpdateManyWithoutChangedByUserNestedInput
+  processedRefunds?: Prisma.RefundRequestUpdateManyWithoutProcessedByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOrdersInput = {
@@ -783,6 +813,7 @@ export type UserUncheckedUpdateWithoutOrdersInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   carts?: Prisma.CartUncheckedUpdateManyWithoutUserNestedInput
   orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedUpdateManyWithoutChangedByUserNestedInput
+  processedRefunds?: Prisma.RefundRequestUncheckedUpdateManyWithoutProcessedByUserNestedInput
 }
 
 export type UserCreateWithoutOrderStatusHistoriesInput = {
@@ -802,6 +833,7 @@ export type UserCreateWithoutOrderStatusHistoriesInput = {
   updatedAt?: Date | string
   carts?: Prisma.CartCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
+  processedRefunds?: Prisma.RefundRequestCreateNestedManyWithoutProcessedByUserInput
 }
 
 export type UserUncheckedCreateWithoutOrderStatusHistoriesInput = {
@@ -821,6 +853,7 @@ export type UserUncheckedCreateWithoutOrderStatusHistoriesInput = {
   updatedAt?: Date | string
   carts?: Prisma.CartUncheckedCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
+  processedRefunds?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutProcessedByUserInput
 }
 
 export type UserCreateOrConnectWithoutOrderStatusHistoriesInput = {
@@ -856,6 +889,7 @@ export type UserUpdateWithoutOrderStatusHistoriesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   carts?: Prisma.CartUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
+  processedRefunds?: Prisma.RefundRequestUpdateManyWithoutProcessedByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOrderStatusHistoriesInput = {
@@ -875,6 +909,103 @@ export type UserUncheckedUpdateWithoutOrderStatusHistoriesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   carts?: Prisma.CartUncheckedUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
+  processedRefunds?: Prisma.RefundRequestUncheckedUpdateManyWithoutProcessedByUserNestedInput
+}
+
+export type UserCreateWithoutProcessedRefundsInput = {
+  id?: string
+  email: string
+  firstName?: string | null
+  lastName?: string | null
+  userName?: string | null
+  phone?: string | null
+  birthDate?: Date | string | null
+  gender?: string | null
+  image?: string | null
+  role?: $Enums.Role
+  isActive?: boolean
+  isArchived?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  carts?: Prisma.CartCreateNestedManyWithoutUserInput
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryCreateNestedManyWithoutChangedByUserInput
+}
+
+export type UserUncheckedCreateWithoutProcessedRefundsInput = {
+  id?: string
+  email: string
+  firstName?: string | null
+  lastName?: string | null
+  userName?: string | null
+  phone?: string | null
+  birthDate?: Date | string | null
+  gender?: string | null
+  image?: string | null
+  role?: $Enums.Role
+  isActive?: boolean
+  isArchived?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  carts?: Prisma.CartUncheckedCreateNestedManyWithoutUserInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedCreateNestedManyWithoutChangedByUserInput
+}
+
+export type UserCreateOrConnectWithoutProcessedRefundsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutProcessedRefundsInput, Prisma.UserUncheckedCreateWithoutProcessedRefundsInput>
+}
+
+export type UserUpsertWithoutProcessedRefundsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutProcessedRefundsInput, Prisma.UserUncheckedUpdateWithoutProcessedRefundsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutProcessedRefundsInput, Prisma.UserUncheckedCreateWithoutProcessedRefundsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutProcessedRefundsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutProcessedRefundsInput, Prisma.UserUncheckedUpdateWithoutProcessedRefundsInput>
+}
+
+export type UserUpdateWithoutProcessedRefundsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  carts?: Prisma.CartUpdateManyWithoutUserNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUpdateManyWithoutChangedByUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutProcessedRefundsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  carts?: Prisma.CartUncheckedUpdateManyWithoutUserNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedUpdateManyWithoutChangedByUserNestedInput
 }
 
 
@@ -886,12 +1017,14 @@ export type UserCountOutputType = {
   carts: number
   orders: number
   orderStatusHistories: number
+  processedRefunds: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   carts?: boolean | UserCountOutputTypeCountCartsArgs
   orders?: boolean | UserCountOutputTypeCountOrdersArgs
   orderStatusHistories?: boolean | UserCountOutputTypeCountOrderStatusHistoriesArgs
+  processedRefunds?: boolean | UserCountOutputTypeCountProcessedRefundsArgs
 }
 
 /**
@@ -925,6 +1058,13 @@ export type UserCountOutputTypeCountOrderStatusHistoriesArgs<ExtArgs extends run
   where?: Prisma.OrderStatusHistoryWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountProcessedRefundsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.RefundRequestWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -944,6 +1084,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   carts?: boolean | Prisma.User$cartsArgs<ExtArgs>
   orders?: boolean | Prisma.User$ordersArgs<ExtArgs>
   orderStatusHistories?: boolean | Prisma.User$orderStatusHistoriesArgs<ExtArgs>
+  processedRefunds?: boolean | Prisma.User$processedRefundsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1003,6 +1144,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   carts?: boolean | Prisma.User$cartsArgs<ExtArgs>
   orders?: boolean | Prisma.User$ordersArgs<ExtArgs>
   orderStatusHistories?: boolean | Prisma.User$orderStatusHistoriesArgs<ExtArgs>
+  processedRefunds?: boolean | Prisma.User$processedRefundsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1014,6 +1156,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     carts: Prisma.$CartPayload<ExtArgs>[]
     orders: Prisma.$OrderPayload<ExtArgs>[]
     orderStatusHistories: Prisma.$OrderStatusHistoryPayload<ExtArgs>[]
+    processedRefunds: Prisma.$RefundRequestPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1427,6 +1570,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   carts<T extends Prisma.User$cartsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$cartsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CartPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   orders<T extends Prisma.User$ordersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$ordersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   orderStatusHistories<T extends Prisma.User$orderStatusHistoriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$orderStatusHistoriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderStatusHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  processedRefunds<T extends Prisma.User$processedRefundsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$processedRefundsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RefundRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1932,6 +2076,30 @@ export type User$orderStatusHistoriesArgs<ExtArgs extends runtime.Types.Extensio
   take?: number
   skip?: number
   distinct?: Prisma.OrderStatusHistoryScalarFieldEnum | Prisma.OrderStatusHistoryScalarFieldEnum[]
+}
+
+/**
+ * User.processedRefunds
+ */
+export type User$processedRefundsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the RefundRequest
+   */
+  select?: Prisma.RefundRequestSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the RefundRequest
+   */
+  omit?: Prisma.RefundRequestOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RefundRequestInclude<ExtArgs> | null
+  where?: Prisma.RefundRequestWhereInput
+  orderBy?: Prisma.RefundRequestOrderByWithRelationInput | Prisma.RefundRequestOrderByWithRelationInput[]
+  cursor?: Prisma.RefundRequestWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.RefundRequestScalarFieldEnum | Prisma.RefundRequestScalarFieldEnum[]
 }
 
 /**

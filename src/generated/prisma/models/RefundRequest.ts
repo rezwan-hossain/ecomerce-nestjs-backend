@@ -41,7 +41,7 @@ export type RefundRequestMinAggregateOutputType = {
   reason: string | null
   amount: runtime.Decimal | null
   adminNote: string | null
-  processedBy: string | null
+  processedByUserId: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -53,7 +53,7 @@ export type RefundRequestMaxAggregateOutputType = {
   reason: string | null
   amount: runtime.Decimal | null
   adminNote: string | null
-  processedBy: string | null
+  processedByUserId: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -65,7 +65,7 @@ export type RefundRequestCountAggregateOutputType = {
   reason: number
   amount: number
   adminNote: number
-  processedBy: number
+  processedByUserId: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -87,7 +87,7 @@ export type RefundRequestMinAggregateInputType = {
   reason?: true
   amount?: true
   adminNote?: true
-  processedBy?: true
+  processedByUserId?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -99,7 +99,7 @@ export type RefundRequestMaxAggregateInputType = {
   reason?: true
   amount?: true
   adminNote?: true
-  processedBy?: true
+  processedByUserId?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -111,7 +111,7 @@ export type RefundRequestCountAggregateInputType = {
   reason?: true
   amount?: true
   adminNote?: true
-  processedBy?: true
+  processedByUserId?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -210,7 +210,7 @@ export type RefundRequestGroupByOutputType = {
   reason: string
   amount: runtime.Decimal
   adminNote: string | null
-  processedBy: string | null
+  processedByUserId: string | null
   createdAt: Date
   updatedAt: Date
   _count: RefundRequestCountAggregateOutputType | null
@@ -245,9 +245,10 @@ export type RefundRequestWhereInput = {
   reason?: Prisma.StringFilter<"RefundRequest"> | string
   amount?: Prisma.DecimalFilter<"RefundRequest"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   adminNote?: Prisma.StringNullableFilter<"RefundRequest"> | string | null
-  processedBy?: Prisma.StringNullableFilter<"RefundRequest"> | string | null
+  processedByUserId?: Prisma.StringNullableFilter<"RefundRequest"> | string | null
   createdAt?: Prisma.DateTimeFilter<"RefundRequest"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"RefundRequest"> | Date | string
+  processedByUser?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   order?: Prisma.XOR<Prisma.OrderScalarRelationFilter, Prisma.OrderWhereInput>
 }
 
@@ -258,9 +259,10 @@ export type RefundRequestOrderByWithRelationInput = {
   reason?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   adminNote?: Prisma.SortOrderInput | Prisma.SortOrder
-  processedBy?: Prisma.SortOrderInput | Prisma.SortOrder
+  processedByUserId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  processedByUser?: Prisma.UserOrderByWithRelationInput
   order?: Prisma.OrderOrderByWithRelationInput
 }
 
@@ -274,9 +276,10 @@ export type RefundRequestWhereUniqueInput = Prisma.AtLeast<{
   reason?: Prisma.StringFilter<"RefundRequest"> | string
   amount?: Prisma.DecimalFilter<"RefundRequest"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   adminNote?: Prisma.StringNullableFilter<"RefundRequest"> | string | null
-  processedBy?: Prisma.StringNullableFilter<"RefundRequest"> | string | null
+  processedByUserId?: Prisma.StringNullableFilter<"RefundRequest"> | string | null
   createdAt?: Prisma.DateTimeFilter<"RefundRequest"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"RefundRequest"> | Date | string
+  processedByUser?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   order?: Prisma.XOR<Prisma.OrderScalarRelationFilter, Prisma.OrderWhereInput>
 }, "id">
 
@@ -287,7 +290,7 @@ export type RefundRequestOrderByWithAggregationInput = {
   reason?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   adminNote?: Prisma.SortOrderInput | Prisma.SortOrder
-  processedBy?: Prisma.SortOrderInput | Prisma.SortOrder
+  processedByUserId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.RefundRequestCountOrderByAggregateInput
@@ -307,7 +310,7 @@ export type RefundRequestScalarWhereWithAggregatesInput = {
   reason?: Prisma.StringWithAggregatesFilter<"RefundRequest"> | string
   amount?: Prisma.DecimalWithAggregatesFilter<"RefundRequest"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   adminNote?: Prisma.StringNullableWithAggregatesFilter<"RefundRequest"> | string | null
-  processedBy?: Prisma.StringNullableWithAggregatesFilter<"RefundRequest"> | string | null
+  processedByUserId?: Prisma.StringNullableWithAggregatesFilter<"RefundRequest"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"RefundRequest"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"RefundRequest"> | Date | string
 }
@@ -318,9 +321,9 @@ export type RefundRequestCreateInput = {
   reason: string
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   adminNote?: string | null
-  processedBy?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  processedByUser?: Prisma.UserCreateNestedOneWithoutProcessedRefundsInput
   order: Prisma.OrderCreateNestedOneWithoutRefundRequestsInput
 }
 
@@ -331,7 +334,7 @@ export type RefundRequestUncheckedCreateInput = {
   reason: string
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   adminNote?: string | null
-  processedBy?: string | null
+  processedByUserId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -342,9 +345,9 @@ export type RefundRequestUpdateInput = {
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   adminNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  processedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  processedByUser?: Prisma.UserUpdateOneWithoutProcessedRefundsNestedInput
   order?: Prisma.OrderUpdateOneRequiredWithoutRefundRequestsNestedInput
 }
 
@@ -355,7 +358,7 @@ export type RefundRequestUncheckedUpdateInput = {
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   adminNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  processedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  processedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -367,7 +370,7 @@ export type RefundRequestCreateManyInput = {
   reason: string
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   adminNote?: string | null
-  processedBy?: string | null
+  processedByUserId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -378,7 +381,6 @@ export type RefundRequestUpdateManyMutationInput = {
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   adminNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  processedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -390,7 +392,7 @@ export type RefundRequestUncheckedUpdateManyInput = {
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   adminNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  processedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  processedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -412,7 +414,7 @@ export type RefundRequestCountOrderByAggregateInput = {
   reason?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   adminNote?: Prisma.SortOrder
-  processedBy?: Prisma.SortOrder
+  processedByUserId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -428,7 +430,7 @@ export type RefundRequestMaxOrderByAggregateInput = {
   reason?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   adminNote?: Prisma.SortOrder
-  processedBy?: Prisma.SortOrder
+  processedByUserId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -440,13 +442,55 @@ export type RefundRequestMinOrderByAggregateInput = {
   reason?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   adminNote?: Prisma.SortOrder
-  processedBy?: Prisma.SortOrder
+  processedByUserId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type RefundRequestSumOrderByAggregateInput = {
   amount?: Prisma.SortOrder
+}
+
+export type RefundRequestCreateNestedManyWithoutProcessedByUserInput = {
+  create?: Prisma.XOR<Prisma.RefundRequestCreateWithoutProcessedByUserInput, Prisma.RefundRequestUncheckedCreateWithoutProcessedByUserInput> | Prisma.RefundRequestCreateWithoutProcessedByUserInput[] | Prisma.RefundRequestUncheckedCreateWithoutProcessedByUserInput[]
+  connectOrCreate?: Prisma.RefundRequestCreateOrConnectWithoutProcessedByUserInput | Prisma.RefundRequestCreateOrConnectWithoutProcessedByUserInput[]
+  createMany?: Prisma.RefundRequestCreateManyProcessedByUserInputEnvelope
+  connect?: Prisma.RefundRequestWhereUniqueInput | Prisma.RefundRequestWhereUniqueInput[]
+}
+
+export type RefundRequestUncheckedCreateNestedManyWithoutProcessedByUserInput = {
+  create?: Prisma.XOR<Prisma.RefundRequestCreateWithoutProcessedByUserInput, Prisma.RefundRequestUncheckedCreateWithoutProcessedByUserInput> | Prisma.RefundRequestCreateWithoutProcessedByUserInput[] | Prisma.RefundRequestUncheckedCreateWithoutProcessedByUserInput[]
+  connectOrCreate?: Prisma.RefundRequestCreateOrConnectWithoutProcessedByUserInput | Prisma.RefundRequestCreateOrConnectWithoutProcessedByUserInput[]
+  createMany?: Prisma.RefundRequestCreateManyProcessedByUserInputEnvelope
+  connect?: Prisma.RefundRequestWhereUniqueInput | Prisma.RefundRequestWhereUniqueInput[]
+}
+
+export type RefundRequestUpdateManyWithoutProcessedByUserNestedInput = {
+  create?: Prisma.XOR<Prisma.RefundRequestCreateWithoutProcessedByUserInput, Prisma.RefundRequestUncheckedCreateWithoutProcessedByUserInput> | Prisma.RefundRequestCreateWithoutProcessedByUserInput[] | Prisma.RefundRequestUncheckedCreateWithoutProcessedByUserInput[]
+  connectOrCreate?: Prisma.RefundRequestCreateOrConnectWithoutProcessedByUserInput | Prisma.RefundRequestCreateOrConnectWithoutProcessedByUserInput[]
+  upsert?: Prisma.RefundRequestUpsertWithWhereUniqueWithoutProcessedByUserInput | Prisma.RefundRequestUpsertWithWhereUniqueWithoutProcessedByUserInput[]
+  createMany?: Prisma.RefundRequestCreateManyProcessedByUserInputEnvelope
+  set?: Prisma.RefundRequestWhereUniqueInput | Prisma.RefundRequestWhereUniqueInput[]
+  disconnect?: Prisma.RefundRequestWhereUniqueInput | Prisma.RefundRequestWhereUniqueInput[]
+  delete?: Prisma.RefundRequestWhereUniqueInput | Prisma.RefundRequestWhereUniqueInput[]
+  connect?: Prisma.RefundRequestWhereUniqueInput | Prisma.RefundRequestWhereUniqueInput[]
+  update?: Prisma.RefundRequestUpdateWithWhereUniqueWithoutProcessedByUserInput | Prisma.RefundRequestUpdateWithWhereUniqueWithoutProcessedByUserInput[]
+  updateMany?: Prisma.RefundRequestUpdateManyWithWhereWithoutProcessedByUserInput | Prisma.RefundRequestUpdateManyWithWhereWithoutProcessedByUserInput[]
+  deleteMany?: Prisma.RefundRequestScalarWhereInput | Prisma.RefundRequestScalarWhereInput[]
+}
+
+export type RefundRequestUncheckedUpdateManyWithoutProcessedByUserNestedInput = {
+  create?: Prisma.XOR<Prisma.RefundRequestCreateWithoutProcessedByUserInput, Prisma.RefundRequestUncheckedCreateWithoutProcessedByUserInput> | Prisma.RefundRequestCreateWithoutProcessedByUserInput[] | Prisma.RefundRequestUncheckedCreateWithoutProcessedByUserInput[]
+  connectOrCreate?: Prisma.RefundRequestCreateOrConnectWithoutProcessedByUserInput | Prisma.RefundRequestCreateOrConnectWithoutProcessedByUserInput[]
+  upsert?: Prisma.RefundRequestUpsertWithWhereUniqueWithoutProcessedByUserInput | Prisma.RefundRequestUpsertWithWhereUniqueWithoutProcessedByUserInput[]
+  createMany?: Prisma.RefundRequestCreateManyProcessedByUserInputEnvelope
+  set?: Prisma.RefundRequestWhereUniqueInput | Prisma.RefundRequestWhereUniqueInput[]
+  disconnect?: Prisma.RefundRequestWhereUniqueInput | Prisma.RefundRequestWhereUniqueInput[]
+  delete?: Prisma.RefundRequestWhereUniqueInput | Prisma.RefundRequestWhereUniqueInput[]
+  connect?: Prisma.RefundRequestWhereUniqueInput | Prisma.RefundRequestWhereUniqueInput[]
+  update?: Prisma.RefundRequestUpdateWithWhereUniqueWithoutProcessedByUserInput | Prisma.RefundRequestUpdateWithWhereUniqueWithoutProcessedByUserInput[]
+  updateMany?: Prisma.RefundRequestUpdateManyWithWhereWithoutProcessedByUserInput | Prisma.RefundRequestUpdateManyWithWhereWithoutProcessedByUserInput[]
+  deleteMany?: Prisma.RefundRequestScalarWhereInput | Prisma.RefundRequestScalarWhereInput[]
 }
 
 export type RefundRequestCreateNestedManyWithoutOrderInput = {
@@ -495,15 +539,78 @@ export type EnumRefundStatusFieldUpdateOperationsInput = {
   set?: $Enums.RefundStatus
 }
 
+export type RefundRequestCreateWithoutProcessedByUserInput = {
+  id?: string
+  status?: $Enums.RefundStatus
+  reason: string
+  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  adminNote?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  order: Prisma.OrderCreateNestedOneWithoutRefundRequestsInput
+}
+
+export type RefundRequestUncheckedCreateWithoutProcessedByUserInput = {
+  id?: string
+  orderId: string
+  status?: $Enums.RefundStatus
+  reason: string
+  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  adminNote?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type RefundRequestCreateOrConnectWithoutProcessedByUserInput = {
+  where: Prisma.RefundRequestWhereUniqueInput
+  create: Prisma.XOR<Prisma.RefundRequestCreateWithoutProcessedByUserInput, Prisma.RefundRequestUncheckedCreateWithoutProcessedByUserInput>
+}
+
+export type RefundRequestCreateManyProcessedByUserInputEnvelope = {
+  data: Prisma.RefundRequestCreateManyProcessedByUserInput | Prisma.RefundRequestCreateManyProcessedByUserInput[]
+  skipDuplicates?: boolean
+}
+
+export type RefundRequestUpsertWithWhereUniqueWithoutProcessedByUserInput = {
+  where: Prisma.RefundRequestWhereUniqueInput
+  update: Prisma.XOR<Prisma.RefundRequestUpdateWithoutProcessedByUserInput, Prisma.RefundRequestUncheckedUpdateWithoutProcessedByUserInput>
+  create: Prisma.XOR<Prisma.RefundRequestCreateWithoutProcessedByUserInput, Prisma.RefundRequestUncheckedCreateWithoutProcessedByUserInput>
+}
+
+export type RefundRequestUpdateWithWhereUniqueWithoutProcessedByUserInput = {
+  where: Prisma.RefundRequestWhereUniqueInput
+  data: Prisma.XOR<Prisma.RefundRequestUpdateWithoutProcessedByUserInput, Prisma.RefundRequestUncheckedUpdateWithoutProcessedByUserInput>
+}
+
+export type RefundRequestUpdateManyWithWhereWithoutProcessedByUserInput = {
+  where: Prisma.RefundRequestScalarWhereInput
+  data: Prisma.XOR<Prisma.RefundRequestUpdateManyMutationInput, Prisma.RefundRequestUncheckedUpdateManyWithoutProcessedByUserInput>
+}
+
+export type RefundRequestScalarWhereInput = {
+  AND?: Prisma.RefundRequestScalarWhereInput | Prisma.RefundRequestScalarWhereInput[]
+  OR?: Prisma.RefundRequestScalarWhereInput[]
+  NOT?: Prisma.RefundRequestScalarWhereInput | Prisma.RefundRequestScalarWhereInput[]
+  id?: Prisma.StringFilter<"RefundRequest"> | string
+  orderId?: Prisma.StringFilter<"RefundRequest"> | string
+  status?: Prisma.EnumRefundStatusFilter<"RefundRequest"> | $Enums.RefundStatus
+  reason?: Prisma.StringFilter<"RefundRequest"> | string
+  amount?: Prisma.DecimalFilter<"RefundRequest"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  adminNote?: Prisma.StringNullableFilter<"RefundRequest"> | string | null
+  processedByUserId?: Prisma.StringNullableFilter<"RefundRequest"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"RefundRequest"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"RefundRequest"> | Date | string
+}
+
 export type RefundRequestCreateWithoutOrderInput = {
   id?: string
   status?: $Enums.RefundStatus
   reason: string
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   adminNote?: string | null
-  processedBy?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  processedByUser?: Prisma.UserCreateNestedOneWithoutProcessedRefundsInput
 }
 
 export type RefundRequestUncheckedCreateWithoutOrderInput = {
@@ -512,7 +619,7 @@ export type RefundRequestUncheckedCreateWithoutOrderInput = {
   reason: string
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   adminNote?: string | null
-  processedBy?: string | null
+  processedByUserId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -543,19 +650,48 @@ export type RefundRequestUpdateManyWithWhereWithoutOrderInput = {
   data: Prisma.XOR<Prisma.RefundRequestUpdateManyMutationInput, Prisma.RefundRequestUncheckedUpdateManyWithoutOrderInput>
 }
 
-export type RefundRequestScalarWhereInput = {
-  AND?: Prisma.RefundRequestScalarWhereInput | Prisma.RefundRequestScalarWhereInput[]
-  OR?: Prisma.RefundRequestScalarWhereInput[]
-  NOT?: Prisma.RefundRequestScalarWhereInput | Prisma.RefundRequestScalarWhereInput[]
-  id?: Prisma.StringFilter<"RefundRequest"> | string
-  orderId?: Prisma.StringFilter<"RefundRequest"> | string
-  status?: Prisma.EnumRefundStatusFilter<"RefundRequest"> | $Enums.RefundStatus
-  reason?: Prisma.StringFilter<"RefundRequest"> | string
-  amount?: Prisma.DecimalFilter<"RefundRequest"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  adminNote?: Prisma.StringNullableFilter<"RefundRequest"> | string | null
-  processedBy?: Prisma.StringNullableFilter<"RefundRequest"> | string | null
-  createdAt?: Prisma.DateTimeFilter<"RefundRequest"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"RefundRequest"> | Date | string
+export type RefundRequestCreateManyProcessedByUserInput = {
+  id?: string
+  orderId: string
+  status?: $Enums.RefundStatus
+  reason: string
+  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  adminNote?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type RefundRequestUpdateWithoutProcessedByUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumRefundStatusFieldUpdateOperationsInput | $Enums.RefundStatus
+  reason?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  adminNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  order?: Prisma.OrderUpdateOneRequiredWithoutRefundRequestsNestedInput
+}
+
+export type RefundRequestUncheckedUpdateWithoutProcessedByUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  orderId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumRefundStatusFieldUpdateOperationsInput | $Enums.RefundStatus
+  reason?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  adminNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type RefundRequestUncheckedUpdateManyWithoutProcessedByUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  orderId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumRefundStatusFieldUpdateOperationsInput | $Enums.RefundStatus
+  reason?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  adminNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type RefundRequestCreateManyOrderInput = {
@@ -564,7 +700,7 @@ export type RefundRequestCreateManyOrderInput = {
   reason: string
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   adminNote?: string | null
-  processedBy?: string | null
+  processedByUserId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -575,9 +711,9 @@ export type RefundRequestUpdateWithoutOrderInput = {
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   adminNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  processedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  processedByUser?: Prisma.UserUpdateOneWithoutProcessedRefundsNestedInput
 }
 
 export type RefundRequestUncheckedUpdateWithoutOrderInput = {
@@ -586,7 +722,7 @@ export type RefundRequestUncheckedUpdateWithoutOrderInput = {
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   adminNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  processedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  processedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -597,7 +733,7 @@ export type RefundRequestUncheckedUpdateManyWithoutOrderInput = {
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   adminNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  processedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  processedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -611,9 +747,10 @@ export type RefundRequestSelect<ExtArgs extends runtime.Types.Extensions.Interna
   reason?: boolean
   amount?: boolean
   adminNote?: boolean
-  processedBy?: boolean
+  processedByUserId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  processedByUser?: boolean | Prisma.RefundRequest$processedByUserArgs<ExtArgs>
   order?: boolean | Prisma.OrderDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["refundRequest"]>
 
@@ -624,9 +761,10 @@ export type RefundRequestSelectCreateManyAndReturn<ExtArgs extends runtime.Types
   reason?: boolean
   amount?: boolean
   adminNote?: boolean
-  processedBy?: boolean
+  processedByUserId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  processedByUser?: boolean | Prisma.RefundRequest$processedByUserArgs<ExtArgs>
   order?: boolean | Prisma.OrderDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["refundRequest"]>
 
@@ -637,9 +775,10 @@ export type RefundRequestSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
   reason?: boolean
   amount?: boolean
   adminNote?: boolean
-  processedBy?: boolean
+  processedByUserId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  processedByUser?: boolean | Prisma.RefundRequest$processedByUserArgs<ExtArgs>
   order?: boolean | Prisma.OrderDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["refundRequest"]>
 
@@ -650,25 +789,29 @@ export type RefundRequestSelectScalar = {
   reason?: boolean
   amount?: boolean
   adminNote?: boolean
-  processedBy?: boolean
+  processedByUserId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type RefundRequestOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "orderId" | "status" | "reason" | "amount" | "adminNote" | "processedBy" | "createdAt" | "updatedAt", ExtArgs["result"]["refundRequest"]>
+export type RefundRequestOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "orderId" | "status" | "reason" | "amount" | "adminNote" | "processedByUserId" | "createdAt" | "updatedAt", ExtArgs["result"]["refundRequest"]>
 export type RefundRequestInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  processedByUser?: boolean | Prisma.RefundRequest$processedByUserArgs<ExtArgs>
   order?: boolean | Prisma.OrderDefaultArgs<ExtArgs>
 }
 export type RefundRequestIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  processedByUser?: boolean | Prisma.RefundRequest$processedByUserArgs<ExtArgs>
   order?: boolean | Prisma.OrderDefaultArgs<ExtArgs>
 }
 export type RefundRequestIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  processedByUser?: boolean | Prisma.RefundRequest$processedByUserArgs<ExtArgs>
   order?: boolean | Prisma.OrderDefaultArgs<ExtArgs>
 }
 
 export type $RefundRequestPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "RefundRequest"
   objects: {
+    processedByUser: Prisma.$UserPayload<ExtArgs> | null
     order: Prisma.$OrderPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -678,7 +821,7 @@ export type $RefundRequestPayload<ExtArgs extends runtime.Types.Extensions.Inter
     reason: string
     amount: runtime.Decimal
     adminNote: string | null
-    processedBy: string | null
+    processedByUserId: string | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["refundRequest"]>
@@ -1075,6 +1218,7 @@ readonly fields: RefundRequestFieldRefs;
  */
 export interface Prisma__RefundRequestClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  processedByUser<T extends Prisma.RefundRequest$processedByUserArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.RefundRequest$processedByUserArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   order<T extends Prisma.OrderDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrderDefaultArgs<ExtArgs>>): Prisma.Prisma__OrderClient<runtime.Types.Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1111,7 +1255,7 @@ export interface RefundRequestFieldRefs {
   readonly reason: Prisma.FieldRef<"RefundRequest", 'String'>
   readonly amount: Prisma.FieldRef<"RefundRequest", 'Decimal'>
   readonly adminNote: Prisma.FieldRef<"RefundRequest", 'String'>
-  readonly processedBy: Prisma.FieldRef<"RefundRequest", 'String'>
+  readonly processedByUserId: Prisma.FieldRef<"RefundRequest", 'String'>
   readonly createdAt: Prisma.FieldRef<"RefundRequest", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"RefundRequest", 'DateTime'>
 }
@@ -1512,6 +1656,25 @@ export type RefundRequestDeleteManyArgs<ExtArgs extends runtime.Types.Extensions
    * Limit how many RefundRequests to delete.
    */
   limit?: number
+}
+
+/**
+ * RefundRequest.processedByUser
+ */
+export type RefundRequest$processedByUserArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
 }
 
 /**

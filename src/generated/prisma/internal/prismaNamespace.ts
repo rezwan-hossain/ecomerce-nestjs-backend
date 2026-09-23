@@ -3431,7 +3431,7 @@ export const RefundRequestScalarFieldEnum = {
   reason: 'reason',
   amount: 'amount',
   adminNote: 'adminNote',
-  processedBy: 'processedBy',
+  processedByUserId: 'processedByUserId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
