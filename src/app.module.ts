@@ -12,6 +12,7 @@ import { BrandsModule } from './modules/brands/brands.module';
 import { TagsModule } from './modules/tags/tags.module';
 import { CampaignsModule } from './modules/campaigns/campaigns.module';
 import { PromotionsModule } from './modules/promotions/promotions.module';
+import { OptionsModule } from './modules/options/options.module';
 
 import 'dotenv/config';
 import { PricingModule } from './modules/pricings/pricing.module';
@@ -28,6 +29,7 @@ import { PricingModule } from './modules/pricings/pricing.module';
     TagsModule,
     CampaignsModule,
     PromotionsModule,
+    OptionsModule,
   ],
   controllers: [AppController],
   providers: [
