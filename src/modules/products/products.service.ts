@@ -394,21 +394,31 @@ export class ProductsService {
           status: true,
           isActive: true,
           createdAt: true,
-          brand: { select: { id: true, name: true, slug: true, logoUrl: true } },
+          brand: {
+            select: { id: true, name: true, slug: true, logoUrl: true },
+          },
           categories: {
             select: {
               isPrimary: true,
               category: { select: { id: true, name: true, slug: true } },
             },
           },
-          tags: { select: { tag: { select: { id: true, name: true, slug: true } } } },
+          tags: {
+            select: { tag: { select: { id: true, name: true, slug: true } } },
+          },
           images: {
             where: { isPrimary: true },
             select: { id: true, url: true, altText: true, isPrimary: true },
             take: 1,
           },
           variants: {
-            select: { id: true, sku: true, price: true, stock: true, isActive: true },
+            select: {
+              id: true,
+              sku: true,
+              price: true,
+              stock: true,
+              isActive: true,
+            },
           },
         },
       }),
@@ -461,7 +471,10 @@ export class ProductsService {
     await this.validateCategories(dto.categoryIds);
     await this.validateTags(dto.tagIds);
 
-    if (dto.primaryCategoryId && !dto.categoryIds?.includes(dto.primaryCategoryId)) {
+    if (
+      dto.primaryCategoryId &&
+      !dto.categoryIds?.includes(dto.primaryCategoryId)
+    ) {
       throw new BadRequestException(
         'primaryCategoryId must be included in categoryIds',
       );
@@ -485,7 +498,9 @@ export class ProductsService {
           data: {
             ...(dto.name && { name: dto.name }),
             ...(dto.slug && { slug: dto.slug }),
-            ...(dto.description !== undefined && { description: dto.description }),
+            ...(dto.description !== undefined && {
+              description: dto.description,
+            }),
             ...(dto.shortDescription !== undefined && {
               shortDescription: dto.shortDescription,
             }),
@@ -722,7 +737,8 @@ export class ProductsService {
       where: { sku: dto.sku },
       select: { id: true },
     });
-    if (skuExists) throw new ConflictException(`SKU '${dto.sku}' already exists`);
+    if (skuExists)
+      throw new ConflictException(`SKU '${dto.sku}' already exists`);
 
     const productOptions = await this.prisma.productOption.findMany({
       where: { productId },
@@ -796,7 +812,9 @@ export class ProductsService {
       return tx.productVariant.findUnique({
         where: { id: variant.id },
         include: {
-          optionValues: { include: { optionValue: { include: { option: true } } } },
+          optionValues: {
+            include: { optionValue: { include: { option: true } } },
+          },
           images: true,
         },
       });
@@ -815,7 +833,8 @@ export class ProductsService {
         where: { sku: dto.sku },
         select: { id: true },
       });
-      if (skuExists) throw new ConflictException(`SKU '${dto.sku}' already exists`);
+      if (skuExists)
+        throw new ConflictException(`SKU '${dto.sku}' already exists`);
     }
 
     const updated = await this.prisma.productVariant.update({
@@ -928,9 +947,7 @@ export class ProductsService {
         throw new NotFoundException(`${entity} not found`);
       }
       if (error.code === 'P2003') {
-        throw new BadRequestException(
-          `${entity} reference constraint failed`,
-        );
+        throw new BadRequestException(`${entity} reference constraint failed`);
       }
     }
 

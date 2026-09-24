@@ -12,7 +12,9 @@ export const updateProductImageSchema = z.object({
   isPrimary: z.boolean().optional(),
   position: z.number().int().nonnegative().optional(),
 });
-export class UpdateProductImageDto extends createZodDto(updateProductImageSchema) {}
+export class UpdateProductImageDto extends createZodDto(
+  updateProductImageSchema,
+) {}
 
 export const reorderProductImagesSchema = z.object({
   items: z
@@ -26,4 +28,4 @@ export const reorderProductImagesSchema = z.object({
 });
 export class ReorderProductImagesDto extends createZodDto(
   reorderProductImagesSchema,
-){}
+) {}

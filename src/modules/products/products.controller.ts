@@ -56,7 +56,9 @@ export class ProductsController {
   findOne(@Param('id') id: string) {
     // Support UUID or slug fallback
     const isUuid =
-      /^[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(id);
+      /^[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(
+        id,
+      );
     return isUuid
       ? this.productsService.findOneById(id)
       : this.productsService.findOneBySlug(id);
@@ -101,10 +103,7 @@ export class ProductsController {
   }
 
   @Patch(':id/images/reorder')
-  reorderImages(
-    @Param('id') id: string,
-    @Body() dto: ReorderProductImagesDto,
-  ) {
+  reorderImages(@Param('id') id: string, @Body() dto: ReorderProductImagesDto) {
     return this.productsService.reorderProductImages(id, dto);
   }
 
@@ -118,10 +117,7 @@ export class ProductsController {
   }
 
   @Delete(':id/images/:imageId')
-  removeImage(
-    @Param('id') id: string,
-    @Param('imageId') imageId: string,
-  ) {
+  removeImage(@Param('id') id: string, @Param('imageId') imageId: string) {
     return this.productsService.removeProductImage(id, imageId);
   }
 
