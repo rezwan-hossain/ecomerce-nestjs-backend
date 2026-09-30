@@ -15,6 +15,7 @@ import { PromotionsModule } from './modules/promotions/promotions.module';
 import { OptionsModule } from './modules/options/options.module';
 import { CartsModule } from './modules/carts/carts.module';
 import { OrdersModule } from './modules/orders/orders.module';
+import { VariantTemplatesModule } from './modules/variant-templates/variant-templates.module';
 
 import 'dotenv/config';
 import { PricingModule } from './modules/pricings/pricing.module';
@@ -34,6 +35,7 @@ import { PricingModule } from './modules/pricings/pricing.module';
     OptionsModule,
     CartsModule,
     OrdersModule,
+    VariantTemplatesModule,
   ],
   controllers: [AppController],
   providers: [
