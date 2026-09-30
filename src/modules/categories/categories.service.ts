@@ -121,34 +121,63 @@ export class CategoriesService {
   //   TREE (nested hierarchy)
   // ═════════════════════════════════════════════════
 
+  // async getCategoryTree() {
+  //   const rootCategories = await this.prisma.category.findMany({
+  //     where: { parentId: null },
+  //     orderBy: [{ position: 'asc' }, { name: 'asc' }],
+  //     include: {
+  //       children: {
+  //         orderBy: [{ position: 'asc' }, { name: 'asc' }],
+  //         include: {
+  //           children: {
+  //             orderBy: [{ position: 'asc' }, { name: 'asc' }],
+  //             include: {
+  //               children: {
+  //                 orderBy: [{ position: 'asc' }, { name: 'asc' }],
+  //                 include: {
+  //                   _count: { select: { products: true } },
+  //                 },
+  //               },
+  //               _count: { select: { products: true, children: true } },
+  //             },
+  //           },
+  //           _count: { select: { products: true, children: true } },
+  //         },
+  //       },
+  //       _count: { select: { products: true, children: true } },
+  //     },
+  //   });
+
+  //   return { data: rootCategories };
+  // }
+
   async getCategoryTree() {
-    const rootCategories = await this.prisma.category.findMany({
-      where: { parentId: null },
+    // Single flat query — no nested includes
+    const all = await this.prisma.category.findMany({
       orderBy: [{ position: 'asc' }, { name: 'asc' }],
       include: {
-        children: {
-          orderBy: [{ position: 'asc' }, { name: 'asc' }],
-          include: {
-            children: {
-              orderBy: [{ position: 'asc' }, { name: 'asc' }],
-              include: {
-                children: {
-                  orderBy: [{ position: 'asc' }, { name: 'asc' }],
-                  include: {
-                    _count: { select: { products: true } },
-                  },
-                },
-                _count: { select: { products: true, children: true } },
-              },
-            },
-            _count: { select: { products: true, children: true } },
-          },
-        },
         _count: { select: { products: true, children: true } },
       },
     });
 
-    return { data: rootCategories };
+    // Index by id for O(1) lookups
+    const map = new Map<string, any>();
+    for (const cat of all) {
+      map.set(cat.id, { ...cat, children: [] });
+    }
+
+    // Assemble tree
+    const roots: any[] = [];
+    for (const cat of all) {
+      const node = map.get(cat.id)!;
+      if (cat.parentId && map.has(cat.parentId)) {
+        map.get(cat.parentId)!.children.push(node);
+      } else {
+        roots.push(node);
+      }
+    }
+
+    return { data: roots };
   }
 
   // ═════════════════════════════════════════════════
