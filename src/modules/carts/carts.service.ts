@@ -293,14 +293,28 @@ export class CartsService {
     const existing = await this.findActiveCart(identity);
     if (existing) return existing;
 
-    return this.prisma.cart.create({
-      data: {
-        userId: identity.userId,
-        sessionId: identity.userId ? undefined : identity.sessionId,
-        status: 'ACTIVE',
-        expiresAt: this.nextExpiry(),
-      },
-    });
+    try {
+      return await this.prisma.cart.create({
+        data: {
+          userId: identity.userId,
+          sessionId: identity.userId ? undefined : identity.sessionId,
+          status: 'ACTIVE',
+          expiresAt: this.nextExpiry(),
+        },
+      });
+    } catch (error) {
+      // A concurrent request created this user's active cart first
+      // (carts_active_user_key) — use that one instead.
+      if (
+        identity.userId &&
+        error instanceof PrismaClientKnownRequestError &&
+        error.code === 'P2002'
+      ) {
+        const winner = await this.findActiveCart(identity);
+        if (winner) return winner;
+      }
+      throw error;
+    }
   }
 
   private async requireActiveCart(identity: CartIdentity) {

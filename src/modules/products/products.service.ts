@@ -285,6 +285,7 @@ export class ProductsService {
             data: {
               productId: product.id,
               sku: v.sku,
+              optionKey: buildOptionKey(v.optionValueIds),
               price: new Decimal(v.price),
               stock: v.stock ?? 0,
               isActive: v.isActive ?? true,
@@ -762,14 +763,12 @@ export class ProductsService {
         include: { optionValues: true },
       });
 
-      const newCombo = [...dto.optionValueIds].sort().join('|');
-      const duplicate = existingVariants.find((v) => {
-        const combo = v.optionValues
-          .map((ov) => ov.optionValueId)
-          .sort()
-          .join('|');
-        return combo === newCombo;
-      });
+      const newCombo = buildOptionKey(dto.optionValueIds);
+      const duplicate = existingVariants.find(
+        (v) =>
+          buildOptionKey(v.optionValues.map((ov) => ov.optionValueId)) ===
+          newCombo,
+      );
       if (duplicate) {
         throw new ConflictException(
           `Variant with this option combination already exists (SKU: ${duplicate.sku})`,
@@ -777,48 +776,60 @@ export class ProductsService {
       }
     }
 
-    return this.prisma.$transaction(async (tx) => {
-      const variant = await tx.productVariant.create({
-        data: {
-          productId,
-          sku: dto.sku,
-          price: new Decimal(dto.price),
-          stock: dto.stock ?? 0,
-          isActive: dto.isActive ?? true,
-        },
-      });
-
-      if (dto.optionValueIds?.length) {
-        await tx.variantOptionValue.createMany({
-          data: dto.optionValueIds.map((optionValueId) => ({
-            variantId: variant.id,
-            optionValueId,
-          })),
-        });
-      }
-
-      if (dto.images?.length) {
-        await tx.variantImage.createMany({
-          data: dto.images.map((img, index) => ({
-            variantId: variant.id,
-            url: img.url,
-            altText: img.altText ?? null,
-            isPrimary: img.isPrimary ?? index === 0,
-            position: img.position ?? index,
-          })),
-        });
-      }
-
-      return tx.productVariant.findUnique({
-        where: { id: variant.id },
-        include: {
-          optionValues: {
-            include: { optionValue: { include: { option: true } } },
+    try {
+      return await this.prisma.$transaction(async (tx) => {
+        const variant = await tx.productVariant.create({
+          data: {
+            productId,
+            sku: dto.sku,
+            optionKey: buildOptionKey(dto.optionValueIds),
+            price: new Decimal(dto.price),
+            stock: dto.stock ?? 0,
+            isActive: dto.isActive ?? true,
           },
-          images: true,
-        },
+        });
+
+        if (dto.optionValueIds?.length) {
+          await tx.variantOptionValue.createMany({
+            data: dto.optionValueIds.map((optionValueId) => ({
+              variantId: variant.id,
+              optionValueId,
+            })),
+          });
+        }
+
+        if (dto.images?.length) {
+          await tx.variantImage.createMany({
+            data: dto.images.map((img, index) => ({
+              variantId: variant.id,
+              url: img.url,
+              altText: img.altText ?? null,
+              isPrimary: img.isPrimary ?? index === 0,
+              position: img.position ?? index,
+            })),
+          });
+        }
+
+        return tx.productVariant.findUnique({
+          where: { id: variant.id },
+          include: {
+            optionValues: {
+              include: { optionValue: { include: { option: true } } },
+            },
+            images: true,
+          },
+        });
       });
-    });
+    } catch (e) {
+      // The pre-checks above can race with a concurrent request; the DB
+      // unique constraints (sku, productId+optionKey) are the final guard.
+      if (e instanceof PrismaClientKnownRequestError && e.code === 'P2002') {
+        throw new ConflictException(
+          'A variant with this SKU or option combination already exists',
+        );
+      }
+      throw e;
+    }
   }
 
   async updateVariant(variantId: string, dto: UpdateVariantDto) {
@@ -964,4 +975,12 @@ export class ProductsService {
       `${entity} operation failed unexpectedly`,
     );
   }
+}
+
+/** Canonical key for a variant's option combination: sorted ids joined by ":".
+ * Must match the backfill in the add_integrity_constraints_and_indexes
+ * migration (which sorts with COLLATE "C", i.e. the same code-unit order). */
+function buildOptionKey(optionValueIds?: string[]): string | null {
+  if (!optionValueIds?.length) return null;
+  return [...optionValueIds].sort().join(':');
 }

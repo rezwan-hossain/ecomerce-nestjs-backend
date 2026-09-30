@@ -580,31 +580,45 @@ export class OrdersService {
       throw new BadRequestException(`Payment already ${payment.status}`);
     }
 
-    await this.prisma.$transaction(async (tx) => {
-      await tx.payment.update({
-        where: { id: paymentId },
-        data: {
-          status: 'PAID',
-          paidAt: new Date(),
-          transactionId: dto.transactionId,
-          providerReference: dto.providerReference,
-        },
-      });
+    try {
+      await this.prisma.$transaction(async (tx) => {
+        await tx.payment.update({
+          where: { id: paymentId },
+          data: {
+            status: 'PAID',
+            paidAt: new Date(),
+            transactionId: dto.transactionId,
+            providerReference: dto.providerReference,
+          },
+        });
 
-      const order = await tx.order.findUnique({
-        where: { id: orderId },
-        select: { status: true },
+        const order = await tx.order.findUnique({
+          where: { id: orderId },
+          select: { status: true },
+        });
+        if (order?.status === 'PENDING') {
+          await this.transitionStatus(
+            tx,
+            orderId,
+            'CONFIRMED',
+            'Payment received',
+            actedBy,
+          );
+        }
       });
-      if (order?.status === 'PENDING') {
-        await this.transitionStatus(
-          tx,
-          orderId,
-          'CONFIRMED',
-          'Payment received',
-          actedBy,
+    } catch (error) {
+      // payments_provider_transactionId_key: the provider's transaction was
+      // already recorded (e.g. a replayed webhook) against another payment.
+      if (
+        error instanceof PrismaClientKnownRequestError &&
+        error.code === 'P2002'
+      ) {
+        throw new ConflictException(
+          `Transaction "${dto.transactionId}" is already recorded for another ${payment.provider} payment`,
         );
       }
-    });
+      throw error;
+    }
 
     return this.loadOrder(this.prisma, orderId);
   }

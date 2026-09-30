@@ -265,12 +265,12 @@ export type CategoryOrderByWithRelationInput = {
 
 export type CategoryWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  name?: string
   slug?: string
   parentId_name?: Prisma.CategoryParentIdNameCompoundUniqueInput
   AND?: Prisma.CategoryWhereInput | Prisma.CategoryWhereInput[]
   OR?: Prisma.CategoryWhereInput[]
   NOT?: Prisma.CategoryWhereInput | Prisma.CategoryWhereInput[]
-  name?: Prisma.StringFilter<"Category"> | string
   isActive?: Prisma.BoolFilter<"Category"> | boolean
   position?: Prisma.IntFilter<"Category"> | number
   parentId?: Prisma.StringNullableFilter<"Category"> | string | null
@@ -281,7 +281,7 @@ export type CategoryWhereUniqueInput = Prisma.AtLeast<{
   products?: Prisma.ProductCategoryListRelationFilter
   promotionTargets?: Prisma.PromotionTargetListRelationFilter
   campaignRules?: Prisma.CampaignSectionRuleListRelationFilter
-}, "id" | "slug" | "parentId_name">
+}, "id" | "slug" | "parentId_name" | "name">
 
 export type CategoryOrderByWithAggregationInput = {
   id?: Prisma.SortOrder

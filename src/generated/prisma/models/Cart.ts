@@ -236,11 +236,11 @@ export type CartOrderByWithRelationInput = {
 
 export type CartWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  userId?: string
   convertedOrderId?: string
   AND?: Prisma.CartWhereInput | Prisma.CartWhereInput[]
   OR?: Prisma.CartWhereInput[]
   NOT?: Prisma.CartWhereInput | Prisma.CartWhereInput[]
-  userId?: Prisma.StringNullableFilter<"Cart"> | string | null
   sessionId?: Prisma.StringNullableFilter<"Cart"> | string | null
   status?: Prisma.EnumCartStatusFilter<"Cart"> | $Enums.CartStatus
   currency?: Prisma.StringFilter<"Cart"> | string
@@ -250,7 +250,7 @@ export type CartWhereUniqueInput = Prisma.AtLeast<{
   user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   items?: Prisma.CartItemListRelationFilter
   convertedOrder?: Prisma.XOR<Prisma.OrderNullableScalarRelationFilter, Prisma.OrderWhereInput> | null
-}, "id" | "convertedOrderId">
+}, "id" | "convertedOrderId" | "userId">
 
 export type CartOrderByWithAggregationInput = {
   id?: Prisma.SortOrder

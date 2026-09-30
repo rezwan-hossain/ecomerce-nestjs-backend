@@ -1,7 +1,8 @@
 generator client {
-  provider     = "prisma-client"
-  output       = "../src/generated/prisma"
-  moduleFormat = "cjs"
+  provider        = "prisma-client"
+  output          = "../src/generated/prisma"
+  moduleFormat    = "cjs"
+  previewFeatures = ["partialIndexes"]
 }
 
 datasource db {
@@ -97,6 +98,8 @@ model Product {
   deletedAt  DateTime?
   orderItems OrderItem[]
 
+  @@index([brandId])
+  @@index([status, deletedAt])
   @@map("products")
 }
 
@@ -235,6 +238,11 @@ model ProductVariant {
   stock     Int     @default(0)
   isActive  Boolean @default(true)
 
+  // Sorted optionValueIds joined with ":" — lets the DB reject two variants of
+  // the same product with the same option combination. NULL for variants of
+  // products without options (NULLs never collide).
+  optionKey String?
+
   product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
 
   optionValues VariantOptionValue[] // which option values define this variant
@@ -248,6 +256,7 @@ model ProductVariant {
   updatedAt  DateTime    @updatedAt
   orderItems OrderItem[]
 
+  @@unique([productId, optionKey])
   @@index([productId])
   @@map("product_variants")
 }
@@ -648,6 +657,7 @@ model Payment {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  @@unique([provider, transactionId])
   @@index([orderId])
   @@index([orderId, status])
   @@index([transactionId])
