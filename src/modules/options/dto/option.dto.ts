@@ -7,12 +7,15 @@ import { z } from 'zod';
 
 export const createOptionSchema = z.object({
   name: z.string().min(1).max(50),
+  displayName: z.string().min(1).max(100).optional(),
 });
 
 export class CreateOptionDto extends createZodDto(createOptionSchema) {}
 
 // Partial schema for PATCH requests
-export const updateOptionSchema = createOptionSchema.partial();
+export const updateOptionSchema = createOptionSchema.partial().extend({
+  displayName: z.string().min(1).max(100).nullable().optional(),
+});
 
 export class UpdateOptionDto extends createZodDto(updateOptionSchema) {}
 

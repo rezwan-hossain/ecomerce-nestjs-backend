@@ -28,6 +28,7 @@ export class OptionsService {
       const option = await this.prisma.option.create({
         data: {
           name: dto.name,
+          displayName: dto.displayName,
         },
       });
 
@@ -118,6 +119,9 @@ export class OptionsService {
         where: { id },
         data: {
           ...(dto.name && { name: dto.name }),
+          ...(dto.displayName !== undefined && {
+            displayName: dto.displayName,
+          }),
         },
       });
 

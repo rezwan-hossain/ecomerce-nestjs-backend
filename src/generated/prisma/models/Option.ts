@@ -27,6 +27,7 @@ export type AggregateOption = {
 export type OptionMinAggregateOutputType = {
   id: string | null
   name: string | null
+  displayName: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -34,6 +35,7 @@ export type OptionMinAggregateOutputType = {
 export type OptionMaxAggregateOutputType = {
   id: string | null
   name: string | null
+  displayName: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -41,6 +43,7 @@ export type OptionMaxAggregateOutputType = {
 export type OptionCountAggregateOutputType = {
   id: number
   name: number
+  displayName: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -50,6 +53,7 @@ export type OptionCountAggregateOutputType = {
 export type OptionMinAggregateInputType = {
   id?: true
   name?: true
+  displayName?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -57,6 +61,7 @@ export type OptionMinAggregateInputType = {
 export type OptionMaxAggregateInputType = {
   id?: true
   name?: true
+  displayName?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -64,6 +69,7 @@ export type OptionMaxAggregateInputType = {
 export type OptionCountAggregateInputType = {
   id?: true
   name?: true
+  displayName?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -144,6 +150,7 @@ export type OptionGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalA
 export type OptionGroupByOutputType = {
   id: string
   name: string
+  displayName: string | null
   createdAt: Date
   updatedAt: Date
   _count: OptionCountAggregateOutputType | null
@@ -172,6 +179,7 @@ export type OptionWhereInput = {
   NOT?: Prisma.OptionWhereInput | Prisma.OptionWhereInput[]
   id?: Prisma.StringFilter<"Option"> | string
   name?: Prisma.StringFilter<"Option"> | string
+  displayName?: Prisma.StringNullableFilter<"Option"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Option"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Option"> | Date | string
   values?: Prisma.OptionValueListRelationFilter
@@ -182,6 +190,7 @@ export type OptionWhereInput = {
 export type OptionOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  displayName?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   values?: Prisma.OptionValueOrderByRelationAggregateInput
@@ -195,6 +204,7 @@ export type OptionWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.OptionWhereInput | Prisma.OptionWhereInput[]
   OR?: Prisma.OptionWhereInput[]
   NOT?: Prisma.OptionWhereInput | Prisma.OptionWhereInput[]
+  displayName?: Prisma.StringNullableFilter<"Option"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Option"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Option"> | Date | string
   values?: Prisma.OptionValueListRelationFilter
@@ -205,6 +215,7 @@ export type OptionWhereUniqueInput = Prisma.AtLeast<{
 export type OptionOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  displayName?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.OptionCountOrderByAggregateInput
@@ -218,6 +229,7 @@ export type OptionScalarWhereWithAggregatesInput = {
   NOT?: Prisma.OptionScalarWhereWithAggregatesInput | Prisma.OptionScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Option"> | string
   name?: Prisma.StringWithAggregatesFilter<"Option"> | string
+  displayName?: Prisma.StringNullableWithAggregatesFilter<"Option"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Option"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Option"> | Date | string
 }
@@ -225,6 +237,7 @@ export type OptionScalarWhereWithAggregatesInput = {
 export type OptionCreateInput = {
   id?: string
   name: string
+  displayName?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   values?: Prisma.OptionValueCreateNestedManyWithoutOptionInput
@@ -235,6 +248,7 @@ export type OptionCreateInput = {
 export type OptionUncheckedCreateInput = {
   id?: string
   name: string
+  displayName?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   values?: Prisma.OptionValueUncheckedCreateNestedManyWithoutOptionInput
@@ -245,6 +259,7 @@ export type OptionUncheckedCreateInput = {
 export type OptionUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   values?: Prisma.OptionValueUpdateManyWithoutOptionNestedInput
@@ -255,6 +270,7 @@ export type OptionUpdateInput = {
 export type OptionUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   values?: Prisma.OptionValueUncheckedUpdateManyWithoutOptionNestedInput
@@ -265,6 +281,7 @@ export type OptionUncheckedUpdateInput = {
 export type OptionCreateManyInput = {
   id?: string
   name: string
+  displayName?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -272,6 +289,7 @@ export type OptionCreateManyInput = {
 export type OptionUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -279,6 +297,7 @@ export type OptionUpdateManyMutationInput = {
 export type OptionUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -286,6 +305,7 @@ export type OptionUncheckedUpdateManyInput = {
 export type OptionCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  displayName?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -293,6 +313,7 @@ export type OptionCountOrderByAggregateInput = {
 export type OptionMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  displayName?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -300,6 +321,7 @@ export type OptionMaxOrderByAggregateInput = {
 export type OptionMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  displayName?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -354,6 +376,7 @@ export type OptionUpdateOneRequiredWithoutTemplateOptionsNestedInput = {
 export type OptionCreateWithoutValuesInput = {
   id?: string
   name: string
+  displayName?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   productOptions?: Prisma.ProductOptionCreateNestedManyWithoutOptionInput
@@ -363,6 +386,7 @@ export type OptionCreateWithoutValuesInput = {
 export type OptionUncheckedCreateWithoutValuesInput = {
   id?: string
   name: string
+  displayName?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   productOptions?: Prisma.ProductOptionUncheckedCreateNestedManyWithoutOptionInput
@@ -388,6 +412,7 @@ export type OptionUpdateToOneWithWhereWithoutValuesInput = {
 export type OptionUpdateWithoutValuesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   productOptions?: Prisma.ProductOptionUpdateManyWithoutOptionNestedInput
@@ -397,6 +422,7 @@ export type OptionUpdateWithoutValuesInput = {
 export type OptionUncheckedUpdateWithoutValuesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   productOptions?: Prisma.ProductOptionUncheckedUpdateManyWithoutOptionNestedInput
@@ -406,6 +432,7 @@ export type OptionUncheckedUpdateWithoutValuesInput = {
 export type OptionCreateWithoutProductOptionsInput = {
   id?: string
   name: string
+  displayName?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   values?: Prisma.OptionValueCreateNestedManyWithoutOptionInput
@@ -415,6 +442,7 @@ export type OptionCreateWithoutProductOptionsInput = {
 export type OptionUncheckedCreateWithoutProductOptionsInput = {
   id?: string
   name: string
+  displayName?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   values?: Prisma.OptionValueUncheckedCreateNestedManyWithoutOptionInput
@@ -440,6 +468,7 @@ export type OptionUpdateToOneWithWhereWithoutProductOptionsInput = {
 export type OptionUpdateWithoutProductOptionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   values?: Prisma.OptionValueUpdateManyWithoutOptionNestedInput
@@ -449,6 +478,7 @@ export type OptionUpdateWithoutProductOptionsInput = {
 export type OptionUncheckedUpdateWithoutProductOptionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   values?: Prisma.OptionValueUncheckedUpdateManyWithoutOptionNestedInput
@@ -458,6 +488,7 @@ export type OptionUncheckedUpdateWithoutProductOptionsInput = {
 export type OptionCreateWithoutTemplateOptionsInput = {
   id?: string
   name: string
+  displayName?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   values?: Prisma.OptionValueCreateNestedManyWithoutOptionInput
@@ -467,6 +498,7 @@ export type OptionCreateWithoutTemplateOptionsInput = {
 export type OptionUncheckedCreateWithoutTemplateOptionsInput = {
   id?: string
   name: string
+  displayName?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   values?: Prisma.OptionValueUncheckedCreateNestedManyWithoutOptionInput
@@ -492,6 +524,7 @@ export type OptionUpdateToOneWithWhereWithoutTemplateOptionsInput = {
 export type OptionUpdateWithoutTemplateOptionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   values?: Prisma.OptionValueUpdateManyWithoutOptionNestedInput
@@ -501,6 +534,7 @@ export type OptionUpdateWithoutTemplateOptionsInput = {
 export type OptionUncheckedUpdateWithoutTemplateOptionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   values?: Prisma.OptionValueUncheckedUpdateManyWithoutOptionNestedInput
@@ -559,6 +593,7 @@ export type OptionCountOutputTypeCountTemplateOptionsArgs<ExtArgs extends runtim
 export type OptionSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  displayName?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   values?: boolean | Prisma.Option$valuesArgs<ExtArgs>
@@ -570,6 +605,7 @@ export type OptionSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
 export type OptionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  displayName?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["option"]>
@@ -577,6 +613,7 @@ export type OptionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
 export type OptionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  displayName?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["option"]>
@@ -584,11 +621,12 @@ export type OptionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
 export type OptionSelectScalar = {
   id?: boolean
   name?: boolean
+  displayName?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type OptionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "createdAt" | "updatedAt", ExtArgs["result"]["option"]>
+export type OptionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "displayName" | "createdAt" | "updatedAt", ExtArgs["result"]["option"]>
 export type OptionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   values?: boolean | Prisma.Option$valuesArgs<ExtArgs>
   productOptions?: boolean | Prisma.Option$productOptionsArgs<ExtArgs>
@@ -608,6 +646,7 @@ export type $OptionPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     name: string
+    displayName: string | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["option"]>
@@ -1038,6 +1077,7 @@ export interface Prisma__OptionClient<T, Null = never, ExtArgs extends runtime.T
 export interface OptionFieldRefs {
   readonly id: Prisma.FieldRef<"Option", 'String'>
   readonly name: Prisma.FieldRef<"Option", 'String'>
+  readonly displayName: Prisma.FieldRef<"Option", 'String'>
   readonly createdAt: Prisma.FieldRef<"Option", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Option", 'DateTime'>
 }

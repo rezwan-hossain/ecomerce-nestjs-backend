@@ -187,8 +187,9 @@ model ProductCategory {
 }
 
 model Option {
-  id   String @id @default(uuid(7))
-  name String @unique // "Color" | "Size" | "RAM"
+  id          String  @id @default(uuid(7))
+  name        String  @unique // "Color" | "Size" | "RAM"
+  displayName String? // customer-facing label, e.g. "Pick a colour"
 
   values          OptionValue[] // all possible values
   productOptions  ProductOption[] // which products use this option

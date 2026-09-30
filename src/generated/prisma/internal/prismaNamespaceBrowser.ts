@@ -214,6 +214,7 @@ export type ProductCategoryScalarFieldEnum = (typeof ProductCategoryScalarFieldE
 export const OptionScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  displayName: 'displayName',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
