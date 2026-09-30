@@ -68,6 +68,7 @@ export const ModelName = {
   VariantTemplate: 'VariantTemplate',
   TemplateOption: 'TemplateOption',
   TemplateOptionValue: 'TemplateOptionValue',
+  Review: 'Review',
   Cart: 'Cart',
   CartItem: 'CartItem',
   Order: 'Order',
@@ -303,6 +304,22 @@ export const TemplateOptionValueScalarFieldEnum = {
 } as const
 
 export type TemplateOptionValueScalarFieldEnum = (typeof TemplateOptionValueScalarFieldEnum)[keyof typeof TemplateOptionValueScalarFieldEnum]
+
+
+export const ReviewScalarFieldEnum = {
+  id: 'id',
+  productId: 'productId',
+  userId: 'userId',
+  rating: 'rating',
+  title: 'title',
+  body: 'body',
+  status: 'status',
+  isVerifiedPurchase: 'isVerifiedPurchase',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ReviewScalarFieldEnum = (typeof ReviewScalarFieldEnum)[keyof typeof ReviewScalarFieldEnum]
 
 
 export const CartScalarFieldEnum = {

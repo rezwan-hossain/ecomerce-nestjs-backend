@@ -27,6 +27,7 @@ model User {
   orders               Order[]
   orderStatusHistories OrderStatusHistory[]
   processedRefunds     RefundRequest[]
+  reviews              Review[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -97,6 +98,7 @@ model Product {
 
   deletedAt  DateTime?
   orderItems OrderItem[]
+  reviews    Review[]
 
   @@index([brandId])
   @@index([status, deletedAt])
@@ -331,6 +333,43 @@ model TemplateOptionValue {
 
   @@unique([templateOptionId, optionValueId])
   @@map("template_option_values")
+}
+
+// ───────────────────────────────────────────────────
+//  REVIEWS
+// ───────────────────────────────────────────────────
+model Review {
+  id        String @id @default(uuid(7))
+  productId String
+  userId    String
+
+  rating Int // 1–5, validated in the DTO
+  title  String?
+  body   String?
+
+  status ReviewStatus @default(PENDING)
+
+  // Set at creation when the user has a delivered/completed order containing
+  // this product. Reviews are allowed without a purchase, just not badged.
+  isVerifiedPurchase Boolean @default(false)
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([productId, userId]) // one review per user per product
+  @@index([productId, status, createdAt])
+  @@index([userId])
+  @@index([status])
+  @@map("reviews")
+}
+
+enum ReviewStatus {
+  PENDING
+  APPROVED
+  REJECTED
 }
 
 // ───────────────────────────────────────────────────

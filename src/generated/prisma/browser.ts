@@ -103,6 +103,11 @@ export type TemplateOption = Prisma.TemplateOptionModel
  */
 export type TemplateOptionValue = Prisma.TemplateOptionValueModel
 /**
+ * Model Review
+ * 
+ */
+export type Review = Prisma.ReviewModel
+/**
  * Model Cart
  * 
  */
