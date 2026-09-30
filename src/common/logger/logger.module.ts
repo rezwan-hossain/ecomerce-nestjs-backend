@@ -25,13 +25,13 @@ import { LoggerModule } from 'nestjs-pino';
 
         // 🧠 Make logs cleaner
         serializers: {
-          req(req) {
+          req(req: { method: string; url: string }) {
             return {
               method: req.method,
               url: req.url,
             };
           },
-          res(res) {
+          res(res: { statusCode: number }) {
             return {
               statusCode: res.statusCode,
             };
