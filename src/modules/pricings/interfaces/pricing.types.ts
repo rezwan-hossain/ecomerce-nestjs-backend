@@ -4,6 +4,7 @@ import { Decimal } from '@prisma/client/runtime/client';
 import {
   CampaignStatus,
   ProductStatus,
+  PromotionScope,
   PromotionStatus,
   PromotionTargetType,
   PromotionType,
@@ -116,7 +117,10 @@ export interface ResolvedPromotion {
   endsAt: Date | null;
   isActive: boolean;
 
-  /** How this promotion targets products */
+  /** ALL = every product (no targets); SPECIFIC = only what `targets` match */
+  scope: PromotionScope;
+
+  /** How this promotion targets products (always empty when scope is ALL) */
   targets: ResolvedTarget[];
 
   /** Every campaign this promotion is linked to (empty = standalone promotion) */
@@ -322,8 +326,10 @@ export const TARGET_SPECIFICITY: Record<PromotionTargetType, number> = {
   TAG: 60,
   BRAND: 50,
   CATEGORY: 40,
-  ALL_PRODUCTS: 10,
 };
+
+/** Specificity of a scope = ALL promotion — the least specific match. */
+export const SCOPE_ALL_SPECIFICITY = 10;
 
 /** Added once (not per target) when a matching promotion runs under a live campaign. */
 export const CAMPAIGN_SPECIFICITY_BONUS = 5;

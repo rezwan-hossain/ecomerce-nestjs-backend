@@ -44,6 +44,7 @@ export class PromotionsService {
           endsAt: dto.endsAt,
           isActive: dto.isActive,
           priority: dto.priority,
+          scope: dto.scope,
         },
       });
 
@@ -58,7 +59,15 @@ export class PromotionsService {
   // ═════════════════════════════════════════════════
 
   async findAll(query: PromotionQueryDto) {
-    const { page = 1, limit = 20, search, type, status, isActive } = query;
+    const {
+      page = 1,
+      limit = 20,
+      search,
+      type,
+      status,
+      scope,
+      isActive,
+    } = query;
     const skip = (page - 1) * limit;
 
     const where: PromotionWhereInput = {};
@@ -68,6 +77,7 @@ export class PromotionsService {
     }
     if (type) where.type = type;
     if (status) where.status = status;
+    if (scope) where.scope = scope;
     if (isActive !== undefined) where.isActive = isActive;
 
     const [items, total] = await Promise.all([
@@ -142,9 +152,12 @@ export class PromotionsService {
     await this.ensurePromotionExistsAndActive(id);
 
     try {
-      const promotion = await this.prisma.promotion.update({
-        where: { id },
-        data: { ...dto },
+      // Switching to ALL drops targets: an ALL-scope promotion has none.
+      const promotion = await this.prisma.$transaction(async (tx) => {
+        if (dto.scope === 'ALL') {
+          await tx.promotionTarget.deleteMany({ where: { promotionId: id } });
+        }
+        return tx.promotion.update({ where: { id }, data: { ...dto } });
       });
       return { message: 'Promotion updated', data: promotion };
     } catch (error) {
@@ -185,7 +198,14 @@ export class PromotionsService {
   // ═════════════════════════════════════════════════
 
   async attachTargets(promotionId: string, dto: AttachTargetsDto) {
-    await this.ensurePromotionExistsAndActive(promotionId);
+    const promotion = await this.ensurePromotionExistsAndActive(promotionId);
+
+    if (promotion.scope === 'ALL') {
+      throw new BadRequestException(
+        'Promotion applies to all products; set scope to SPECIFIC before attaching targets',
+      );
+    }
+
     await this.validateTargetReferences(dto.targets);
 
     const data = dto.targets.map((t) => this.mapTargetToRow(promotionId, t));
@@ -325,7 +345,7 @@ export class PromotionsService {
   private async ensurePromotionExists(id: string) {
     const promotion = await this.prisma.promotion.findUnique({
       where: { id },
-      select: { id: true, status: true, isActive: true },
+      select: { id: true, status: true, isActive: true, scope: true },
     });
 
     if (!promotion) {

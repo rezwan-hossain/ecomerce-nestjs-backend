@@ -18,6 +18,8 @@ export const promotionStatusEnum = z.enum([
   'ARCHIVED',
 ]);
 
+export const promotionScopeEnum = z.enum(['ALL', 'SPECIFIC']);
+
 /* ══════════════ CREATE ══════════════ */
 export const createPromotionSchema = z
   .object({
@@ -38,6 +40,7 @@ export const createPromotionSchema = z
 
     isActive: z.boolean().optional().default(true),
     priority: z.number().int().nonnegative().optional().default(0),
+    scope: promotionScopeEnum.optional().default('SPECIFIC'),
   })
   .refine(
     (d) => {
@@ -110,6 +113,7 @@ export const updatePromotionSchema = z.object({
   endsAt: z.iso.datetime().optional().nullable(),
   isActive: z.boolean().optional(),
   priority: z.number().int().nonnegative().optional(),
+  scope: promotionScopeEnum.optional(),
 });
 
 export class UpdatePromotionDto extends createZodDto(updatePromotionSchema) {}
@@ -121,6 +125,7 @@ export const promotionQuerySchema = z.object({
   search: z.string().optional(),
   type: promotionTypeEnum.optional(),
   status: promotionStatusEnum.optional(),
+  scope: promotionScopeEnum.optional(),
   isActive: z.preprocess((v) => {
     if (v === 'true') return true;
     if (v === 'false') return false;

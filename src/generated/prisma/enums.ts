@@ -174,13 +174,20 @@ export const PromotionStatus = {
 export type PromotionStatus = (typeof PromotionStatus)[keyof typeof PromotionStatus]
 
 
+export const PromotionScope = {
+  ALL: 'ALL',
+  SPECIFIC: 'SPECIFIC'
+} as const
+
+export type PromotionScope = (typeof PromotionScope)[keyof typeof PromotionScope]
+
+
 export const PromotionTargetType = {
   PRODUCT: 'PRODUCT',
   VARIANT: 'VARIANT',
   CATEGORY: 'CATEGORY',
   BRAND: 'BRAND',
-  TAG: 'TAG',
-  ALL_PRODUCTS: 'ALL_PRODUCTS'
+  TAG: 'TAG'
 } as const
 
 export type PromotionTargetType = (typeof PromotionTargetType)[keyof typeof PromotionTargetType]

@@ -7,7 +7,6 @@ export const promotionTargetTypeEnum = z.enum([
   'CATEGORY',
   'BRAND',
   'TAG',
-  'ALL_PRODUCTS',
 ]);
 
 export const promotionTargetSchema = z
@@ -32,8 +31,6 @@ export const promotionTargetSchema = z
           return !!t.brandId;
         case 'TAG':
           return !!t.tagId;
-        case 'ALL_PRODUCTS':
-          return true;
       }
     },
     {

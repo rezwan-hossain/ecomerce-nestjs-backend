@@ -44,7 +44,7 @@ export class PromotionResolver {
 
   /**
    * The single resolution routine used for product pages, listings and carts.
-   * ORDER/SHIPPING promotions apply when they have no targets (cart-wide)
+   * ORDER/SHIPPING promotions apply when their scope is ALL (cart-wide)
    * or when at least one variant matches their targets.
    */
   async resolve(
@@ -102,10 +102,7 @@ export class PromotionResolver {
         continue;
       }
 
-      const appliesToCart =
-        promo.targets.length === 0 ||
-        this.validator.matchesAnyVariant(promo, variants);
-      if (!appliesToCart) {
+      if (!this.validator.matchesAnyVariant(promo, variants)) {
         skip(promo, SkipReason.NO_MATCHING_TARGETS);
         continue;
       }
@@ -232,6 +229,7 @@ export class PromotionResolver {
         startsAt: p.startsAt,
         endsAt: p.endsAt,
         isActive: p.isActive,
+        scope: p.scope,
         targets: p.targets.map((t) => ({
           id: t.id,
           targetType: t.targetType,

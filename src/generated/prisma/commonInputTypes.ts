@@ -553,6 +553,13 @@ export type IntNullableFilter<$PrismaModel = never> = {
   not?: Prisma.NestedIntNullableFilter<$PrismaModel> | number | null
 }
 
+export type EnumPromotionScopeFilter<$PrismaModel = never> = {
+  equals?: $Enums.PromotionScope | Prisma.EnumPromotionScopeFieldRefInput<$PrismaModel>
+  in?: $Enums.PromotionScope[] | Prisma.ListEnumPromotionScopeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PromotionScope[] | Prisma.ListEnumPromotionScopeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPromotionScopeFilter<$PrismaModel> | $Enums.PromotionScope
+}
+
 export type EnumPromotionStatusWithAggregatesFilter<$PrismaModel = never> = {
   equals?: $Enums.PromotionStatus | Prisma.EnumPromotionStatusFieldRefInput<$PrismaModel>
   in?: $Enums.PromotionStatus[] | Prisma.ListEnumPromotionStatusFieldRefInput<$PrismaModel>
@@ -577,6 +584,16 @@ export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
   _sum?: Prisma.NestedIntNullableFilter<$PrismaModel>
   _min?: Prisma.NestedIntNullableFilter<$PrismaModel>
   _max?: Prisma.NestedIntNullableFilter<$PrismaModel>
+}
+
+export type EnumPromotionScopeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.PromotionScope | Prisma.EnumPromotionScopeFieldRefInput<$PrismaModel>
+  in?: $Enums.PromotionScope[] | Prisma.ListEnumPromotionScopeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PromotionScope[] | Prisma.ListEnumPromotionScopeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPromotionScopeWithAggregatesFilter<$PrismaModel> | $Enums.PromotionScope
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumPromotionScopeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumPromotionScopeFilter<$PrismaModel>
 }
 
 export type EnumPromotionTargetTypeFilter<$PrismaModel = never> = {
@@ -1110,6 +1127,13 @@ export type NestedEnumPromotionStatusFilter<$PrismaModel = never> = {
   not?: Prisma.NestedEnumPromotionStatusFilter<$PrismaModel> | $Enums.PromotionStatus
 }
 
+export type NestedEnumPromotionScopeFilter<$PrismaModel = never> = {
+  equals?: $Enums.PromotionScope | Prisma.EnumPromotionScopeFieldRefInput<$PrismaModel>
+  in?: $Enums.PromotionScope[] | Prisma.ListEnumPromotionScopeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PromotionScope[] | Prisma.ListEnumPromotionScopeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPromotionScopeFilter<$PrismaModel> | $Enums.PromotionScope
+}
+
 export type NestedEnumPromotionStatusWithAggregatesFilter<$PrismaModel = never> = {
   equals?: $Enums.PromotionStatus | Prisma.EnumPromotionStatusFieldRefInput<$PrismaModel>
   in?: $Enums.PromotionStatus[] | Prisma.ListEnumPromotionStatusFieldRefInput<$PrismaModel>
@@ -1145,6 +1169,16 @@ export type NestedFloatNullableFilter<$PrismaModel = never> = {
   gt?: number | Prisma.FloatFieldRefInput<$PrismaModel>
   gte?: number | Prisma.FloatFieldRefInput<$PrismaModel>
   not?: Prisma.NestedFloatNullableFilter<$PrismaModel> | number | null
+}
+
+export type NestedEnumPromotionScopeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.PromotionScope | Prisma.EnumPromotionScopeFieldRefInput<$PrismaModel>
+  in?: $Enums.PromotionScope[] | Prisma.ListEnumPromotionScopeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PromotionScope[] | Prisma.ListEnumPromotionScopeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPromotionScopeWithAggregatesFilter<$PrismaModel> | $Enums.PromotionScope
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumPromotionScopeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumPromotionScopeFilter<$PrismaModel>
 }
 
 export type NestedEnumPromotionTargetTypeFilter<$PrismaModel = never> = {

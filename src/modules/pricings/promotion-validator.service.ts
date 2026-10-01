@@ -8,6 +8,7 @@ import {
   ResolvedCampaign,
   ResolvedPromotion,
   ResolvedTarget,
+  SCOPE_ALL_SPECIFICITY,
   SkipReason,
   TARGET_SPECIFICITY,
   VariantPricingData,
@@ -67,8 +68,9 @@ export class PromotionValidator {
     return live.find((c) => c.id === context.activeCampaignId)?.id ?? live[0].id;
   }
 
-  /** True if at least one target matches the variant. */
+  /** True if the promotion covers all products or at least one target matches the variant. */
   validateTargetMatch(promo: ResolvedPromotion, variant: VariantPricingData): boolean {
+    if (promo.scope === 'ALL') return true;
     return promo.targets.some((target) => this.targetMatches(target, variant));
   }
 
@@ -82,7 +84,7 @@ export class PromotionValidator {
    * Non-matching targets contribute nothing.
    */
   computeMatchSpecificity(promo: ResolvedPromotion, variant: VariantPricingData): number {
-    let best = 0;
+    let best = promo.scope === 'ALL' ? SCOPE_ALL_SPECIFICITY : 0;
     for (const target of promo.targets) {
       if (this.targetMatches(target, variant)) {
         best = Math.max(best, TARGET_SPECIFICITY[target.targetType]);
@@ -108,8 +110,6 @@ export class PromotionValidator {
   /** The single place that decides whether one target matches one variant. */
   private targetMatches(target: ResolvedTarget, variant: VariantPricingData): boolean {
     switch (target.targetType) {
-      case 'ALL_PRODUCTS':
-        return true;
       case 'VARIANT':
         return target.variantId === variant.id;
       case 'PRODUCT':

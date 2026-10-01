@@ -59,6 +59,7 @@ export type PromotionMinAggregateOutputType = {
   endsAt: Date | null
   isActive: boolean | null
   priority: number | null
+  scope: $Enums.PromotionScope | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -78,6 +79,7 @@ export type PromotionMaxAggregateOutputType = {
   endsAt: Date | null
   isActive: boolean | null
   priority: number | null
+  scope: $Enums.PromotionScope | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -97,6 +99,7 @@ export type PromotionCountAggregateOutputType = {
   endsAt: number
   isActive: number
   priority: number
+  scope: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -136,6 +139,7 @@ export type PromotionMinAggregateInputType = {
   endsAt?: true
   isActive?: true
   priority?: true
+  scope?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -155,6 +159,7 @@ export type PromotionMaxAggregateInputType = {
   endsAt?: true
   isActive?: true
   priority?: true
+  scope?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -174,6 +179,7 @@ export type PromotionCountAggregateInputType = {
   endsAt?: true
   isActive?: true
   priority?: true
+  scope?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -280,6 +286,7 @@ export type PromotionGroupByOutputType = {
   endsAt: Date | null
   isActive: boolean
   priority: number
+  scope: $Enums.PromotionScope
   createdAt: Date
   updatedAt: Date
   _count: PromotionCountAggregateOutputType | null
@@ -322,6 +329,7 @@ export type PromotionWhereInput = {
   endsAt?: Prisma.DateTimeNullableFilter<"Promotion"> | Date | string | null
   isActive?: Prisma.BoolFilter<"Promotion"> | boolean
   priority?: Prisma.IntFilter<"Promotion"> | number
+  scope?: Prisma.EnumPromotionScopeFilter<"Promotion"> | $Enums.PromotionScope
   createdAt?: Prisma.DateTimeFilter<"Promotion"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Promotion"> | Date | string
   campaigns?: Prisma.PromotionCampaignListRelationFilter
@@ -344,6 +352,7 @@ export type PromotionOrderByWithRelationInput = {
   endsAt?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
   priority?: Prisma.SortOrder
+  scope?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   campaigns?: Prisma.PromotionCampaignOrderByRelationAggregateInput
@@ -369,6 +378,7 @@ export type PromotionWhereUniqueInput = Prisma.AtLeast<{
   endsAt?: Prisma.DateTimeNullableFilter<"Promotion"> | Date | string | null
   isActive?: Prisma.BoolFilter<"Promotion"> | boolean
   priority?: Prisma.IntFilter<"Promotion"> | number
+  scope?: Prisma.EnumPromotionScopeFilter<"Promotion"> | $Enums.PromotionScope
   createdAt?: Prisma.DateTimeFilter<"Promotion"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Promotion"> | Date | string
   campaigns?: Prisma.PromotionCampaignListRelationFilter
@@ -391,6 +401,7 @@ export type PromotionOrderByWithAggregationInput = {
   endsAt?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
   priority?: Prisma.SortOrder
+  scope?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.PromotionCountOrderByAggregateInput
@@ -418,6 +429,7 @@ export type PromotionScalarWhereWithAggregatesInput = {
   endsAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Promotion"> | Date | string | null
   isActive?: Prisma.BoolWithAggregatesFilter<"Promotion"> | boolean
   priority?: Prisma.IntWithAggregatesFilter<"Promotion"> | number
+  scope?: Prisma.EnumPromotionScopeWithAggregatesFilter<"Promotion"> | $Enums.PromotionScope
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Promotion"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Promotion"> | Date | string
 }
@@ -437,6 +449,7 @@ export type PromotionCreateInput = {
   endsAt?: Date | string | null
   isActive?: boolean
   priority?: number
+  scope?: $Enums.PromotionScope
   createdAt?: Date | string
   updatedAt?: Date | string
   campaigns?: Prisma.PromotionCampaignCreateNestedManyWithoutPromotionInput
@@ -459,6 +472,7 @@ export type PromotionUncheckedCreateInput = {
   endsAt?: Date | string | null
   isActive?: boolean
   priority?: number
+  scope?: $Enums.PromotionScope
   createdAt?: Date | string
   updatedAt?: Date | string
   campaigns?: Prisma.PromotionCampaignUncheckedCreateNestedManyWithoutPromotionInput
@@ -481,6 +495,7 @@ export type PromotionUpdateInput = {
   endsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priority?: Prisma.IntFieldUpdateOperationsInput | number
+  scope?: Prisma.EnumPromotionScopeFieldUpdateOperationsInput | $Enums.PromotionScope
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   campaigns?: Prisma.PromotionCampaignUpdateManyWithoutPromotionNestedInput
@@ -503,6 +518,7 @@ export type PromotionUncheckedUpdateInput = {
   endsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priority?: Prisma.IntFieldUpdateOperationsInput | number
+  scope?: Prisma.EnumPromotionScopeFieldUpdateOperationsInput | $Enums.PromotionScope
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   campaigns?: Prisma.PromotionCampaignUncheckedUpdateManyWithoutPromotionNestedInput
@@ -525,6 +541,7 @@ export type PromotionCreateManyInput = {
   endsAt?: Date | string | null
   isActive?: boolean
   priority?: number
+  scope?: $Enums.PromotionScope
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -544,6 +561,7 @@ export type PromotionUpdateManyMutationInput = {
   endsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priority?: Prisma.IntFieldUpdateOperationsInput | number
+  scope?: Prisma.EnumPromotionScopeFieldUpdateOperationsInput | $Enums.PromotionScope
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -563,6 +581,7 @@ export type PromotionUncheckedUpdateManyInput = {
   endsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priority?: Prisma.IntFieldUpdateOperationsInput | number
+  scope?: Prisma.EnumPromotionScopeFieldUpdateOperationsInput | $Enums.PromotionScope
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -587,6 +606,7 @@ export type PromotionCountOrderByAggregateInput = {
   endsAt?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   priority?: Prisma.SortOrder
+  scope?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -615,6 +635,7 @@ export type PromotionMaxOrderByAggregateInput = {
   endsAt?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   priority?: Prisma.SortOrder
+  scope?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -634,6 +655,7 @@ export type PromotionMinOrderByAggregateInput = {
   endsAt?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   priority?: Prisma.SortOrder
+  scope?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -680,6 +702,10 @@ export type NullableIntFieldUpdateOperationsInput = {
   divide?: number
 }
 
+export type EnumPromotionScopeFieldUpdateOperationsInput = {
+  set?: $Enums.PromotionScope
+}
+
 export type PromotionCreateNestedOneWithoutCampaignsInput = {
   create?: Prisma.XOR<Prisma.PromotionCreateWithoutCampaignsInput, Prisma.PromotionUncheckedCreateWithoutCampaignsInput>
   connectOrCreate?: Prisma.PromotionCreateOrConnectWithoutCampaignsInput
@@ -723,6 +749,7 @@ export type PromotionCreateWithoutOrderDiscountsInput = {
   endsAt?: Date | string | null
   isActive?: boolean
   priority?: number
+  scope?: $Enums.PromotionScope
   createdAt?: Date | string
   updatedAt?: Date | string
   campaigns?: Prisma.PromotionCampaignCreateNestedManyWithoutPromotionInput
@@ -744,6 +771,7 @@ export type PromotionUncheckedCreateWithoutOrderDiscountsInput = {
   endsAt?: Date | string | null
   isActive?: boolean
   priority?: number
+  scope?: $Enums.PromotionScope
   createdAt?: Date | string
   updatedAt?: Date | string
   campaigns?: Prisma.PromotionCampaignUncheckedCreateNestedManyWithoutPromotionInput
@@ -781,6 +809,7 @@ export type PromotionUpdateWithoutOrderDiscountsInput = {
   endsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priority?: Prisma.IntFieldUpdateOperationsInput | number
+  scope?: Prisma.EnumPromotionScopeFieldUpdateOperationsInput | $Enums.PromotionScope
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   campaigns?: Prisma.PromotionCampaignUpdateManyWithoutPromotionNestedInput
@@ -802,6 +831,7 @@ export type PromotionUncheckedUpdateWithoutOrderDiscountsInput = {
   endsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priority?: Prisma.IntFieldUpdateOperationsInput | number
+  scope?: Prisma.EnumPromotionScopeFieldUpdateOperationsInput | $Enums.PromotionScope
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   campaigns?: Prisma.PromotionCampaignUncheckedUpdateManyWithoutPromotionNestedInput
@@ -823,6 +853,7 @@ export type PromotionCreateWithoutCampaignsInput = {
   endsAt?: Date | string | null
   isActive?: boolean
   priority?: number
+  scope?: $Enums.PromotionScope
   createdAt?: Date | string
   updatedAt?: Date | string
   targets?: Prisma.PromotionTargetCreateNestedManyWithoutPromotionInput
@@ -844,6 +875,7 @@ export type PromotionUncheckedCreateWithoutCampaignsInput = {
   endsAt?: Date | string | null
   isActive?: boolean
   priority?: number
+  scope?: $Enums.PromotionScope
   createdAt?: Date | string
   updatedAt?: Date | string
   targets?: Prisma.PromotionTargetUncheckedCreateNestedManyWithoutPromotionInput
@@ -881,6 +913,7 @@ export type PromotionUpdateWithoutCampaignsInput = {
   endsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priority?: Prisma.IntFieldUpdateOperationsInput | number
+  scope?: Prisma.EnumPromotionScopeFieldUpdateOperationsInput | $Enums.PromotionScope
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   targets?: Prisma.PromotionTargetUpdateManyWithoutPromotionNestedInput
@@ -902,6 +935,7 @@ export type PromotionUncheckedUpdateWithoutCampaignsInput = {
   endsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priority?: Prisma.IntFieldUpdateOperationsInput | number
+  scope?: Prisma.EnumPromotionScopeFieldUpdateOperationsInput | $Enums.PromotionScope
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   targets?: Prisma.PromotionTargetUncheckedUpdateManyWithoutPromotionNestedInput
@@ -923,6 +957,7 @@ export type PromotionCreateWithoutTargetsInput = {
   endsAt?: Date | string | null
   isActive?: boolean
   priority?: number
+  scope?: $Enums.PromotionScope
   createdAt?: Date | string
   updatedAt?: Date | string
   campaigns?: Prisma.PromotionCampaignCreateNestedManyWithoutPromotionInput
@@ -944,6 +979,7 @@ export type PromotionUncheckedCreateWithoutTargetsInput = {
   endsAt?: Date | string | null
   isActive?: boolean
   priority?: number
+  scope?: $Enums.PromotionScope
   createdAt?: Date | string
   updatedAt?: Date | string
   campaigns?: Prisma.PromotionCampaignUncheckedCreateNestedManyWithoutPromotionInput
@@ -981,6 +1017,7 @@ export type PromotionUpdateWithoutTargetsInput = {
   endsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priority?: Prisma.IntFieldUpdateOperationsInput | number
+  scope?: Prisma.EnumPromotionScopeFieldUpdateOperationsInput | $Enums.PromotionScope
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   campaigns?: Prisma.PromotionCampaignUpdateManyWithoutPromotionNestedInput
@@ -1002,6 +1039,7 @@ export type PromotionUncheckedUpdateWithoutTargetsInput = {
   endsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priority?: Prisma.IntFieldUpdateOperationsInput | number
+  scope?: Prisma.EnumPromotionScopeFieldUpdateOperationsInput | $Enums.PromotionScope
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   campaigns?: Prisma.PromotionCampaignUncheckedUpdateManyWithoutPromotionNestedInput
@@ -1072,6 +1110,7 @@ export type PromotionSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   endsAt?: boolean
   isActive?: boolean
   priority?: boolean
+  scope?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   campaigns?: boolean | Prisma.Promotion$campaignsArgs<ExtArgs>
@@ -1095,6 +1134,7 @@ export type PromotionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   endsAt?: boolean
   isActive?: boolean
   priority?: boolean
+  scope?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["promotion"]>
@@ -1114,6 +1154,7 @@ export type PromotionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   endsAt?: boolean
   isActive?: boolean
   priority?: boolean
+  scope?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["promotion"]>
@@ -1133,11 +1174,12 @@ export type PromotionSelectScalar = {
   endsAt?: boolean
   isActive?: boolean
   priority?: boolean
+  scope?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type PromotionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "type" | "status" | "value" | "buyQuantity" | "getQuantity" | "minOrderAmount" | "maxDiscountAmount" | "startsAt" | "endsAt" | "isActive" | "priority" | "createdAt" | "updatedAt", ExtArgs["result"]["promotion"]>
+export type PromotionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "type" | "status" | "value" | "buyQuantity" | "getQuantity" | "minOrderAmount" | "maxDiscountAmount" | "startsAt" | "endsAt" | "isActive" | "priority" | "scope" | "createdAt" | "updatedAt", ExtArgs["result"]["promotion"]>
 export type PromotionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   campaigns?: boolean | Prisma.Promotion$campaignsArgs<ExtArgs>
   targets?: boolean | Prisma.Promotion$targetsArgs<ExtArgs>
@@ -1169,6 +1211,7 @@ export type $PromotionPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     endsAt: Date | null
     isActive: boolean
     priority: number
+    scope: $Enums.PromotionScope
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["promotion"]>
@@ -1611,6 +1654,7 @@ export interface PromotionFieldRefs {
   readonly endsAt: Prisma.FieldRef<"Promotion", 'DateTime'>
   readonly isActive: Prisma.FieldRef<"Promotion", 'Boolean'>
   readonly priority: Prisma.FieldRef<"Promotion", 'Int'>
+  readonly scope: Prisma.FieldRef<"Promotion", 'PromotionScope'>
   readonly createdAt: Prisma.FieldRef<"Promotion", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Promotion", 'DateTime'>
 }

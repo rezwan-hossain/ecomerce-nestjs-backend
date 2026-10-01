@@ -589,6 +589,7 @@ export const PromotionScalarFieldEnum = {
   endsAt: 'endsAt',
   isActive: 'isActive',
   priority: 'priority',
+  scope: 'scope',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const

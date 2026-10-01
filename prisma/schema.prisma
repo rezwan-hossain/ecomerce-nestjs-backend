@@ -935,6 +935,10 @@ model Promotion {
 
   priority Int @default(0)
 
+  // ALL: applies to every product, must have no targets.
+  // SPECIFIC: applies only to products matched by `targets` (none = matches nothing).
+  scope PromotionScope @default(SPECIFIC)
+
   campaigns PromotionCampaign[]
   targets   PromotionTarget[]
 
@@ -1012,11 +1016,15 @@ enum PromotionStatus {
   ARCHIVED
 }
 
+enum PromotionScope {
+  ALL
+  SPECIFIC
+}
+
 enum PromotionTargetType {
   PRODUCT
   VARIANT
   CATEGORY
   BRAND
   TAG
-  ALL_PRODUCTS // global promotion
 }

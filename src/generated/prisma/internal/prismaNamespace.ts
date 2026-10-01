@@ -3626,6 +3626,7 @@ export const PromotionScalarFieldEnum = {
   endsAt: 'endsAt',
   isActive: 'isActive',
   priority: 'priority',
+  scope: 'scope',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -3987,6 +3988,20 @@ export type EnumPromotionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$
  * Reference to a field of type 'PromotionStatus[]'
  */
 export type ListEnumPromotionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PromotionStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'PromotionScope'
+ */
+export type EnumPromotionScopeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PromotionScope'>
+    
+
+
+/**
+ * Reference to a field of type 'PromotionScope[]'
+ */
+export type ListEnumPromotionScopeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PromotionScope[]'>
     
 
 
