@@ -94,4 +94,105 @@ describe('PricingService', () => {
       );
     });
   });
+
+  describe('withDisplayPrices', () => {
+    const twentyPercent = makePromotion({ id: 'sale', value: money(20) });
+    const variants = {
+      cheap: makeVariant('cheap', 1000),
+      dear: makeVariant('dear', 2000),
+      hidden: makeVariant('hidden', 500, { isActive: false }),
+    };
+
+    let displayService: PricingService;
+
+    beforeEach(() => {
+      const prisma = {
+        productVariant: {
+          findMany: jest.fn(({ where }: { where: { id: { in: string[] } } }) =>
+            Promise.resolve(
+              where.id.in.map((id) => ({
+                ...variants[id as keyof typeof variants],
+                optionValues: [],
+              })),
+            ),
+          ),
+        },
+      };
+      resolve.mockImplementation(
+        (vs: VariantPricingData[]): Promise<PromotionResolution> =>
+          Promise.resolve({
+            itemLevel: new Map(vs.map((v) => [v.id, [twentyPercent]])),
+            orderLevel: [],
+            shippingLevel: [],
+            skipped: [],
+          }),
+      );
+      displayService = new PricingService(
+        prisma as unknown as PrismaService,
+        { resolve } as unknown as PromotionResolver,
+        new DiscountCalculator(),
+      );
+    });
+
+    const product = (...ids: (keyof typeof variants)[]) => ({
+      name: 'Shoe',
+      variants: ids.map((id) => ({
+        id,
+        price: variants[id].price,
+        isActive: variants[id].isActive,
+      })),
+    });
+
+    it('adds the promotional price to each variant and keeps the raw price', async () => {
+      const [priced] = await displayService.withDisplayPrices([
+        product('cheap'),
+      ]);
+
+      expect(priced.name).toBe('Shoe');
+      expect(priced.variants[0].price).toEqual(money(1000));
+      expect(priced.variants[0].pricing).toEqual(
+        expect.objectContaining({
+          originalPrice: money(1000),
+          effectivePrice: money(800),
+          discountAmount: money(200),
+          hasPromotion: true,
+          promotion: expect.objectContaining({
+            id: 'sale',
+            description: '20% off',
+          }) as unknown,
+        }),
+      );
+    });
+
+    it('builds the price range from active variants only', async () => {
+      const [priced] = await displayService.withDisplayPrices([
+        product('cheap', 'dear', 'hidden'),
+      ]);
+
+      expect(priced.priceRange).toEqual({
+        min: money(800),
+        max: money(1600),
+        originalMin: money(1000),
+        originalMax: money(2000),
+        hasPromotion: true,
+      });
+    });
+
+    it('has no price range when no variant is active', async () => {
+      const [priced] = await displayService.withDisplayPrices([
+        product('hidden'),
+      ]);
+      expect(priced.priceRange).toBeNull();
+    });
+
+    it('passes the browsed campaign through for attribution', async () => {
+      await displayService.withDisplayPrices([product('cheap')], {
+        activeCampaignId: 'winter-sale',
+      });
+      expect(resolve).toHaveBeenCalledWith(
+        expect.anything(),
+        expect.objectContaining({ activeCampaignId: 'winter-sale' }),
+      );
+    });
+  });
 });

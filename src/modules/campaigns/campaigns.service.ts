@@ -7,10 +7,10 @@ import {
 } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { PromotionResolver } from '../pricings/promotion-resolver.service';
+import { PricingService } from '../pricings/pricing.service';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/client';
 import { CampaignWhereInput } from 'src/generated/prisma/models/Campaign'; // adjust path if needed
 import { ProductWhereInput } from 'src/generated/prisma/models/Product';
-
 
 import {
   CreateCampaignDto,
@@ -40,6 +40,7 @@ export class CampaignsService {
   constructor(
     private readonly prisma: PrismaService,
     private readonly resolver: PromotionResolver,
+    private readonly pricing: PricingService,
   ) {}
 
   // ═════════════════════════════════════════════════
@@ -146,7 +147,10 @@ export class CampaignsService {
                 product: {
                   include: {
                     images: { where: { isPrimary: true }, take: 1 },
-                    variants: { where: { isActive: true }, take: 1 },
+                    variants: {
+                      where: { isActive: true },
+                      orderBy: { price: 'asc' },
+                    },
                     brand: true,
                   },
                 },
@@ -168,7 +172,26 @@ export class CampaignsService {
       throw new NotFoundException(`Campaign slug "${slug}" not found`);
     }
 
-    return { data: campaign };
+    // Price every section's products in one pass, attributing promotions to
+    // this campaign.
+    const priced = await this.pricing.withDisplayPrices(
+      campaign.sections.flatMap((s) => s.products.map((sp) => sp.product)),
+      { activeCampaignId: campaign.id },
+    );
+    const pricedById = new Map(priced.map((p) => [p.id, p]));
+
+    return {
+      data: {
+        ...campaign,
+        sections: campaign.sections.map((section) => ({
+          ...section,
+          products: section.products.map((sp) => ({
+            ...sp,
+            product: pricedById.get(sp.productId)!,
+          })),
+        })),
+      },
+    };
   }
 
   async update(id: string, dto: UpdateCampaignDto) {
@@ -419,7 +442,7 @@ export class CampaignsService {
   }
 
   async listSectionProducts(sectionId: string) {
-    await this.ensureSectionExists(sectionId);
+    const section = await this.ensureSectionExists(sectionId);
 
     const items = await this.prisma.campaignSectionProduct.findMany({
       where: { sectionId },
@@ -429,13 +452,20 @@ export class CampaignsService {
           include: {
             images: { where: { isPrimary: true }, take: 1 },
             brand: true,
-            variants: { where: { isActive: true }, take: 1 },
+            variants: { where: { isActive: true }, orderBy: { price: 'asc' } },
           },
         },
       },
     });
 
-    return { data: items };
+    const priced = await this.pricing.withDisplayPrices(
+      items.map((i) => i.product),
+      { activeCampaignId: section.campaignId },
+    );
+
+    return {
+      data: items.map((item, i) => ({ ...item, product: priced[i] })),
+    };
   }
 
   async detachProductFromSection(sectionId: string, productId: string) {
@@ -553,7 +583,7 @@ export class CampaignsService {
   // ═════════════════════════════════════════════════
 
   async previewRuleMatches(sectionId: string) {
-    await this.ensureSectionExists(sectionId);
+    const section = await this.ensureSectionExists(sectionId);
 
     const rules = await this.prisma.campaignSectionRule.findMany({
       where: { sectionId },
@@ -614,14 +644,16 @@ export class CampaignsService {
       include: {
         images: { where: { isPrimary: true }, take: 1 },
         brand: true,
-        variants: { where: { isActive: true }, take: 1 },
+        variants: { where: { isActive: true }, orderBy: { price: 'asc' } },
       },
       take: 50, // safety limit for preview
       orderBy: { createdAt: 'desc' },
     });
 
     return {
-      data: products,
+      data: await this.pricing.withDisplayPrices(products, {
+        activeCampaignId: section.campaignId,
+      }),
       count: products.length,
     };
   }

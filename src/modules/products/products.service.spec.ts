@@ -6,6 +6,7 @@ import {
 } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { PricingService } from '../pricings/pricing.service';
 import { CreateProductDto, UpdateProductDto } from './dto/product.dto';
 import { AddVariantDto } from './dto/product-variant.dto';
 
@@ -92,14 +93,22 @@ function baseCreateDto(
 describe('ProductsService', () => {
   let service: ProductsService;
   let prisma: MockPrisma;
+  let pricing: { withDisplayPrices: jest.Mock };
 
   beforeEach(async () => {
     prisma = createMockPrisma();
+    // Pass-through: these tests are about queries, not price math.
+    pricing = {
+      withDisplayPrices: jest.fn((products: unknown[]) =>
+        Promise.resolve(products),
+      ),
+    };
 
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         ProductsService,
         { provide: PrismaService, useValue: prisma },
+        { provide: PricingService, useValue: pricing },
       ],
     }).compile();
 
@@ -364,6 +373,22 @@ describe('ProductsService', () => {
           where: { id: 'p1', deletedAt: null },
         }),
       );
+    });
+
+    it('returns the product with display prices applied', async () => {
+      prisma.product.findFirst.mockResolvedValue({ id: 'p1', variants: [] });
+      pricing.withDisplayPrices.mockResolvedValue([
+        { id: 'p1', variants: [], priceRange: null },
+      ]);
+
+      await expect(service.findOneById('p1')).resolves.toEqual({
+        id: 'p1',
+        variants: [],
+        priceRange: null,
+      });
+      expect(pricing.withDisplayPrices).toHaveBeenCalledWith([
+        { id: 'p1', variants: [] },
+      ]);
     });
 
     it('looks up by slug with the same deletedAt guard', async () => {

@@ -24,10 +24,13 @@ import {
   CartLine,
   CartPriceResult,
   DEFAULT_CURRENCY,
+  DisplayPrice,
   ItemPriceResult,
   OrderPricing,
   PricableItem,
+  PriceRange,
   PriceSnapshot,
+  PricedVariantSource,
   PricingContext,
   SHIPPING_RULES,
   SkipReason,
@@ -39,7 +42,7 @@ import {
  * THE AUTHORITATIVE PRICING ENGINE.
  * Every customer-facing price MUST come from this service.
  *
- *   ✅ ProductService  → calculateItemPrice() / calculateBulkPrices()
+ *   ✅ ProductService  → withDisplayPrices() (built on calculateBulkPrices())
  *   ✅ CartService     → loadPricableItems() + calculateCartPrices()
  *   ✅ CheckoutService → calculateCheckoutTotals(lines)
  *   ✅ OrderService    → createOrderPricing(lines, ctx, tx)
@@ -78,6 +81,40 @@ export class PricingService {
 
     const variants = await this.loadVariants(ids);
     return this.priceForDisplay(variants, context);
+  }
+
+  /**
+   * Adds `pricing` to every variant and a `priceRange` (active variants only)
+   * to every product. Raw `variant.price` is left untouched for admin use.
+   * One promotion resolution for all products — use it for whole pages.
+   */
+  async withDisplayPrices<P extends { variants: PricedVariantSource[] }>(
+    products: P[],
+    context: PricingContext = {},
+  ): Promise<
+    (Omit<P, 'variants'> & {
+      variants: (P['variants'][number] & { pricing: DisplayPrice })[];
+      priceRange: PriceRange | null;
+    })[]
+  > {
+    const prices = await this.calculateBulkPrices(
+      products.flatMap((p) => p.variants.map((v) => v.id)),
+      context,
+    );
+
+    return products.map((product) => {
+      const variants = product.variants.map((v) => ({
+        ...v,
+        pricing: this.toDisplayPrice(prices.get(v.id)!),
+      }));
+      return {
+        ...product,
+        variants,
+        priceRange: this.toPriceRange(
+          variants.filter((v) => v.isActive).map((v) => v.pricing),
+        ),
+      };
+    });
   }
 
   // ═══════════════════════════════════════════════════════════════
@@ -417,6 +454,37 @@ export class PricingService {
         : null,
       currency,
       calculatedAt,
+    };
+  }
+
+  private toDisplayPrice(result: ItemPriceResult): DisplayPrice {
+    const promo = result.appliedDiscount;
+    return {
+      originalPrice: result.originalUnitPrice,
+      effectivePrice: result.effectiveUnitPrice,
+      discountAmount: result.discountAmount,
+      hasPromotion: result.hasPromotion,
+      label: result.priceLabel,
+      promotion: promo
+        ? {
+            id: promo.promotionId,
+            name: promo.promotionName,
+            type: promo.promotionType,
+            description: promo.targetDescription,
+            campaignId: promo.campaignId,
+          }
+        : null,
+    };
+  }
+
+  private toPriceRange(prices: DisplayPrice[]): PriceRange | null {
+    if (prices.length === 0) return null;
+    return {
+      min: Decimal.min(...prices.map((p) => p.effectivePrice)),
+      max: Decimal.max(...prices.map((p) => p.effectivePrice)),
+      originalMin: Decimal.min(...prices.map((p) => p.originalPrice)),
+      originalMax: Decimal.max(...prices.map((p) => p.originalPrice)),
+      hasPromotion: prices.some((p) => p.hasPromotion),
     };
   }
 

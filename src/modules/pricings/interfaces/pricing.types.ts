@@ -247,6 +247,42 @@ export enum SkipReason {
   MAX_DISCOUNT_REACHED = 'MAX_DISCOUNT_REACHED',
 }
 
+/** Customer-facing price of one unit of a variant (product pages, listings). */
+export interface DisplayPrice {
+  /** variant.price, before promotions */
+  originalPrice: Decimal;
+  /** What one unit costs after the best promotion */
+  effectivePrice: Decimal;
+  discountAmount: Decimal;
+  hasPromotion: boolean;
+  /** e.g. "৳14400.00 (was ৳18000.00)" */
+  label: string;
+  promotion: {
+    id: string;
+    name: string;
+    type: PromotionType;
+    /** e.g. "20% off" */
+    description: string;
+    campaignId: string | null;
+  } | null;
+}
+
+/** Cheapest/dearest active variant of a product, for "from ৳X" listing cards. */
+export interface PriceRange {
+  min: Decimal;
+  max: Decimal;
+  originalMin: Decimal;
+  originalMax: Decimal;
+  /** At least one active variant has a promotion */
+  hasPromotion: boolean;
+}
+
+/** Minimal variant shape withDisplayPrices() needs from a Prisma query. */
+export interface PricedVariantSource {
+  id: string;
+  isActive: boolean;
+}
+
 /**
  * Frozen price snapshot for one order line.
  * Field names map 1:1 onto the OrderItem model.

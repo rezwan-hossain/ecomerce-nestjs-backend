@@ -7,6 +7,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { PricingService } from '../pricings/pricing.service';
 import {
   Decimal,
   PrismaClientKnownRequestError,
@@ -33,7 +34,10 @@ import {
 
 @Injectable()
 export class ProductsService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private readonly pricing: PricingService,
+  ) {}
 
   // ═════════════════════════════════════════════════
   //   INTERNAL VALIDATORS
@@ -426,7 +430,9 @@ export class ProductsService {
     ]);
 
     return {
-      data: products,
+      // Each variant gets `pricing` (after promotions) next to its raw
+      // `price`; each product gets a `priceRange` for listing cards.
+      data: await this.pricing.withDisplayPrices(products),
       meta: {
         total,
         page,
@@ -448,7 +454,8 @@ export class ProductsService {
       include: this.fullProductInclude(),
     });
     if (!product) throw new NotFoundException('Product not found');
-    return product;
+    const [priced] = await this.pricing.withDisplayPrices([product]);
+    return priced;
   }
 
   async findOneBySlug(slug: string) {
@@ -457,7 +464,8 @@ export class ProductsService {
       include: this.fullProductInclude(),
     });
     if (!product) throw new NotFoundException('Product not found');
-    return product;
+    const [priced] = await this.pricing.withDisplayPrices([product]);
+    return priced;
   }
 
   // ═════════════════════════════════════════════════
