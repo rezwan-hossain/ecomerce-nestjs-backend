@@ -6,6 +6,7 @@ import {
   ForbiddenException,
 } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { PromotionResolver } from '../pricings/promotion-resolver.service';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/client';
 import { CampaignWhereInput } from 'src/generated/prisma/models/Campaign'; // adjust path if needed
 import { ProductWhereInput } from 'src/generated/prisma/models/Product';
@@ -34,7 +35,12 @@ import {
 
 @Injectable()
 export class CampaignsService {
-  constructor(private readonly prisma: PrismaService) {}
+  // Campaign status/dates gate their linked promotions, so campaign writes
+  // invalidate the resolver's promotion cache. Banners/sections don't.
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly resolver: PromotionResolver,
+  ) {}
 
   // ═════════════════════════════════════════════════
   //   CAMPAIGN CRUD
@@ -173,6 +179,7 @@ export class CampaignsService {
         where: { id },
         data: { ...dto },
       });
+      this.resolver.invalidateCache();
       return { message: 'Campaign updated', data: campaign };
     } catch (error) {
       this.handlePrismaError(error, 'Campaign');
@@ -191,6 +198,7 @@ export class CampaignsService {
       },
     });
 
+    this.resolver.invalidateCache();
     return { message: 'Campaign archived', data: campaign };
   }
 
@@ -201,6 +209,7 @@ export class CampaignsService {
     // You can add business logic here later
 
     await this.prisma.campaign.delete({ where: { id } });
+    this.resolver.invalidateCache();
     return { message: 'Campaign deleted successfully' };
   }
 

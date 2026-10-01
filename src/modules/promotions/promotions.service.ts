@@ -6,6 +6,7 @@ import {
   ForbiddenException,
 } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { PromotionResolver } from '../pricings/promotion-resolver.service';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/client';
 import { PromotionWhereInput } from 'src/generated/prisma/models/Promotion'; // adjust path if needed
 
@@ -21,7 +22,12 @@ type TargetInput = AttachTargetsDto['targets'][number];
 
 @Injectable()
 export class PromotionsService {
-  constructor(private readonly prisma: PrismaService) {}
+  // Every write below invalidates the resolver's promotion cache so prices
+  // reflect the change immediately instead of up to 2 minutes later.
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly resolver: PromotionResolver,
+  ) {}
 
   // ═════════════════════════════════════════════════
   //   CREATE
@@ -48,6 +54,7 @@ export class PromotionsService {
         },
       });
 
+      this.resolver.invalidateCache();
       return { message: 'Promotion created successfully', data: promotion };
     } catch (error) {
       this.handlePrismaError(error, 'Promotion');
@@ -159,6 +166,7 @@ export class PromotionsService {
         }
         return tx.promotion.update({ where: { id }, data: { ...dto } });
       });
+      this.resolver.invalidateCache();
       return { message: 'Promotion updated', data: promotion };
     } catch (error) {
       this.handlePrismaError(error, 'Promotion');
@@ -180,6 +188,7 @@ export class PromotionsService {
       },
     });
 
+    this.resolver.invalidateCache();
     return { message: 'Promotion archived', data: promotion };
   }
 
@@ -190,6 +199,7 @@ export class PromotionsService {
   async remove(id: string) {
     await this.ensurePromotionExists(id);
     await this.prisma.promotion.delete({ where: { id } });
+    this.resolver.invalidateCache();
     return { message: 'Promotion deleted successfully' };
   }
 
@@ -215,6 +225,7 @@ export class PromotionsService {
       skipDuplicates: true,
     });
 
+    this.resolver.invalidateCache();
     return { message: 'Targets attached to promotion' };
   }
 
@@ -263,6 +274,7 @@ export class PromotionsService {
       throw error;
     }
 
+    this.resolver.invalidateCache();
     return { message: 'Target detached' };
   }
 
@@ -291,6 +303,7 @@ export class PromotionsService {
       skipDuplicates: true,
     });
 
+    this.resolver.invalidateCache();
     return { message: 'Campaigns attached' };
   }
 
@@ -335,6 +348,7 @@ export class PromotionsService {
       throw error;
     }
 
+    this.resolver.invalidateCache();
     return { message: 'Campaign detached' };
   }
 

@@ -1,6 +1,7 @@
 // src/modules/pricing/promotion-resolver.service.ts
 
 import { Injectable, Logger } from '@nestjs/common';
+import { Prisma } from 'src/generated/prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { PromotionValidator } from './promotion-validator.service';
 import { comparePromotions } from './promotion-ranking';
@@ -46,12 +47,19 @@ export class PromotionResolver {
    * The single resolution routine used for product pages, listings and carts.
    * ORDER/SHIPPING promotions apply when their scope is ALL (cart-wide)
    * or when at least one variant matches their targets.
+   *
+   * Pass `options.db` to read promotions fresh through that client, bypassing
+   * the cache. Order placement does this so a promotion an admin just
+   * disabled can never be applied to a real order.
    */
   async resolve(
     variants: VariantPricingData[],
     context: PricingContext,
+    options: { db?: Prisma.TransactionClient } = {},
   ): Promise<PromotionResolution> {
-    const promos = await this.getActivePromotions();
+    const promos = options.db
+      ? await this.loadActivePromotions(options.db)
+      : await this.getActivePromotions();
 
     const itemLevel = new Map<string, ResolvedPromotion[]>();
     const orderLevel: ResolvedPromotion[] = [];
@@ -139,9 +147,10 @@ export class PromotionResolver {
   }
 
   /**
-   * Invalidate the cache. Call after an admin creates/updates/deletes a
-   * promotion, its targets, or a linked campaign.
-   * NOTE: this only clears THIS process. See the multi-instance note in the review.
+   * Invalidate the cache. PromotionsService and CampaignsService call this
+   * after every write that can change which promotions apply.
+   * Only clears THIS process; other instances catch up within CACHE_TTL_MS.
+   * Order placement always reads fresh, so the lag only affects shown prices.
    */
   invalidateCache(): void {
     this.cacheGeneration++;
@@ -180,13 +189,15 @@ export class PromotionResolver {
     return this.inflight;
   }
 
-  private async loadActivePromotions(): Promise<ResolvedPromotion[]> {
+  private async loadActivePromotions(
+    db: Prisma.TransactionClient = this.prisma,
+  ): Promise<ResolvedPromotion[]> {
     const now = new Date();
     // Look ahead by the TTL so a promotion starting mid-cache isn't delayed up
     // to 2 minutes. The validator still enforces exact start/end per request.
     const horizon = new Date(now.getTime() + this.CACHE_TTL_MS);
 
-    const promos = await this.prisma.promotion.findMany({
+    const promos = await db.promotion.findMany({
       where: {
         isActive: true,
         status: { in: ['ACTIVE', 'SCHEDULED'] },

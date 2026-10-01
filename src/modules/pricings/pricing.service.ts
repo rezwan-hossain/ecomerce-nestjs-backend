@@ -89,9 +89,21 @@ export class PricingService {
    * Does NOT reject unavailable items (the cart UI should show them);
    * checkout and order placement do.
    */
-  async calculateCartPrices(
+  calculateCartPrices(
     items: PricableItem[],
     context: PricingContext = {},
+  ): Promise<CartPriceResult> {
+    return this.priceCart(items, context);
+  }
+
+  /**
+   * Shared cart calculation. `promotionDb` set → promotions are read fresh
+   * through it instead of from the resolver cache.
+   */
+  private async priceCart(
+    items: PricableItem[],
+    context: PricingContext,
+    promotionDb?: Prisma.TransactionClient,
   ): Promise<CartPriceResult> {
     const currency = context.currency ?? DEFAULT_CURRENCY;
     const lines = this.mergeItems(items);
@@ -101,7 +113,9 @@ export class PricingService {
     const ctx: PricingContext = {
       ...context,
       timestamp: context.timestamp ?? new Date(),
-      cartSubtotal: sumDecimals(lines.map((l) => l.variant.price.mul(l.quantity))),
+      cartSubtotal: sumDecimals(
+        lines.map((l) => l.variant.price.mul(l.quantity)),
+      ),
       cartItemCount: lines.reduce((n, l) => n + l.quantity, 0),
     };
 
@@ -109,14 +123,26 @@ export class PricingService {
     const resolution = await this.resolver.resolve(
       lines.map((l) => l.variant),
       ctx,
+      { db: promotionDb },
     );
 
     const ledger: DiscountCapLedger = new Map();
     const applied: AppliedDiscount[] = [];
     const skipped: SkippedPromotion[] = [...resolution.skipped];
 
-    // 3. Item-level discounts (one per line, caps shared across the order)
-    const itemResults = lines.map((line) => {
+    // 3. Item-level discounts (one per line, caps shared across the order).
+    //    Lines are priced in a fixed order — biggest line first — so an
+    //    order-wide cap is consumed the same way on every request and the cart
+    //    view and checkout always agree. Results keep the original line order.
+    const pricingOrder = [...lines].sort(
+      (a, b) =>
+        b.variant.price
+          .mul(b.quantity)
+          .comparedTo(a.variant.price.mul(a.quantity)) ||
+        a.variant.id.localeCompare(b.variant.id),
+    );
+    const resultsById = new Map<string, ItemPriceResult>();
+    for (const line of pricingOrder) {
       const decision = this.calculator.calculateBestItemDiscount(
         line.variant,
         line.quantity,
@@ -127,12 +153,16 @@ export class PricingService {
       skipped.push(...decision.skipped);
       if (decision.discount) applied.push(decision.discount);
 
-      return this.calculator.buildItemPriceResult(
-        line.variant,
-        line.quantity,
-        decision.discount,
+      resultsById.set(
+        line.variant.id,
+        this.calculator.buildItemPriceResult(
+          line.variant,
+          line.quantity,
+          decision.discount,
+        ),
       );
-    });
+    }
+    const itemResults = lines.map((line) => resultsById.get(line.variant.id)!);
 
     // 4. Totals
     const subtotal = sumDecimals(itemResults.map((r) => r.originalLineTotal));
@@ -146,7 +176,8 @@ export class PricingService {
 
     // Shipping promos' minOrderAmount is also checked against the discounted subtotal
     const shippingPromos = resolution.shippingLevel.filter((promo) => {
-      const ok = !promo.minOrderAmount || discountedSubtotal.gte(promo.minOrderAmount);
+      const ok =
+        !promo.minOrderAmount || discountedSubtotal.gte(promo.minOrderAmount);
       if (!ok) {
         skipped.push({
           promotionId: promo.id,
@@ -180,10 +211,15 @@ export class PricingService {
       itemDiscountTotal,
       discountedSubtotal,
       orderDiscounts,
-      orderDiscountTotal: sumDecimals(orderDiscounts.map((d) => d.discountAmount)),
+      orderDiscountTotal: sumDecimals(
+        orderDiscounts.map((d) => d.discountAmount),
+      ),
       shippingAmount,
       effectiveShipping,
-      totalAmount: Decimal.max(discountedSubtotal.plus(effectiveShipping), ZERO),
+      totalAmount: Decimal.max(
+        discountedSubtotal.plus(effectiveShipping),
+        ZERO,
+      ),
       currency,
       appliedPromotions: applied,
       skippedPromotions: this.dedupeSkipped(skipped),
@@ -205,7 +241,8 @@ export class PricingService {
 
   /**
    * Totals + per-line snapshots from ONE calculation, for order placement.
-   * Pass the transaction client so variants are read inside the order transaction.
+   * Pass the transaction client so variants AND promotions are read inside
+   * the order transaction (promotions bypass the resolver cache).
    */
   async createOrderPricing(
     lines: CartLine[],
@@ -217,11 +254,20 @@ export class PricingService {
     const items = await this.loadPricableItems(lines, tx);
     this.assertPurchasable(items);
 
-    const totals = await this.calculateCartPrices(items, { ...context, timestamp: calculatedAt });
+    const totals = await this.priceCart(
+      items,
+      { ...context, timestamp: calculatedAt },
+      tx ?? this.prisma,
+    );
 
     const variantsById = new Map(items.map((i) => [i.variant.id, i.variant]));
     const snapshots = totals.items.map((result) =>
-      this.toSnapshot(variantsById.get(result.variantId)!, result, totals.currency, calculatedAt),
+      this.toSnapshot(
+        variantsById.get(result.variantId)!,
+        result,
+        totals.currency,
+        calculatedAt,
+      ),
     );
 
     return { totals, snapshots, calculatedAt };
@@ -235,7 +281,10 @@ export class PricingService {
     const quantities = new Map<string, number>();
     for (const line of lines) {
       this.assertQuantity(line.quantity, line.variantId);
-      quantities.set(line.variantId, (quantities.get(line.variantId) ?? 0) + line.quantity);
+      quantities.set(
+        line.variantId,
+        (quantities.get(line.variantId) ?? 0) + line.quantity,
+      );
     }
 
     const variants = await this.loadVariants([...quantities.keys()], tx);
@@ -243,7 +292,9 @@ export class PricingService {
 
     const missing = [...quantities.keys()].filter((id) => !byId.has(id));
     if (missing.length > 0) {
-      throw new NotFoundException(`Variant(s) not found: ${missing.join(', ')}`);
+      throw new NotFoundException(
+        `Variant(s) not found: ${missing.join(', ')}`,
+      );
     }
 
     return [...quantities].map(([variantId, quantity]) => ({
@@ -261,7 +312,10 @@ export class PricingService {
     variants: VariantPricingData[],
     context: PricingContext,
   ): Promise<Map<string, ItemPriceResult>> {
-    const ctx: PricingContext = { ...context, timestamp: context.timestamp ?? new Date() };
+    const ctx: PricingContext = {
+      ...context,
+      timestamp: context.timestamp ?? new Date(),
+    };
     const { itemLevel } = await this.resolver.resolve(variants, ctx);
 
     const results = new Map<string, ItemPriceResult>();
@@ -271,7 +325,10 @@ export class PricingService {
         1,
         itemLevel.get(variant.id) ?? [],
       );
-      results.set(variant.id, this.calculator.buildItemPriceResult(variant, 1, discount));
+      results.set(
+        variant.id,
+        this.calculator.buildItemPriceResult(variant, 1, discount),
+      );
     }
     return results;
   }
@@ -294,14 +351,20 @@ export class PricingService {
       this.assertQuantity(item.quantity, item.variant.id);
       const existing = merged.get(item.variant.id);
       if (existing) existing.quantity += item.quantity;
-      else merged.set(item.variant.id, { variant: item.variant, quantity: item.quantity });
+      else
+        merged.set(item.variant.id, {
+          variant: item.variant,
+          quantity: item.quantity,
+        });
     }
     return [...merged.values()];
   }
 
   private assertQuantity(quantity: number, variantId: string): void {
     if (!Number.isInteger(quantity) || quantity < 1) {
-      throw new BadRequestException(`Invalid quantity ${quantity} for variant ${variantId}`);
+      throw new BadRequestException(
+        `Invalid quantity ${quantity} for variant ${variantId}`,
+      );
     }
   }
 
@@ -312,7 +375,9 @@ export class PricingService {
       if (!isVariantPurchasable(variant)) {
         errors.push(`"${variant.product.name}" is no longer available`);
       } else if (variant.stock < quantity) {
-        errors.push(`Only ${variant.stock} left of "${variant.product.name}" (${variant.name})`);
+        errors.push(
+          `Only ${variant.stock} left of "${variant.product.name}" (${variant.name})`,
+        );
       }
     }
     if (errors.length > 0) {
