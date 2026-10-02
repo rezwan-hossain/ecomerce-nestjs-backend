@@ -103,6 +103,86 @@ export type TemplateOption = Prisma.TemplateOptionModel
  */
 export type TemplateOptionValue = Prisma.TemplateOptionValueModel
 /**
+ * Model Warehouse
+ * 
+ */
+export type Warehouse = Prisma.WarehouseModel
+/**
+ * Model InventoryLevel
+ * 
+ */
+export type InventoryLevel = Prisma.InventoryLevelModel
+/**
+ * Model StorageLocation
+ * 
+ */
+export type StorageLocation = Prisma.StorageLocationModel
+/**
+ * Model LocationStock
+ * 
+ */
+export type LocationStock = Prisma.LocationStockModel
+/**
+ * Model InventoryMovement
+ * 
+ */
+export type InventoryMovement = Prisma.InventoryMovementModel
+/**
+ * Model StockReservation
+ * 
+ */
+export type StockReservation = Prisma.StockReservationModel
+/**
+ * Model InventoryBatch
+ * 
+ */
+export type InventoryBatch = Prisma.InventoryBatchModel
+/**
+ * Model Supplier
+ * 
+ */
+export type Supplier = Prisma.SupplierModel
+/**
+ * Model PurchaseOrder
+ * 
+ */
+export type PurchaseOrder = Prisma.PurchaseOrderModel
+/**
+ * Model PurchaseOrderItem
+ * 
+ */
+export type PurchaseOrderItem = Prisma.PurchaseOrderItemModel
+/**
+ * Model InventoryTransfer
+ * 
+ */
+export type InventoryTransfer = Prisma.InventoryTransferModel
+/**
+ * Model InventoryTransferItem
+ * 
+ */
+export type InventoryTransferItem = Prisma.InventoryTransferItemModel
+/**
+ * Model StockAdjustment
+ * 
+ */
+export type StockAdjustment = Prisma.StockAdjustmentModel
+/**
+ * Model StockAdjustmentItem
+ * 
+ */
+export type StockAdjustmentItem = Prisma.StockAdjustmentItemModel
+/**
+ * Model ReorderRule
+ * 
+ */
+export type ReorderRule = Prisma.ReorderRuleModel
+/**
+ * Model InventoryAlert
+ * 
+ */
+export type InventoryAlert = Prisma.InventoryAlertModel
+/**
  * Model Review
  * 
  */

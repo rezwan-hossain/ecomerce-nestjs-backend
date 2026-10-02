@@ -16,6 +16,7 @@ import { OrderWhereInput } from 'src/generated/prisma/models/Order';
 import { PricingService } from '../pricings/pricing.service';
 import { CartLine } from '../pricings/interfaces/pricing.types';
 import { CartIdentity, CartsService } from '../carts/carts.service';
+import { InventoryService } from '../inventory/inventory.service';
 import { generateOrderNumber } from 'src/common/utils/order-number.util';
 
 import { CheckoutDto } from './dto/checkout.dto';
@@ -67,6 +68,7 @@ export class OrdersService {
     private readonly prisma: PrismaService,
     private readonly pricing: PricingService,
     private readonly carts: CartsService,
+    private readonly inventory: InventoryService,
   ) {}
 
   // ═════════════════════════════════════════════════
@@ -90,24 +92,6 @@ export class OrdersService {
           { currency: cart.currency, userId: identity.userId },
           tx,
         );
-
-        // 2. Atomically commit stock. The pricing check above is a
-        //    fast-fail UX nicety; THIS conditional decrement is what
-        //    actually prevents overselling under concurrent checkouts.
-        for (const line of lines) {
-          const result = await tx.productVariant.updateMany({
-            where: { id: line.variantId, stock: { gte: line.quantity } },
-            data: { stock: { decrement: line.quantity } },
-          });
-          if (result.count !== 1) {
-            const snapshot = orderPricing.snapshots.find(
-              (s) => s.variantId === line.variantId,
-            );
-            throw new BadRequestException(
-              `"${snapshot?.productName ?? line.variantId}" no longer has enough stock`,
-            );
-          }
-        }
 
         const orderNumber = await this.generateUniqueOrderNumber(tx);
         const shippingAddress = dto.shippingAddress;
@@ -134,7 +118,8 @@ export class OrdersService {
           },
         });
 
-        await tx.orderItem.createMany({
+        const orderItems = await tx.orderItem.createManyAndReturn({
+          select: { id: true, variantId: true, quantity: true },
           data: orderPricing.snapshots.map((s) => ({
             orderId: order.id,
             productId: s.productId,
@@ -152,6 +137,22 @@ export class OrdersService {
               : undefined,
           })),
         });
+
+        // 2. Hold the stock. The pricing check above is a fast-fail UX
+        //    nicety; these locked, conditional reservations are what
+        //    actually prevent overselling under concurrent checkouts. A
+        //    failure rolls back the whole order. Stock leaves onHand only
+        //    when the order ships (commitOrderReservations).
+        await this.inventory.reserveForOrder(
+          tx,
+          order.id,
+          orderItems.map((item) => ({
+            variantId: item.variantId!,
+            quantity: item.quantity,
+            orderItemId: item.id,
+          })),
+          identity.userId ?? null,
+        );
 
         if (orderPricing.totals.orderDiscounts.length) {
           await tx.orderDiscount.createMany({
@@ -336,18 +337,6 @@ export class OrdersService {
         dto.reason,
         actedBy,
       );
-
-      const items = await tx.orderItem.findMany({
-        where: { orderId },
-        select: { variantId: true, quantity: true },
-      });
-      for (const item of items) {
-        if (!item.variantId) continue;
-        await tx.productVariant.update({
-          where: { id: item.variantId },
-          data: { stock: { increment: item.quantity } },
-        });
-      }
 
       const paidPayments = await tx.payment.findMany({
         where: { orderId, status: 'PAID' },
@@ -795,6 +784,22 @@ export class OrdersService {
     const extra: Prisma.OrderUpdateInput = {};
     if (toStatus === 'CANCELLED') extra.cancelledAt = new Date();
     if (toStatus === 'COMPLETED') extra.completedAt = new Date();
+
+    // Inventory follows the order: shipping turns held stock into a sale;
+    // cancelling / failing frees it. Same transaction as the status change.
+    if (toStatus === 'SHIPPED') {
+      await this.inventory.commitOrderReservations(
+        tx,
+        orderId,
+        changedByUserId,
+      );
+    }
+    if (toStatus === 'CANCELLED' || toStatus === 'FAILED') {
+      await this.inventory.releaseOrderReservations(tx, orderId, {
+        note,
+        userId: changedByUserId,
+      });
+    }
 
     await tx.order.update({
       where: { id: orderId },

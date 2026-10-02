@@ -8,6 +8,7 @@ import {
 } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { PricingService } from '../pricings/pricing.service';
+import { InventoryService } from '../inventory/inventory.service';
 import {
   Decimal,
   PrismaClientKnownRequestError,
@@ -37,6 +38,7 @@ export class ProductsService {
   constructor(
     private prisma: PrismaService,
     private readonly pricing: PricingService,
+    private readonly inventory: InventoryService,
   ) {}
 
   // ═════════════════════════════════════════════════
@@ -294,6 +296,9 @@ export class ProductsService {
               stock: v.stock ?? 0,
               isActive: v.isActive ?? true,
             },
+          });
+          await this.inventory.recordInitialStock(tx, variant, {
+            unitCost: v.costPrice,
           });
 
           if (v.optionValueIds?.length) {
@@ -796,6 +801,9 @@ export class ProductsService {
             isActive: dto.isActive ?? true,
           },
         });
+        await this.inventory.recordInitialStock(tx, variant, {
+          unitCost: dto.costPrice,
+        });
 
         if (dto.optionValueIds?.length) {
           await tx.variantOptionValue.createMany({
@@ -856,14 +864,21 @@ export class ProductsService {
         throw new ConflictException(`SKU '${dto.sku}' already exists`);
     }
 
-    const updated = await this.prisma.productVariant.update({
-      where: { id: variantId },
-      data: {
-        ...(dto.sku && { sku: dto.sku }),
-        ...(dto.price !== undefined && { price: new Decimal(dto.price) }),
-        ...(dto.stock !== undefined && { stock: dto.stock }),
-        ...(dto.isActive !== undefined && { isActive: dto.isActive }),
-      },
+    const updated = await this.prisma.$transaction(async (tx) => {
+      // Stock goes through the inventory ledger, never a raw write.
+      if (dto.stock !== undefined) {
+        await this.inventory.setStock(tx, variantId, dto.stock, {
+          note: 'Set via variant update',
+        });
+      }
+      return tx.productVariant.update({
+        where: { id: variantId },
+        data: {
+          ...(dto.sku && { sku: dto.sku }),
+          ...(dto.price !== undefined && { price: new Decimal(dto.price) }),
+          ...(dto.isActive !== undefined && { isActive: dto.isActive }),
+        },
+      });
     });
 
     return { message: 'Variant updated', data: updated };
@@ -885,27 +900,34 @@ export class ProductsService {
       );
     }
 
-    await this.prisma.productVariant.delete({ where: { id: variantId } });
+    try {
+      await this.prisma.productVariant.delete({ where: { id: variantId } });
+    } catch (e) {
+      // The inventory ledger, reservations and purchase/transfer lines
+      // reference the variant with RESTRICT — history is never deleted.
+      if (e instanceof PrismaClientKnownRequestError && e.code === 'P2003') {
+        throw new ConflictException(
+          'Variant has inventory or order history and cannot be deleted. Deactivate it instead (isActive: false).',
+        );
+      }
+      throw e;
+    }
     return { message: 'Variant removed' };
   }
 
+  /** Kept for API compatibility — prefer POST /inventory/adjustments. */
   async adjustStock(variantId: string, dto: AdjustStockDto) {
-    const variant = await this.prisma.productVariant.findUnique({
-      where: { id: variantId },
-      select: { id: true, stock: true },
-    });
-    if (!variant) throw new NotFoundException('Variant not found');
-
-    const newStock = variant.stock + dto.delta;
-    if (newStock < 0) {
-      throw new BadRequestException(
-        `Insufficient stock. Current: ${variant.stock}, Delta: ${dto.delta}`,
-      );
-    }
-
-    const updated = await this.prisma.productVariant.update({
-      where: { id: variantId },
-      data: { stock: newStock },
+    if (dto.delta === 0) throw new BadRequestException('delta cannot be 0');
+    const updated = await this.prisma.$transaction(async (tx) => {
+      // Applies at the default warehouse.
+      await this.inventory.applyMovement(tx, {
+        variantId,
+        type: dto.delta > 0 ? 'ADJUSTMENT_INCREASE' : 'ADJUSTMENT_DECREASE',
+        quantity: Math.abs(dto.delta),
+        referenceType: 'ADJUSTMENT',
+        note: dto.reason,
+      });
+      return tx.productVariant.findUniqueOrThrow({ where: { id: variantId } });
     });
 
     return { message: 'Stock adjusted', data: updated };

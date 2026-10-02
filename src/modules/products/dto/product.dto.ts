@@ -23,6 +23,9 @@ export const variantSchema = z.object({
   sku: z.string().min(1).max(100),
   price: z.coerce.number().nonnegative().multipleOf(0.01),
   stock: z.number().int().nonnegative().optional().default(0),
+  // What one unit cost you to buy/make. Optional; recorded as the opening
+  // stock's unit cost so stock value and margins are right from day one.
+  costPrice: z.coerce.number().nonnegative().multipleOf(0.0001).optional(),
   isActive: z.boolean().optional().default(true),
   optionValueIds: z.array(z.string().uuid()).optional(),
   images: z.array(variantImageSchema).optional(),

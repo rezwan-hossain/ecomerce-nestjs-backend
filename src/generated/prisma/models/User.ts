@@ -259,6 +259,14 @@ export type UserWhereInput = {
   orderStatusHistories?: Prisma.OrderStatusHistoryListRelationFilter
   processedRefunds?: Prisma.RefundRequestListRelationFilter
   reviews?: Prisma.ReviewListRelationFilter
+  inventoryMovements?: Prisma.InventoryMovementListRelationFilter
+  purchaseOrdersCreated?: Prisma.PurchaseOrderListRelationFilter
+  purchaseOrdersApproved?: Prisma.PurchaseOrderListRelationFilter
+  transfersInitiated?: Prisma.InventoryTransferListRelationFilter
+  transfersReceived?: Prisma.InventoryTransferListRelationFilter
+  stockAdjustmentsCreated?: Prisma.StockAdjustmentListRelationFilter
+  stockAdjustmentsApproved?: Prisma.StockAdjustmentListRelationFilter
+  inventoryAlertsAcknowledged?: Prisma.InventoryAlertListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -281,6 +289,14 @@ export type UserOrderByWithRelationInput = {
   orderStatusHistories?: Prisma.OrderStatusHistoryOrderByRelationAggregateInput
   processedRefunds?: Prisma.RefundRequestOrderByRelationAggregateInput
   reviews?: Prisma.ReviewOrderByRelationAggregateInput
+  inventoryMovements?: Prisma.InventoryMovementOrderByRelationAggregateInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderOrderByRelationAggregateInput
+  purchaseOrdersApproved?: Prisma.PurchaseOrderOrderByRelationAggregateInput
+  transfersInitiated?: Prisma.InventoryTransferOrderByRelationAggregateInput
+  transfersReceived?: Prisma.InventoryTransferOrderByRelationAggregateInput
+  stockAdjustmentsCreated?: Prisma.StockAdjustmentOrderByRelationAggregateInput
+  stockAdjustmentsApproved?: Prisma.StockAdjustmentOrderByRelationAggregateInput
+  inventoryAlertsAcknowledged?: Prisma.InventoryAlertOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -306,6 +322,14 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   orderStatusHistories?: Prisma.OrderStatusHistoryListRelationFilter
   processedRefunds?: Prisma.RefundRequestListRelationFilter
   reviews?: Prisma.ReviewListRelationFilter
+  inventoryMovements?: Prisma.InventoryMovementListRelationFilter
+  purchaseOrdersCreated?: Prisma.PurchaseOrderListRelationFilter
+  purchaseOrdersApproved?: Prisma.PurchaseOrderListRelationFilter
+  transfersInitiated?: Prisma.InventoryTransferListRelationFilter
+  transfersReceived?: Prisma.InventoryTransferListRelationFilter
+  stockAdjustmentsCreated?: Prisma.StockAdjustmentListRelationFilter
+  stockAdjustmentsApproved?: Prisma.StockAdjustmentListRelationFilter
+  inventoryAlertsAcknowledged?: Prisma.InventoryAlertListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -368,6 +392,14 @@ export type UserCreateInput = {
   orderStatusHistories?: Prisma.OrderStatusHistoryCreateNestedManyWithoutChangedByUserInput
   processedRefunds?: Prisma.RefundRequestCreateNestedManyWithoutProcessedByUserInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput
+  inventoryMovements?: Prisma.InventoryMovementCreateNestedManyWithoutPerformedByUserInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderCreateNestedManyWithoutCreatedByUserInput
+  purchaseOrdersApproved?: Prisma.PurchaseOrderCreateNestedManyWithoutApprovedByUserInput
+  transfersInitiated?: Prisma.InventoryTransferCreateNestedManyWithoutInitiatedByUserInput
+  transfersReceived?: Prisma.InventoryTransferCreateNestedManyWithoutReceivedByUserInput
+  stockAdjustmentsCreated?: Prisma.StockAdjustmentCreateNestedManyWithoutCreatedByUserInput
+  stockAdjustmentsApproved?: Prisma.StockAdjustmentCreateNestedManyWithoutApprovedByUserInput
+  inventoryAlertsAcknowledged?: Prisma.InventoryAlertCreateNestedManyWithoutAcknowledgedByUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -390,6 +422,14 @@ export type UserUncheckedCreateInput = {
   orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedCreateNestedManyWithoutChangedByUserInput
   processedRefunds?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutProcessedByUserInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput
+  inventoryMovements?: Prisma.InventoryMovementUncheckedCreateNestedManyWithoutPerformedByUserInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutCreatedByUserInput
+  purchaseOrdersApproved?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutApprovedByUserInput
+  transfersInitiated?: Prisma.InventoryTransferUncheckedCreateNestedManyWithoutInitiatedByUserInput
+  transfersReceived?: Prisma.InventoryTransferUncheckedCreateNestedManyWithoutReceivedByUserInput
+  stockAdjustmentsCreated?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutCreatedByUserInput
+  stockAdjustmentsApproved?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutApprovedByUserInput
+  inventoryAlertsAcknowledged?: Prisma.InventoryAlertUncheckedCreateNestedManyWithoutAcknowledgedByUserInput
 }
 
 export type UserUpdateInput = {
@@ -412,6 +452,14 @@ export type UserUpdateInput = {
   orderStatusHistories?: Prisma.OrderStatusHistoryUpdateManyWithoutChangedByUserNestedInput
   processedRefunds?: Prisma.RefundRequestUpdateManyWithoutProcessedByUserNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput
+  inventoryMovements?: Prisma.InventoryMovementUpdateManyWithoutPerformedByUserNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUpdateManyWithoutCreatedByUserNestedInput
+  purchaseOrdersApproved?: Prisma.PurchaseOrderUpdateManyWithoutApprovedByUserNestedInput
+  transfersInitiated?: Prisma.InventoryTransferUpdateManyWithoutInitiatedByUserNestedInput
+  transfersReceived?: Prisma.InventoryTransferUpdateManyWithoutReceivedByUserNestedInput
+  stockAdjustmentsCreated?: Prisma.StockAdjustmentUpdateManyWithoutCreatedByUserNestedInput
+  stockAdjustmentsApproved?: Prisma.StockAdjustmentUpdateManyWithoutApprovedByUserNestedInput
+  inventoryAlertsAcknowledged?: Prisma.InventoryAlertUpdateManyWithoutAcknowledgedByUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -434,6 +482,14 @@ export type UserUncheckedUpdateInput = {
   orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedUpdateManyWithoutChangedByUserNestedInput
   processedRefunds?: Prisma.RefundRequestUncheckedUpdateManyWithoutProcessedByUserNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput
+  inventoryMovements?: Prisma.InventoryMovementUncheckedUpdateManyWithoutPerformedByUserNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  purchaseOrdersApproved?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutApprovedByUserNestedInput
+  transfersInitiated?: Prisma.InventoryTransferUncheckedUpdateManyWithoutInitiatedByUserNestedInput
+  transfersReceived?: Prisma.InventoryTransferUncheckedUpdateManyWithoutReceivedByUserNestedInput
+  stockAdjustmentsCreated?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  stockAdjustmentsApproved?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutApprovedByUserNestedInput
+  inventoryAlertsAcknowledged?: Prisma.InventoryAlertUncheckedUpdateManyWithoutAcknowledgedByUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -538,14 +594,14 @@ export type UserMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
 }
 
-export type UserScalarRelationFilter = {
-  is?: Prisma.UserWhereInput
-  isNot?: Prisma.UserWhereInput
-}
-
 export type UserNullableScalarRelationFilter = {
   is?: Prisma.UserWhereInput | null
   isNot?: Prisma.UserWhereInput | null
+}
+
+export type UserScalarRelationFilter = {
+  is?: Prisma.UserWhereInput
+  isNot?: Prisma.UserWhereInput
 }
 
 export type StringFieldUpdateOperationsInput = {
@@ -570,6 +626,134 @@ export type BoolFieldUpdateOperationsInput = {
 
 export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
+}
+
+export type UserCreateNestedOneWithoutInventoryMovementsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutInventoryMovementsInput, Prisma.UserUncheckedCreateWithoutInventoryMovementsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutInventoryMovementsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutInventoryMovementsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutInventoryMovementsInput, Prisma.UserUncheckedCreateWithoutInventoryMovementsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutInventoryMovementsInput
+  upsert?: Prisma.UserUpsertWithoutInventoryMovementsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutInventoryMovementsInput, Prisma.UserUpdateWithoutInventoryMovementsInput>, Prisma.UserUncheckedUpdateWithoutInventoryMovementsInput>
+}
+
+export type UserCreateNestedOneWithoutPurchaseOrdersCreatedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPurchaseOrdersCreatedInput, Prisma.UserUncheckedCreateWithoutPurchaseOrdersCreatedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPurchaseOrdersCreatedInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutPurchaseOrdersApprovedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPurchaseOrdersApprovedInput, Prisma.UserUncheckedCreateWithoutPurchaseOrdersApprovedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPurchaseOrdersApprovedInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutPurchaseOrdersCreatedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPurchaseOrdersCreatedInput, Prisma.UserUncheckedCreateWithoutPurchaseOrdersCreatedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPurchaseOrdersCreatedInput
+  upsert?: Prisma.UserUpsertWithoutPurchaseOrdersCreatedInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPurchaseOrdersCreatedInput, Prisma.UserUpdateWithoutPurchaseOrdersCreatedInput>, Prisma.UserUncheckedUpdateWithoutPurchaseOrdersCreatedInput>
+}
+
+export type UserUpdateOneWithoutPurchaseOrdersApprovedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPurchaseOrdersApprovedInput, Prisma.UserUncheckedCreateWithoutPurchaseOrdersApprovedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPurchaseOrdersApprovedInput
+  upsert?: Prisma.UserUpsertWithoutPurchaseOrdersApprovedInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPurchaseOrdersApprovedInput, Prisma.UserUpdateWithoutPurchaseOrdersApprovedInput>, Prisma.UserUncheckedUpdateWithoutPurchaseOrdersApprovedInput>
+}
+
+export type UserCreateNestedOneWithoutTransfersInitiatedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTransfersInitiatedInput, Prisma.UserUncheckedCreateWithoutTransfersInitiatedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTransfersInitiatedInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutTransfersReceivedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTransfersReceivedInput, Prisma.UserUncheckedCreateWithoutTransfersReceivedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTransfersReceivedInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutTransfersInitiatedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTransfersInitiatedInput, Prisma.UserUncheckedCreateWithoutTransfersInitiatedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTransfersInitiatedInput
+  upsert?: Prisma.UserUpsertWithoutTransfersInitiatedInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutTransfersInitiatedInput, Prisma.UserUpdateWithoutTransfersInitiatedInput>, Prisma.UserUncheckedUpdateWithoutTransfersInitiatedInput>
+}
+
+export type UserUpdateOneWithoutTransfersReceivedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTransfersReceivedInput, Prisma.UserUncheckedCreateWithoutTransfersReceivedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTransfersReceivedInput
+  upsert?: Prisma.UserUpsertWithoutTransfersReceivedInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutTransfersReceivedInput, Prisma.UserUpdateWithoutTransfersReceivedInput>, Prisma.UserUncheckedUpdateWithoutTransfersReceivedInput>
+}
+
+export type UserCreateNestedOneWithoutStockAdjustmentsCreatedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutStockAdjustmentsCreatedInput, Prisma.UserUncheckedCreateWithoutStockAdjustmentsCreatedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStockAdjustmentsCreatedInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutStockAdjustmentsApprovedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutStockAdjustmentsApprovedInput, Prisma.UserUncheckedCreateWithoutStockAdjustmentsApprovedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStockAdjustmentsApprovedInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutStockAdjustmentsCreatedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutStockAdjustmentsCreatedInput, Prisma.UserUncheckedCreateWithoutStockAdjustmentsCreatedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStockAdjustmentsCreatedInput
+  upsert?: Prisma.UserUpsertWithoutStockAdjustmentsCreatedInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutStockAdjustmentsCreatedInput, Prisma.UserUpdateWithoutStockAdjustmentsCreatedInput>, Prisma.UserUncheckedUpdateWithoutStockAdjustmentsCreatedInput>
+}
+
+export type UserUpdateOneWithoutStockAdjustmentsApprovedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutStockAdjustmentsApprovedInput, Prisma.UserUncheckedCreateWithoutStockAdjustmentsApprovedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStockAdjustmentsApprovedInput
+  upsert?: Prisma.UserUpsertWithoutStockAdjustmentsApprovedInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutStockAdjustmentsApprovedInput, Prisma.UserUpdateWithoutStockAdjustmentsApprovedInput>, Prisma.UserUncheckedUpdateWithoutStockAdjustmentsApprovedInput>
+}
+
+export type UserCreateNestedOneWithoutInventoryAlertsAcknowledgedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutInventoryAlertsAcknowledgedInput, Prisma.UserUncheckedCreateWithoutInventoryAlertsAcknowledgedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutInventoryAlertsAcknowledgedInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutInventoryAlertsAcknowledgedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutInventoryAlertsAcknowledgedInput, Prisma.UserUncheckedCreateWithoutInventoryAlertsAcknowledgedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutInventoryAlertsAcknowledgedInput
+  upsert?: Prisma.UserUpsertWithoutInventoryAlertsAcknowledgedInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutInventoryAlertsAcknowledgedInput, Prisma.UserUpdateWithoutInventoryAlertsAcknowledgedInput>, Prisma.UserUncheckedUpdateWithoutInventoryAlertsAcknowledgedInput>
 }
 
 export type UserCreateNestedOneWithoutReviewsInput = {
@@ -650,6 +834,1062 @@ export type UserUpdateOneWithoutProcessedRefundsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutProcessedRefundsInput, Prisma.UserUpdateWithoutProcessedRefundsInput>, Prisma.UserUncheckedUpdateWithoutProcessedRefundsInput>
 }
 
+export type UserCreateWithoutInventoryMovementsInput = {
+  id?: string
+  email: string
+  firstName?: string | null
+  lastName?: string | null
+  userName?: string | null
+  phone?: string | null
+  birthDate?: Date | string | null
+  gender?: string | null
+  image?: string | null
+  role?: $Enums.Role
+  isActive?: boolean
+  isArchived?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  carts?: Prisma.CartCreateNestedManyWithoutUserInput
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryCreateNestedManyWithoutChangedByUserInput
+  processedRefunds?: Prisma.RefundRequestCreateNestedManyWithoutProcessedByUserInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderCreateNestedManyWithoutCreatedByUserInput
+  purchaseOrdersApproved?: Prisma.PurchaseOrderCreateNestedManyWithoutApprovedByUserInput
+  transfersInitiated?: Prisma.InventoryTransferCreateNestedManyWithoutInitiatedByUserInput
+  transfersReceived?: Prisma.InventoryTransferCreateNestedManyWithoutReceivedByUserInput
+  stockAdjustmentsCreated?: Prisma.StockAdjustmentCreateNestedManyWithoutCreatedByUserInput
+  stockAdjustmentsApproved?: Prisma.StockAdjustmentCreateNestedManyWithoutApprovedByUserInput
+  inventoryAlertsAcknowledged?: Prisma.InventoryAlertCreateNestedManyWithoutAcknowledgedByUserInput
+}
+
+export type UserUncheckedCreateWithoutInventoryMovementsInput = {
+  id?: string
+  email: string
+  firstName?: string | null
+  lastName?: string | null
+  userName?: string | null
+  phone?: string | null
+  birthDate?: Date | string | null
+  gender?: string | null
+  image?: string | null
+  role?: $Enums.Role
+  isActive?: boolean
+  isArchived?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  carts?: Prisma.CartUncheckedCreateNestedManyWithoutUserInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedCreateNestedManyWithoutChangedByUserInput
+  processedRefunds?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutProcessedByUserInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutCreatedByUserInput
+  purchaseOrdersApproved?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutApprovedByUserInput
+  transfersInitiated?: Prisma.InventoryTransferUncheckedCreateNestedManyWithoutInitiatedByUserInput
+  transfersReceived?: Prisma.InventoryTransferUncheckedCreateNestedManyWithoutReceivedByUserInput
+  stockAdjustmentsCreated?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutCreatedByUserInput
+  stockAdjustmentsApproved?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutApprovedByUserInput
+  inventoryAlertsAcknowledged?: Prisma.InventoryAlertUncheckedCreateNestedManyWithoutAcknowledgedByUserInput
+}
+
+export type UserCreateOrConnectWithoutInventoryMovementsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutInventoryMovementsInput, Prisma.UserUncheckedCreateWithoutInventoryMovementsInput>
+}
+
+export type UserUpsertWithoutInventoryMovementsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutInventoryMovementsInput, Prisma.UserUncheckedUpdateWithoutInventoryMovementsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutInventoryMovementsInput, Prisma.UserUncheckedCreateWithoutInventoryMovementsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutInventoryMovementsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutInventoryMovementsInput, Prisma.UserUncheckedUpdateWithoutInventoryMovementsInput>
+}
+
+export type UserUpdateWithoutInventoryMovementsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  carts?: Prisma.CartUpdateManyWithoutUserNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUpdateManyWithoutChangedByUserNestedInput
+  processedRefunds?: Prisma.RefundRequestUpdateManyWithoutProcessedByUserNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUpdateManyWithoutCreatedByUserNestedInput
+  purchaseOrdersApproved?: Prisma.PurchaseOrderUpdateManyWithoutApprovedByUserNestedInput
+  transfersInitiated?: Prisma.InventoryTransferUpdateManyWithoutInitiatedByUserNestedInput
+  transfersReceived?: Prisma.InventoryTransferUpdateManyWithoutReceivedByUserNestedInput
+  stockAdjustmentsCreated?: Prisma.StockAdjustmentUpdateManyWithoutCreatedByUserNestedInput
+  stockAdjustmentsApproved?: Prisma.StockAdjustmentUpdateManyWithoutApprovedByUserNestedInput
+  inventoryAlertsAcknowledged?: Prisma.InventoryAlertUpdateManyWithoutAcknowledgedByUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutInventoryMovementsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  carts?: Prisma.CartUncheckedUpdateManyWithoutUserNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedUpdateManyWithoutChangedByUserNestedInput
+  processedRefunds?: Prisma.RefundRequestUncheckedUpdateManyWithoutProcessedByUserNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  purchaseOrdersApproved?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutApprovedByUserNestedInput
+  transfersInitiated?: Prisma.InventoryTransferUncheckedUpdateManyWithoutInitiatedByUserNestedInput
+  transfersReceived?: Prisma.InventoryTransferUncheckedUpdateManyWithoutReceivedByUserNestedInput
+  stockAdjustmentsCreated?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  stockAdjustmentsApproved?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutApprovedByUserNestedInput
+  inventoryAlertsAcknowledged?: Prisma.InventoryAlertUncheckedUpdateManyWithoutAcknowledgedByUserNestedInput
+}
+
+export type UserCreateWithoutPurchaseOrdersCreatedInput = {
+  id?: string
+  email: string
+  firstName?: string | null
+  lastName?: string | null
+  userName?: string | null
+  phone?: string | null
+  birthDate?: Date | string | null
+  gender?: string | null
+  image?: string | null
+  role?: $Enums.Role
+  isActive?: boolean
+  isArchived?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  carts?: Prisma.CartCreateNestedManyWithoutUserInput
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryCreateNestedManyWithoutChangedByUserInput
+  processedRefunds?: Prisma.RefundRequestCreateNestedManyWithoutProcessedByUserInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput
+  inventoryMovements?: Prisma.InventoryMovementCreateNestedManyWithoutPerformedByUserInput
+  purchaseOrdersApproved?: Prisma.PurchaseOrderCreateNestedManyWithoutApprovedByUserInput
+  transfersInitiated?: Prisma.InventoryTransferCreateNestedManyWithoutInitiatedByUserInput
+  transfersReceived?: Prisma.InventoryTransferCreateNestedManyWithoutReceivedByUserInput
+  stockAdjustmentsCreated?: Prisma.StockAdjustmentCreateNestedManyWithoutCreatedByUserInput
+  stockAdjustmentsApproved?: Prisma.StockAdjustmentCreateNestedManyWithoutApprovedByUserInput
+  inventoryAlertsAcknowledged?: Prisma.InventoryAlertCreateNestedManyWithoutAcknowledgedByUserInput
+}
+
+export type UserUncheckedCreateWithoutPurchaseOrdersCreatedInput = {
+  id?: string
+  email: string
+  firstName?: string | null
+  lastName?: string | null
+  userName?: string | null
+  phone?: string | null
+  birthDate?: Date | string | null
+  gender?: string | null
+  image?: string | null
+  role?: $Enums.Role
+  isActive?: boolean
+  isArchived?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  carts?: Prisma.CartUncheckedCreateNestedManyWithoutUserInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedCreateNestedManyWithoutChangedByUserInput
+  processedRefunds?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutProcessedByUserInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput
+  inventoryMovements?: Prisma.InventoryMovementUncheckedCreateNestedManyWithoutPerformedByUserInput
+  purchaseOrdersApproved?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutApprovedByUserInput
+  transfersInitiated?: Prisma.InventoryTransferUncheckedCreateNestedManyWithoutInitiatedByUserInput
+  transfersReceived?: Prisma.InventoryTransferUncheckedCreateNestedManyWithoutReceivedByUserInput
+  stockAdjustmentsCreated?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutCreatedByUserInput
+  stockAdjustmentsApproved?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutApprovedByUserInput
+  inventoryAlertsAcknowledged?: Prisma.InventoryAlertUncheckedCreateNestedManyWithoutAcknowledgedByUserInput
+}
+
+export type UserCreateOrConnectWithoutPurchaseOrdersCreatedInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutPurchaseOrdersCreatedInput, Prisma.UserUncheckedCreateWithoutPurchaseOrdersCreatedInput>
+}
+
+export type UserCreateWithoutPurchaseOrdersApprovedInput = {
+  id?: string
+  email: string
+  firstName?: string | null
+  lastName?: string | null
+  userName?: string | null
+  phone?: string | null
+  birthDate?: Date | string | null
+  gender?: string | null
+  image?: string | null
+  role?: $Enums.Role
+  isActive?: boolean
+  isArchived?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  carts?: Prisma.CartCreateNestedManyWithoutUserInput
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryCreateNestedManyWithoutChangedByUserInput
+  processedRefunds?: Prisma.RefundRequestCreateNestedManyWithoutProcessedByUserInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput
+  inventoryMovements?: Prisma.InventoryMovementCreateNestedManyWithoutPerformedByUserInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderCreateNestedManyWithoutCreatedByUserInput
+  transfersInitiated?: Prisma.InventoryTransferCreateNestedManyWithoutInitiatedByUserInput
+  transfersReceived?: Prisma.InventoryTransferCreateNestedManyWithoutReceivedByUserInput
+  stockAdjustmentsCreated?: Prisma.StockAdjustmentCreateNestedManyWithoutCreatedByUserInput
+  stockAdjustmentsApproved?: Prisma.StockAdjustmentCreateNestedManyWithoutApprovedByUserInput
+  inventoryAlertsAcknowledged?: Prisma.InventoryAlertCreateNestedManyWithoutAcknowledgedByUserInput
+}
+
+export type UserUncheckedCreateWithoutPurchaseOrdersApprovedInput = {
+  id?: string
+  email: string
+  firstName?: string | null
+  lastName?: string | null
+  userName?: string | null
+  phone?: string | null
+  birthDate?: Date | string | null
+  gender?: string | null
+  image?: string | null
+  role?: $Enums.Role
+  isActive?: boolean
+  isArchived?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  carts?: Prisma.CartUncheckedCreateNestedManyWithoutUserInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedCreateNestedManyWithoutChangedByUserInput
+  processedRefunds?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutProcessedByUserInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput
+  inventoryMovements?: Prisma.InventoryMovementUncheckedCreateNestedManyWithoutPerformedByUserInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutCreatedByUserInput
+  transfersInitiated?: Prisma.InventoryTransferUncheckedCreateNestedManyWithoutInitiatedByUserInput
+  transfersReceived?: Prisma.InventoryTransferUncheckedCreateNestedManyWithoutReceivedByUserInput
+  stockAdjustmentsCreated?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutCreatedByUserInput
+  stockAdjustmentsApproved?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutApprovedByUserInput
+  inventoryAlertsAcknowledged?: Prisma.InventoryAlertUncheckedCreateNestedManyWithoutAcknowledgedByUserInput
+}
+
+export type UserCreateOrConnectWithoutPurchaseOrdersApprovedInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutPurchaseOrdersApprovedInput, Prisma.UserUncheckedCreateWithoutPurchaseOrdersApprovedInput>
+}
+
+export type UserUpsertWithoutPurchaseOrdersCreatedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutPurchaseOrdersCreatedInput, Prisma.UserUncheckedUpdateWithoutPurchaseOrdersCreatedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutPurchaseOrdersCreatedInput, Prisma.UserUncheckedCreateWithoutPurchaseOrdersCreatedInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutPurchaseOrdersCreatedInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutPurchaseOrdersCreatedInput, Prisma.UserUncheckedUpdateWithoutPurchaseOrdersCreatedInput>
+}
+
+export type UserUpdateWithoutPurchaseOrdersCreatedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  carts?: Prisma.CartUpdateManyWithoutUserNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUpdateManyWithoutChangedByUserNestedInput
+  processedRefunds?: Prisma.RefundRequestUpdateManyWithoutProcessedByUserNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput
+  inventoryMovements?: Prisma.InventoryMovementUpdateManyWithoutPerformedByUserNestedInput
+  purchaseOrdersApproved?: Prisma.PurchaseOrderUpdateManyWithoutApprovedByUserNestedInput
+  transfersInitiated?: Prisma.InventoryTransferUpdateManyWithoutInitiatedByUserNestedInput
+  transfersReceived?: Prisma.InventoryTransferUpdateManyWithoutReceivedByUserNestedInput
+  stockAdjustmentsCreated?: Prisma.StockAdjustmentUpdateManyWithoutCreatedByUserNestedInput
+  stockAdjustmentsApproved?: Prisma.StockAdjustmentUpdateManyWithoutApprovedByUserNestedInput
+  inventoryAlertsAcknowledged?: Prisma.InventoryAlertUpdateManyWithoutAcknowledgedByUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutPurchaseOrdersCreatedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  carts?: Prisma.CartUncheckedUpdateManyWithoutUserNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedUpdateManyWithoutChangedByUserNestedInput
+  processedRefunds?: Prisma.RefundRequestUncheckedUpdateManyWithoutProcessedByUserNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput
+  inventoryMovements?: Prisma.InventoryMovementUncheckedUpdateManyWithoutPerformedByUserNestedInput
+  purchaseOrdersApproved?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutApprovedByUserNestedInput
+  transfersInitiated?: Prisma.InventoryTransferUncheckedUpdateManyWithoutInitiatedByUserNestedInput
+  transfersReceived?: Prisma.InventoryTransferUncheckedUpdateManyWithoutReceivedByUserNestedInput
+  stockAdjustmentsCreated?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  stockAdjustmentsApproved?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutApprovedByUserNestedInput
+  inventoryAlertsAcknowledged?: Prisma.InventoryAlertUncheckedUpdateManyWithoutAcknowledgedByUserNestedInput
+}
+
+export type UserUpsertWithoutPurchaseOrdersApprovedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutPurchaseOrdersApprovedInput, Prisma.UserUncheckedUpdateWithoutPurchaseOrdersApprovedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutPurchaseOrdersApprovedInput, Prisma.UserUncheckedCreateWithoutPurchaseOrdersApprovedInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutPurchaseOrdersApprovedInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutPurchaseOrdersApprovedInput, Prisma.UserUncheckedUpdateWithoutPurchaseOrdersApprovedInput>
+}
+
+export type UserUpdateWithoutPurchaseOrdersApprovedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  carts?: Prisma.CartUpdateManyWithoutUserNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUpdateManyWithoutChangedByUserNestedInput
+  processedRefunds?: Prisma.RefundRequestUpdateManyWithoutProcessedByUserNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput
+  inventoryMovements?: Prisma.InventoryMovementUpdateManyWithoutPerformedByUserNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUpdateManyWithoutCreatedByUserNestedInput
+  transfersInitiated?: Prisma.InventoryTransferUpdateManyWithoutInitiatedByUserNestedInput
+  transfersReceived?: Prisma.InventoryTransferUpdateManyWithoutReceivedByUserNestedInput
+  stockAdjustmentsCreated?: Prisma.StockAdjustmentUpdateManyWithoutCreatedByUserNestedInput
+  stockAdjustmentsApproved?: Prisma.StockAdjustmentUpdateManyWithoutApprovedByUserNestedInput
+  inventoryAlertsAcknowledged?: Prisma.InventoryAlertUpdateManyWithoutAcknowledgedByUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutPurchaseOrdersApprovedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  carts?: Prisma.CartUncheckedUpdateManyWithoutUserNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedUpdateManyWithoutChangedByUserNestedInput
+  processedRefunds?: Prisma.RefundRequestUncheckedUpdateManyWithoutProcessedByUserNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput
+  inventoryMovements?: Prisma.InventoryMovementUncheckedUpdateManyWithoutPerformedByUserNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  transfersInitiated?: Prisma.InventoryTransferUncheckedUpdateManyWithoutInitiatedByUserNestedInput
+  transfersReceived?: Prisma.InventoryTransferUncheckedUpdateManyWithoutReceivedByUserNestedInput
+  stockAdjustmentsCreated?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  stockAdjustmentsApproved?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutApprovedByUserNestedInput
+  inventoryAlertsAcknowledged?: Prisma.InventoryAlertUncheckedUpdateManyWithoutAcknowledgedByUserNestedInput
+}
+
+export type UserCreateWithoutTransfersInitiatedInput = {
+  id?: string
+  email: string
+  firstName?: string | null
+  lastName?: string | null
+  userName?: string | null
+  phone?: string | null
+  birthDate?: Date | string | null
+  gender?: string | null
+  image?: string | null
+  role?: $Enums.Role
+  isActive?: boolean
+  isArchived?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  carts?: Prisma.CartCreateNestedManyWithoutUserInput
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryCreateNestedManyWithoutChangedByUserInput
+  processedRefunds?: Prisma.RefundRequestCreateNestedManyWithoutProcessedByUserInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput
+  inventoryMovements?: Prisma.InventoryMovementCreateNestedManyWithoutPerformedByUserInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderCreateNestedManyWithoutCreatedByUserInput
+  purchaseOrdersApproved?: Prisma.PurchaseOrderCreateNestedManyWithoutApprovedByUserInput
+  transfersReceived?: Prisma.InventoryTransferCreateNestedManyWithoutReceivedByUserInput
+  stockAdjustmentsCreated?: Prisma.StockAdjustmentCreateNestedManyWithoutCreatedByUserInput
+  stockAdjustmentsApproved?: Prisma.StockAdjustmentCreateNestedManyWithoutApprovedByUserInput
+  inventoryAlertsAcknowledged?: Prisma.InventoryAlertCreateNestedManyWithoutAcknowledgedByUserInput
+}
+
+export type UserUncheckedCreateWithoutTransfersInitiatedInput = {
+  id?: string
+  email: string
+  firstName?: string | null
+  lastName?: string | null
+  userName?: string | null
+  phone?: string | null
+  birthDate?: Date | string | null
+  gender?: string | null
+  image?: string | null
+  role?: $Enums.Role
+  isActive?: boolean
+  isArchived?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  carts?: Prisma.CartUncheckedCreateNestedManyWithoutUserInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedCreateNestedManyWithoutChangedByUserInput
+  processedRefunds?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutProcessedByUserInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput
+  inventoryMovements?: Prisma.InventoryMovementUncheckedCreateNestedManyWithoutPerformedByUserInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutCreatedByUserInput
+  purchaseOrdersApproved?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutApprovedByUserInput
+  transfersReceived?: Prisma.InventoryTransferUncheckedCreateNestedManyWithoutReceivedByUserInput
+  stockAdjustmentsCreated?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutCreatedByUserInput
+  stockAdjustmentsApproved?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutApprovedByUserInput
+  inventoryAlertsAcknowledged?: Prisma.InventoryAlertUncheckedCreateNestedManyWithoutAcknowledgedByUserInput
+}
+
+export type UserCreateOrConnectWithoutTransfersInitiatedInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutTransfersInitiatedInput, Prisma.UserUncheckedCreateWithoutTransfersInitiatedInput>
+}
+
+export type UserCreateWithoutTransfersReceivedInput = {
+  id?: string
+  email: string
+  firstName?: string | null
+  lastName?: string | null
+  userName?: string | null
+  phone?: string | null
+  birthDate?: Date | string | null
+  gender?: string | null
+  image?: string | null
+  role?: $Enums.Role
+  isActive?: boolean
+  isArchived?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  carts?: Prisma.CartCreateNestedManyWithoutUserInput
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryCreateNestedManyWithoutChangedByUserInput
+  processedRefunds?: Prisma.RefundRequestCreateNestedManyWithoutProcessedByUserInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput
+  inventoryMovements?: Prisma.InventoryMovementCreateNestedManyWithoutPerformedByUserInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderCreateNestedManyWithoutCreatedByUserInput
+  purchaseOrdersApproved?: Prisma.PurchaseOrderCreateNestedManyWithoutApprovedByUserInput
+  transfersInitiated?: Prisma.InventoryTransferCreateNestedManyWithoutInitiatedByUserInput
+  stockAdjustmentsCreated?: Prisma.StockAdjustmentCreateNestedManyWithoutCreatedByUserInput
+  stockAdjustmentsApproved?: Prisma.StockAdjustmentCreateNestedManyWithoutApprovedByUserInput
+  inventoryAlertsAcknowledged?: Prisma.InventoryAlertCreateNestedManyWithoutAcknowledgedByUserInput
+}
+
+export type UserUncheckedCreateWithoutTransfersReceivedInput = {
+  id?: string
+  email: string
+  firstName?: string | null
+  lastName?: string | null
+  userName?: string | null
+  phone?: string | null
+  birthDate?: Date | string | null
+  gender?: string | null
+  image?: string | null
+  role?: $Enums.Role
+  isActive?: boolean
+  isArchived?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  carts?: Prisma.CartUncheckedCreateNestedManyWithoutUserInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedCreateNestedManyWithoutChangedByUserInput
+  processedRefunds?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutProcessedByUserInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput
+  inventoryMovements?: Prisma.InventoryMovementUncheckedCreateNestedManyWithoutPerformedByUserInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutCreatedByUserInput
+  purchaseOrdersApproved?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutApprovedByUserInput
+  transfersInitiated?: Prisma.InventoryTransferUncheckedCreateNestedManyWithoutInitiatedByUserInput
+  stockAdjustmentsCreated?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutCreatedByUserInput
+  stockAdjustmentsApproved?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutApprovedByUserInput
+  inventoryAlertsAcknowledged?: Prisma.InventoryAlertUncheckedCreateNestedManyWithoutAcknowledgedByUserInput
+}
+
+export type UserCreateOrConnectWithoutTransfersReceivedInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutTransfersReceivedInput, Prisma.UserUncheckedCreateWithoutTransfersReceivedInput>
+}
+
+export type UserUpsertWithoutTransfersInitiatedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutTransfersInitiatedInput, Prisma.UserUncheckedUpdateWithoutTransfersInitiatedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutTransfersInitiatedInput, Prisma.UserUncheckedCreateWithoutTransfersInitiatedInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutTransfersInitiatedInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutTransfersInitiatedInput, Prisma.UserUncheckedUpdateWithoutTransfersInitiatedInput>
+}
+
+export type UserUpdateWithoutTransfersInitiatedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  carts?: Prisma.CartUpdateManyWithoutUserNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUpdateManyWithoutChangedByUserNestedInput
+  processedRefunds?: Prisma.RefundRequestUpdateManyWithoutProcessedByUserNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput
+  inventoryMovements?: Prisma.InventoryMovementUpdateManyWithoutPerformedByUserNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUpdateManyWithoutCreatedByUserNestedInput
+  purchaseOrdersApproved?: Prisma.PurchaseOrderUpdateManyWithoutApprovedByUserNestedInput
+  transfersReceived?: Prisma.InventoryTransferUpdateManyWithoutReceivedByUserNestedInput
+  stockAdjustmentsCreated?: Prisma.StockAdjustmentUpdateManyWithoutCreatedByUserNestedInput
+  stockAdjustmentsApproved?: Prisma.StockAdjustmentUpdateManyWithoutApprovedByUserNestedInput
+  inventoryAlertsAcknowledged?: Prisma.InventoryAlertUpdateManyWithoutAcknowledgedByUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutTransfersInitiatedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  carts?: Prisma.CartUncheckedUpdateManyWithoutUserNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedUpdateManyWithoutChangedByUserNestedInput
+  processedRefunds?: Prisma.RefundRequestUncheckedUpdateManyWithoutProcessedByUserNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput
+  inventoryMovements?: Prisma.InventoryMovementUncheckedUpdateManyWithoutPerformedByUserNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  purchaseOrdersApproved?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutApprovedByUserNestedInput
+  transfersReceived?: Prisma.InventoryTransferUncheckedUpdateManyWithoutReceivedByUserNestedInput
+  stockAdjustmentsCreated?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  stockAdjustmentsApproved?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutApprovedByUserNestedInput
+  inventoryAlertsAcknowledged?: Prisma.InventoryAlertUncheckedUpdateManyWithoutAcknowledgedByUserNestedInput
+}
+
+export type UserUpsertWithoutTransfersReceivedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutTransfersReceivedInput, Prisma.UserUncheckedUpdateWithoutTransfersReceivedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutTransfersReceivedInput, Prisma.UserUncheckedCreateWithoutTransfersReceivedInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutTransfersReceivedInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutTransfersReceivedInput, Prisma.UserUncheckedUpdateWithoutTransfersReceivedInput>
+}
+
+export type UserUpdateWithoutTransfersReceivedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  carts?: Prisma.CartUpdateManyWithoutUserNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUpdateManyWithoutChangedByUserNestedInput
+  processedRefunds?: Prisma.RefundRequestUpdateManyWithoutProcessedByUserNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput
+  inventoryMovements?: Prisma.InventoryMovementUpdateManyWithoutPerformedByUserNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUpdateManyWithoutCreatedByUserNestedInput
+  purchaseOrdersApproved?: Prisma.PurchaseOrderUpdateManyWithoutApprovedByUserNestedInput
+  transfersInitiated?: Prisma.InventoryTransferUpdateManyWithoutInitiatedByUserNestedInput
+  stockAdjustmentsCreated?: Prisma.StockAdjustmentUpdateManyWithoutCreatedByUserNestedInput
+  stockAdjustmentsApproved?: Prisma.StockAdjustmentUpdateManyWithoutApprovedByUserNestedInput
+  inventoryAlertsAcknowledged?: Prisma.InventoryAlertUpdateManyWithoutAcknowledgedByUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutTransfersReceivedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  carts?: Prisma.CartUncheckedUpdateManyWithoutUserNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedUpdateManyWithoutChangedByUserNestedInput
+  processedRefunds?: Prisma.RefundRequestUncheckedUpdateManyWithoutProcessedByUserNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput
+  inventoryMovements?: Prisma.InventoryMovementUncheckedUpdateManyWithoutPerformedByUserNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  purchaseOrdersApproved?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutApprovedByUserNestedInput
+  transfersInitiated?: Prisma.InventoryTransferUncheckedUpdateManyWithoutInitiatedByUserNestedInput
+  stockAdjustmentsCreated?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  stockAdjustmentsApproved?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutApprovedByUserNestedInput
+  inventoryAlertsAcknowledged?: Prisma.InventoryAlertUncheckedUpdateManyWithoutAcknowledgedByUserNestedInput
+}
+
+export type UserCreateWithoutStockAdjustmentsCreatedInput = {
+  id?: string
+  email: string
+  firstName?: string | null
+  lastName?: string | null
+  userName?: string | null
+  phone?: string | null
+  birthDate?: Date | string | null
+  gender?: string | null
+  image?: string | null
+  role?: $Enums.Role
+  isActive?: boolean
+  isArchived?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  carts?: Prisma.CartCreateNestedManyWithoutUserInput
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryCreateNestedManyWithoutChangedByUserInput
+  processedRefunds?: Prisma.RefundRequestCreateNestedManyWithoutProcessedByUserInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput
+  inventoryMovements?: Prisma.InventoryMovementCreateNestedManyWithoutPerformedByUserInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderCreateNestedManyWithoutCreatedByUserInput
+  purchaseOrdersApproved?: Prisma.PurchaseOrderCreateNestedManyWithoutApprovedByUserInput
+  transfersInitiated?: Prisma.InventoryTransferCreateNestedManyWithoutInitiatedByUserInput
+  transfersReceived?: Prisma.InventoryTransferCreateNestedManyWithoutReceivedByUserInput
+  stockAdjustmentsApproved?: Prisma.StockAdjustmentCreateNestedManyWithoutApprovedByUserInput
+  inventoryAlertsAcknowledged?: Prisma.InventoryAlertCreateNestedManyWithoutAcknowledgedByUserInput
+}
+
+export type UserUncheckedCreateWithoutStockAdjustmentsCreatedInput = {
+  id?: string
+  email: string
+  firstName?: string | null
+  lastName?: string | null
+  userName?: string | null
+  phone?: string | null
+  birthDate?: Date | string | null
+  gender?: string | null
+  image?: string | null
+  role?: $Enums.Role
+  isActive?: boolean
+  isArchived?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  carts?: Prisma.CartUncheckedCreateNestedManyWithoutUserInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedCreateNestedManyWithoutChangedByUserInput
+  processedRefunds?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutProcessedByUserInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput
+  inventoryMovements?: Prisma.InventoryMovementUncheckedCreateNestedManyWithoutPerformedByUserInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutCreatedByUserInput
+  purchaseOrdersApproved?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutApprovedByUserInput
+  transfersInitiated?: Prisma.InventoryTransferUncheckedCreateNestedManyWithoutInitiatedByUserInput
+  transfersReceived?: Prisma.InventoryTransferUncheckedCreateNestedManyWithoutReceivedByUserInput
+  stockAdjustmentsApproved?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutApprovedByUserInput
+  inventoryAlertsAcknowledged?: Prisma.InventoryAlertUncheckedCreateNestedManyWithoutAcknowledgedByUserInput
+}
+
+export type UserCreateOrConnectWithoutStockAdjustmentsCreatedInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutStockAdjustmentsCreatedInput, Prisma.UserUncheckedCreateWithoutStockAdjustmentsCreatedInput>
+}
+
+export type UserCreateWithoutStockAdjustmentsApprovedInput = {
+  id?: string
+  email: string
+  firstName?: string | null
+  lastName?: string | null
+  userName?: string | null
+  phone?: string | null
+  birthDate?: Date | string | null
+  gender?: string | null
+  image?: string | null
+  role?: $Enums.Role
+  isActive?: boolean
+  isArchived?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  carts?: Prisma.CartCreateNestedManyWithoutUserInput
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryCreateNestedManyWithoutChangedByUserInput
+  processedRefunds?: Prisma.RefundRequestCreateNestedManyWithoutProcessedByUserInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput
+  inventoryMovements?: Prisma.InventoryMovementCreateNestedManyWithoutPerformedByUserInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderCreateNestedManyWithoutCreatedByUserInput
+  purchaseOrdersApproved?: Prisma.PurchaseOrderCreateNestedManyWithoutApprovedByUserInput
+  transfersInitiated?: Prisma.InventoryTransferCreateNestedManyWithoutInitiatedByUserInput
+  transfersReceived?: Prisma.InventoryTransferCreateNestedManyWithoutReceivedByUserInput
+  stockAdjustmentsCreated?: Prisma.StockAdjustmentCreateNestedManyWithoutCreatedByUserInput
+  inventoryAlertsAcknowledged?: Prisma.InventoryAlertCreateNestedManyWithoutAcknowledgedByUserInput
+}
+
+export type UserUncheckedCreateWithoutStockAdjustmentsApprovedInput = {
+  id?: string
+  email: string
+  firstName?: string | null
+  lastName?: string | null
+  userName?: string | null
+  phone?: string | null
+  birthDate?: Date | string | null
+  gender?: string | null
+  image?: string | null
+  role?: $Enums.Role
+  isActive?: boolean
+  isArchived?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  carts?: Prisma.CartUncheckedCreateNestedManyWithoutUserInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedCreateNestedManyWithoutChangedByUserInput
+  processedRefunds?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutProcessedByUserInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput
+  inventoryMovements?: Prisma.InventoryMovementUncheckedCreateNestedManyWithoutPerformedByUserInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutCreatedByUserInput
+  purchaseOrdersApproved?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutApprovedByUserInput
+  transfersInitiated?: Prisma.InventoryTransferUncheckedCreateNestedManyWithoutInitiatedByUserInput
+  transfersReceived?: Prisma.InventoryTransferUncheckedCreateNestedManyWithoutReceivedByUserInput
+  stockAdjustmentsCreated?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutCreatedByUserInput
+  inventoryAlertsAcknowledged?: Prisma.InventoryAlertUncheckedCreateNestedManyWithoutAcknowledgedByUserInput
+}
+
+export type UserCreateOrConnectWithoutStockAdjustmentsApprovedInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutStockAdjustmentsApprovedInput, Prisma.UserUncheckedCreateWithoutStockAdjustmentsApprovedInput>
+}
+
+export type UserUpsertWithoutStockAdjustmentsCreatedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutStockAdjustmentsCreatedInput, Prisma.UserUncheckedUpdateWithoutStockAdjustmentsCreatedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutStockAdjustmentsCreatedInput, Prisma.UserUncheckedCreateWithoutStockAdjustmentsCreatedInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutStockAdjustmentsCreatedInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutStockAdjustmentsCreatedInput, Prisma.UserUncheckedUpdateWithoutStockAdjustmentsCreatedInput>
+}
+
+export type UserUpdateWithoutStockAdjustmentsCreatedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  carts?: Prisma.CartUpdateManyWithoutUserNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUpdateManyWithoutChangedByUserNestedInput
+  processedRefunds?: Prisma.RefundRequestUpdateManyWithoutProcessedByUserNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput
+  inventoryMovements?: Prisma.InventoryMovementUpdateManyWithoutPerformedByUserNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUpdateManyWithoutCreatedByUserNestedInput
+  purchaseOrdersApproved?: Prisma.PurchaseOrderUpdateManyWithoutApprovedByUserNestedInput
+  transfersInitiated?: Prisma.InventoryTransferUpdateManyWithoutInitiatedByUserNestedInput
+  transfersReceived?: Prisma.InventoryTransferUpdateManyWithoutReceivedByUserNestedInput
+  stockAdjustmentsApproved?: Prisma.StockAdjustmentUpdateManyWithoutApprovedByUserNestedInput
+  inventoryAlertsAcknowledged?: Prisma.InventoryAlertUpdateManyWithoutAcknowledgedByUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutStockAdjustmentsCreatedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  carts?: Prisma.CartUncheckedUpdateManyWithoutUserNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedUpdateManyWithoutChangedByUserNestedInput
+  processedRefunds?: Prisma.RefundRequestUncheckedUpdateManyWithoutProcessedByUserNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput
+  inventoryMovements?: Prisma.InventoryMovementUncheckedUpdateManyWithoutPerformedByUserNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  purchaseOrdersApproved?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutApprovedByUserNestedInput
+  transfersInitiated?: Prisma.InventoryTransferUncheckedUpdateManyWithoutInitiatedByUserNestedInput
+  transfersReceived?: Prisma.InventoryTransferUncheckedUpdateManyWithoutReceivedByUserNestedInput
+  stockAdjustmentsApproved?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutApprovedByUserNestedInput
+  inventoryAlertsAcknowledged?: Prisma.InventoryAlertUncheckedUpdateManyWithoutAcknowledgedByUserNestedInput
+}
+
+export type UserUpsertWithoutStockAdjustmentsApprovedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutStockAdjustmentsApprovedInput, Prisma.UserUncheckedUpdateWithoutStockAdjustmentsApprovedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutStockAdjustmentsApprovedInput, Prisma.UserUncheckedCreateWithoutStockAdjustmentsApprovedInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutStockAdjustmentsApprovedInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutStockAdjustmentsApprovedInput, Prisma.UserUncheckedUpdateWithoutStockAdjustmentsApprovedInput>
+}
+
+export type UserUpdateWithoutStockAdjustmentsApprovedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  carts?: Prisma.CartUpdateManyWithoutUserNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUpdateManyWithoutChangedByUserNestedInput
+  processedRefunds?: Prisma.RefundRequestUpdateManyWithoutProcessedByUserNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput
+  inventoryMovements?: Prisma.InventoryMovementUpdateManyWithoutPerformedByUserNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUpdateManyWithoutCreatedByUserNestedInput
+  purchaseOrdersApproved?: Prisma.PurchaseOrderUpdateManyWithoutApprovedByUserNestedInput
+  transfersInitiated?: Prisma.InventoryTransferUpdateManyWithoutInitiatedByUserNestedInput
+  transfersReceived?: Prisma.InventoryTransferUpdateManyWithoutReceivedByUserNestedInput
+  stockAdjustmentsCreated?: Prisma.StockAdjustmentUpdateManyWithoutCreatedByUserNestedInput
+  inventoryAlertsAcknowledged?: Prisma.InventoryAlertUpdateManyWithoutAcknowledgedByUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutStockAdjustmentsApprovedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  carts?: Prisma.CartUncheckedUpdateManyWithoutUserNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedUpdateManyWithoutChangedByUserNestedInput
+  processedRefunds?: Prisma.RefundRequestUncheckedUpdateManyWithoutProcessedByUserNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput
+  inventoryMovements?: Prisma.InventoryMovementUncheckedUpdateManyWithoutPerformedByUserNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  purchaseOrdersApproved?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutApprovedByUserNestedInput
+  transfersInitiated?: Prisma.InventoryTransferUncheckedUpdateManyWithoutInitiatedByUserNestedInput
+  transfersReceived?: Prisma.InventoryTransferUncheckedUpdateManyWithoutReceivedByUserNestedInput
+  stockAdjustmentsCreated?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  inventoryAlertsAcknowledged?: Prisma.InventoryAlertUncheckedUpdateManyWithoutAcknowledgedByUserNestedInput
+}
+
+export type UserCreateWithoutInventoryAlertsAcknowledgedInput = {
+  id?: string
+  email: string
+  firstName?: string | null
+  lastName?: string | null
+  userName?: string | null
+  phone?: string | null
+  birthDate?: Date | string | null
+  gender?: string | null
+  image?: string | null
+  role?: $Enums.Role
+  isActive?: boolean
+  isArchived?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  carts?: Prisma.CartCreateNestedManyWithoutUserInput
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryCreateNestedManyWithoutChangedByUserInput
+  processedRefunds?: Prisma.RefundRequestCreateNestedManyWithoutProcessedByUserInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput
+  inventoryMovements?: Prisma.InventoryMovementCreateNestedManyWithoutPerformedByUserInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderCreateNestedManyWithoutCreatedByUserInput
+  purchaseOrdersApproved?: Prisma.PurchaseOrderCreateNestedManyWithoutApprovedByUserInput
+  transfersInitiated?: Prisma.InventoryTransferCreateNestedManyWithoutInitiatedByUserInput
+  transfersReceived?: Prisma.InventoryTransferCreateNestedManyWithoutReceivedByUserInput
+  stockAdjustmentsCreated?: Prisma.StockAdjustmentCreateNestedManyWithoutCreatedByUserInput
+  stockAdjustmentsApproved?: Prisma.StockAdjustmentCreateNestedManyWithoutApprovedByUserInput
+}
+
+export type UserUncheckedCreateWithoutInventoryAlertsAcknowledgedInput = {
+  id?: string
+  email: string
+  firstName?: string | null
+  lastName?: string | null
+  userName?: string | null
+  phone?: string | null
+  birthDate?: Date | string | null
+  gender?: string | null
+  image?: string | null
+  role?: $Enums.Role
+  isActive?: boolean
+  isArchived?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  carts?: Prisma.CartUncheckedCreateNestedManyWithoutUserInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedCreateNestedManyWithoutChangedByUserInput
+  processedRefunds?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutProcessedByUserInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput
+  inventoryMovements?: Prisma.InventoryMovementUncheckedCreateNestedManyWithoutPerformedByUserInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutCreatedByUserInput
+  purchaseOrdersApproved?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutApprovedByUserInput
+  transfersInitiated?: Prisma.InventoryTransferUncheckedCreateNestedManyWithoutInitiatedByUserInput
+  transfersReceived?: Prisma.InventoryTransferUncheckedCreateNestedManyWithoutReceivedByUserInput
+  stockAdjustmentsCreated?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutCreatedByUserInput
+  stockAdjustmentsApproved?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutApprovedByUserInput
+}
+
+export type UserCreateOrConnectWithoutInventoryAlertsAcknowledgedInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutInventoryAlertsAcknowledgedInput, Prisma.UserUncheckedCreateWithoutInventoryAlertsAcknowledgedInput>
+}
+
+export type UserUpsertWithoutInventoryAlertsAcknowledgedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutInventoryAlertsAcknowledgedInput, Prisma.UserUncheckedUpdateWithoutInventoryAlertsAcknowledgedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutInventoryAlertsAcknowledgedInput, Prisma.UserUncheckedCreateWithoutInventoryAlertsAcknowledgedInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutInventoryAlertsAcknowledgedInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutInventoryAlertsAcknowledgedInput, Prisma.UserUncheckedUpdateWithoutInventoryAlertsAcknowledgedInput>
+}
+
+export type UserUpdateWithoutInventoryAlertsAcknowledgedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  carts?: Prisma.CartUpdateManyWithoutUserNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUpdateManyWithoutChangedByUserNestedInput
+  processedRefunds?: Prisma.RefundRequestUpdateManyWithoutProcessedByUserNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput
+  inventoryMovements?: Prisma.InventoryMovementUpdateManyWithoutPerformedByUserNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUpdateManyWithoutCreatedByUserNestedInput
+  purchaseOrdersApproved?: Prisma.PurchaseOrderUpdateManyWithoutApprovedByUserNestedInput
+  transfersInitiated?: Prisma.InventoryTransferUpdateManyWithoutInitiatedByUserNestedInput
+  transfersReceived?: Prisma.InventoryTransferUpdateManyWithoutReceivedByUserNestedInput
+  stockAdjustmentsCreated?: Prisma.StockAdjustmentUpdateManyWithoutCreatedByUserNestedInput
+  stockAdjustmentsApproved?: Prisma.StockAdjustmentUpdateManyWithoutApprovedByUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutInventoryAlertsAcknowledgedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  carts?: Prisma.CartUncheckedUpdateManyWithoutUserNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedUpdateManyWithoutChangedByUserNestedInput
+  processedRefunds?: Prisma.RefundRequestUncheckedUpdateManyWithoutProcessedByUserNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput
+  inventoryMovements?: Prisma.InventoryMovementUncheckedUpdateManyWithoutPerformedByUserNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  purchaseOrdersApproved?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutApprovedByUserNestedInput
+  transfersInitiated?: Prisma.InventoryTransferUncheckedUpdateManyWithoutInitiatedByUserNestedInput
+  transfersReceived?: Prisma.InventoryTransferUncheckedUpdateManyWithoutReceivedByUserNestedInput
+  stockAdjustmentsCreated?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  stockAdjustmentsApproved?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutApprovedByUserNestedInput
+}
+
 export type UserCreateWithoutReviewsInput = {
   id?: string
   email: string
@@ -669,6 +1909,14 @@ export type UserCreateWithoutReviewsInput = {
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
   orderStatusHistories?: Prisma.OrderStatusHistoryCreateNestedManyWithoutChangedByUserInput
   processedRefunds?: Prisma.RefundRequestCreateNestedManyWithoutProcessedByUserInput
+  inventoryMovements?: Prisma.InventoryMovementCreateNestedManyWithoutPerformedByUserInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderCreateNestedManyWithoutCreatedByUserInput
+  purchaseOrdersApproved?: Prisma.PurchaseOrderCreateNestedManyWithoutApprovedByUserInput
+  transfersInitiated?: Prisma.InventoryTransferCreateNestedManyWithoutInitiatedByUserInput
+  transfersReceived?: Prisma.InventoryTransferCreateNestedManyWithoutReceivedByUserInput
+  stockAdjustmentsCreated?: Prisma.StockAdjustmentCreateNestedManyWithoutCreatedByUserInput
+  stockAdjustmentsApproved?: Prisma.StockAdjustmentCreateNestedManyWithoutApprovedByUserInput
+  inventoryAlertsAcknowledged?: Prisma.InventoryAlertCreateNestedManyWithoutAcknowledgedByUserInput
 }
 
 export type UserUncheckedCreateWithoutReviewsInput = {
@@ -690,6 +1938,14 @@ export type UserUncheckedCreateWithoutReviewsInput = {
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
   orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedCreateNestedManyWithoutChangedByUserInput
   processedRefunds?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutProcessedByUserInput
+  inventoryMovements?: Prisma.InventoryMovementUncheckedCreateNestedManyWithoutPerformedByUserInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutCreatedByUserInput
+  purchaseOrdersApproved?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutApprovedByUserInput
+  transfersInitiated?: Prisma.InventoryTransferUncheckedCreateNestedManyWithoutInitiatedByUserInput
+  transfersReceived?: Prisma.InventoryTransferUncheckedCreateNestedManyWithoutReceivedByUserInput
+  stockAdjustmentsCreated?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutCreatedByUserInput
+  stockAdjustmentsApproved?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutApprovedByUserInput
+  inventoryAlertsAcknowledged?: Prisma.InventoryAlertUncheckedCreateNestedManyWithoutAcknowledgedByUserInput
 }
 
 export type UserCreateOrConnectWithoutReviewsInput = {
@@ -727,6 +1983,14 @@ export type UserUpdateWithoutReviewsInput = {
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
   orderStatusHistories?: Prisma.OrderStatusHistoryUpdateManyWithoutChangedByUserNestedInput
   processedRefunds?: Prisma.RefundRequestUpdateManyWithoutProcessedByUserNestedInput
+  inventoryMovements?: Prisma.InventoryMovementUpdateManyWithoutPerformedByUserNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUpdateManyWithoutCreatedByUserNestedInput
+  purchaseOrdersApproved?: Prisma.PurchaseOrderUpdateManyWithoutApprovedByUserNestedInput
+  transfersInitiated?: Prisma.InventoryTransferUpdateManyWithoutInitiatedByUserNestedInput
+  transfersReceived?: Prisma.InventoryTransferUpdateManyWithoutReceivedByUserNestedInput
+  stockAdjustmentsCreated?: Prisma.StockAdjustmentUpdateManyWithoutCreatedByUserNestedInput
+  stockAdjustmentsApproved?: Prisma.StockAdjustmentUpdateManyWithoutApprovedByUserNestedInput
+  inventoryAlertsAcknowledged?: Prisma.InventoryAlertUpdateManyWithoutAcknowledgedByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReviewsInput = {
@@ -748,6 +2012,14 @@ export type UserUncheckedUpdateWithoutReviewsInput = {
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
   orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedUpdateManyWithoutChangedByUserNestedInput
   processedRefunds?: Prisma.RefundRequestUncheckedUpdateManyWithoutProcessedByUserNestedInput
+  inventoryMovements?: Prisma.InventoryMovementUncheckedUpdateManyWithoutPerformedByUserNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  purchaseOrdersApproved?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutApprovedByUserNestedInput
+  transfersInitiated?: Prisma.InventoryTransferUncheckedUpdateManyWithoutInitiatedByUserNestedInput
+  transfersReceived?: Prisma.InventoryTransferUncheckedUpdateManyWithoutReceivedByUserNestedInput
+  stockAdjustmentsCreated?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  stockAdjustmentsApproved?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutApprovedByUserNestedInput
+  inventoryAlertsAcknowledged?: Prisma.InventoryAlertUncheckedUpdateManyWithoutAcknowledgedByUserNestedInput
 }
 
 export type UserCreateWithoutCartsInput = {
@@ -769,6 +2041,14 @@ export type UserCreateWithoutCartsInput = {
   orderStatusHistories?: Prisma.OrderStatusHistoryCreateNestedManyWithoutChangedByUserInput
   processedRefunds?: Prisma.RefundRequestCreateNestedManyWithoutProcessedByUserInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput
+  inventoryMovements?: Prisma.InventoryMovementCreateNestedManyWithoutPerformedByUserInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderCreateNestedManyWithoutCreatedByUserInput
+  purchaseOrdersApproved?: Prisma.PurchaseOrderCreateNestedManyWithoutApprovedByUserInput
+  transfersInitiated?: Prisma.InventoryTransferCreateNestedManyWithoutInitiatedByUserInput
+  transfersReceived?: Prisma.InventoryTransferCreateNestedManyWithoutReceivedByUserInput
+  stockAdjustmentsCreated?: Prisma.StockAdjustmentCreateNestedManyWithoutCreatedByUserInput
+  stockAdjustmentsApproved?: Prisma.StockAdjustmentCreateNestedManyWithoutApprovedByUserInput
+  inventoryAlertsAcknowledged?: Prisma.InventoryAlertCreateNestedManyWithoutAcknowledgedByUserInput
 }
 
 export type UserUncheckedCreateWithoutCartsInput = {
@@ -790,6 +2070,14 @@ export type UserUncheckedCreateWithoutCartsInput = {
   orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedCreateNestedManyWithoutChangedByUserInput
   processedRefunds?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutProcessedByUserInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput
+  inventoryMovements?: Prisma.InventoryMovementUncheckedCreateNestedManyWithoutPerformedByUserInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutCreatedByUserInput
+  purchaseOrdersApproved?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutApprovedByUserInput
+  transfersInitiated?: Prisma.InventoryTransferUncheckedCreateNestedManyWithoutInitiatedByUserInput
+  transfersReceived?: Prisma.InventoryTransferUncheckedCreateNestedManyWithoutReceivedByUserInput
+  stockAdjustmentsCreated?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutCreatedByUserInput
+  stockAdjustmentsApproved?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutApprovedByUserInput
+  inventoryAlertsAcknowledged?: Prisma.InventoryAlertUncheckedCreateNestedManyWithoutAcknowledgedByUserInput
 }
 
 export type UserCreateOrConnectWithoutCartsInput = {
@@ -827,6 +2115,14 @@ export type UserUpdateWithoutCartsInput = {
   orderStatusHistories?: Prisma.OrderStatusHistoryUpdateManyWithoutChangedByUserNestedInput
   processedRefunds?: Prisma.RefundRequestUpdateManyWithoutProcessedByUserNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput
+  inventoryMovements?: Prisma.InventoryMovementUpdateManyWithoutPerformedByUserNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUpdateManyWithoutCreatedByUserNestedInput
+  purchaseOrdersApproved?: Prisma.PurchaseOrderUpdateManyWithoutApprovedByUserNestedInput
+  transfersInitiated?: Prisma.InventoryTransferUpdateManyWithoutInitiatedByUserNestedInput
+  transfersReceived?: Prisma.InventoryTransferUpdateManyWithoutReceivedByUserNestedInput
+  stockAdjustmentsCreated?: Prisma.StockAdjustmentUpdateManyWithoutCreatedByUserNestedInput
+  stockAdjustmentsApproved?: Prisma.StockAdjustmentUpdateManyWithoutApprovedByUserNestedInput
+  inventoryAlertsAcknowledged?: Prisma.InventoryAlertUpdateManyWithoutAcknowledgedByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCartsInput = {
@@ -848,6 +2144,14 @@ export type UserUncheckedUpdateWithoutCartsInput = {
   orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedUpdateManyWithoutChangedByUserNestedInput
   processedRefunds?: Prisma.RefundRequestUncheckedUpdateManyWithoutProcessedByUserNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput
+  inventoryMovements?: Prisma.InventoryMovementUncheckedUpdateManyWithoutPerformedByUserNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  purchaseOrdersApproved?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutApprovedByUserNestedInput
+  transfersInitiated?: Prisma.InventoryTransferUncheckedUpdateManyWithoutInitiatedByUserNestedInput
+  transfersReceived?: Prisma.InventoryTransferUncheckedUpdateManyWithoutReceivedByUserNestedInput
+  stockAdjustmentsCreated?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  stockAdjustmentsApproved?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutApprovedByUserNestedInput
+  inventoryAlertsAcknowledged?: Prisma.InventoryAlertUncheckedUpdateManyWithoutAcknowledgedByUserNestedInput
 }
 
 export type UserCreateWithoutOrdersInput = {
@@ -869,6 +2173,14 @@ export type UserCreateWithoutOrdersInput = {
   orderStatusHistories?: Prisma.OrderStatusHistoryCreateNestedManyWithoutChangedByUserInput
   processedRefunds?: Prisma.RefundRequestCreateNestedManyWithoutProcessedByUserInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput
+  inventoryMovements?: Prisma.InventoryMovementCreateNestedManyWithoutPerformedByUserInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderCreateNestedManyWithoutCreatedByUserInput
+  purchaseOrdersApproved?: Prisma.PurchaseOrderCreateNestedManyWithoutApprovedByUserInput
+  transfersInitiated?: Prisma.InventoryTransferCreateNestedManyWithoutInitiatedByUserInput
+  transfersReceived?: Prisma.InventoryTransferCreateNestedManyWithoutReceivedByUserInput
+  stockAdjustmentsCreated?: Prisma.StockAdjustmentCreateNestedManyWithoutCreatedByUserInput
+  stockAdjustmentsApproved?: Prisma.StockAdjustmentCreateNestedManyWithoutApprovedByUserInput
+  inventoryAlertsAcknowledged?: Prisma.InventoryAlertCreateNestedManyWithoutAcknowledgedByUserInput
 }
 
 export type UserUncheckedCreateWithoutOrdersInput = {
@@ -890,6 +2202,14 @@ export type UserUncheckedCreateWithoutOrdersInput = {
   orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedCreateNestedManyWithoutChangedByUserInput
   processedRefunds?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutProcessedByUserInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput
+  inventoryMovements?: Prisma.InventoryMovementUncheckedCreateNestedManyWithoutPerformedByUserInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutCreatedByUserInput
+  purchaseOrdersApproved?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutApprovedByUserInput
+  transfersInitiated?: Prisma.InventoryTransferUncheckedCreateNestedManyWithoutInitiatedByUserInput
+  transfersReceived?: Prisma.InventoryTransferUncheckedCreateNestedManyWithoutReceivedByUserInput
+  stockAdjustmentsCreated?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutCreatedByUserInput
+  stockAdjustmentsApproved?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutApprovedByUserInput
+  inventoryAlertsAcknowledged?: Prisma.InventoryAlertUncheckedCreateNestedManyWithoutAcknowledgedByUserInput
 }
 
 export type UserCreateOrConnectWithoutOrdersInput = {
@@ -927,6 +2247,14 @@ export type UserUpdateWithoutOrdersInput = {
   orderStatusHistories?: Prisma.OrderStatusHistoryUpdateManyWithoutChangedByUserNestedInput
   processedRefunds?: Prisma.RefundRequestUpdateManyWithoutProcessedByUserNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput
+  inventoryMovements?: Prisma.InventoryMovementUpdateManyWithoutPerformedByUserNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUpdateManyWithoutCreatedByUserNestedInput
+  purchaseOrdersApproved?: Prisma.PurchaseOrderUpdateManyWithoutApprovedByUserNestedInput
+  transfersInitiated?: Prisma.InventoryTransferUpdateManyWithoutInitiatedByUserNestedInput
+  transfersReceived?: Prisma.InventoryTransferUpdateManyWithoutReceivedByUserNestedInput
+  stockAdjustmentsCreated?: Prisma.StockAdjustmentUpdateManyWithoutCreatedByUserNestedInput
+  stockAdjustmentsApproved?: Prisma.StockAdjustmentUpdateManyWithoutApprovedByUserNestedInput
+  inventoryAlertsAcknowledged?: Prisma.InventoryAlertUpdateManyWithoutAcknowledgedByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOrdersInput = {
@@ -948,6 +2276,14 @@ export type UserUncheckedUpdateWithoutOrdersInput = {
   orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedUpdateManyWithoutChangedByUserNestedInput
   processedRefunds?: Prisma.RefundRequestUncheckedUpdateManyWithoutProcessedByUserNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput
+  inventoryMovements?: Prisma.InventoryMovementUncheckedUpdateManyWithoutPerformedByUserNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  purchaseOrdersApproved?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutApprovedByUserNestedInput
+  transfersInitiated?: Prisma.InventoryTransferUncheckedUpdateManyWithoutInitiatedByUserNestedInput
+  transfersReceived?: Prisma.InventoryTransferUncheckedUpdateManyWithoutReceivedByUserNestedInput
+  stockAdjustmentsCreated?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  stockAdjustmentsApproved?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutApprovedByUserNestedInput
+  inventoryAlertsAcknowledged?: Prisma.InventoryAlertUncheckedUpdateManyWithoutAcknowledgedByUserNestedInput
 }
 
 export type UserCreateWithoutOrderStatusHistoriesInput = {
@@ -969,6 +2305,14 @@ export type UserCreateWithoutOrderStatusHistoriesInput = {
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
   processedRefunds?: Prisma.RefundRequestCreateNestedManyWithoutProcessedByUserInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput
+  inventoryMovements?: Prisma.InventoryMovementCreateNestedManyWithoutPerformedByUserInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderCreateNestedManyWithoutCreatedByUserInput
+  purchaseOrdersApproved?: Prisma.PurchaseOrderCreateNestedManyWithoutApprovedByUserInput
+  transfersInitiated?: Prisma.InventoryTransferCreateNestedManyWithoutInitiatedByUserInput
+  transfersReceived?: Prisma.InventoryTransferCreateNestedManyWithoutReceivedByUserInput
+  stockAdjustmentsCreated?: Prisma.StockAdjustmentCreateNestedManyWithoutCreatedByUserInput
+  stockAdjustmentsApproved?: Prisma.StockAdjustmentCreateNestedManyWithoutApprovedByUserInput
+  inventoryAlertsAcknowledged?: Prisma.InventoryAlertCreateNestedManyWithoutAcknowledgedByUserInput
 }
 
 export type UserUncheckedCreateWithoutOrderStatusHistoriesInput = {
@@ -990,6 +2334,14 @@ export type UserUncheckedCreateWithoutOrderStatusHistoriesInput = {
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
   processedRefunds?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutProcessedByUserInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput
+  inventoryMovements?: Prisma.InventoryMovementUncheckedCreateNestedManyWithoutPerformedByUserInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutCreatedByUserInput
+  purchaseOrdersApproved?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutApprovedByUserInput
+  transfersInitiated?: Prisma.InventoryTransferUncheckedCreateNestedManyWithoutInitiatedByUserInput
+  transfersReceived?: Prisma.InventoryTransferUncheckedCreateNestedManyWithoutReceivedByUserInput
+  stockAdjustmentsCreated?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutCreatedByUserInput
+  stockAdjustmentsApproved?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutApprovedByUserInput
+  inventoryAlertsAcknowledged?: Prisma.InventoryAlertUncheckedCreateNestedManyWithoutAcknowledgedByUserInput
 }
 
 export type UserCreateOrConnectWithoutOrderStatusHistoriesInput = {
@@ -1027,6 +2379,14 @@ export type UserUpdateWithoutOrderStatusHistoriesInput = {
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
   processedRefunds?: Prisma.RefundRequestUpdateManyWithoutProcessedByUserNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput
+  inventoryMovements?: Prisma.InventoryMovementUpdateManyWithoutPerformedByUserNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUpdateManyWithoutCreatedByUserNestedInput
+  purchaseOrdersApproved?: Prisma.PurchaseOrderUpdateManyWithoutApprovedByUserNestedInput
+  transfersInitiated?: Prisma.InventoryTransferUpdateManyWithoutInitiatedByUserNestedInput
+  transfersReceived?: Prisma.InventoryTransferUpdateManyWithoutReceivedByUserNestedInput
+  stockAdjustmentsCreated?: Prisma.StockAdjustmentUpdateManyWithoutCreatedByUserNestedInput
+  stockAdjustmentsApproved?: Prisma.StockAdjustmentUpdateManyWithoutApprovedByUserNestedInput
+  inventoryAlertsAcknowledged?: Prisma.InventoryAlertUpdateManyWithoutAcknowledgedByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOrderStatusHistoriesInput = {
@@ -1048,6 +2408,14 @@ export type UserUncheckedUpdateWithoutOrderStatusHistoriesInput = {
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
   processedRefunds?: Prisma.RefundRequestUncheckedUpdateManyWithoutProcessedByUserNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput
+  inventoryMovements?: Prisma.InventoryMovementUncheckedUpdateManyWithoutPerformedByUserNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  purchaseOrdersApproved?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutApprovedByUserNestedInput
+  transfersInitiated?: Prisma.InventoryTransferUncheckedUpdateManyWithoutInitiatedByUserNestedInput
+  transfersReceived?: Prisma.InventoryTransferUncheckedUpdateManyWithoutReceivedByUserNestedInput
+  stockAdjustmentsCreated?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  stockAdjustmentsApproved?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutApprovedByUserNestedInput
+  inventoryAlertsAcknowledged?: Prisma.InventoryAlertUncheckedUpdateManyWithoutAcknowledgedByUserNestedInput
 }
 
 export type UserCreateWithoutProcessedRefundsInput = {
@@ -1069,6 +2437,14 @@ export type UserCreateWithoutProcessedRefundsInput = {
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
   orderStatusHistories?: Prisma.OrderStatusHistoryCreateNestedManyWithoutChangedByUserInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput
+  inventoryMovements?: Prisma.InventoryMovementCreateNestedManyWithoutPerformedByUserInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderCreateNestedManyWithoutCreatedByUserInput
+  purchaseOrdersApproved?: Prisma.PurchaseOrderCreateNestedManyWithoutApprovedByUserInput
+  transfersInitiated?: Prisma.InventoryTransferCreateNestedManyWithoutInitiatedByUserInput
+  transfersReceived?: Prisma.InventoryTransferCreateNestedManyWithoutReceivedByUserInput
+  stockAdjustmentsCreated?: Prisma.StockAdjustmentCreateNestedManyWithoutCreatedByUserInput
+  stockAdjustmentsApproved?: Prisma.StockAdjustmentCreateNestedManyWithoutApprovedByUserInput
+  inventoryAlertsAcknowledged?: Prisma.InventoryAlertCreateNestedManyWithoutAcknowledgedByUserInput
 }
 
 export type UserUncheckedCreateWithoutProcessedRefundsInput = {
@@ -1090,6 +2466,14 @@ export type UserUncheckedCreateWithoutProcessedRefundsInput = {
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
   orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedCreateNestedManyWithoutChangedByUserInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput
+  inventoryMovements?: Prisma.InventoryMovementUncheckedCreateNestedManyWithoutPerformedByUserInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutCreatedByUserInput
+  purchaseOrdersApproved?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutApprovedByUserInput
+  transfersInitiated?: Prisma.InventoryTransferUncheckedCreateNestedManyWithoutInitiatedByUserInput
+  transfersReceived?: Prisma.InventoryTransferUncheckedCreateNestedManyWithoutReceivedByUserInput
+  stockAdjustmentsCreated?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutCreatedByUserInput
+  stockAdjustmentsApproved?: Prisma.StockAdjustmentUncheckedCreateNestedManyWithoutApprovedByUserInput
+  inventoryAlertsAcknowledged?: Prisma.InventoryAlertUncheckedCreateNestedManyWithoutAcknowledgedByUserInput
 }
 
 export type UserCreateOrConnectWithoutProcessedRefundsInput = {
@@ -1127,6 +2511,14 @@ export type UserUpdateWithoutProcessedRefundsInput = {
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
   orderStatusHistories?: Prisma.OrderStatusHistoryUpdateManyWithoutChangedByUserNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput
+  inventoryMovements?: Prisma.InventoryMovementUpdateManyWithoutPerformedByUserNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUpdateManyWithoutCreatedByUserNestedInput
+  purchaseOrdersApproved?: Prisma.PurchaseOrderUpdateManyWithoutApprovedByUserNestedInput
+  transfersInitiated?: Prisma.InventoryTransferUpdateManyWithoutInitiatedByUserNestedInput
+  transfersReceived?: Prisma.InventoryTransferUpdateManyWithoutReceivedByUserNestedInput
+  stockAdjustmentsCreated?: Prisma.StockAdjustmentUpdateManyWithoutCreatedByUserNestedInput
+  stockAdjustmentsApproved?: Prisma.StockAdjustmentUpdateManyWithoutApprovedByUserNestedInput
+  inventoryAlertsAcknowledged?: Prisma.InventoryAlertUpdateManyWithoutAcknowledgedByUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProcessedRefundsInput = {
@@ -1148,6 +2540,14 @@ export type UserUncheckedUpdateWithoutProcessedRefundsInput = {
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
   orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedUpdateManyWithoutChangedByUserNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput
+  inventoryMovements?: Prisma.InventoryMovementUncheckedUpdateManyWithoutPerformedByUserNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  purchaseOrdersApproved?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutApprovedByUserNestedInput
+  transfersInitiated?: Prisma.InventoryTransferUncheckedUpdateManyWithoutInitiatedByUserNestedInput
+  transfersReceived?: Prisma.InventoryTransferUncheckedUpdateManyWithoutReceivedByUserNestedInput
+  stockAdjustmentsCreated?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  stockAdjustmentsApproved?: Prisma.StockAdjustmentUncheckedUpdateManyWithoutApprovedByUserNestedInput
+  inventoryAlertsAcknowledged?: Prisma.InventoryAlertUncheckedUpdateManyWithoutAcknowledgedByUserNestedInput
 }
 
 
@@ -1161,6 +2561,14 @@ export type UserCountOutputType = {
   orderStatusHistories: number
   processedRefunds: number
   reviews: number
+  inventoryMovements: number
+  purchaseOrdersCreated: number
+  purchaseOrdersApproved: number
+  transfersInitiated: number
+  transfersReceived: number
+  stockAdjustmentsCreated: number
+  stockAdjustmentsApproved: number
+  inventoryAlertsAcknowledged: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1169,6 +2577,14 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   orderStatusHistories?: boolean | UserCountOutputTypeCountOrderStatusHistoriesArgs
   processedRefunds?: boolean | UserCountOutputTypeCountProcessedRefundsArgs
   reviews?: boolean | UserCountOutputTypeCountReviewsArgs
+  inventoryMovements?: boolean | UserCountOutputTypeCountInventoryMovementsArgs
+  purchaseOrdersCreated?: boolean | UserCountOutputTypeCountPurchaseOrdersCreatedArgs
+  purchaseOrdersApproved?: boolean | UserCountOutputTypeCountPurchaseOrdersApprovedArgs
+  transfersInitiated?: boolean | UserCountOutputTypeCountTransfersInitiatedArgs
+  transfersReceived?: boolean | UserCountOutputTypeCountTransfersReceivedArgs
+  stockAdjustmentsCreated?: boolean | UserCountOutputTypeCountStockAdjustmentsCreatedArgs
+  stockAdjustmentsApproved?: boolean | UserCountOutputTypeCountStockAdjustmentsApprovedArgs
+  inventoryAlertsAcknowledged?: boolean | UserCountOutputTypeCountInventoryAlertsAcknowledgedArgs
 }
 
 /**
@@ -1216,6 +2632,62 @@ export type UserCountOutputTypeCountReviewsArgs<ExtArgs extends runtime.Types.Ex
   where?: Prisma.ReviewWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountInventoryMovementsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.InventoryMovementWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountPurchaseOrdersCreatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PurchaseOrderWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountPurchaseOrdersApprovedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PurchaseOrderWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountTransfersInitiatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.InventoryTransferWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountTransfersReceivedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.InventoryTransferWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountStockAdjustmentsCreatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.StockAdjustmentWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountStockAdjustmentsApprovedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.StockAdjustmentWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountInventoryAlertsAcknowledgedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.InventoryAlertWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1237,6 +2709,14 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   orderStatusHistories?: boolean | Prisma.User$orderStatusHistoriesArgs<ExtArgs>
   processedRefunds?: boolean | Prisma.User$processedRefundsArgs<ExtArgs>
   reviews?: boolean | Prisma.User$reviewsArgs<ExtArgs>
+  inventoryMovements?: boolean | Prisma.User$inventoryMovementsArgs<ExtArgs>
+  purchaseOrdersCreated?: boolean | Prisma.User$purchaseOrdersCreatedArgs<ExtArgs>
+  purchaseOrdersApproved?: boolean | Prisma.User$purchaseOrdersApprovedArgs<ExtArgs>
+  transfersInitiated?: boolean | Prisma.User$transfersInitiatedArgs<ExtArgs>
+  transfersReceived?: boolean | Prisma.User$transfersReceivedArgs<ExtArgs>
+  stockAdjustmentsCreated?: boolean | Prisma.User$stockAdjustmentsCreatedArgs<ExtArgs>
+  stockAdjustmentsApproved?: boolean | Prisma.User$stockAdjustmentsApprovedArgs<ExtArgs>
+  inventoryAlertsAcknowledged?: boolean | Prisma.User$inventoryAlertsAcknowledgedArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1298,6 +2778,14 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   orderStatusHistories?: boolean | Prisma.User$orderStatusHistoriesArgs<ExtArgs>
   processedRefunds?: boolean | Prisma.User$processedRefundsArgs<ExtArgs>
   reviews?: boolean | Prisma.User$reviewsArgs<ExtArgs>
+  inventoryMovements?: boolean | Prisma.User$inventoryMovementsArgs<ExtArgs>
+  purchaseOrdersCreated?: boolean | Prisma.User$purchaseOrdersCreatedArgs<ExtArgs>
+  purchaseOrdersApproved?: boolean | Prisma.User$purchaseOrdersApprovedArgs<ExtArgs>
+  transfersInitiated?: boolean | Prisma.User$transfersInitiatedArgs<ExtArgs>
+  transfersReceived?: boolean | Prisma.User$transfersReceivedArgs<ExtArgs>
+  stockAdjustmentsCreated?: boolean | Prisma.User$stockAdjustmentsCreatedArgs<ExtArgs>
+  stockAdjustmentsApproved?: boolean | Prisma.User$stockAdjustmentsApprovedArgs<ExtArgs>
+  inventoryAlertsAcknowledged?: boolean | Prisma.User$inventoryAlertsAcknowledgedArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1311,6 +2799,14 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     orderStatusHistories: Prisma.$OrderStatusHistoryPayload<ExtArgs>[]
     processedRefunds: Prisma.$RefundRequestPayload<ExtArgs>[]
     reviews: Prisma.$ReviewPayload<ExtArgs>[]
+    inventoryMovements: Prisma.$InventoryMovementPayload<ExtArgs>[]
+    purchaseOrdersCreated: Prisma.$PurchaseOrderPayload<ExtArgs>[]
+    purchaseOrdersApproved: Prisma.$PurchaseOrderPayload<ExtArgs>[]
+    transfersInitiated: Prisma.$InventoryTransferPayload<ExtArgs>[]
+    transfersReceived: Prisma.$InventoryTransferPayload<ExtArgs>[]
+    stockAdjustmentsCreated: Prisma.$StockAdjustmentPayload<ExtArgs>[]
+    stockAdjustmentsApproved: Prisma.$StockAdjustmentPayload<ExtArgs>[]
+    inventoryAlertsAcknowledged: Prisma.$InventoryAlertPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1726,6 +3222,14 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   orderStatusHistories<T extends Prisma.User$orderStatusHistoriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$orderStatusHistoriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderStatusHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   processedRefunds<T extends Prisma.User$processedRefundsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$processedRefundsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RefundRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   reviews<T extends Prisma.User$reviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$reviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  inventoryMovements<T extends Prisma.User$inventoryMovementsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$inventoryMovementsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InventoryMovementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  purchaseOrdersCreated<T extends Prisma.User$purchaseOrdersCreatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$purchaseOrdersCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PurchaseOrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  purchaseOrdersApproved<T extends Prisma.User$purchaseOrdersApprovedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$purchaseOrdersApprovedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PurchaseOrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  transfersInitiated<T extends Prisma.User$transfersInitiatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$transfersInitiatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InventoryTransferPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  transfersReceived<T extends Prisma.User$transfersReceivedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$transfersReceivedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InventoryTransferPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  stockAdjustmentsCreated<T extends Prisma.User$stockAdjustmentsCreatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$stockAdjustmentsCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StockAdjustmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  stockAdjustmentsApproved<T extends Prisma.User$stockAdjustmentsApprovedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$stockAdjustmentsApprovedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StockAdjustmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  inventoryAlertsAcknowledged<T extends Prisma.User$inventoryAlertsAcknowledgedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$inventoryAlertsAcknowledgedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InventoryAlertPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2279,6 +3783,198 @@ export type User$reviewsArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
   take?: number
   skip?: number
   distinct?: Prisma.ReviewScalarFieldEnum | Prisma.ReviewScalarFieldEnum[]
+}
+
+/**
+ * User.inventoryMovements
+ */
+export type User$inventoryMovementsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the InventoryMovement
+   */
+  select?: Prisma.InventoryMovementSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the InventoryMovement
+   */
+  omit?: Prisma.InventoryMovementOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.InventoryMovementInclude<ExtArgs> | null
+  where?: Prisma.InventoryMovementWhereInput
+  orderBy?: Prisma.InventoryMovementOrderByWithRelationInput | Prisma.InventoryMovementOrderByWithRelationInput[]
+  cursor?: Prisma.InventoryMovementWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.InventoryMovementScalarFieldEnum | Prisma.InventoryMovementScalarFieldEnum[]
+}
+
+/**
+ * User.purchaseOrdersCreated
+ */
+export type User$purchaseOrdersCreatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PurchaseOrder
+   */
+  select?: Prisma.PurchaseOrderSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PurchaseOrder
+   */
+  omit?: Prisma.PurchaseOrderOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PurchaseOrderInclude<ExtArgs> | null
+  where?: Prisma.PurchaseOrderWhereInput
+  orderBy?: Prisma.PurchaseOrderOrderByWithRelationInput | Prisma.PurchaseOrderOrderByWithRelationInput[]
+  cursor?: Prisma.PurchaseOrderWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PurchaseOrderScalarFieldEnum | Prisma.PurchaseOrderScalarFieldEnum[]
+}
+
+/**
+ * User.purchaseOrdersApproved
+ */
+export type User$purchaseOrdersApprovedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PurchaseOrder
+   */
+  select?: Prisma.PurchaseOrderSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PurchaseOrder
+   */
+  omit?: Prisma.PurchaseOrderOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PurchaseOrderInclude<ExtArgs> | null
+  where?: Prisma.PurchaseOrderWhereInput
+  orderBy?: Prisma.PurchaseOrderOrderByWithRelationInput | Prisma.PurchaseOrderOrderByWithRelationInput[]
+  cursor?: Prisma.PurchaseOrderWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PurchaseOrderScalarFieldEnum | Prisma.PurchaseOrderScalarFieldEnum[]
+}
+
+/**
+ * User.transfersInitiated
+ */
+export type User$transfersInitiatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the InventoryTransfer
+   */
+  select?: Prisma.InventoryTransferSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the InventoryTransfer
+   */
+  omit?: Prisma.InventoryTransferOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.InventoryTransferInclude<ExtArgs> | null
+  where?: Prisma.InventoryTransferWhereInput
+  orderBy?: Prisma.InventoryTransferOrderByWithRelationInput | Prisma.InventoryTransferOrderByWithRelationInput[]
+  cursor?: Prisma.InventoryTransferWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.InventoryTransferScalarFieldEnum | Prisma.InventoryTransferScalarFieldEnum[]
+}
+
+/**
+ * User.transfersReceived
+ */
+export type User$transfersReceivedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the InventoryTransfer
+   */
+  select?: Prisma.InventoryTransferSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the InventoryTransfer
+   */
+  omit?: Prisma.InventoryTransferOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.InventoryTransferInclude<ExtArgs> | null
+  where?: Prisma.InventoryTransferWhereInput
+  orderBy?: Prisma.InventoryTransferOrderByWithRelationInput | Prisma.InventoryTransferOrderByWithRelationInput[]
+  cursor?: Prisma.InventoryTransferWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.InventoryTransferScalarFieldEnum | Prisma.InventoryTransferScalarFieldEnum[]
+}
+
+/**
+ * User.stockAdjustmentsCreated
+ */
+export type User$stockAdjustmentsCreatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the StockAdjustment
+   */
+  select?: Prisma.StockAdjustmentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the StockAdjustment
+   */
+  omit?: Prisma.StockAdjustmentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.StockAdjustmentInclude<ExtArgs> | null
+  where?: Prisma.StockAdjustmentWhereInput
+  orderBy?: Prisma.StockAdjustmentOrderByWithRelationInput | Prisma.StockAdjustmentOrderByWithRelationInput[]
+  cursor?: Prisma.StockAdjustmentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.StockAdjustmentScalarFieldEnum | Prisma.StockAdjustmentScalarFieldEnum[]
+}
+
+/**
+ * User.stockAdjustmentsApproved
+ */
+export type User$stockAdjustmentsApprovedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the StockAdjustment
+   */
+  select?: Prisma.StockAdjustmentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the StockAdjustment
+   */
+  omit?: Prisma.StockAdjustmentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.StockAdjustmentInclude<ExtArgs> | null
+  where?: Prisma.StockAdjustmentWhereInput
+  orderBy?: Prisma.StockAdjustmentOrderByWithRelationInput | Prisma.StockAdjustmentOrderByWithRelationInput[]
+  cursor?: Prisma.StockAdjustmentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.StockAdjustmentScalarFieldEnum | Prisma.StockAdjustmentScalarFieldEnum[]
+}
+
+/**
+ * User.inventoryAlertsAcknowledged
+ */
+export type User$inventoryAlertsAcknowledgedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the InventoryAlert
+   */
+  select?: Prisma.InventoryAlertSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the InventoryAlert
+   */
+  omit?: Prisma.InventoryAlertOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.InventoryAlertInclude<ExtArgs> | null
+  where?: Prisma.InventoryAlertWhereInput
+  orderBy?: Prisma.InventoryAlertOrderByWithRelationInput | Prisma.InventoryAlertOrderByWithRelationInput[]
+  cursor?: Prisma.InventoryAlertWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.InventoryAlertScalarFieldEnum | Prisma.InventoryAlertScalarFieldEnum[]
 }
 
 /**

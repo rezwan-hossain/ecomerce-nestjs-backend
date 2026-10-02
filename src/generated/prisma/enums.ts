@@ -28,6 +28,190 @@ export const ProductStatus = {
 export type ProductStatus = (typeof ProductStatus)[keyof typeof ProductStatus]
 
 
+export const WarehouseType = {
+  PHYSICAL: 'PHYSICAL',
+  STORE: 'STORE',
+  VIRTUAL_DAMAGE: 'VIRTUAL_DAMAGE',
+  VIRTUAL_QC: 'VIRTUAL_QC',
+  VIRTUAL_RETURN: 'VIRTUAL_RETURN'
+} as const
+
+export type WarehouseType = (typeof WarehouseType)[keyof typeof WarehouseType]
+
+
+export const LocationType = {
+  ZONE: 'ZONE',
+  AISLE: 'AISLE',
+  RACK: 'RACK',
+  SHELF: 'SHELF',
+  BIN: 'BIN',
+  RECEIVING: 'RECEIVING',
+  STAGING: 'STAGING',
+  PACKING: 'PACKING'
+} as const
+
+export type LocationType = (typeof LocationType)[keyof typeof LocationType]
+
+
+export const MovementType = {
+  PURCHASE_RECEIVED: 'PURCHASE_RECEIVED',
+  RETURN_RESTOCKED: 'RETURN_RESTOCKED',
+  ADJUSTMENT_INCREASE: 'ADJUSTMENT_INCREASE',
+  TRANSFER_IN: 'TRANSFER_IN',
+  INITIAL_STOCK: 'INITIAL_STOCK',
+  SALE: 'SALE',
+  ADJUSTMENT_DECREASE: 'ADJUSTMENT_DECREASE',
+  TRANSFER_OUT: 'TRANSFER_OUT',
+  DAMAGED: 'DAMAGED',
+  LOST: 'LOST',
+  EXPIRED: 'EXPIRED',
+  SAMPLE: 'SAMPLE',
+  WRITE_OFF: 'WRITE_OFF',
+  RESERVATION_CREATED: 'RESERVATION_CREATED',
+  RESERVATION_RELEASED: 'RESERVATION_RELEASED',
+  RESERVATION_EXPIRED: 'RESERVATION_EXPIRED',
+  LOCATION_MOVE: 'LOCATION_MOVE'
+} as const
+
+export type MovementType = (typeof MovementType)[keyof typeof MovementType]
+
+
+export const MovementDirection = {
+  IN: 'IN',
+  OUT: 'OUT',
+  INTERNAL: 'INTERNAL'
+} as const
+
+export type MovementDirection = (typeof MovementDirection)[keyof typeof MovementDirection]
+
+
+export const ReferenceType = {
+  ORDER: 'ORDER',
+  ORDER_ITEM: 'ORDER_ITEM',
+  PURCHASE_ORDER: 'PURCHASE_ORDER',
+  PURCHASE_ORDER_ITEM: 'PURCHASE_ORDER_ITEM',
+  TRANSFER: 'TRANSFER',
+  ADJUSTMENT: 'ADJUSTMENT',
+  RETURN: 'RETURN',
+  RESERVATION: 'RESERVATION'
+} as const
+
+export type ReferenceType = (typeof ReferenceType)[keyof typeof ReferenceType]
+
+
+export const ReservationStatus = {
+  ACTIVE: 'ACTIVE',
+  COMMITTED: 'COMMITTED',
+  RELEASED: 'RELEASED',
+  EXPIRED: 'EXPIRED'
+} as const
+
+export type ReservationStatus = (typeof ReservationStatus)[keyof typeof ReservationStatus]
+
+
+export const BatchStatus = {
+  AVAILABLE: 'AVAILABLE',
+  DEPLETED: 'DEPLETED',
+  EXPIRED: 'EXPIRED',
+  QUARANTINED: 'QUARANTINED',
+  RECALLED: 'RECALLED'
+} as const
+
+export type BatchStatus = (typeof BatchStatus)[keyof typeof BatchStatus]
+
+
+export const PurchaseOrderStatus = {
+  DRAFT: 'DRAFT',
+  SUBMITTED: 'SUBMITTED',
+  CONFIRMED: 'CONFIRMED',
+  PARTIAL: 'PARTIAL',
+  RECEIVED: 'RECEIVED',
+  CANCELLED: 'CANCELLED',
+  CLOSED: 'CLOSED'
+} as const
+
+export type PurchaseOrderStatus = (typeof PurchaseOrderStatus)[keyof typeof PurchaseOrderStatus]
+
+
+export const PurchaseOrderItemStatus = {
+  PENDING: 'PENDING',
+  PARTIAL: 'PARTIAL',
+  RECEIVED: 'RECEIVED',
+  CANCELLED: 'CANCELLED'
+} as const
+
+export type PurchaseOrderItemStatus = (typeof PurchaseOrderItemStatus)[keyof typeof PurchaseOrderItemStatus]
+
+
+export const TransferStatus = {
+  DRAFT: 'DRAFT',
+  PENDING: 'PENDING',
+  IN_TRANSIT: 'IN_TRANSIT',
+  PARTIAL: 'PARTIAL',
+  COMPLETED: 'COMPLETED',
+  CANCELLED: 'CANCELLED'
+} as const
+
+export type TransferStatus = (typeof TransferStatus)[keyof typeof TransferStatus]
+
+
+export const AdjustmentType = {
+  INCREASE: 'INCREASE',
+  DECREASE: 'DECREASE',
+  CYCLE_COUNT: 'CYCLE_COUNT'
+} as const
+
+export type AdjustmentType = (typeof AdjustmentType)[keyof typeof AdjustmentType]
+
+
+export const AdjustmentReason = {
+  CYCLE_COUNT: 'CYCLE_COUNT',
+  DAMAGE: 'DAMAGE',
+  THEFT: 'THEFT',
+  LOSS: 'LOSS',
+  EXPIRY: 'EXPIRY',
+  CORRECTION: 'CORRECTION',
+  OPENING_STOCK: 'OPENING_STOCK',
+  PROMOTIONAL: 'PROMOTIONAL',
+  OTHER: 'OTHER'
+} as const
+
+export type AdjustmentReason = (typeof AdjustmentReason)[keyof typeof AdjustmentReason]
+
+
+export const AdjustmentStatus = {
+  PENDING: 'PENDING',
+  APPROVED: 'APPROVED',
+  APPLIED: 'APPLIED',
+  REJECTED: 'REJECTED',
+  CANCELLED: 'CANCELLED'
+} as const
+
+export type AdjustmentStatus = (typeof AdjustmentStatus)[keyof typeof AdjustmentStatus]
+
+
+export const InventoryAlertType = {
+  LOW_STOCK: 'LOW_STOCK',
+  OUT_OF_STOCK: 'OUT_OF_STOCK',
+  OVERSTOCK: 'OVERSTOCK',
+  EXPIRING_SOON: 'EXPIRING_SOON',
+  NEGATIVE_STOCK: 'NEGATIVE_STOCK',
+  REORDER_TRIGGERED: 'REORDER_TRIGGERED'
+} as const
+
+export type InventoryAlertType = (typeof InventoryAlertType)[keyof typeof InventoryAlertType]
+
+
+export const InventoryAlertStatus = {
+  ACTIVE: 'ACTIVE',
+  ACKNOWLEDGED: 'ACKNOWLEDGED',
+  RESOLVED: 'RESOLVED',
+  DISMISSED: 'DISMISSED'
+} as const
+
+export type InventoryAlertStatus = (typeof InventoryAlertStatus)[keyof typeof InventoryAlertStatus]
+
+
 export const ReviewStatus = {
   PENDING: 'PENDING',
   APPROVED: 'APPROVED',

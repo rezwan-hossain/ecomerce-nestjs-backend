@@ -341,6 +341,7 @@ export type OrderWhereInput = {
   statusLogs?: Prisma.OrderStatusHistoryListRelationFilter
   sourceCart?: Prisma.XOR<Prisma.CartNullableScalarRelationFilter, Prisma.CartWhereInput> | null
   refundRequests?: Prisma.RefundRequestListRelationFilter
+  stockReservations?: Prisma.StockReservationListRelationFilter
 }
 
 export type OrderOrderByWithRelationInput = {
@@ -371,6 +372,7 @@ export type OrderOrderByWithRelationInput = {
   statusLogs?: Prisma.OrderStatusHistoryOrderByRelationAggregateInput
   sourceCart?: Prisma.CartOrderByWithRelationInput
   refundRequests?: Prisma.RefundRequestOrderByRelationAggregateInput
+  stockReservations?: Prisma.StockReservationOrderByRelationAggregateInput
 }
 
 export type OrderWhereUniqueInput = Prisma.AtLeast<{
@@ -404,6 +406,7 @@ export type OrderWhereUniqueInput = Prisma.AtLeast<{
   statusLogs?: Prisma.OrderStatusHistoryListRelationFilter
   sourceCart?: Prisma.XOR<Prisma.CartNullableScalarRelationFilter, Prisma.CartWhereInput> | null
   refundRequests?: Prisma.RefundRequestListRelationFilter
+  stockReservations?: Prisma.StockReservationListRelationFilter
 }, "id" | "orderNumber">
 
 export type OrderOrderByWithAggregationInput = {
@@ -483,6 +486,7 @@ export type OrderCreateInput = {
   statusLogs?: Prisma.OrderStatusHistoryCreateNestedManyWithoutOrderInput
   sourceCart?: Prisma.CartCreateNestedOneWithoutConvertedOrderInput
   refundRequests?: Prisma.RefundRequestCreateNestedManyWithoutOrderInput
+  stockReservations?: Prisma.StockReservationCreateNestedManyWithoutOrderInput
 }
 
 export type OrderUncheckedCreateInput = {
@@ -512,6 +516,7 @@ export type OrderUncheckedCreateInput = {
   statusLogs?: Prisma.OrderStatusHistoryUncheckedCreateNestedManyWithoutOrderInput
   sourceCart?: Prisma.CartUncheckedCreateNestedOneWithoutConvertedOrderInput
   refundRequests?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutOrderInput
+  stockReservations?: Prisma.StockReservationUncheckedCreateNestedManyWithoutOrderInput
 }
 
 export type OrderUpdateInput = {
@@ -541,6 +546,7 @@ export type OrderUpdateInput = {
   statusLogs?: Prisma.OrderStatusHistoryUpdateManyWithoutOrderNestedInput
   sourceCart?: Prisma.CartUpdateOneWithoutConvertedOrderNestedInput
   refundRequests?: Prisma.RefundRequestUpdateManyWithoutOrderNestedInput
+  stockReservations?: Prisma.StockReservationUpdateManyWithoutOrderNestedInput
 }
 
 export type OrderUncheckedUpdateInput = {
@@ -570,6 +576,7 @@ export type OrderUncheckedUpdateInput = {
   statusLogs?: Prisma.OrderStatusHistoryUncheckedUpdateManyWithoutOrderNestedInput
   sourceCart?: Prisma.CartUncheckedUpdateOneWithoutConvertedOrderNestedInput
   refundRequests?: Prisma.RefundRequestUncheckedUpdateManyWithoutOrderNestedInput
+  stockReservations?: Prisma.StockReservationUncheckedUpdateManyWithoutOrderNestedInput
 }
 
 export type OrderCreateManyInput = {
@@ -773,6 +780,22 @@ export type OrderUncheckedUpdateManyWithoutUserNestedInput = {
   deleteMany?: Prisma.OrderScalarWhereInput | Prisma.OrderScalarWhereInput[]
 }
 
+export type OrderCreateNestedOneWithoutStockReservationsInput = {
+  create?: Prisma.XOR<Prisma.OrderCreateWithoutStockReservationsInput, Prisma.OrderUncheckedCreateWithoutStockReservationsInput>
+  connectOrCreate?: Prisma.OrderCreateOrConnectWithoutStockReservationsInput
+  connect?: Prisma.OrderWhereUniqueInput
+}
+
+export type OrderUpdateOneWithoutStockReservationsNestedInput = {
+  create?: Prisma.XOR<Prisma.OrderCreateWithoutStockReservationsInput, Prisma.OrderUncheckedCreateWithoutStockReservationsInput>
+  connectOrCreate?: Prisma.OrderCreateOrConnectWithoutStockReservationsInput
+  upsert?: Prisma.OrderUpsertWithoutStockReservationsInput
+  disconnect?: Prisma.OrderWhereInput | boolean
+  delete?: Prisma.OrderWhereInput | boolean
+  connect?: Prisma.OrderWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OrderUpdateToOneWithWhereWithoutStockReservationsInput, Prisma.OrderUpdateWithoutStockReservationsInput>, Prisma.OrderUncheckedUpdateWithoutStockReservationsInput>
+}
+
 export type OrderCreateNestedOneWithoutSourceCartInput = {
   create?: Prisma.XOR<Prisma.OrderCreateWithoutSourceCartInput, Prisma.OrderUncheckedCreateWithoutSourceCartInput>
   connectOrCreate?: Prisma.OrderCreateOrConnectWithoutSourceCartInput
@@ -917,6 +940,7 @@ export type OrderCreateWithoutUserInput = {
   statusLogs?: Prisma.OrderStatusHistoryCreateNestedManyWithoutOrderInput
   sourceCart?: Prisma.CartCreateNestedOneWithoutConvertedOrderInput
   refundRequests?: Prisma.RefundRequestCreateNestedManyWithoutOrderInput
+  stockReservations?: Prisma.StockReservationCreateNestedManyWithoutOrderInput
 }
 
 export type OrderUncheckedCreateWithoutUserInput = {
@@ -945,6 +969,7 @@ export type OrderUncheckedCreateWithoutUserInput = {
   statusLogs?: Prisma.OrderStatusHistoryUncheckedCreateNestedManyWithoutOrderInput
   sourceCart?: Prisma.CartUncheckedCreateNestedOneWithoutConvertedOrderInput
   refundRequests?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutOrderInput
+  stockReservations?: Prisma.StockReservationUncheckedCreateNestedManyWithoutOrderInput
 }
 
 export type OrderCreateOrConnectWithoutUserInput = {
@@ -997,6 +1022,138 @@ export type OrderScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Order"> | Date | string
 }
 
+export type OrderCreateWithoutStockReservationsInput = {
+  id?: string
+  orderNumber: string
+  customerEmail: string
+  customerName?: string | null
+  customerPhone?: string | null
+  status?: $Enums.OrderStatus
+  currency?: string
+  subtotalAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  shippingAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  customerNote?: string | null
+  placedAt?: Date | string | null
+  cancelledAt?: Date | string | null
+  completedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user?: Prisma.UserCreateNestedOneWithoutOrdersInput
+  items?: Prisma.OrderItemCreateNestedManyWithoutOrderInput
+  addresses?: Prisma.OrderAddressCreateNestedManyWithoutOrderInput
+  discounts?: Prisma.OrderDiscountCreateNestedManyWithoutOrderInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutOrderInput
+  shipments?: Prisma.ShipmentCreateNestedManyWithoutOrderInput
+  statusLogs?: Prisma.OrderStatusHistoryCreateNestedManyWithoutOrderInput
+  sourceCart?: Prisma.CartCreateNestedOneWithoutConvertedOrderInput
+  refundRequests?: Prisma.RefundRequestCreateNestedManyWithoutOrderInput
+}
+
+export type OrderUncheckedCreateWithoutStockReservationsInput = {
+  id?: string
+  orderNumber: string
+  userId?: string | null
+  customerEmail: string
+  customerName?: string | null
+  customerPhone?: string | null
+  status?: $Enums.OrderStatus
+  currency?: string
+  subtotalAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  shippingAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  customerNote?: string | null
+  placedAt?: Date | string | null
+  cancelledAt?: Date | string | null
+  completedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  items?: Prisma.OrderItemUncheckedCreateNestedManyWithoutOrderInput
+  addresses?: Prisma.OrderAddressUncheckedCreateNestedManyWithoutOrderInput
+  discounts?: Prisma.OrderDiscountUncheckedCreateNestedManyWithoutOrderInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutOrderInput
+  shipments?: Prisma.ShipmentUncheckedCreateNestedManyWithoutOrderInput
+  statusLogs?: Prisma.OrderStatusHistoryUncheckedCreateNestedManyWithoutOrderInput
+  sourceCart?: Prisma.CartUncheckedCreateNestedOneWithoutConvertedOrderInput
+  refundRequests?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutOrderInput
+}
+
+export type OrderCreateOrConnectWithoutStockReservationsInput = {
+  where: Prisma.OrderWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrderCreateWithoutStockReservationsInput, Prisma.OrderUncheckedCreateWithoutStockReservationsInput>
+}
+
+export type OrderUpsertWithoutStockReservationsInput = {
+  update: Prisma.XOR<Prisma.OrderUpdateWithoutStockReservationsInput, Prisma.OrderUncheckedUpdateWithoutStockReservationsInput>
+  create: Prisma.XOR<Prisma.OrderCreateWithoutStockReservationsInput, Prisma.OrderUncheckedCreateWithoutStockReservationsInput>
+  where?: Prisma.OrderWhereInput
+}
+
+export type OrderUpdateToOneWithWhereWithoutStockReservationsInput = {
+  where?: Prisma.OrderWhereInput
+  data: Prisma.XOR<Prisma.OrderUpdateWithoutStockReservationsInput, Prisma.OrderUncheckedUpdateWithoutStockReservationsInput>
+}
+
+export type OrderUpdateWithoutStockReservationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  orderNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  customerEmail?: Prisma.StringFieldUpdateOperationsInput | string
+  customerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customerPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  subtotalAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  discountAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  shippingAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  customerNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  placedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancelledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneWithoutOrdersNestedInput
+  items?: Prisma.OrderItemUpdateManyWithoutOrderNestedInput
+  addresses?: Prisma.OrderAddressUpdateManyWithoutOrderNestedInput
+  discounts?: Prisma.OrderDiscountUpdateManyWithoutOrderNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutOrderNestedInput
+  shipments?: Prisma.ShipmentUpdateManyWithoutOrderNestedInput
+  statusLogs?: Prisma.OrderStatusHistoryUpdateManyWithoutOrderNestedInput
+  sourceCart?: Prisma.CartUpdateOneWithoutConvertedOrderNestedInput
+  refundRequests?: Prisma.RefundRequestUpdateManyWithoutOrderNestedInput
+}
+
+export type OrderUncheckedUpdateWithoutStockReservationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  orderNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customerEmail?: Prisma.StringFieldUpdateOperationsInput | string
+  customerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customerPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  subtotalAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  discountAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  shippingAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  customerNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  placedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancelledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  items?: Prisma.OrderItemUncheckedUpdateManyWithoutOrderNestedInput
+  addresses?: Prisma.OrderAddressUncheckedUpdateManyWithoutOrderNestedInput
+  discounts?: Prisma.OrderDiscountUncheckedUpdateManyWithoutOrderNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutOrderNestedInput
+  shipments?: Prisma.ShipmentUncheckedUpdateManyWithoutOrderNestedInput
+  statusLogs?: Prisma.OrderStatusHistoryUncheckedUpdateManyWithoutOrderNestedInput
+  sourceCart?: Prisma.CartUncheckedUpdateOneWithoutConvertedOrderNestedInput
+  refundRequests?: Prisma.RefundRequestUncheckedUpdateManyWithoutOrderNestedInput
+}
+
 export type OrderCreateWithoutSourceCartInput = {
   id?: string
   orderNumber: string
@@ -1023,6 +1180,7 @@ export type OrderCreateWithoutSourceCartInput = {
   shipments?: Prisma.ShipmentCreateNestedManyWithoutOrderInput
   statusLogs?: Prisma.OrderStatusHistoryCreateNestedManyWithoutOrderInput
   refundRequests?: Prisma.RefundRequestCreateNestedManyWithoutOrderInput
+  stockReservations?: Prisma.StockReservationCreateNestedManyWithoutOrderInput
 }
 
 export type OrderUncheckedCreateWithoutSourceCartInput = {
@@ -1051,6 +1209,7 @@ export type OrderUncheckedCreateWithoutSourceCartInput = {
   shipments?: Prisma.ShipmentUncheckedCreateNestedManyWithoutOrderInput
   statusLogs?: Prisma.OrderStatusHistoryUncheckedCreateNestedManyWithoutOrderInput
   refundRequests?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutOrderInput
+  stockReservations?: Prisma.StockReservationUncheckedCreateNestedManyWithoutOrderInput
 }
 
 export type OrderCreateOrConnectWithoutSourceCartInput = {
@@ -1095,6 +1254,7 @@ export type OrderUpdateWithoutSourceCartInput = {
   shipments?: Prisma.ShipmentUpdateManyWithoutOrderNestedInput
   statusLogs?: Prisma.OrderStatusHistoryUpdateManyWithoutOrderNestedInput
   refundRequests?: Prisma.RefundRequestUpdateManyWithoutOrderNestedInput
+  stockReservations?: Prisma.StockReservationUpdateManyWithoutOrderNestedInput
 }
 
 export type OrderUncheckedUpdateWithoutSourceCartInput = {
@@ -1123,6 +1283,7 @@ export type OrderUncheckedUpdateWithoutSourceCartInput = {
   shipments?: Prisma.ShipmentUncheckedUpdateManyWithoutOrderNestedInput
   statusLogs?: Prisma.OrderStatusHistoryUncheckedUpdateManyWithoutOrderNestedInput
   refundRequests?: Prisma.RefundRequestUncheckedUpdateManyWithoutOrderNestedInput
+  stockReservations?: Prisma.StockReservationUncheckedUpdateManyWithoutOrderNestedInput
 }
 
 export type OrderCreateWithoutItemsInput = {
@@ -1151,6 +1312,7 @@ export type OrderCreateWithoutItemsInput = {
   statusLogs?: Prisma.OrderStatusHistoryCreateNestedManyWithoutOrderInput
   sourceCart?: Prisma.CartCreateNestedOneWithoutConvertedOrderInput
   refundRequests?: Prisma.RefundRequestCreateNestedManyWithoutOrderInput
+  stockReservations?: Prisma.StockReservationCreateNestedManyWithoutOrderInput
 }
 
 export type OrderUncheckedCreateWithoutItemsInput = {
@@ -1179,6 +1341,7 @@ export type OrderUncheckedCreateWithoutItemsInput = {
   statusLogs?: Prisma.OrderStatusHistoryUncheckedCreateNestedManyWithoutOrderInput
   sourceCart?: Prisma.CartUncheckedCreateNestedOneWithoutConvertedOrderInput
   refundRequests?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutOrderInput
+  stockReservations?: Prisma.StockReservationUncheckedCreateNestedManyWithoutOrderInput
 }
 
 export type OrderCreateOrConnectWithoutItemsInput = {
@@ -1223,6 +1386,7 @@ export type OrderUpdateWithoutItemsInput = {
   statusLogs?: Prisma.OrderStatusHistoryUpdateManyWithoutOrderNestedInput
   sourceCart?: Prisma.CartUpdateOneWithoutConvertedOrderNestedInput
   refundRequests?: Prisma.RefundRequestUpdateManyWithoutOrderNestedInput
+  stockReservations?: Prisma.StockReservationUpdateManyWithoutOrderNestedInput
 }
 
 export type OrderUncheckedUpdateWithoutItemsInput = {
@@ -1251,6 +1415,7 @@ export type OrderUncheckedUpdateWithoutItemsInput = {
   statusLogs?: Prisma.OrderStatusHistoryUncheckedUpdateManyWithoutOrderNestedInput
   sourceCart?: Prisma.CartUncheckedUpdateOneWithoutConvertedOrderNestedInput
   refundRequests?: Prisma.RefundRequestUncheckedUpdateManyWithoutOrderNestedInput
+  stockReservations?: Prisma.StockReservationUncheckedUpdateManyWithoutOrderNestedInput
 }
 
 export type OrderCreateWithoutAddressesInput = {
@@ -1279,6 +1444,7 @@ export type OrderCreateWithoutAddressesInput = {
   statusLogs?: Prisma.OrderStatusHistoryCreateNestedManyWithoutOrderInput
   sourceCart?: Prisma.CartCreateNestedOneWithoutConvertedOrderInput
   refundRequests?: Prisma.RefundRequestCreateNestedManyWithoutOrderInput
+  stockReservations?: Prisma.StockReservationCreateNestedManyWithoutOrderInput
 }
 
 export type OrderUncheckedCreateWithoutAddressesInput = {
@@ -1307,6 +1473,7 @@ export type OrderUncheckedCreateWithoutAddressesInput = {
   statusLogs?: Prisma.OrderStatusHistoryUncheckedCreateNestedManyWithoutOrderInput
   sourceCart?: Prisma.CartUncheckedCreateNestedOneWithoutConvertedOrderInput
   refundRequests?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutOrderInput
+  stockReservations?: Prisma.StockReservationUncheckedCreateNestedManyWithoutOrderInput
 }
 
 export type OrderCreateOrConnectWithoutAddressesInput = {
@@ -1351,6 +1518,7 @@ export type OrderUpdateWithoutAddressesInput = {
   statusLogs?: Prisma.OrderStatusHistoryUpdateManyWithoutOrderNestedInput
   sourceCart?: Prisma.CartUpdateOneWithoutConvertedOrderNestedInput
   refundRequests?: Prisma.RefundRequestUpdateManyWithoutOrderNestedInput
+  stockReservations?: Prisma.StockReservationUpdateManyWithoutOrderNestedInput
 }
 
 export type OrderUncheckedUpdateWithoutAddressesInput = {
@@ -1379,6 +1547,7 @@ export type OrderUncheckedUpdateWithoutAddressesInput = {
   statusLogs?: Prisma.OrderStatusHistoryUncheckedUpdateManyWithoutOrderNestedInput
   sourceCart?: Prisma.CartUncheckedUpdateOneWithoutConvertedOrderNestedInput
   refundRequests?: Prisma.RefundRequestUncheckedUpdateManyWithoutOrderNestedInput
+  stockReservations?: Prisma.StockReservationUncheckedUpdateManyWithoutOrderNestedInput
 }
 
 export type OrderCreateWithoutDiscountsInput = {
@@ -1407,6 +1576,7 @@ export type OrderCreateWithoutDiscountsInput = {
   statusLogs?: Prisma.OrderStatusHistoryCreateNestedManyWithoutOrderInput
   sourceCart?: Prisma.CartCreateNestedOneWithoutConvertedOrderInput
   refundRequests?: Prisma.RefundRequestCreateNestedManyWithoutOrderInput
+  stockReservations?: Prisma.StockReservationCreateNestedManyWithoutOrderInput
 }
 
 export type OrderUncheckedCreateWithoutDiscountsInput = {
@@ -1435,6 +1605,7 @@ export type OrderUncheckedCreateWithoutDiscountsInput = {
   statusLogs?: Prisma.OrderStatusHistoryUncheckedCreateNestedManyWithoutOrderInput
   sourceCart?: Prisma.CartUncheckedCreateNestedOneWithoutConvertedOrderInput
   refundRequests?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutOrderInput
+  stockReservations?: Prisma.StockReservationUncheckedCreateNestedManyWithoutOrderInput
 }
 
 export type OrderCreateOrConnectWithoutDiscountsInput = {
@@ -1479,6 +1650,7 @@ export type OrderUpdateWithoutDiscountsInput = {
   statusLogs?: Prisma.OrderStatusHistoryUpdateManyWithoutOrderNestedInput
   sourceCart?: Prisma.CartUpdateOneWithoutConvertedOrderNestedInput
   refundRequests?: Prisma.RefundRequestUpdateManyWithoutOrderNestedInput
+  stockReservations?: Prisma.StockReservationUpdateManyWithoutOrderNestedInput
 }
 
 export type OrderUncheckedUpdateWithoutDiscountsInput = {
@@ -1507,6 +1679,7 @@ export type OrderUncheckedUpdateWithoutDiscountsInput = {
   statusLogs?: Prisma.OrderStatusHistoryUncheckedUpdateManyWithoutOrderNestedInput
   sourceCart?: Prisma.CartUncheckedUpdateOneWithoutConvertedOrderNestedInput
   refundRequests?: Prisma.RefundRequestUncheckedUpdateManyWithoutOrderNestedInput
+  stockReservations?: Prisma.StockReservationUncheckedUpdateManyWithoutOrderNestedInput
 }
 
 export type OrderCreateWithoutShipmentsInput = {
@@ -1535,6 +1708,7 @@ export type OrderCreateWithoutShipmentsInput = {
   statusLogs?: Prisma.OrderStatusHistoryCreateNestedManyWithoutOrderInput
   sourceCart?: Prisma.CartCreateNestedOneWithoutConvertedOrderInput
   refundRequests?: Prisma.RefundRequestCreateNestedManyWithoutOrderInput
+  stockReservations?: Prisma.StockReservationCreateNestedManyWithoutOrderInput
 }
 
 export type OrderUncheckedCreateWithoutShipmentsInput = {
@@ -1563,6 +1737,7 @@ export type OrderUncheckedCreateWithoutShipmentsInput = {
   statusLogs?: Prisma.OrderStatusHistoryUncheckedCreateNestedManyWithoutOrderInput
   sourceCart?: Prisma.CartUncheckedCreateNestedOneWithoutConvertedOrderInput
   refundRequests?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutOrderInput
+  stockReservations?: Prisma.StockReservationUncheckedCreateNestedManyWithoutOrderInput
 }
 
 export type OrderCreateOrConnectWithoutShipmentsInput = {
@@ -1607,6 +1782,7 @@ export type OrderUpdateWithoutShipmentsInput = {
   statusLogs?: Prisma.OrderStatusHistoryUpdateManyWithoutOrderNestedInput
   sourceCart?: Prisma.CartUpdateOneWithoutConvertedOrderNestedInput
   refundRequests?: Prisma.RefundRequestUpdateManyWithoutOrderNestedInput
+  stockReservations?: Prisma.StockReservationUpdateManyWithoutOrderNestedInput
 }
 
 export type OrderUncheckedUpdateWithoutShipmentsInput = {
@@ -1635,6 +1811,7 @@ export type OrderUncheckedUpdateWithoutShipmentsInput = {
   statusLogs?: Prisma.OrderStatusHistoryUncheckedUpdateManyWithoutOrderNestedInput
   sourceCart?: Prisma.CartUncheckedUpdateOneWithoutConvertedOrderNestedInput
   refundRequests?: Prisma.RefundRequestUncheckedUpdateManyWithoutOrderNestedInput
+  stockReservations?: Prisma.StockReservationUncheckedUpdateManyWithoutOrderNestedInput
 }
 
 export type OrderCreateWithoutStatusLogsInput = {
@@ -1663,6 +1840,7 @@ export type OrderCreateWithoutStatusLogsInput = {
   shipments?: Prisma.ShipmentCreateNestedManyWithoutOrderInput
   sourceCart?: Prisma.CartCreateNestedOneWithoutConvertedOrderInput
   refundRequests?: Prisma.RefundRequestCreateNestedManyWithoutOrderInput
+  stockReservations?: Prisma.StockReservationCreateNestedManyWithoutOrderInput
 }
 
 export type OrderUncheckedCreateWithoutStatusLogsInput = {
@@ -1691,6 +1869,7 @@ export type OrderUncheckedCreateWithoutStatusLogsInput = {
   shipments?: Prisma.ShipmentUncheckedCreateNestedManyWithoutOrderInput
   sourceCart?: Prisma.CartUncheckedCreateNestedOneWithoutConvertedOrderInput
   refundRequests?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutOrderInput
+  stockReservations?: Prisma.StockReservationUncheckedCreateNestedManyWithoutOrderInput
 }
 
 export type OrderCreateOrConnectWithoutStatusLogsInput = {
@@ -1735,6 +1914,7 @@ export type OrderUpdateWithoutStatusLogsInput = {
   shipments?: Prisma.ShipmentUpdateManyWithoutOrderNestedInput
   sourceCart?: Prisma.CartUpdateOneWithoutConvertedOrderNestedInput
   refundRequests?: Prisma.RefundRequestUpdateManyWithoutOrderNestedInput
+  stockReservations?: Prisma.StockReservationUpdateManyWithoutOrderNestedInput
 }
 
 export type OrderUncheckedUpdateWithoutStatusLogsInput = {
@@ -1763,6 +1943,7 @@ export type OrderUncheckedUpdateWithoutStatusLogsInput = {
   shipments?: Prisma.ShipmentUncheckedUpdateManyWithoutOrderNestedInput
   sourceCart?: Prisma.CartUncheckedUpdateOneWithoutConvertedOrderNestedInput
   refundRequests?: Prisma.RefundRequestUncheckedUpdateManyWithoutOrderNestedInput
+  stockReservations?: Prisma.StockReservationUncheckedUpdateManyWithoutOrderNestedInput
 }
 
 export type OrderCreateWithoutPaymentsInput = {
@@ -1791,6 +1972,7 @@ export type OrderCreateWithoutPaymentsInput = {
   statusLogs?: Prisma.OrderStatusHistoryCreateNestedManyWithoutOrderInput
   sourceCart?: Prisma.CartCreateNestedOneWithoutConvertedOrderInput
   refundRequests?: Prisma.RefundRequestCreateNestedManyWithoutOrderInput
+  stockReservations?: Prisma.StockReservationCreateNestedManyWithoutOrderInput
 }
 
 export type OrderUncheckedCreateWithoutPaymentsInput = {
@@ -1819,6 +2001,7 @@ export type OrderUncheckedCreateWithoutPaymentsInput = {
   statusLogs?: Prisma.OrderStatusHistoryUncheckedCreateNestedManyWithoutOrderInput
   sourceCart?: Prisma.CartUncheckedCreateNestedOneWithoutConvertedOrderInput
   refundRequests?: Prisma.RefundRequestUncheckedCreateNestedManyWithoutOrderInput
+  stockReservations?: Prisma.StockReservationUncheckedCreateNestedManyWithoutOrderInput
 }
 
 export type OrderCreateOrConnectWithoutPaymentsInput = {
@@ -1863,6 +2046,7 @@ export type OrderUpdateWithoutPaymentsInput = {
   statusLogs?: Prisma.OrderStatusHistoryUpdateManyWithoutOrderNestedInput
   sourceCart?: Prisma.CartUpdateOneWithoutConvertedOrderNestedInput
   refundRequests?: Prisma.RefundRequestUpdateManyWithoutOrderNestedInput
+  stockReservations?: Prisma.StockReservationUpdateManyWithoutOrderNestedInput
 }
 
 export type OrderUncheckedUpdateWithoutPaymentsInput = {
@@ -1891,6 +2075,7 @@ export type OrderUncheckedUpdateWithoutPaymentsInput = {
   statusLogs?: Prisma.OrderStatusHistoryUncheckedUpdateManyWithoutOrderNestedInput
   sourceCart?: Prisma.CartUncheckedUpdateOneWithoutConvertedOrderNestedInput
   refundRequests?: Prisma.RefundRequestUncheckedUpdateManyWithoutOrderNestedInput
+  stockReservations?: Prisma.StockReservationUncheckedUpdateManyWithoutOrderNestedInput
 }
 
 export type OrderCreateWithoutRefundRequestsInput = {
@@ -1919,6 +2104,7 @@ export type OrderCreateWithoutRefundRequestsInput = {
   shipments?: Prisma.ShipmentCreateNestedManyWithoutOrderInput
   statusLogs?: Prisma.OrderStatusHistoryCreateNestedManyWithoutOrderInput
   sourceCart?: Prisma.CartCreateNestedOneWithoutConvertedOrderInput
+  stockReservations?: Prisma.StockReservationCreateNestedManyWithoutOrderInput
 }
 
 export type OrderUncheckedCreateWithoutRefundRequestsInput = {
@@ -1947,6 +2133,7 @@ export type OrderUncheckedCreateWithoutRefundRequestsInput = {
   shipments?: Prisma.ShipmentUncheckedCreateNestedManyWithoutOrderInput
   statusLogs?: Prisma.OrderStatusHistoryUncheckedCreateNestedManyWithoutOrderInput
   sourceCart?: Prisma.CartUncheckedCreateNestedOneWithoutConvertedOrderInput
+  stockReservations?: Prisma.StockReservationUncheckedCreateNestedManyWithoutOrderInput
 }
 
 export type OrderCreateOrConnectWithoutRefundRequestsInput = {
@@ -1991,6 +2178,7 @@ export type OrderUpdateWithoutRefundRequestsInput = {
   shipments?: Prisma.ShipmentUpdateManyWithoutOrderNestedInput
   statusLogs?: Prisma.OrderStatusHistoryUpdateManyWithoutOrderNestedInput
   sourceCart?: Prisma.CartUpdateOneWithoutConvertedOrderNestedInput
+  stockReservations?: Prisma.StockReservationUpdateManyWithoutOrderNestedInput
 }
 
 export type OrderUncheckedUpdateWithoutRefundRequestsInput = {
@@ -2019,6 +2207,7 @@ export type OrderUncheckedUpdateWithoutRefundRequestsInput = {
   shipments?: Prisma.ShipmentUncheckedUpdateManyWithoutOrderNestedInput
   statusLogs?: Prisma.OrderStatusHistoryUncheckedUpdateManyWithoutOrderNestedInput
   sourceCart?: Prisma.CartUncheckedUpdateOneWithoutConvertedOrderNestedInput
+  stockReservations?: Prisma.StockReservationUncheckedUpdateManyWithoutOrderNestedInput
 }
 
 export type OrderCreateManyUserInput = {
@@ -2067,6 +2256,7 @@ export type OrderUpdateWithoutUserInput = {
   statusLogs?: Prisma.OrderStatusHistoryUpdateManyWithoutOrderNestedInput
   sourceCart?: Prisma.CartUpdateOneWithoutConvertedOrderNestedInput
   refundRequests?: Prisma.RefundRequestUpdateManyWithoutOrderNestedInput
+  stockReservations?: Prisma.StockReservationUpdateManyWithoutOrderNestedInput
 }
 
 export type OrderUncheckedUpdateWithoutUserInput = {
@@ -2095,6 +2285,7 @@ export type OrderUncheckedUpdateWithoutUserInput = {
   statusLogs?: Prisma.OrderStatusHistoryUncheckedUpdateManyWithoutOrderNestedInput
   sourceCart?: Prisma.CartUncheckedUpdateOneWithoutConvertedOrderNestedInput
   refundRequests?: Prisma.RefundRequestUncheckedUpdateManyWithoutOrderNestedInput
+  stockReservations?: Prisma.StockReservationUncheckedUpdateManyWithoutOrderNestedInput
 }
 
 export type OrderUncheckedUpdateManyWithoutUserInput = {
@@ -2130,6 +2321,7 @@ export type OrderCountOutputType = {
   shipments: number
   statusLogs: number
   refundRequests: number
+  stockReservations: number
 }
 
 export type OrderCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2140,6 +2332,7 @@ export type OrderCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.
   shipments?: boolean | OrderCountOutputTypeCountShipmentsArgs
   statusLogs?: boolean | OrderCountOutputTypeCountStatusLogsArgs
   refundRequests?: boolean | OrderCountOutputTypeCountRefundRequestsArgs
+  stockReservations?: boolean | OrderCountOutputTypeCountStockReservationsArgs
 }
 
 /**
@@ -2201,6 +2394,13 @@ export type OrderCountOutputTypeCountRefundRequestsArgs<ExtArgs extends runtime.
   where?: Prisma.RefundRequestWhereInput
 }
 
+/**
+ * OrderCountOutputType without action
+ */
+export type OrderCountOutputTypeCountStockReservationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.StockReservationWhereInput
+}
+
 
 export type OrderSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -2230,6 +2430,7 @@ export type OrderSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   statusLogs?: boolean | Prisma.Order$statusLogsArgs<ExtArgs>
   sourceCart?: boolean | Prisma.Order$sourceCartArgs<ExtArgs>
   refundRequests?: boolean | Prisma.Order$refundRequestsArgs<ExtArgs>
+  stockReservations?: boolean | Prisma.Order$stockReservationsArgs<ExtArgs>
   _count?: boolean | Prisma.OrderCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["order"]>
 
@@ -2309,6 +2510,7 @@ export type OrderInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   statusLogs?: boolean | Prisma.Order$statusLogsArgs<ExtArgs>
   sourceCart?: boolean | Prisma.Order$sourceCartArgs<ExtArgs>
   refundRequests?: boolean | Prisma.Order$refundRequestsArgs<ExtArgs>
+  stockReservations?: boolean | Prisma.Order$stockReservationsArgs<ExtArgs>
   _count?: boolean | Prisma.OrderCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type OrderIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2330,6 +2532,7 @@ export type $OrderPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     statusLogs: Prisma.$OrderStatusHistoryPayload<ExtArgs>[]
     sourceCart: Prisma.$CartPayload<ExtArgs> | null
     refundRequests: Prisma.$RefundRequestPayload<ExtArgs>[]
+    stockReservations: Prisma.$StockReservationPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2753,6 +2956,7 @@ export interface Prisma__OrderClient<T, Null = never, ExtArgs extends runtime.Ty
   statusLogs<T extends Prisma.Order$statusLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Order$statusLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderStatusHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   sourceCart<T extends Prisma.Order$sourceCartArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Order$sourceCartArgs<ExtArgs>>): Prisma.Prisma__CartClient<runtime.Types.Result.GetResult<Prisma.$CartPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   refundRequests<T extends Prisma.Order$refundRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Order$refundRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RefundRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  stockReservations<T extends Prisma.Order$stockReservationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Order$stockReservationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StockReservationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3404,6 +3608,30 @@ export type Order$refundRequestsArgs<ExtArgs extends runtime.Types.Extensions.In
   take?: number
   skip?: number
   distinct?: Prisma.RefundRequestScalarFieldEnum | Prisma.RefundRequestScalarFieldEnum[]
+}
+
+/**
+ * Order.stockReservations
+ */
+export type Order$stockReservationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the StockReservation
+   */
+  select?: Prisma.StockReservationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the StockReservation
+   */
+  omit?: Prisma.StockReservationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.StockReservationInclude<ExtArgs> | null
+  where?: Prisma.StockReservationWhereInput
+  orderBy?: Prisma.StockReservationOrderByWithRelationInput | Prisma.StockReservationOrderByWithRelationInput[]
+  cursor?: Prisma.StockReservationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.StockReservationScalarFieldEnum | Prisma.StockReservationScalarFieldEnum[]
 }
 
 /**

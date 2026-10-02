@@ -4,9 +4,11 @@ import {
   ConflictException,
   NotFoundException,
 } from '@nestjs/common';
+import { PrismaClientKnownRequestError } from '@prisma/client/runtime/client';
 import { ProductsService } from './products.service';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { PricingService } from '../pricings/pricing.service';
+import { InventoryService } from '../inventory/inventory.service';
 import { CreateProductDto, UpdateProductDto } from './dto/product.dto';
 import { AddVariantDto } from './dto/product-variant.dto';
 
@@ -94,6 +96,11 @@ describe('ProductsService', () => {
   let service: ProductsService;
   let prisma: MockPrisma;
   let pricing: { withDisplayPrices: jest.Mock };
+  const inventory = {
+    applyMovement: jest.fn(),
+    setStock: jest.fn(),
+    recordInitialStock: jest.fn(),
+  };
 
   beforeEach(async () => {
     prisma = createMockPrisma();
@@ -109,6 +116,7 @@ describe('ProductsService', () => {
         ProductsService,
         { provide: PrismaService, useValue: prisma },
         { provide: PricingService, useValue: pricing },
+        { provide: InventoryService, useValue: inventory },
       ],
     }).compile();
 
@@ -539,6 +547,23 @@ describe('ProductsService', () => {
       expect(data.productId).toBe('p1');
       expect(data.sku).toBe('SKU-1');
     });
+
+    it('passes costPrice to the opening stock entry', async () => {
+      prisma.productVariant.findUnique.mockResolvedValue(null);
+      prisma.productOption.findMany.mockResolvedValue([]);
+      prisma.productVariant.create.mockResolvedValue({ id: 'v1', stock: 50 });
+
+      await service.addVariant(
+        'p1',
+        baseVariant({ stock: 50, costPrice: 250 }) as AddVariantDto,
+      );
+
+      expect(inventory.recordInitialStock).toHaveBeenCalledWith(
+        expect.anything(),
+        { id: 'v1', stock: 50 },
+        { unitCost: 250 },
+      );
+    });
   });
 
   // ═════════════════════════════════════════════════
@@ -579,61 +604,76 @@ describe('ProductsService', () => {
         where: { id: 'v1' },
       });
     });
+
+    it('returns 409 when inventory history blocks the delete', async () => {
+      prisma.productVariant.findUnique.mockResolvedValue({
+        id: 'v1',
+        productId: 'p1',
+      });
+      prisma.productVariant.count.mockResolvedValue(2);
+      prisma.productVariant.delete.mockRejectedValue(
+        new PrismaClientKnownRequestError('FK violation', {
+          code: 'P2003',
+          clientVersion: 'test',
+        }),
+      );
+
+      await expect(service.removeVariant('v1')).rejects.toThrow(
+        ConflictException,
+      );
+    });
   });
 
   // ═════════════════════════════════════════════════
   //   adjustStock
   // ═════════════════════════════════════════════════
 
+  // Validation (missing variant, going negative) lives in InventoryService
+  // and is covered by inventory.service.spec.ts — here we only check that
+  // the legacy endpoint routes through the ledger.
   describe('adjustStock', () => {
-    it('throws NotFoundException when the variant does not exist', async () => {
-      prisma.productVariant.findUnique.mockResolvedValue(null);
-      await expect(
-        service.adjustStock('missing', { delta: 1 }),
-      ).rejects.toThrow(NotFoundException);
-    });
-
-    it('refuses a decrement that would push stock negative', async () => {
-      prisma.productVariant.findUnique.mockResolvedValue({
-        id: 'v1',
-        stock: 5,
+    it('records an ADJUSTMENT_INCREASE movement and returns the updated variant', async () => {
+      const tx = {
+        productVariant: {
+          findUniqueOrThrow: jest
+            .fn()
+            .mockResolvedValue({ id: 'v1', stock: 15 }),
+        },
+      };
+      Object.assign(prisma, {
+        $transaction: jest.fn((fn: (t: typeof tx) => unknown) => fn(tx)),
       });
 
-      await expect(service.adjustStock('v1', { delta: -10 })).rejects.toThrow(
-        BadRequestException,
-      );
-      expect(prisma.productVariant.update).not.toHaveBeenCalled();
-    });
-
-    it('applies a positive delta correctly', async () => {
-      prisma.productVariant.findUnique.mockResolvedValue({
-        id: 'v1',
-        stock: 5,
+      const result = await service.adjustStock('v1', {
+        delta: 10,
+        reason: 'found in back room',
       });
-      prisma.productVariant.update.mockResolvedValue({ id: 'v1', stock: 15 });
 
-      const result = await service.adjustStock('v1', { delta: 10 });
-
-      expect(prisma.productVariant.update).toHaveBeenCalledWith({
-        where: { id: 'v1' },
-        data: { stock: 15 },
+      expect(inventory.applyMovement).toHaveBeenCalledWith(tx, {
+        variantId: 'v1',
+        type: 'ADJUSTMENT_INCREASE',
+        quantity: 10,
+        referenceType: 'ADJUSTMENT',
+        note: 'found in back room',
       });
       expect(result.data.stock).toBe(15);
     });
 
-    it('applies a negative delta down to exactly zero', async () => {
-      prisma.productVariant.findUnique.mockResolvedValue({
-        id: 'v1',
-        stock: 5,
+    it('propagates inventory errors (e.g. insufficient stock)', async () => {
+      Object.assign(prisma, {
+        $transaction: jest.fn((fn: (t: unknown) => unknown) => fn({})),
       });
-      prisma.productVariant.update.mockResolvedValue({ id: 'v1', stock: 0 });
+      inventory.applyMovement.mockRejectedValueOnce(
+        new BadRequestException('Not enough stock'),
+      );
 
-      await service.adjustStock('v1', { delta: -5 });
-
-      expect(prisma.productVariant.update).toHaveBeenCalledWith({
-        where: { id: 'v1' },
-        data: { stock: 0 },
-      });
+      await expect(service.adjustStock('v1', { delta: -10 })).rejects.toThrow(
+        BadRequestException,
+      );
+      expect(inventory.applyMovement).toHaveBeenCalledWith(
+        {},
+        expect.objectContaining({ type: 'ADJUSTMENT_DECREASE', quantity: 10 }),
+      );
     });
   });
 });

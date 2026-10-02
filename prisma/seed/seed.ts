@@ -362,7 +362,142 @@ async function seedUsers() {
   return new Map(rows.map((u) => [u.email, u.id]));
 }
 
+// ─── Warehouses & suppliers ───────────────────────────────────
+
+const WAREHOUSES = [
+  // MAIN also exists after the inventory migration; upsert keeps it in sync.
+  {
+    code: 'MAIN',
+    name: 'Main Warehouse',
+    type: 'PHYSICAL',
+    isDefault: true,
+    priority: 100,
+    city: 'Dhaka',
+  },
+  {
+    code: 'CTG-STORE',
+    name: 'Chattogram Store',
+    type: 'STORE',
+    isDefault: false,
+    priority: 50,
+    city: 'Chattogram',
+  },
+  {
+    code: 'RETURNS',
+    name: 'Returns Processing',
+    type: 'VIRTUAL_RETURN',
+    isDefault: false,
+    priority: 0,
+    city: 'Dhaka',
+  },
+  {
+    code: 'DAMAGE',
+    name: 'Damaged Goods Hold',
+    type: 'VIRTUAL_DAMAGE',
+    isDefault: false,
+    priority: 0,
+    city: 'Dhaka',
+  },
+] as const;
+
+async function seedWarehouses() {
+  const ids = new Map<string, string>();
+  let created = 0;
+  for (const { code, ...data } of WAREHOUSES) {
+    let row = await prisma.warehouse.findUnique({ where: { code } });
+    if (!row) {
+      row = await prisma.warehouse.create({
+        data: { code, country: 'BD', ...data },
+      });
+      created++;
+    }
+    ids.set(code, row.id);
+  }
+  log('warehouses', created, WAREHOUSES.length);
+  return ids;
+}
+
+// Racks in MAIN: two aisles (A, B) of four racks, walked A-01 → B-04, plus a
+// receiving dock that's only picked from when the racks run out.
+const MAIN_RACKS = [
+  ...['A', 'B'].flatMap((aisle, a) =>
+    [1, 2, 3, 4].map((n) => ({
+      code: `${aisle}-0${n}`,
+      name: `Aisle ${aisle}, rack ${n}`,
+      type: 'RACK' as const,
+      isPickable: true,
+      pickSequence: a * 10 + n,
+    })),
+  ),
+  {
+    code: 'DOCK-01',
+    name: 'Receiving dock',
+    type: 'RECEIVING' as const,
+    isPickable: false,
+    pickSequence: 900,
+  },
+];
+
+/** UNASSIGNED in every warehouse, demo racks in MAIN. Returns MAIN rack ids. */
+async function seedLocations(warehouses: Map<string, string>) {
+  const wanted = [
+    ...[...warehouses.values()].map((warehouseId) => ({
+      warehouseId,
+      code: 'UNASSIGNED',
+      name: 'Unassigned',
+      type: 'STAGING' as const,
+      isPickable: true,
+      pickSequence: 999999,
+    })),
+    ...MAIN_RACKS.map((r) => ({ warehouseId: warehouses.get('MAIN')!, ...r })),
+  ];
+
+  let created = 0;
+  const mainRacks = new Map<string, string>();
+  for (const { warehouseId, code, ...data } of wanted) {
+    let row = await prisma.storageLocation.findUnique({
+      where: { warehouseId_code: { warehouseId, code } },
+    });
+    if (!row) {
+      row = await prisma.storageLocation.create({
+        data: { warehouseId, code, ...data },
+      });
+      created++;
+    }
+    if (warehouseId === warehouses.get('MAIN')) mainRacks.set(code, row.id);
+  }
+  log('storage locations', created, wanted.length);
+  return mainRacks;
+}
+
+const SUPPLIERS = [
+  {
+    code: 'SUP-001',
+    name: 'Dhaka Wholesale Traders',
+    paymentTerms: 'Net 30',
+    leadTimeDays: 7,
+  },
+  {
+    code: 'SUP-002',
+    name: 'Global Imports Ltd',
+    paymentTerms: 'COD',
+    leadTimeDays: 21,
+  },
+];
+
+async function seedSuppliers() {
+  let created = 0;
+  for (const { code, ...data } of SUPPLIERS) {
+    if (await prisma.supplier.findUnique({ where: { code } })) continue;
+    await prisma.supplier.create({ data: { code, country: 'BD', ...data } });
+    created++;
+  }
+  log('suppliers', created, SUPPLIERS.length);
+}
+
 async function seedProducts(deps: {
+  warehouses: Map<string, string>;
+  mainRacks: Map<string, string>;
   categories: Awaited<ReturnType<typeof seedCategories>>;
   brands: Map<string, string>;
   tags: Map<string, string>;
@@ -375,6 +510,11 @@ async function seedProducts(deps: {
   // Some fixture titles slugify identically ("Off White & Red" vs "Off White
   // Red"). Suffix by fixture order, not DB state, so re-runs pick the same slug.
   const usedSlugs = new Set<string>();
+  // Each new variant gets a default rack, round-robin over the A/B racks.
+  const rackIds = MAIN_RACKS.filter((r) => r.type === 'RACK').map(
+    (r) => deps.mainRacks.get(r.code)!,
+  );
+  let rackCursor = 0;
 
   for (const [source, products] of Object.entries(fixture)) {
     const category = deps.categories.bySource.get(source)!;
@@ -401,10 +541,39 @@ async function seedProducts(deps: {
         );
         // Every 4th product has its last variant sold out, to exercise stock UI.
         const soldOut = index % 4 === 3 && i === values.length - 1;
+        const stock = soldOut ? 0 : stockEach;
+        const rackId = rackIds[rackCursor++ % rackIds.length];
         return {
           sku: skuFor(slug, value),
           price: price.toFixed(2),
-          stock: soldOut ? 0 : stockEach,
+          // Denormalized from the MAIN level below (see InventoryService).
+          stock,
+          // Opening stock lives at the default warehouse, with its ledger row.
+          inventoryLevels: {
+            create: {
+              warehouseId: deps.warehouses.get('MAIN')!,
+              onHand: stock,
+              available: stock,
+              defaultLocationId: rackId,
+              // Racks must add up to onHand: all of it sits on the default rack.
+              locationStocks: stock
+                ? { create: { locationId: rackId, quantity: stock } }
+                : undefined,
+              movements: stock
+                ? {
+                    create: {
+                      type: 'INITIAL_STOCK' as const,
+                      direction: 'IN' as const,
+                      quantity: stock,
+                      onHandBefore: 0,
+                      onHandAfter: stock,
+                      toLocationId: rackId,
+                      note: 'Seed opening stock',
+                    },
+                  }
+                : undefined,
+            },
+          },
           optionKey: buildOptionKey(optionValueIds),
           optionValues: {
             create: optionValueIds.map((optionValueId) => ({ optionValueId })),
@@ -798,7 +967,18 @@ async function main() {
   const options = await seedOptions();
   await seedTemplates(options);
   const users = await seedUsers();
-  await seedProducts({ categories, brands, tags, options, users });
+  const warehouses = await seedWarehouses();
+  const mainRacks = await seedLocations(warehouses);
+  await seedSuppliers();
+  await seedProducts({
+    warehouses,
+    mainRacks,
+    categories,
+    brands,
+    tags,
+    options,
+    users,
+  });
   const campaigns = await seedCampaigns({ categories, brands });
   await seedPromotions({ categories, brands, tags, campaigns });
   console.log('Done.');
