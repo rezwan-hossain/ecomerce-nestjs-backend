@@ -144,6 +144,12 @@ export const inventoryQuerySchema = z.object({
 
 export class InventoryQueryDto extends createZodDto(inventoryQuerySchema) {}
 
+// "2026-10-02" or "2026-10-02T14:30:00Z" / "...+06:00"
+const isoDateOrDateTime = z.union([
+  z.iso.date(),
+  z.iso.datetime({ offset: true }),
+]);
+
 export const movementQuerySchema = z.object({
   ...pagination,
   variantId: z.string().uuid().optional(),
@@ -153,8 +159,11 @@ export const movementQuerySchema = z.object({
   referenceId: z.string().optional(),
   type: movementTypeEnum.optional(),
   direction: z.enum(['IN', 'OUT', 'INTERNAL']).optional(),
-  dateFrom: z.coerce.date().optional(),
-  dateTo: z.coerce.date().optional(),
+  // ISO strings, not z.date(): Date can't be represented in JSON Schema,
+  // which nestjs-zod generates from these DTOs. A date-only dateTo
+  // ("2026-10-02") includes that whole day.
+  dateFrom: isoDateOrDateTime.optional(),
+  dateTo: isoDateOrDateTime.optional(),
 });
 
 export class MovementQueryDto extends createZodDto(movementQuerySchema) {}

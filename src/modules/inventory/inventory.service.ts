@@ -976,8 +976,8 @@ export class InventoryService {
       ...(direction && { direction }),
       ...((dateFrom || dateTo) && {
         createdAt: {
-          ...(dateFrom && { gte: dateFrom }),
-          ...(dateTo && { lte: dateTo }),
+          ...(dateFrom && { gte: new Date(dateFrom) }),
+          ...(dateTo && this.endBound(dateTo)),
         },
       }),
     };
@@ -1265,6 +1265,16 @@ export class InventoryService {
         userId: opts.userId,
       });
     }
+  }
+
+  /** A date-only upper bound covers that whole day (UTC); a datetime is exact. */
+  private endBound(dateTo: string): { lt: Date } | { lte: Date } {
+    if (/^\d{4}-\d{2}-\d{2}$/.test(dateTo)) {
+      const next = new Date(`${dateTo}T00:00:00.000Z`);
+      next.setUTCDate(next.getUTCDate() + 1);
+      return { lt: next };
+    }
+    return { lte: new Date(dateTo) };
   }
 
   private toStockChange(
