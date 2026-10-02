@@ -24,8 +24,8 @@ export const orderQuerySchema = z.object({
   search: z.string().optional(), // orderNumber / customerEmail / customerName
   status: orderStatusEnum.optional(),
   userId: z.string().uuid().optional(),
-  dateFrom: z.iso.date().optional(),
-  dateTo: z.iso.date().optional(),
+  dateFrom: z.iso.date().optional(), // inclusive
+  dateTo: z.iso.date().optional(), // inclusive: the whole day
   sortBy: z.enum(['createdAt', 'totalAmount']).optional().default('createdAt'),
   sortOrder: z.enum(['asc', 'desc']).optional().default('desc'),
 });

@@ -9,6 +9,7 @@ import {
   PrismaClientKnownRequestError,
 } from '@prisma/client/runtime/client';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { dateRangeFilter } from 'src/common/utils/date-range.util';
 import { Prisma } from 'src/generated/prisma/client';
 import type {
   MovementDirection,
@@ -974,12 +975,7 @@ export class InventoryService {
       ...(referenceId && { referenceId }),
       ...(type && { type }),
       ...(direction && { direction }),
-      ...((dateFrom || dateTo) && {
-        createdAt: {
-          ...(dateFrom && { gte: new Date(dateFrom) }),
-          ...(dateTo && this.endBound(dateTo)),
-        },
-      }),
+      createdAt: dateRangeFilter(dateFrom, dateTo),
     };
 
     const [total, movements] = await Promise.all([
@@ -1265,16 +1261,6 @@ export class InventoryService {
         userId: opts.userId,
       });
     }
-  }
-
-  /** A date-only upper bound covers that whole day (UTC); a datetime is exact. */
-  private endBound(dateTo: string): { lt: Date } | { lte: Date } {
-    if (/^\d{4}-\d{2}-\d{2}$/.test(dateTo)) {
-      const next = new Date(`${dateTo}T00:00:00.000Z`);
-      next.setUTCDate(next.getUTCDate() + 1);
-      return { lt: next };
-    }
-    return { lte: new Date(dateTo) };
   }
 
   private toStockChange(

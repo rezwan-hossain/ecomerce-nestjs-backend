@@ -18,6 +18,7 @@ import { CartLine } from '../pricings/interfaces/pricing.types';
 import { CartIdentity, CartsService } from '../carts/carts.service';
 import { InventoryService } from '../inventory/inventory.service';
 import { generateOrderNumber } from 'src/common/utils/order-number.util';
+import { dateRangeFilter } from 'src/common/utils/date-range.util';
 
 import { CheckoutDto } from './dto/checkout.dto';
 import { MyOrdersQueryDto, OrderQueryDto } from './dto/order-query.dto';
@@ -246,12 +247,8 @@ export class OrdersService {
       ];
     }
 
-    if (dateFrom || dateTo) {
-      where.createdAt = {
-        ...(dateFrom && { gte: dateFrom }),
-        ...(dateTo && { lte: dateTo }),
-      };
-    }
+    const createdAt = dateRangeFilter(dateFrom, dateTo);
+    if (createdAt) where.createdAt = createdAt;
 
     const [total, orders] = await Promise.all([
       this.prisma.order.count({ where }),
