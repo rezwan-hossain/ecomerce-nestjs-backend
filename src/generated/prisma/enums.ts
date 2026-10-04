@@ -9,25 +9,6 @@
 * 🟢 You can import this file directly.
 */
 
-export const Role = {
-  CUSTOMER: 'CUSTOMER',
-  VENDOR: 'VENDOR',
-  ADMIN: 'ADMIN',
-  SUPER_ADMIN: 'SUPER_ADMIN'
-} as const
-
-export type Role = (typeof Role)[keyof typeof Role]
-
-
-export const ProductStatus = {
-  DRAFT: 'DRAFT',
-  ACTIVE: 'ACTIVE',
-  ARCHIVED: 'ARCHIVED'
-} as const
-
-export type ProductStatus = (typeof ProductStatus)[keyof typeof ProductStatus]
-
-
 export const WarehouseType = {
   PHYSICAL: 'PHYSICAL',
   STORE: 'STORE',
@@ -210,6 +191,25 @@ export const InventoryAlertStatus = {
 } as const
 
 export type InventoryAlertStatus = (typeof InventoryAlertStatus)[keyof typeof InventoryAlertStatus]
+
+
+export const Role = {
+  CUSTOMER: 'CUSTOMER',
+  VENDOR: 'VENDOR',
+  ADMIN: 'ADMIN',
+  SUPER_ADMIN: 'SUPER_ADMIN'
+} as const
+
+export type Role = (typeof Role)[keyof typeof Role]
+
+
+export const ProductStatus = {
+  DRAFT: 'DRAFT',
+  ACTIVE: 'ACTIVE',
+  ARCHIVED: 'ARCHIVED'
+} as const
+
+export type ProductStatus = (typeof ProductStatus)[keyof typeof ProductStatus]
 
 
 export const ReviewStatus = {

@@ -26,7 +26,7 @@ npx jest -t "test name"                       # run tests matching a name
 npx jest --config ./test/jest-e2e.json path/to/file.e2e-spec.ts   # single e2e test
 
 # Prisma
-npx prisma generate          # regenerate client into src/generated/prisma (run after schema.prisma changes)
+npx prisma generate          # regenerate client into src/generated/prisma (run after any prisma/*.prisma change)
 npx prisma migrate dev        # create/apply a migration in dev
 npx prisma studio
 ```
@@ -41,7 +41,7 @@ Requires `DATABASE_URL` (PostgreSQL) in `.env`, loaded via `dotenv/config`. Pris
 
 NestJS 11 + Prisma 7 (postgres) backend with Zod-based validation (`nestjs-zod`) instead of `class-validator`.
 
-- **Prisma client is custom-generated.** `prisma/schema.prisma` outputs the client to `src/generated/prisma` (not `node_modules/@prisma/client`), using `moduleFormat: cjs`. This generated output is checked into the repo — after editing `schema.prisma`, run `npx prisma generate` and the diff in `src/generated/prisma/**` is expected/required, not accidental.
+- **Prisma client is custom-generated.** The schema is split across multiple files in `prisma/` (`prisma.config.ts` points `schema` at the folder): `schema.prisma` holds the generator/datasource and core models, `inventory.prisma` holds the inventory domain (warehouses, levels, movements, reservations, batches, suppliers, POs, transfers, adjustments, reorder rules/alerts). The generator outputs the client to `src/generated/prisma` (not `node_modules/@prisma/client`), using `moduleFormat: cjs`. This generated output is checked into the repo — after editing any `.prisma` file, run `npx prisma generate` and the diff in `src/generated/prisma/**` is expected/required, not accidental.
 - **DTOs are Zod schemas, not classes with decorators.** Each module defines schemas with `z.object(...)` and wraps them via `createZodDto()` from `nestjs-zod` (see `src/modules/products/dto/product.dto.ts`, `src/modules/categories/dto/categories.dto.ts`). Validation is enforced globally through `ZodValidationPipe` registered as `APP_PIPE` in `app.module.ts` (also passed to `useGlobalPipes` in `main.ts`).
 - **Module layout**: each domain lives under `src/modules/<name>/` with `<name>.module.ts`, `<name>.controller.ts`, `<name>.service.ts`, and a `dto/` folder. `PrismaModule` (`src/prisma/`) is imported per-module to inject `PrismaService`.
 - **Product domain is the core of the data model** (`prisma/schema.prisma`): `Product` has many `ProductVariant`s (SKU + price/stock), and variants are defined by combinations of `Option`/`OptionValue` pairs (e.g. Color=Red, Size=XL) joined through `VariantOptionValue`. Products also relate to `Category`/`Tag`/`Brand` via join tables (`ProductCategory`, `ProductTag`), and have their own `ProductImage`s plus per-variant `VariantImage`s. `VariantTemplate`/`TemplateOption`/`TemplateOptionValue` exist to predefine reusable option sets (e.g. "Shoe Sizes") but aren't yet wired into product creation.

@@ -592,6 +592,56 @@ export type InventoryAlertSumOrderByAggregateInput = {
   threshold?: Prisma.SortOrder
 }
 
+export type InventoryAlertCreateNestedManyWithoutWarehouseInput = {
+  create?: Prisma.XOR<Prisma.InventoryAlertCreateWithoutWarehouseInput, Prisma.InventoryAlertUncheckedCreateWithoutWarehouseInput> | Prisma.InventoryAlertCreateWithoutWarehouseInput[] | Prisma.InventoryAlertUncheckedCreateWithoutWarehouseInput[]
+  connectOrCreate?: Prisma.InventoryAlertCreateOrConnectWithoutWarehouseInput | Prisma.InventoryAlertCreateOrConnectWithoutWarehouseInput[]
+  createMany?: Prisma.InventoryAlertCreateManyWarehouseInputEnvelope
+  connect?: Prisma.InventoryAlertWhereUniqueInput | Prisma.InventoryAlertWhereUniqueInput[]
+}
+
+export type InventoryAlertUncheckedCreateNestedManyWithoutWarehouseInput = {
+  create?: Prisma.XOR<Prisma.InventoryAlertCreateWithoutWarehouseInput, Prisma.InventoryAlertUncheckedCreateWithoutWarehouseInput> | Prisma.InventoryAlertCreateWithoutWarehouseInput[] | Prisma.InventoryAlertUncheckedCreateWithoutWarehouseInput[]
+  connectOrCreate?: Prisma.InventoryAlertCreateOrConnectWithoutWarehouseInput | Prisma.InventoryAlertCreateOrConnectWithoutWarehouseInput[]
+  createMany?: Prisma.InventoryAlertCreateManyWarehouseInputEnvelope
+  connect?: Prisma.InventoryAlertWhereUniqueInput | Prisma.InventoryAlertWhereUniqueInput[]
+}
+
+export type InventoryAlertUpdateManyWithoutWarehouseNestedInput = {
+  create?: Prisma.XOR<Prisma.InventoryAlertCreateWithoutWarehouseInput, Prisma.InventoryAlertUncheckedCreateWithoutWarehouseInput> | Prisma.InventoryAlertCreateWithoutWarehouseInput[] | Prisma.InventoryAlertUncheckedCreateWithoutWarehouseInput[]
+  connectOrCreate?: Prisma.InventoryAlertCreateOrConnectWithoutWarehouseInput | Prisma.InventoryAlertCreateOrConnectWithoutWarehouseInput[]
+  upsert?: Prisma.InventoryAlertUpsertWithWhereUniqueWithoutWarehouseInput | Prisma.InventoryAlertUpsertWithWhereUniqueWithoutWarehouseInput[]
+  createMany?: Prisma.InventoryAlertCreateManyWarehouseInputEnvelope
+  set?: Prisma.InventoryAlertWhereUniqueInput | Prisma.InventoryAlertWhereUniqueInput[]
+  disconnect?: Prisma.InventoryAlertWhereUniqueInput | Prisma.InventoryAlertWhereUniqueInput[]
+  delete?: Prisma.InventoryAlertWhereUniqueInput | Prisma.InventoryAlertWhereUniqueInput[]
+  connect?: Prisma.InventoryAlertWhereUniqueInput | Prisma.InventoryAlertWhereUniqueInput[]
+  update?: Prisma.InventoryAlertUpdateWithWhereUniqueWithoutWarehouseInput | Prisma.InventoryAlertUpdateWithWhereUniqueWithoutWarehouseInput[]
+  updateMany?: Prisma.InventoryAlertUpdateManyWithWhereWithoutWarehouseInput | Prisma.InventoryAlertUpdateManyWithWhereWithoutWarehouseInput[]
+  deleteMany?: Prisma.InventoryAlertScalarWhereInput | Prisma.InventoryAlertScalarWhereInput[]
+}
+
+export type InventoryAlertUncheckedUpdateManyWithoutWarehouseNestedInput = {
+  create?: Prisma.XOR<Prisma.InventoryAlertCreateWithoutWarehouseInput, Prisma.InventoryAlertUncheckedCreateWithoutWarehouseInput> | Prisma.InventoryAlertCreateWithoutWarehouseInput[] | Prisma.InventoryAlertUncheckedCreateWithoutWarehouseInput[]
+  connectOrCreate?: Prisma.InventoryAlertCreateOrConnectWithoutWarehouseInput | Prisma.InventoryAlertCreateOrConnectWithoutWarehouseInput[]
+  upsert?: Prisma.InventoryAlertUpsertWithWhereUniqueWithoutWarehouseInput | Prisma.InventoryAlertUpsertWithWhereUniqueWithoutWarehouseInput[]
+  createMany?: Prisma.InventoryAlertCreateManyWarehouseInputEnvelope
+  set?: Prisma.InventoryAlertWhereUniqueInput | Prisma.InventoryAlertWhereUniqueInput[]
+  disconnect?: Prisma.InventoryAlertWhereUniqueInput | Prisma.InventoryAlertWhereUniqueInput[]
+  delete?: Prisma.InventoryAlertWhereUniqueInput | Prisma.InventoryAlertWhereUniqueInput[]
+  connect?: Prisma.InventoryAlertWhereUniqueInput | Prisma.InventoryAlertWhereUniqueInput[]
+  update?: Prisma.InventoryAlertUpdateWithWhereUniqueWithoutWarehouseInput | Prisma.InventoryAlertUpdateWithWhereUniqueWithoutWarehouseInput[]
+  updateMany?: Prisma.InventoryAlertUpdateManyWithWhereWithoutWarehouseInput | Prisma.InventoryAlertUpdateManyWithWhereWithoutWarehouseInput[]
+  deleteMany?: Prisma.InventoryAlertScalarWhereInput | Prisma.InventoryAlertScalarWhereInput[]
+}
+
+export type EnumInventoryAlertTypeFieldUpdateOperationsInput = {
+  set?: $Enums.InventoryAlertType
+}
+
+export type EnumInventoryAlertStatusFieldUpdateOperationsInput = {
+  set?: $Enums.InventoryAlertStatus
+}
+
 export type InventoryAlertCreateNestedManyWithoutAcknowledgedByUserInput = {
   create?: Prisma.XOR<Prisma.InventoryAlertCreateWithoutAcknowledgedByUserInput, Prisma.InventoryAlertUncheckedCreateWithoutAcknowledgedByUserInput> | Prisma.InventoryAlertCreateWithoutAcknowledgedByUserInput[] | Prisma.InventoryAlertUncheckedCreateWithoutAcknowledgedByUserInput[]
   connectOrCreate?: Prisma.InventoryAlertCreateOrConnectWithoutAcknowledgedByUserInput | Prisma.InventoryAlertCreateOrConnectWithoutAcknowledgedByUserInput[]
@@ -676,54 +726,85 @@ export type InventoryAlertUncheckedUpdateManyWithoutVariantNestedInput = {
   deleteMany?: Prisma.InventoryAlertScalarWhereInput | Prisma.InventoryAlertScalarWhereInput[]
 }
 
-export type InventoryAlertCreateNestedManyWithoutWarehouseInput = {
-  create?: Prisma.XOR<Prisma.InventoryAlertCreateWithoutWarehouseInput, Prisma.InventoryAlertUncheckedCreateWithoutWarehouseInput> | Prisma.InventoryAlertCreateWithoutWarehouseInput[] | Prisma.InventoryAlertUncheckedCreateWithoutWarehouseInput[]
-  connectOrCreate?: Prisma.InventoryAlertCreateOrConnectWithoutWarehouseInput | Prisma.InventoryAlertCreateOrConnectWithoutWarehouseInput[]
-  createMany?: Prisma.InventoryAlertCreateManyWarehouseInputEnvelope
-  connect?: Prisma.InventoryAlertWhereUniqueInput | Prisma.InventoryAlertWhereUniqueInput[]
+export type InventoryAlertCreateWithoutWarehouseInput = {
+  id?: string
+  type: $Enums.InventoryAlertType
+  status?: $Enums.InventoryAlertStatus
+  title: string
+  message?: string | null
+  currentStock: number
+  threshold?: number | null
+  acknowledgedAt?: Date | string | null
+  resolvedAt?: Date | string | null
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  variant: Prisma.ProductVariantCreateNestedOneWithoutInventoryAlertsInput
+  acknowledgedByUser?: Prisma.UserCreateNestedOneWithoutInventoryAlertsAcknowledgedInput
 }
 
-export type InventoryAlertUncheckedCreateNestedManyWithoutWarehouseInput = {
-  create?: Prisma.XOR<Prisma.InventoryAlertCreateWithoutWarehouseInput, Prisma.InventoryAlertUncheckedCreateWithoutWarehouseInput> | Prisma.InventoryAlertCreateWithoutWarehouseInput[] | Prisma.InventoryAlertUncheckedCreateWithoutWarehouseInput[]
-  connectOrCreate?: Prisma.InventoryAlertCreateOrConnectWithoutWarehouseInput | Prisma.InventoryAlertCreateOrConnectWithoutWarehouseInput[]
-  createMany?: Prisma.InventoryAlertCreateManyWarehouseInputEnvelope
-  connect?: Prisma.InventoryAlertWhereUniqueInput | Prisma.InventoryAlertWhereUniqueInput[]
+export type InventoryAlertUncheckedCreateWithoutWarehouseInput = {
+  id?: string
+  variantId: string
+  type: $Enums.InventoryAlertType
+  status?: $Enums.InventoryAlertStatus
+  title: string
+  message?: string | null
+  currentStock: number
+  threshold?: number | null
+  acknowledgedByUserId?: string | null
+  acknowledgedAt?: Date | string | null
+  resolvedAt?: Date | string | null
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
-export type InventoryAlertUpdateManyWithoutWarehouseNestedInput = {
-  create?: Prisma.XOR<Prisma.InventoryAlertCreateWithoutWarehouseInput, Prisma.InventoryAlertUncheckedCreateWithoutWarehouseInput> | Prisma.InventoryAlertCreateWithoutWarehouseInput[] | Prisma.InventoryAlertUncheckedCreateWithoutWarehouseInput[]
-  connectOrCreate?: Prisma.InventoryAlertCreateOrConnectWithoutWarehouseInput | Prisma.InventoryAlertCreateOrConnectWithoutWarehouseInput[]
-  upsert?: Prisma.InventoryAlertUpsertWithWhereUniqueWithoutWarehouseInput | Prisma.InventoryAlertUpsertWithWhereUniqueWithoutWarehouseInput[]
-  createMany?: Prisma.InventoryAlertCreateManyWarehouseInputEnvelope
-  set?: Prisma.InventoryAlertWhereUniqueInput | Prisma.InventoryAlertWhereUniqueInput[]
-  disconnect?: Prisma.InventoryAlertWhereUniqueInput | Prisma.InventoryAlertWhereUniqueInput[]
-  delete?: Prisma.InventoryAlertWhereUniqueInput | Prisma.InventoryAlertWhereUniqueInput[]
-  connect?: Prisma.InventoryAlertWhereUniqueInput | Prisma.InventoryAlertWhereUniqueInput[]
-  update?: Prisma.InventoryAlertUpdateWithWhereUniqueWithoutWarehouseInput | Prisma.InventoryAlertUpdateWithWhereUniqueWithoutWarehouseInput[]
-  updateMany?: Prisma.InventoryAlertUpdateManyWithWhereWithoutWarehouseInput | Prisma.InventoryAlertUpdateManyWithWhereWithoutWarehouseInput[]
-  deleteMany?: Prisma.InventoryAlertScalarWhereInput | Prisma.InventoryAlertScalarWhereInput[]
+export type InventoryAlertCreateOrConnectWithoutWarehouseInput = {
+  where: Prisma.InventoryAlertWhereUniqueInput
+  create: Prisma.XOR<Prisma.InventoryAlertCreateWithoutWarehouseInput, Prisma.InventoryAlertUncheckedCreateWithoutWarehouseInput>
 }
 
-export type InventoryAlertUncheckedUpdateManyWithoutWarehouseNestedInput = {
-  create?: Prisma.XOR<Prisma.InventoryAlertCreateWithoutWarehouseInput, Prisma.InventoryAlertUncheckedCreateWithoutWarehouseInput> | Prisma.InventoryAlertCreateWithoutWarehouseInput[] | Prisma.InventoryAlertUncheckedCreateWithoutWarehouseInput[]
-  connectOrCreate?: Prisma.InventoryAlertCreateOrConnectWithoutWarehouseInput | Prisma.InventoryAlertCreateOrConnectWithoutWarehouseInput[]
-  upsert?: Prisma.InventoryAlertUpsertWithWhereUniqueWithoutWarehouseInput | Prisma.InventoryAlertUpsertWithWhereUniqueWithoutWarehouseInput[]
-  createMany?: Prisma.InventoryAlertCreateManyWarehouseInputEnvelope
-  set?: Prisma.InventoryAlertWhereUniqueInput | Prisma.InventoryAlertWhereUniqueInput[]
-  disconnect?: Prisma.InventoryAlertWhereUniqueInput | Prisma.InventoryAlertWhereUniqueInput[]
-  delete?: Prisma.InventoryAlertWhereUniqueInput | Prisma.InventoryAlertWhereUniqueInput[]
-  connect?: Prisma.InventoryAlertWhereUniqueInput | Prisma.InventoryAlertWhereUniqueInput[]
-  update?: Prisma.InventoryAlertUpdateWithWhereUniqueWithoutWarehouseInput | Prisma.InventoryAlertUpdateWithWhereUniqueWithoutWarehouseInput[]
-  updateMany?: Prisma.InventoryAlertUpdateManyWithWhereWithoutWarehouseInput | Prisma.InventoryAlertUpdateManyWithWhereWithoutWarehouseInput[]
-  deleteMany?: Prisma.InventoryAlertScalarWhereInput | Prisma.InventoryAlertScalarWhereInput[]
+export type InventoryAlertCreateManyWarehouseInputEnvelope = {
+  data: Prisma.InventoryAlertCreateManyWarehouseInput | Prisma.InventoryAlertCreateManyWarehouseInput[]
+  skipDuplicates?: boolean
 }
 
-export type EnumInventoryAlertTypeFieldUpdateOperationsInput = {
-  set?: $Enums.InventoryAlertType
+export type InventoryAlertUpsertWithWhereUniqueWithoutWarehouseInput = {
+  where: Prisma.InventoryAlertWhereUniqueInput
+  update: Prisma.XOR<Prisma.InventoryAlertUpdateWithoutWarehouseInput, Prisma.InventoryAlertUncheckedUpdateWithoutWarehouseInput>
+  create: Prisma.XOR<Prisma.InventoryAlertCreateWithoutWarehouseInput, Prisma.InventoryAlertUncheckedCreateWithoutWarehouseInput>
 }
 
-export type EnumInventoryAlertStatusFieldUpdateOperationsInput = {
-  set?: $Enums.InventoryAlertStatus
+export type InventoryAlertUpdateWithWhereUniqueWithoutWarehouseInput = {
+  where: Prisma.InventoryAlertWhereUniqueInput
+  data: Prisma.XOR<Prisma.InventoryAlertUpdateWithoutWarehouseInput, Prisma.InventoryAlertUncheckedUpdateWithoutWarehouseInput>
+}
+
+export type InventoryAlertUpdateManyWithWhereWithoutWarehouseInput = {
+  where: Prisma.InventoryAlertScalarWhereInput
+  data: Prisma.XOR<Prisma.InventoryAlertUpdateManyMutationInput, Prisma.InventoryAlertUncheckedUpdateManyWithoutWarehouseInput>
+}
+
+export type InventoryAlertScalarWhereInput = {
+  AND?: Prisma.InventoryAlertScalarWhereInput | Prisma.InventoryAlertScalarWhereInput[]
+  OR?: Prisma.InventoryAlertScalarWhereInput[]
+  NOT?: Prisma.InventoryAlertScalarWhereInput | Prisma.InventoryAlertScalarWhereInput[]
+  id?: Prisma.StringFilter<"InventoryAlert"> | string
+  variantId?: Prisma.StringFilter<"InventoryAlert"> | string
+  warehouseId?: Prisma.StringNullableFilter<"InventoryAlert"> | string | null
+  type?: Prisma.EnumInventoryAlertTypeFilter<"InventoryAlert"> | $Enums.InventoryAlertType
+  status?: Prisma.EnumInventoryAlertStatusFilter<"InventoryAlert"> | $Enums.InventoryAlertStatus
+  title?: Prisma.StringFilter<"InventoryAlert"> | string
+  message?: Prisma.StringNullableFilter<"InventoryAlert"> | string | null
+  currentStock?: Prisma.IntFilter<"InventoryAlert"> | number
+  threshold?: Prisma.IntNullableFilter<"InventoryAlert"> | number | null
+  acknowledgedByUserId?: Prisma.StringNullableFilter<"InventoryAlert"> | string | null
+  acknowledgedAt?: Prisma.DateTimeNullableFilter<"InventoryAlert"> | Date | string | null
+  resolvedAt?: Prisma.DateTimeNullableFilter<"InventoryAlert"> | Date | string | null
+  metadata?: Prisma.JsonNullableFilter<"InventoryAlert">
+  createdAt?: Prisma.DateTimeFilter<"InventoryAlert"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"InventoryAlert"> | Date | string
 }
 
 export type InventoryAlertCreateWithoutAcknowledgedByUserInput = {
@@ -786,27 +867,6 @@ export type InventoryAlertUpdateManyWithWhereWithoutAcknowledgedByUserInput = {
   data: Prisma.XOR<Prisma.InventoryAlertUpdateManyMutationInput, Prisma.InventoryAlertUncheckedUpdateManyWithoutAcknowledgedByUserInput>
 }
 
-export type InventoryAlertScalarWhereInput = {
-  AND?: Prisma.InventoryAlertScalarWhereInput | Prisma.InventoryAlertScalarWhereInput[]
-  OR?: Prisma.InventoryAlertScalarWhereInput[]
-  NOT?: Prisma.InventoryAlertScalarWhereInput | Prisma.InventoryAlertScalarWhereInput[]
-  id?: Prisma.StringFilter<"InventoryAlert"> | string
-  variantId?: Prisma.StringFilter<"InventoryAlert"> | string
-  warehouseId?: Prisma.StringNullableFilter<"InventoryAlert"> | string | null
-  type?: Prisma.EnumInventoryAlertTypeFilter<"InventoryAlert"> | $Enums.InventoryAlertType
-  status?: Prisma.EnumInventoryAlertStatusFilter<"InventoryAlert"> | $Enums.InventoryAlertStatus
-  title?: Prisma.StringFilter<"InventoryAlert"> | string
-  message?: Prisma.StringNullableFilter<"InventoryAlert"> | string | null
-  currentStock?: Prisma.IntFilter<"InventoryAlert"> | number
-  threshold?: Prisma.IntNullableFilter<"InventoryAlert"> | number | null
-  acknowledgedByUserId?: Prisma.StringNullableFilter<"InventoryAlert"> | string | null
-  acknowledgedAt?: Prisma.DateTimeNullableFilter<"InventoryAlert"> | Date | string | null
-  resolvedAt?: Prisma.DateTimeNullableFilter<"InventoryAlert"> | Date | string | null
-  metadata?: Prisma.JsonNullableFilter<"InventoryAlert">
-  createdAt?: Prisma.DateTimeFilter<"InventoryAlert"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"InventoryAlert"> | Date | string
-}
-
 export type InventoryAlertCreateWithoutVariantInput = {
   id?: string
   type: $Enums.InventoryAlertType
@@ -867,24 +927,7 @@ export type InventoryAlertUpdateManyWithWhereWithoutVariantInput = {
   data: Prisma.XOR<Prisma.InventoryAlertUpdateManyMutationInput, Prisma.InventoryAlertUncheckedUpdateManyWithoutVariantInput>
 }
 
-export type InventoryAlertCreateWithoutWarehouseInput = {
-  id?: string
-  type: $Enums.InventoryAlertType
-  status?: $Enums.InventoryAlertStatus
-  title: string
-  message?: string | null
-  currentStock: number
-  threshold?: number | null
-  acknowledgedAt?: Date | string | null
-  resolvedAt?: Date | string | null
-  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  variant: Prisma.ProductVariantCreateNestedOneWithoutInventoryAlertsInput
-  acknowledgedByUser?: Prisma.UserCreateNestedOneWithoutInventoryAlertsAcknowledgedInput
-}
-
-export type InventoryAlertUncheckedCreateWithoutWarehouseInput = {
+export type InventoryAlertCreateManyWarehouseInput = {
   id?: string
   variantId: string
   type: $Enums.InventoryAlertType
@@ -901,30 +944,55 @@ export type InventoryAlertUncheckedCreateWithoutWarehouseInput = {
   updatedAt?: Date | string
 }
 
-export type InventoryAlertCreateOrConnectWithoutWarehouseInput = {
-  where: Prisma.InventoryAlertWhereUniqueInput
-  create: Prisma.XOR<Prisma.InventoryAlertCreateWithoutWarehouseInput, Prisma.InventoryAlertUncheckedCreateWithoutWarehouseInput>
+export type InventoryAlertUpdateWithoutWarehouseInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumInventoryAlertTypeFieldUpdateOperationsInput | $Enums.InventoryAlertType
+  status?: Prisma.EnumInventoryAlertStatusFieldUpdateOperationsInput | $Enums.InventoryAlertStatus
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentStock?: Prisma.IntFieldUpdateOperationsInput | number
+  threshold?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  acknowledgedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  variant?: Prisma.ProductVariantUpdateOneRequiredWithoutInventoryAlertsNestedInput
+  acknowledgedByUser?: Prisma.UserUpdateOneWithoutInventoryAlertsAcknowledgedNestedInput
 }
 
-export type InventoryAlertCreateManyWarehouseInputEnvelope = {
-  data: Prisma.InventoryAlertCreateManyWarehouseInput | Prisma.InventoryAlertCreateManyWarehouseInput[]
-  skipDuplicates?: boolean
+export type InventoryAlertUncheckedUpdateWithoutWarehouseInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  variantId?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumInventoryAlertTypeFieldUpdateOperationsInput | $Enums.InventoryAlertType
+  status?: Prisma.EnumInventoryAlertStatusFieldUpdateOperationsInput | $Enums.InventoryAlertStatus
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentStock?: Prisma.IntFieldUpdateOperationsInput | number
+  threshold?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  acknowledgedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acknowledgedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type InventoryAlertUpsertWithWhereUniqueWithoutWarehouseInput = {
-  where: Prisma.InventoryAlertWhereUniqueInput
-  update: Prisma.XOR<Prisma.InventoryAlertUpdateWithoutWarehouseInput, Prisma.InventoryAlertUncheckedUpdateWithoutWarehouseInput>
-  create: Prisma.XOR<Prisma.InventoryAlertCreateWithoutWarehouseInput, Prisma.InventoryAlertUncheckedCreateWithoutWarehouseInput>
-}
-
-export type InventoryAlertUpdateWithWhereUniqueWithoutWarehouseInput = {
-  where: Prisma.InventoryAlertWhereUniqueInput
-  data: Prisma.XOR<Prisma.InventoryAlertUpdateWithoutWarehouseInput, Prisma.InventoryAlertUncheckedUpdateWithoutWarehouseInput>
-}
-
-export type InventoryAlertUpdateManyWithWhereWithoutWarehouseInput = {
-  where: Prisma.InventoryAlertScalarWhereInput
-  data: Prisma.XOR<Prisma.InventoryAlertUpdateManyMutationInput, Prisma.InventoryAlertUncheckedUpdateManyWithoutWarehouseInput>
+export type InventoryAlertUncheckedUpdateManyWithoutWarehouseInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  variantId?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumInventoryAlertTypeFieldUpdateOperationsInput | $Enums.InventoryAlertType
+  status?: Prisma.EnumInventoryAlertStatusFieldUpdateOperationsInput | $Enums.InventoryAlertStatus
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentStock?: Prisma.IntFieldUpdateOperationsInput | number
+  threshold?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  acknowledgedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acknowledgedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type InventoryAlertCreateManyAcknowledgedByUserInput = {
@@ -1049,74 +1117,6 @@ export type InventoryAlertUncheckedUpdateWithoutVariantInput = {
 export type InventoryAlertUncheckedUpdateManyWithoutVariantInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   warehouseId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  type?: Prisma.EnumInventoryAlertTypeFieldUpdateOperationsInput | $Enums.InventoryAlertType
-  status?: Prisma.EnumInventoryAlertStatusFieldUpdateOperationsInput | $Enums.InventoryAlertStatus
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  currentStock?: Prisma.IntFieldUpdateOperationsInput | number
-  threshold?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  acknowledgedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  acknowledgedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type InventoryAlertCreateManyWarehouseInput = {
-  id?: string
-  variantId: string
-  type: $Enums.InventoryAlertType
-  status?: $Enums.InventoryAlertStatus
-  title: string
-  message?: string | null
-  currentStock: number
-  threshold?: number | null
-  acknowledgedByUserId?: string | null
-  acknowledgedAt?: Date | string | null
-  resolvedAt?: Date | string | null
-  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Date | string
-  updatedAt?: Date | string
-}
-
-export type InventoryAlertUpdateWithoutWarehouseInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  type?: Prisma.EnumInventoryAlertTypeFieldUpdateOperationsInput | $Enums.InventoryAlertType
-  status?: Prisma.EnumInventoryAlertStatusFieldUpdateOperationsInput | $Enums.InventoryAlertStatus
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  currentStock?: Prisma.IntFieldUpdateOperationsInput | number
-  threshold?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  acknowledgedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  variant?: Prisma.ProductVariantUpdateOneRequiredWithoutInventoryAlertsNestedInput
-  acknowledgedByUser?: Prisma.UserUpdateOneWithoutInventoryAlertsAcknowledgedNestedInput
-}
-
-export type InventoryAlertUncheckedUpdateWithoutWarehouseInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  variantId?: Prisma.StringFieldUpdateOperationsInput | string
-  type?: Prisma.EnumInventoryAlertTypeFieldUpdateOperationsInput | $Enums.InventoryAlertType
-  status?: Prisma.EnumInventoryAlertStatusFieldUpdateOperationsInput | $Enums.InventoryAlertStatus
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  currentStock?: Prisma.IntFieldUpdateOperationsInput | number
-  threshold?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  acknowledgedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  acknowledgedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type InventoryAlertUncheckedUpdateManyWithoutWarehouseInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  variantId?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumInventoryAlertTypeFieldUpdateOperationsInput | $Enums.InventoryAlertType
   status?: Prisma.EnumInventoryAlertStatusFieldUpdateOperationsInput | $Enums.InventoryAlertStatus
   title?: Prisma.StringFieldUpdateOperationsInput | string

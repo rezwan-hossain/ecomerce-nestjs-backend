@@ -497,48 +497,6 @@ export type InventoryTransferItemSumOrderByAggregateInput = {
   unitCost?: Prisma.SortOrder
 }
 
-export type InventoryTransferItemCreateNestedManyWithoutVariantInput = {
-  create?: Prisma.XOR<Prisma.InventoryTransferItemCreateWithoutVariantInput, Prisma.InventoryTransferItemUncheckedCreateWithoutVariantInput> | Prisma.InventoryTransferItemCreateWithoutVariantInput[] | Prisma.InventoryTransferItemUncheckedCreateWithoutVariantInput[]
-  connectOrCreate?: Prisma.InventoryTransferItemCreateOrConnectWithoutVariantInput | Prisma.InventoryTransferItemCreateOrConnectWithoutVariantInput[]
-  createMany?: Prisma.InventoryTransferItemCreateManyVariantInputEnvelope
-  connect?: Prisma.InventoryTransferItemWhereUniqueInput | Prisma.InventoryTransferItemWhereUniqueInput[]
-}
-
-export type InventoryTransferItemUncheckedCreateNestedManyWithoutVariantInput = {
-  create?: Prisma.XOR<Prisma.InventoryTransferItemCreateWithoutVariantInput, Prisma.InventoryTransferItemUncheckedCreateWithoutVariantInput> | Prisma.InventoryTransferItemCreateWithoutVariantInput[] | Prisma.InventoryTransferItemUncheckedCreateWithoutVariantInput[]
-  connectOrCreate?: Prisma.InventoryTransferItemCreateOrConnectWithoutVariantInput | Prisma.InventoryTransferItemCreateOrConnectWithoutVariantInput[]
-  createMany?: Prisma.InventoryTransferItemCreateManyVariantInputEnvelope
-  connect?: Prisma.InventoryTransferItemWhereUniqueInput | Prisma.InventoryTransferItemWhereUniqueInput[]
-}
-
-export type InventoryTransferItemUpdateManyWithoutVariantNestedInput = {
-  create?: Prisma.XOR<Prisma.InventoryTransferItemCreateWithoutVariantInput, Prisma.InventoryTransferItemUncheckedCreateWithoutVariantInput> | Prisma.InventoryTransferItemCreateWithoutVariantInput[] | Prisma.InventoryTransferItemUncheckedCreateWithoutVariantInput[]
-  connectOrCreate?: Prisma.InventoryTransferItemCreateOrConnectWithoutVariantInput | Prisma.InventoryTransferItemCreateOrConnectWithoutVariantInput[]
-  upsert?: Prisma.InventoryTransferItemUpsertWithWhereUniqueWithoutVariantInput | Prisma.InventoryTransferItemUpsertWithWhereUniqueWithoutVariantInput[]
-  createMany?: Prisma.InventoryTransferItemCreateManyVariantInputEnvelope
-  set?: Prisma.InventoryTransferItemWhereUniqueInput | Prisma.InventoryTransferItemWhereUniqueInput[]
-  disconnect?: Prisma.InventoryTransferItemWhereUniqueInput | Prisma.InventoryTransferItemWhereUniqueInput[]
-  delete?: Prisma.InventoryTransferItemWhereUniqueInput | Prisma.InventoryTransferItemWhereUniqueInput[]
-  connect?: Prisma.InventoryTransferItemWhereUniqueInput | Prisma.InventoryTransferItemWhereUniqueInput[]
-  update?: Prisma.InventoryTransferItemUpdateWithWhereUniqueWithoutVariantInput | Prisma.InventoryTransferItemUpdateWithWhereUniqueWithoutVariantInput[]
-  updateMany?: Prisma.InventoryTransferItemUpdateManyWithWhereWithoutVariantInput | Prisma.InventoryTransferItemUpdateManyWithWhereWithoutVariantInput[]
-  deleteMany?: Prisma.InventoryTransferItemScalarWhereInput | Prisma.InventoryTransferItemScalarWhereInput[]
-}
-
-export type InventoryTransferItemUncheckedUpdateManyWithoutVariantNestedInput = {
-  create?: Prisma.XOR<Prisma.InventoryTransferItemCreateWithoutVariantInput, Prisma.InventoryTransferItemUncheckedCreateWithoutVariantInput> | Prisma.InventoryTransferItemCreateWithoutVariantInput[] | Prisma.InventoryTransferItemUncheckedCreateWithoutVariantInput[]
-  connectOrCreate?: Prisma.InventoryTransferItemCreateOrConnectWithoutVariantInput | Prisma.InventoryTransferItemCreateOrConnectWithoutVariantInput[]
-  upsert?: Prisma.InventoryTransferItemUpsertWithWhereUniqueWithoutVariantInput | Prisma.InventoryTransferItemUpsertWithWhereUniqueWithoutVariantInput[]
-  createMany?: Prisma.InventoryTransferItemCreateManyVariantInputEnvelope
-  set?: Prisma.InventoryTransferItemWhereUniqueInput | Prisma.InventoryTransferItemWhereUniqueInput[]
-  disconnect?: Prisma.InventoryTransferItemWhereUniqueInput | Prisma.InventoryTransferItemWhereUniqueInput[]
-  delete?: Prisma.InventoryTransferItemWhereUniqueInput | Prisma.InventoryTransferItemWhereUniqueInput[]
-  connect?: Prisma.InventoryTransferItemWhereUniqueInput | Prisma.InventoryTransferItemWhereUniqueInput[]
-  update?: Prisma.InventoryTransferItemUpdateWithWhereUniqueWithoutVariantInput | Prisma.InventoryTransferItemUpdateWithWhereUniqueWithoutVariantInput[]
-  updateMany?: Prisma.InventoryTransferItemUpdateManyWithWhereWithoutVariantInput | Prisma.InventoryTransferItemUpdateManyWithWhereWithoutVariantInput[]
-  deleteMany?: Prisma.InventoryTransferItemScalarWhereInput | Prisma.InventoryTransferItemScalarWhereInput[]
-}
-
 export type InventoryTransferItemCreateNestedManyWithoutTransferInput = {
   create?: Prisma.XOR<Prisma.InventoryTransferItemCreateWithoutTransferInput, Prisma.InventoryTransferItemUncheckedCreateWithoutTransferInput> | Prisma.InventoryTransferItemCreateWithoutTransferInput[] | Prisma.InventoryTransferItemUncheckedCreateWithoutTransferInput[]
   connectOrCreate?: Prisma.InventoryTransferItemCreateOrConnectWithoutTransferInput | Prisma.InventoryTransferItemCreateOrConnectWithoutTransferInput[]
@@ -581,70 +539,46 @@ export type InventoryTransferItemUncheckedUpdateManyWithoutTransferNestedInput =
   deleteMany?: Prisma.InventoryTransferItemScalarWhereInput | Prisma.InventoryTransferItemScalarWhereInput[]
 }
 
-export type InventoryTransferItemCreateWithoutVariantInput = {
-  id?: string
-  sentQty: number
-  receivedQty?: number
-  damagedQty?: number
-  unitCost?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  note?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  transfer: Prisma.InventoryTransferCreateNestedOneWithoutItemsInput
+export type InventoryTransferItemCreateNestedManyWithoutVariantInput = {
+  create?: Prisma.XOR<Prisma.InventoryTransferItemCreateWithoutVariantInput, Prisma.InventoryTransferItemUncheckedCreateWithoutVariantInput> | Prisma.InventoryTransferItemCreateWithoutVariantInput[] | Prisma.InventoryTransferItemUncheckedCreateWithoutVariantInput[]
+  connectOrCreate?: Prisma.InventoryTransferItemCreateOrConnectWithoutVariantInput | Prisma.InventoryTransferItemCreateOrConnectWithoutVariantInput[]
+  createMany?: Prisma.InventoryTransferItemCreateManyVariantInputEnvelope
+  connect?: Prisma.InventoryTransferItemWhereUniqueInput | Prisma.InventoryTransferItemWhereUniqueInput[]
 }
 
-export type InventoryTransferItemUncheckedCreateWithoutVariantInput = {
-  id?: string
-  transferId: string
-  sentQty: number
-  receivedQty?: number
-  damagedQty?: number
-  unitCost?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  note?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
+export type InventoryTransferItemUncheckedCreateNestedManyWithoutVariantInput = {
+  create?: Prisma.XOR<Prisma.InventoryTransferItemCreateWithoutVariantInput, Prisma.InventoryTransferItemUncheckedCreateWithoutVariantInput> | Prisma.InventoryTransferItemCreateWithoutVariantInput[] | Prisma.InventoryTransferItemUncheckedCreateWithoutVariantInput[]
+  connectOrCreate?: Prisma.InventoryTransferItemCreateOrConnectWithoutVariantInput | Prisma.InventoryTransferItemCreateOrConnectWithoutVariantInput[]
+  createMany?: Prisma.InventoryTransferItemCreateManyVariantInputEnvelope
+  connect?: Prisma.InventoryTransferItemWhereUniqueInput | Prisma.InventoryTransferItemWhereUniqueInput[]
 }
 
-export type InventoryTransferItemCreateOrConnectWithoutVariantInput = {
-  where: Prisma.InventoryTransferItemWhereUniqueInput
-  create: Prisma.XOR<Prisma.InventoryTransferItemCreateWithoutVariantInput, Prisma.InventoryTransferItemUncheckedCreateWithoutVariantInput>
+export type InventoryTransferItemUpdateManyWithoutVariantNestedInput = {
+  create?: Prisma.XOR<Prisma.InventoryTransferItemCreateWithoutVariantInput, Prisma.InventoryTransferItemUncheckedCreateWithoutVariantInput> | Prisma.InventoryTransferItemCreateWithoutVariantInput[] | Prisma.InventoryTransferItemUncheckedCreateWithoutVariantInput[]
+  connectOrCreate?: Prisma.InventoryTransferItemCreateOrConnectWithoutVariantInput | Prisma.InventoryTransferItemCreateOrConnectWithoutVariantInput[]
+  upsert?: Prisma.InventoryTransferItemUpsertWithWhereUniqueWithoutVariantInput | Prisma.InventoryTransferItemUpsertWithWhereUniqueWithoutVariantInput[]
+  createMany?: Prisma.InventoryTransferItemCreateManyVariantInputEnvelope
+  set?: Prisma.InventoryTransferItemWhereUniqueInput | Prisma.InventoryTransferItemWhereUniqueInput[]
+  disconnect?: Prisma.InventoryTransferItemWhereUniqueInput | Prisma.InventoryTransferItemWhereUniqueInput[]
+  delete?: Prisma.InventoryTransferItemWhereUniqueInput | Prisma.InventoryTransferItemWhereUniqueInput[]
+  connect?: Prisma.InventoryTransferItemWhereUniqueInput | Prisma.InventoryTransferItemWhereUniqueInput[]
+  update?: Prisma.InventoryTransferItemUpdateWithWhereUniqueWithoutVariantInput | Prisma.InventoryTransferItemUpdateWithWhereUniqueWithoutVariantInput[]
+  updateMany?: Prisma.InventoryTransferItemUpdateManyWithWhereWithoutVariantInput | Prisma.InventoryTransferItemUpdateManyWithWhereWithoutVariantInput[]
+  deleteMany?: Prisma.InventoryTransferItemScalarWhereInput | Prisma.InventoryTransferItemScalarWhereInput[]
 }
 
-export type InventoryTransferItemCreateManyVariantInputEnvelope = {
-  data: Prisma.InventoryTransferItemCreateManyVariantInput | Prisma.InventoryTransferItemCreateManyVariantInput[]
-  skipDuplicates?: boolean
-}
-
-export type InventoryTransferItemUpsertWithWhereUniqueWithoutVariantInput = {
-  where: Prisma.InventoryTransferItemWhereUniqueInput
-  update: Prisma.XOR<Prisma.InventoryTransferItemUpdateWithoutVariantInput, Prisma.InventoryTransferItemUncheckedUpdateWithoutVariantInput>
-  create: Prisma.XOR<Prisma.InventoryTransferItemCreateWithoutVariantInput, Prisma.InventoryTransferItemUncheckedCreateWithoutVariantInput>
-}
-
-export type InventoryTransferItemUpdateWithWhereUniqueWithoutVariantInput = {
-  where: Prisma.InventoryTransferItemWhereUniqueInput
-  data: Prisma.XOR<Prisma.InventoryTransferItemUpdateWithoutVariantInput, Prisma.InventoryTransferItemUncheckedUpdateWithoutVariantInput>
-}
-
-export type InventoryTransferItemUpdateManyWithWhereWithoutVariantInput = {
-  where: Prisma.InventoryTransferItemScalarWhereInput
-  data: Prisma.XOR<Prisma.InventoryTransferItemUpdateManyMutationInput, Prisma.InventoryTransferItemUncheckedUpdateManyWithoutVariantInput>
-}
-
-export type InventoryTransferItemScalarWhereInput = {
-  AND?: Prisma.InventoryTransferItemScalarWhereInput | Prisma.InventoryTransferItemScalarWhereInput[]
-  OR?: Prisma.InventoryTransferItemScalarWhereInput[]
-  NOT?: Prisma.InventoryTransferItemScalarWhereInput | Prisma.InventoryTransferItemScalarWhereInput[]
-  id?: Prisma.StringFilter<"InventoryTransferItem"> | string
-  transferId?: Prisma.StringFilter<"InventoryTransferItem"> | string
-  variantId?: Prisma.StringFilter<"InventoryTransferItem"> | string
-  sentQty?: Prisma.IntFilter<"InventoryTransferItem"> | number
-  receivedQty?: Prisma.IntFilter<"InventoryTransferItem"> | number
-  damagedQty?: Prisma.IntFilter<"InventoryTransferItem"> | number
-  unitCost?: Prisma.DecimalNullableFilter<"InventoryTransferItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  note?: Prisma.StringNullableFilter<"InventoryTransferItem"> | string | null
-  createdAt?: Prisma.DateTimeFilter<"InventoryTransferItem"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"InventoryTransferItem"> | Date | string
+export type InventoryTransferItemUncheckedUpdateManyWithoutVariantNestedInput = {
+  create?: Prisma.XOR<Prisma.InventoryTransferItemCreateWithoutVariantInput, Prisma.InventoryTransferItemUncheckedCreateWithoutVariantInput> | Prisma.InventoryTransferItemCreateWithoutVariantInput[] | Prisma.InventoryTransferItemUncheckedCreateWithoutVariantInput[]
+  connectOrCreate?: Prisma.InventoryTransferItemCreateOrConnectWithoutVariantInput | Prisma.InventoryTransferItemCreateOrConnectWithoutVariantInput[]
+  upsert?: Prisma.InventoryTransferItemUpsertWithWhereUniqueWithoutVariantInput | Prisma.InventoryTransferItemUpsertWithWhereUniqueWithoutVariantInput[]
+  createMany?: Prisma.InventoryTransferItemCreateManyVariantInputEnvelope
+  set?: Prisma.InventoryTransferItemWhereUniqueInput | Prisma.InventoryTransferItemWhereUniqueInput[]
+  disconnect?: Prisma.InventoryTransferItemWhereUniqueInput | Prisma.InventoryTransferItemWhereUniqueInput[]
+  delete?: Prisma.InventoryTransferItemWhereUniqueInput | Prisma.InventoryTransferItemWhereUniqueInput[]
+  connect?: Prisma.InventoryTransferItemWhereUniqueInput | Prisma.InventoryTransferItemWhereUniqueInput[]
+  update?: Prisma.InventoryTransferItemUpdateWithWhereUniqueWithoutVariantInput | Prisma.InventoryTransferItemUpdateWithWhereUniqueWithoutVariantInput[]
+  updateMany?: Prisma.InventoryTransferItemUpdateManyWithWhereWithoutVariantInput | Prisma.InventoryTransferItemUpdateManyWithWhereWithoutVariantInput[]
+  deleteMany?: Prisma.InventoryTransferItemScalarWhereInput | Prisma.InventoryTransferItemScalarWhereInput[]
 }
 
 export type InventoryTransferItemCreateWithoutTransferInput = {
@@ -697,7 +631,35 @@ export type InventoryTransferItemUpdateManyWithWhereWithoutTransferInput = {
   data: Prisma.XOR<Prisma.InventoryTransferItemUpdateManyMutationInput, Prisma.InventoryTransferItemUncheckedUpdateManyWithoutTransferInput>
 }
 
-export type InventoryTransferItemCreateManyVariantInput = {
+export type InventoryTransferItemScalarWhereInput = {
+  AND?: Prisma.InventoryTransferItemScalarWhereInput | Prisma.InventoryTransferItemScalarWhereInput[]
+  OR?: Prisma.InventoryTransferItemScalarWhereInput[]
+  NOT?: Prisma.InventoryTransferItemScalarWhereInput | Prisma.InventoryTransferItemScalarWhereInput[]
+  id?: Prisma.StringFilter<"InventoryTransferItem"> | string
+  transferId?: Prisma.StringFilter<"InventoryTransferItem"> | string
+  variantId?: Prisma.StringFilter<"InventoryTransferItem"> | string
+  sentQty?: Prisma.IntFilter<"InventoryTransferItem"> | number
+  receivedQty?: Prisma.IntFilter<"InventoryTransferItem"> | number
+  damagedQty?: Prisma.IntFilter<"InventoryTransferItem"> | number
+  unitCost?: Prisma.DecimalNullableFilter<"InventoryTransferItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  note?: Prisma.StringNullableFilter<"InventoryTransferItem"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"InventoryTransferItem"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"InventoryTransferItem"> | Date | string
+}
+
+export type InventoryTransferItemCreateWithoutVariantInput = {
+  id?: string
+  sentQty: number
+  receivedQty?: number
+  damagedQty?: number
+  unitCost?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  note?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  transfer: Prisma.InventoryTransferCreateNestedOneWithoutItemsInput
+}
+
+export type InventoryTransferItemUncheckedCreateWithoutVariantInput = {
   id?: string
   transferId: string
   sentQty: number
@@ -709,40 +671,30 @@ export type InventoryTransferItemCreateManyVariantInput = {
   updatedAt?: Date | string
 }
 
-export type InventoryTransferItemUpdateWithoutVariantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  sentQty?: Prisma.IntFieldUpdateOperationsInput | number
-  receivedQty?: Prisma.IntFieldUpdateOperationsInput | number
-  damagedQty?: Prisma.IntFieldUpdateOperationsInput | number
-  unitCost?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  transfer?: Prisma.InventoryTransferUpdateOneRequiredWithoutItemsNestedInput
+export type InventoryTransferItemCreateOrConnectWithoutVariantInput = {
+  where: Prisma.InventoryTransferItemWhereUniqueInput
+  create: Prisma.XOR<Prisma.InventoryTransferItemCreateWithoutVariantInput, Prisma.InventoryTransferItemUncheckedCreateWithoutVariantInput>
 }
 
-export type InventoryTransferItemUncheckedUpdateWithoutVariantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  transferId?: Prisma.StringFieldUpdateOperationsInput | string
-  sentQty?: Prisma.IntFieldUpdateOperationsInput | number
-  receivedQty?: Prisma.IntFieldUpdateOperationsInput | number
-  damagedQty?: Prisma.IntFieldUpdateOperationsInput | number
-  unitCost?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+export type InventoryTransferItemCreateManyVariantInputEnvelope = {
+  data: Prisma.InventoryTransferItemCreateManyVariantInput | Prisma.InventoryTransferItemCreateManyVariantInput[]
+  skipDuplicates?: boolean
 }
 
-export type InventoryTransferItemUncheckedUpdateManyWithoutVariantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  transferId?: Prisma.StringFieldUpdateOperationsInput | string
-  sentQty?: Prisma.IntFieldUpdateOperationsInput | number
-  receivedQty?: Prisma.IntFieldUpdateOperationsInput | number
-  damagedQty?: Prisma.IntFieldUpdateOperationsInput | number
-  unitCost?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+export type InventoryTransferItemUpsertWithWhereUniqueWithoutVariantInput = {
+  where: Prisma.InventoryTransferItemWhereUniqueInput
+  update: Prisma.XOR<Prisma.InventoryTransferItemUpdateWithoutVariantInput, Prisma.InventoryTransferItemUncheckedUpdateWithoutVariantInput>
+  create: Prisma.XOR<Prisma.InventoryTransferItemCreateWithoutVariantInput, Prisma.InventoryTransferItemUncheckedCreateWithoutVariantInput>
+}
+
+export type InventoryTransferItemUpdateWithWhereUniqueWithoutVariantInput = {
+  where: Prisma.InventoryTransferItemWhereUniqueInput
+  data: Prisma.XOR<Prisma.InventoryTransferItemUpdateWithoutVariantInput, Prisma.InventoryTransferItemUncheckedUpdateWithoutVariantInput>
+}
+
+export type InventoryTransferItemUpdateManyWithWhereWithoutVariantInput = {
+  where: Prisma.InventoryTransferItemScalarWhereInput
+  data: Prisma.XOR<Prisma.InventoryTransferItemUpdateManyMutationInput, Prisma.InventoryTransferItemUncheckedUpdateManyWithoutVariantInput>
 }
 
 export type InventoryTransferItemCreateManyTransferInput = {
@@ -784,6 +736,54 @@ export type InventoryTransferItemUncheckedUpdateWithoutTransferInput = {
 export type InventoryTransferItemUncheckedUpdateManyWithoutTransferInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   variantId?: Prisma.StringFieldUpdateOperationsInput | string
+  sentQty?: Prisma.IntFieldUpdateOperationsInput | number
+  receivedQty?: Prisma.IntFieldUpdateOperationsInput | number
+  damagedQty?: Prisma.IntFieldUpdateOperationsInput | number
+  unitCost?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type InventoryTransferItemCreateManyVariantInput = {
+  id?: string
+  transferId: string
+  sentQty: number
+  receivedQty?: number
+  damagedQty?: number
+  unitCost?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  note?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type InventoryTransferItemUpdateWithoutVariantInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  sentQty?: Prisma.IntFieldUpdateOperationsInput | number
+  receivedQty?: Prisma.IntFieldUpdateOperationsInput | number
+  damagedQty?: Prisma.IntFieldUpdateOperationsInput | number
+  unitCost?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  transfer?: Prisma.InventoryTransferUpdateOneRequiredWithoutItemsNestedInput
+}
+
+export type InventoryTransferItemUncheckedUpdateWithoutVariantInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  transferId?: Prisma.StringFieldUpdateOperationsInput | string
+  sentQty?: Prisma.IntFieldUpdateOperationsInput | number
+  receivedQty?: Prisma.IntFieldUpdateOperationsInput | number
+  damagedQty?: Prisma.IntFieldUpdateOperationsInput | number
+  unitCost?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type InventoryTransferItemUncheckedUpdateManyWithoutVariantInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  transferId?: Prisma.StringFieldUpdateOperationsInput | string
   sentQty?: Prisma.IntFieldUpdateOperationsInput | number
   receivedQty?: Prisma.IntFieldUpdateOperationsInput | number
   damagedQty?: Prisma.IntFieldUpdateOperationsInput | number

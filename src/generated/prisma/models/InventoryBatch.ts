@@ -678,48 +678,6 @@ export type InventoryBatchSumOrderByAggregateInput = {
   unitCost?: Prisma.SortOrder
 }
 
-export type InventoryBatchCreateNestedManyWithoutVariantInput = {
-  create?: Prisma.XOR<Prisma.InventoryBatchCreateWithoutVariantInput, Prisma.InventoryBatchUncheckedCreateWithoutVariantInput> | Prisma.InventoryBatchCreateWithoutVariantInput[] | Prisma.InventoryBatchUncheckedCreateWithoutVariantInput[]
-  connectOrCreate?: Prisma.InventoryBatchCreateOrConnectWithoutVariantInput | Prisma.InventoryBatchCreateOrConnectWithoutVariantInput[]
-  createMany?: Prisma.InventoryBatchCreateManyVariantInputEnvelope
-  connect?: Prisma.InventoryBatchWhereUniqueInput | Prisma.InventoryBatchWhereUniqueInput[]
-}
-
-export type InventoryBatchUncheckedCreateNestedManyWithoutVariantInput = {
-  create?: Prisma.XOR<Prisma.InventoryBatchCreateWithoutVariantInput, Prisma.InventoryBatchUncheckedCreateWithoutVariantInput> | Prisma.InventoryBatchCreateWithoutVariantInput[] | Prisma.InventoryBatchUncheckedCreateWithoutVariantInput[]
-  connectOrCreate?: Prisma.InventoryBatchCreateOrConnectWithoutVariantInput | Prisma.InventoryBatchCreateOrConnectWithoutVariantInput[]
-  createMany?: Prisma.InventoryBatchCreateManyVariantInputEnvelope
-  connect?: Prisma.InventoryBatchWhereUniqueInput | Prisma.InventoryBatchWhereUniqueInput[]
-}
-
-export type InventoryBatchUpdateManyWithoutVariantNestedInput = {
-  create?: Prisma.XOR<Prisma.InventoryBatchCreateWithoutVariantInput, Prisma.InventoryBatchUncheckedCreateWithoutVariantInput> | Prisma.InventoryBatchCreateWithoutVariantInput[] | Prisma.InventoryBatchUncheckedCreateWithoutVariantInput[]
-  connectOrCreate?: Prisma.InventoryBatchCreateOrConnectWithoutVariantInput | Prisma.InventoryBatchCreateOrConnectWithoutVariantInput[]
-  upsert?: Prisma.InventoryBatchUpsertWithWhereUniqueWithoutVariantInput | Prisma.InventoryBatchUpsertWithWhereUniqueWithoutVariantInput[]
-  createMany?: Prisma.InventoryBatchCreateManyVariantInputEnvelope
-  set?: Prisma.InventoryBatchWhereUniqueInput | Prisma.InventoryBatchWhereUniqueInput[]
-  disconnect?: Prisma.InventoryBatchWhereUniqueInput | Prisma.InventoryBatchWhereUniqueInput[]
-  delete?: Prisma.InventoryBatchWhereUniqueInput | Prisma.InventoryBatchWhereUniqueInput[]
-  connect?: Prisma.InventoryBatchWhereUniqueInput | Prisma.InventoryBatchWhereUniqueInput[]
-  update?: Prisma.InventoryBatchUpdateWithWhereUniqueWithoutVariantInput | Prisma.InventoryBatchUpdateWithWhereUniqueWithoutVariantInput[]
-  updateMany?: Prisma.InventoryBatchUpdateManyWithWhereWithoutVariantInput | Prisma.InventoryBatchUpdateManyWithWhereWithoutVariantInput[]
-  deleteMany?: Prisma.InventoryBatchScalarWhereInput | Prisma.InventoryBatchScalarWhereInput[]
-}
-
-export type InventoryBatchUncheckedUpdateManyWithoutVariantNestedInput = {
-  create?: Prisma.XOR<Prisma.InventoryBatchCreateWithoutVariantInput, Prisma.InventoryBatchUncheckedCreateWithoutVariantInput> | Prisma.InventoryBatchCreateWithoutVariantInput[] | Prisma.InventoryBatchUncheckedCreateWithoutVariantInput[]
-  connectOrCreate?: Prisma.InventoryBatchCreateOrConnectWithoutVariantInput | Prisma.InventoryBatchCreateOrConnectWithoutVariantInput[]
-  upsert?: Prisma.InventoryBatchUpsertWithWhereUniqueWithoutVariantInput | Prisma.InventoryBatchUpsertWithWhereUniqueWithoutVariantInput[]
-  createMany?: Prisma.InventoryBatchCreateManyVariantInputEnvelope
-  set?: Prisma.InventoryBatchWhereUniqueInput | Prisma.InventoryBatchWhereUniqueInput[]
-  disconnect?: Prisma.InventoryBatchWhereUniqueInput | Prisma.InventoryBatchWhereUniqueInput[]
-  delete?: Prisma.InventoryBatchWhereUniqueInput | Prisma.InventoryBatchWhereUniqueInput[]
-  connect?: Prisma.InventoryBatchWhereUniqueInput | Prisma.InventoryBatchWhereUniqueInput[]
-  update?: Prisma.InventoryBatchUpdateWithWhereUniqueWithoutVariantInput | Prisma.InventoryBatchUpdateWithWhereUniqueWithoutVariantInput[]
-  updateMany?: Prisma.InventoryBatchUpdateManyWithWhereWithoutVariantInput | Prisma.InventoryBatchUpdateManyWithWhereWithoutVariantInput[]
-  deleteMany?: Prisma.InventoryBatchScalarWhereInput | Prisma.InventoryBatchScalarWhereInput[]
-}
-
 export type InventoryBatchCreateNestedManyWithoutWarehouseInput = {
   create?: Prisma.XOR<Prisma.InventoryBatchCreateWithoutWarehouseInput, Prisma.InventoryBatchUncheckedCreateWithoutWarehouseInput> | Prisma.InventoryBatchCreateWithoutWarehouseInput[] | Prisma.InventoryBatchUncheckedCreateWithoutWarehouseInput[]
   connectOrCreate?: Prisma.InventoryBatchCreateOrConnectWithoutWarehouseInput | Prisma.InventoryBatchCreateOrConnectWithoutWarehouseInput[]
@@ -866,96 +824,46 @@ export type InventoryBatchUncheckedUpdateManyWithoutPurchaseOrderItemNestedInput
   deleteMany?: Prisma.InventoryBatchScalarWhereInput | Prisma.InventoryBatchScalarWhereInput[]
 }
 
-export type InventoryBatchCreateWithoutVariantInput = {
-  id?: string
-  batchNumber: string
-  barcode?: string | null
-  quantity: number
-  initialQty: number
-  unitCost?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  manufacturedAt?: Date | string | null
-  expiresAt?: Date | string | null
-  receivedAt?: Date | string | null
-  status?: $Enums.BatchStatus
-  note?: string | null
-  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  warehouse: Prisma.WarehouseCreateNestedOneWithoutInventoryBatchesInput
-  supplier?: Prisma.SupplierCreateNestedOneWithoutBatchesInput
-  purchaseOrderItem?: Prisma.PurchaseOrderItemCreateNestedOneWithoutBatchesInput
-  movements?: Prisma.InventoryMovementCreateNestedManyWithoutBatchInput
+export type InventoryBatchCreateNestedManyWithoutVariantInput = {
+  create?: Prisma.XOR<Prisma.InventoryBatchCreateWithoutVariantInput, Prisma.InventoryBatchUncheckedCreateWithoutVariantInput> | Prisma.InventoryBatchCreateWithoutVariantInput[] | Prisma.InventoryBatchUncheckedCreateWithoutVariantInput[]
+  connectOrCreate?: Prisma.InventoryBatchCreateOrConnectWithoutVariantInput | Prisma.InventoryBatchCreateOrConnectWithoutVariantInput[]
+  createMany?: Prisma.InventoryBatchCreateManyVariantInputEnvelope
+  connect?: Prisma.InventoryBatchWhereUniqueInput | Prisma.InventoryBatchWhereUniqueInput[]
 }
 
-export type InventoryBatchUncheckedCreateWithoutVariantInput = {
-  id?: string
-  warehouseId: string
-  batchNumber: string
-  barcode?: string | null
-  quantity: number
-  initialQty: number
-  unitCost?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  manufacturedAt?: Date | string | null
-  expiresAt?: Date | string | null
-  receivedAt?: Date | string | null
-  supplierId?: string | null
-  purchaseOrderItemId?: string | null
-  status?: $Enums.BatchStatus
-  note?: string | null
-  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  movements?: Prisma.InventoryMovementUncheckedCreateNestedManyWithoutBatchInput
+export type InventoryBatchUncheckedCreateNestedManyWithoutVariantInput = {
+  create?: Prisma.XOR<Prisma.InventoryBatchCreateWithoutVariantInput, Prisma.InventoryBatchUncheckedCreateWithoutVariantInput> | Prisma.InventoryBatchCreateWithoutVariantInput[] | Prisma.InventoryBatchUncheckedCreateWithoutVariantInput[]
+  connectOrCreate?: Prisma.InventoryBatchCreateOrConnectWithoutVariantInput | Prisma.InventoryBatchCreateOrConnectWithoutVariantInput[]
+  createMany?: Prisma.InventoryBatchCreateManyVariantInputEnvelope
+  connect?: Prisma.InventoryBatchWhereUniqueInput | Prisma.InventoryBatchWhereUniqueInput[]
 }
 
-export type InventoryBatchCreateOrConnectWithoutVariantInput = {
-  where: Prisma.InventoryBatchWhereUniqueInput
-  create: Prisma.XOR<Prisma.InventoryBatchCreateWithoutVariantInput, Prisma.InventoryBatchUncheckedCreateWithoutVariantInput>
+export type InventoryBatchUpdateManyWithoutVariantNestedInput = {
+  create?: Prisma.XOR<Prisma.InventoryBatchCreateWithoutVariantInput, Prisma.InventoryBatchUncheckedCreateWithoutVariantInput> | Prisma.InventoryBatchCreateWithoutVariantInput[] | Prisma.InventoryBatchUncheckedCreateWithoutVariantInput[]
+  connectOrCreate?: Prisma.InventoryBatchCreateOrConnectWithoutVariantInput | Prisma.InventoryBatchCreateOrConnectWithoutVariantInput[]
+  upsert?: Prisma.InventoryBatchUpsertWithWhereUniqueWithoutVariantInput | Prisma.InventoryBatchUpsertWithWhereUniqueWithoutVariantInput[]
+  createMany?: Prisma.InventoryBatchCreateManyVariantInputEnvelope
+  set?: Prisma.InventoryBatchWhereUniqueInput | Prisma.InventoryBatchWhereUniqueInput[]
+  disconnect?: Prisma.InventoryBatchWhereUniqueInput | Prisma.InventoryBatchWhereUniqueInput[]
+  delete?: Prisma.InventoryBatchWhereUniqueInput | Prisma.InventoryBatchWhereUniqueInput[]
+  connect?: Prisma.InventoryBatchWhereUniqueInput | Prisma.InventoryBatchWhereUniqueInput[]
+  update?: Prisma.InventoryBatchUpdateWithWhereUniqueWithoutVariantInput | Prisma.InventoryBatchUpdateWithWhereUniqueWithoutVariantInput[]
+  updateMany?: Prisma.InventoryBatchUpdateManyWithWhereWithoutVariantInput | Prisma.InventoryBatchUpdateManyWithWhereWithoutVariantInput[]
+  deleteMany?: Prisma.InventoryBatchScalarWhereInput | Prisma.InventoryBatchScalarWhereInput[]
 }
 
-export type InventoryBatchCreateManyVariantInputEnvelope = {
-  data: Prisma.InventoryBatchCreateManyVariantInput | Prisma.InventoryBatchCreateManyVariantInput[]
-  skipDuplicates?: boolean
-}
-
-export type InventoryBatchUpsertWithWhereUniqueWithoutVariantInput = {
-  where: Prisma.InventoryBatchWhereUniqueInput
-  update: Prisma.XOR<Prisma.InventoryBatchUpdateWithoutVariantInput, Prisma.InventoryBatchUncheckedUpdateWithoutVariantInput>
-  create: Prisma.XOR<Prisma.InventoryBatchCreateWithoutVariantInput, Prisma.InventoryBatchUncheckedCreateWithoutVariantInput>
-}
-
-export type InventoryBatchUpdateWithWhereUniqueWithoutVariantInput = {
-  where: Prisma.InventoryBatchWhereUniqueInput
-  data: Prisma.XOR<Prisma.InventoryBatchUpdateWithoutVariantInput, Prisma.InventoryBatchUncheckedUpdateWithoutVariantInput>
-}
-
-export type InventoryBatchUpdateManyWithWhereWithoutVariantInput = {
-  where: Prisma.InventoryBatchScalarWhereInput
-  data: Prisma.XOR<Prisma.InventoryBatchUpdateManyMutationInput, Prisma.InventoryBatchUncheckedUpdateManyWithoutVariantInput>
-}
-
-export type InventoryBatchScalarWhereInput = {
-  AND?: Prisma.InventoryBatchScalarWhereInput | Prisma.InventoryBatchScalarWhereInput[]
-  OR?: Prisma.InventoryBatchScalarWhereInput[]
-  NOT?: Prisma.InventoryBatchScalarWhereInput | Prisma.InventoryBatchScalarWhereInput[]
-  id?: Prisma.StringFilter<"InventoryBatch"> | string
-  variantId?: Prisma.StringFilter<"InventoryBatch"> | string
-  warehouseId?: Prisma.StringFilter<"InventoryBatch"> | string
-  batchNumber?: Prisma.StringFilter<"InventoryBatch"> | string
-  barcode?: Prisma.StringNullableFilter<"InventoryBatch"> | string | null
-  quantity?: Prisma.IntFilter<"InventoryBatch"> | number
-  initialQty?: Prisma.IntFilter<"InventoryBatch"> | number
-  unitCost?: Prisma.DecimalNullableFilter<"InventoryBatch"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  manufacturedAt?: Prisma.DateTimeNullableFilter<"InventoryBatch"> | Date | string | null
-  expiresAt?: Prisma.DateTimeNullableFilter<"InventoryBatch"> | Date | string | null
-  receivedAt?: Prisma.DateTimeNullableFilter<"InventoryBatch"> | Date | string | null
-  supplierId?: Prisma.StringNullableFilter<"InventoryBatch"> | string | null
-  purchaseOrderItemId?: Prisma.StringNullableFilter<"InventoryBatch"> | string | null
-  status?: Prisma.EnumBatchStatusFilter<"InventoryBatch"> | $Enums.BatchStatus
-  note?: Prisma.StringNullableFilter<"InventoryBatch"> | string | null
-  metadata?: Prisma.JsonNullableFilter<"InventoryBatch">
-  createdAt?: Prisma.DateTimeFilter<"InventoryBatch"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"InventoryBatch"> | Date | string
+export type InventoryBatchUncheckedUpdateManyWithoutVariantNestedInput = {
+  create?: Prisma.XOR<Prisma.InventoryBatchCreateWithoutVariantInput, Prisma.InventoryBatchUncheckedCreateWithoutVariantInput> | Prisma.InventoryBatchCreateWithoutVariantInput[] | Prisma.InventoryBatchUncheckedCreateWithoutVariantInput[]
+  connectOrCreate?: Prisma.InventoryBatchCreateOrConnectWithoutVariantInput | Prisma.InventoryBatchCreateOrConnectWithoutVariantInput[]
+  upsert?: Prisma.InventoryBatchUpsertWithWhereUniqueWithoutVariantInput | Prisma.InventoryBatchUpsertWithWhereUniqueWithoutVariantInput[]
+  createMany?: Prisma.InventoryBatchCreateManyVariantInputEnvelope
+  set?: Prisma.InventoryBatchWhereUniqueInput | Prisma.InventoryBatchWhereUniqueInput[]
+  disconnect?: Prisma.InventoryBatchWhereUniqueInput | Prisma.InventoryBatchWhereUniqueInput[]
+  delete?: Prisma.InventoryBatchWhereUniqueInput | Prisma.InventoryBatchWhereUniqueInput[]
+  connect?: Prisma.InventoryBatchWhereUniqueInput | Prisma.InventoryBatchWhereUniqueInput[]
+  update?: Prisma.InventoryBatchUpdateWithWhereUniqueWithoutVariantInput | Prisma.InventoryBatchUpdateWithWhereUniqueWithoutVariantInput[]
+  updateMany?: Prisma.InventoryBatchUpdateManyWithWhereWithoutVariantInput | Prisma.InventoryBatchUpdateManyWithWhereWithoutVariantInput[]
+  deleteMany?: Prisma.InventoryBatchScalarWhereInput | Prisma.InventoryBatchScalarWhereInput[]
 }
 
 export type InventoryBatchCreateWithoutWarehouseInput = {
@@ -1024,6 +932,30 @@ export type InventoryBatchUpdateWithWhereUniqueWithoutWarehouseInput = {
 export type InventoryBatchUpdateManyWithWhereWithoutWarehouseInput = {
   where: Prisma.InventoryBatchScalarWhereInput
   data: Prisma.XOR<Prisma.InventoryBatchUpdateManyMutationInput, Prisma.InventoryBatchUncheckedUpdateManyWithoutWarehouseInput>
+}
+
+export type InventoryBatchScalarWhereInput = {
+  AND?: Prisma.InventoryBatchScalarWhereInput | Prisma.InventoryBatchScalarWhereInput[]
+  OR?: Prisma.InventoryBatchScalarWhereInput[]
+  NOT?: Prisma.InventoryBatchScalarWhereInput | Prisma.InventoryBatchScalarWhereInput[]
+  id?: Prisma.StringFilter<"InventoryBatch"> | string
+  variantId?: Prisma.StringFilter<"InventoryBatch"> | string
+  warehouseId?: Prisma.StringFilter<"InventoryBatch"> | string
+  batchNumber?: Prisma.StringFilter<"InventoryBatch"> | string
+  barcode?: Prisma.StringNullableFilter<"InventoryBatch"> | string | null
+  quantity?: Prisma.IntFilter<"InventoryBatch"> | number
+  initialQty?: Prisma.IntFilter<"InventoryBatch"> | number
+  unitCost?: Prisma.DecimalNullableFilter<"InventoryBatch"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  manufacturedAt?: Prisma.DateTimeNullableFilter<"InventoryBatch"> | Date | string | null
+  expiresAt?: Prisma.DateTimeNullableFilter<"InventoryBatch"> | Date | string | null
+  receivedAt?: Prisma.DateTimeNullableFilter<"InventoryBatch"> | Date | string | null
+  supplierId?: Prisma.StringNullableFilter<"InventoryBatch"> | string | null
+  purchaseOrderItemId?: Prisma.StringNullableFilter<"InventoryBatch"> | string | null
+  status?: Prisma.EnumBatchStatusFilter<"InventoryBatch"> | $Enums.BatchStatus
+  note?: Prisma.StringNullableFilter<"InventoryBatch"> | string | null
+  metadata?: Prisma.JsonNullableFilter<"InventoryBatch">
+  createdAt?: Prisma.DateTimeFilter<"InventoryBatch"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"InventoryBatch"> | Date | string
 }
 
 export type InventoryBatchCreateWithoutMovementsInput = {
@@ -1262,7 +1194,28 @@ export type InventoryBatchUpdateManyWithWhereWithoutPurchaseOrderItemInput = {
   data: Prisma.XOR<Prisma.InventoryBatchUpdateManyMutationInput, Prisma.InventoryBatchUncheckedUpdateManyWithoutPurchaseOrderItemInput>
 }
 
-export type InventoryBatchCreateManyVariantInput = {
+export type InventoryBatchCreateWithoutVariantInput = {
+  id?: string
+  batchNumber: string
+  barcode?: string | null
+  quantity: number
+  initialQty: number
+  unitCost?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  manufacturedAt?: Date | string | null
+  expiresAt?: Date | string | null
+  receivedAt?: Date | string | null
+  status?: $Enums.BatchStatus
+  note?: string | null
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  warehouse: Prisma.WarehouseCreateNestedOneWithoutInventoryBatchesInput
+  supplier?: Prisma.SupplierCreateNestedOneWithoutBatchesInput
+  purchaseOrderItem?: Prisma.PurchaseOrderItemCreateNestedOneWithoutBatchesInput
+  movements?: Prisma.InventoryMovementCreateNestedManyWithoutBatchInput
+}
+
+export type InventoryBatchUncheckedCreateWithoutVariantInput = {
   id?: string
   warehouseId: string
   batchNumber: string
@@ -1280,68 +1233,33 @@ export type InventoryBatchCreateManyVariantInput = {
   metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
+  movements?: Prisma.InventoryMovementUncheckedCreateNestedManyWithoutBatchInput
 }
 
-export type InventoryBatchUpdateWithoutVariantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  batchNumber?: Prisma.StringFieldUpdateOperationsInput | string
-  barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  quantity?: Prisma.IntFieldUpdateOperationsInput | number
-  initialQty?: Prisma.IntFieldUpdateOperationsInput | number
-  unitCost?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  manufacturedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  receivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  status?: Prisma.EnumBatchStatusFieldUpdateOperationsInput | $Enums.BatchStatus
-  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  warehouse?: Prisma.WarehouseUpdateOneRequiredWithoutInventoryBatchesNestedInput
-  supplier?: Prisma.SupplierUpdateOneWithoutBatchesNestedInput
-  purchaseOrderItem?: Prisma.PurchaseOrderItemUpdateOneWithoutBatchesNestedInput
-  movements?: Prisma.InventoryMovementUpdateManyWithoutBatchNestedInput
+export type InventoryBatchCreateOrConnectWithoutVariantInput = {
+  where: Prisma.InventoryBatchWhereUniqueInput
+  create: Prisma.XOR<Prisma.InventoryBatchCreateWithoutVariantInput, Prisma.InventoryBatchUncheckedCreateWithoutVariantInput>
 }
 
-export type InventoryBatchUncheckedUpdateWithoutVariantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  warehouseId?: Prisma.StringFieldUpdateOperationsInput | string
-  batchNumber?: Prisma.StringFieldUpdateOperationsInput | string
-  barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  quantity?: Prisma.IntFieldUpdateOperationsInput | number
-  initialQty?: Prisma.IntFieldUpdateOperationsInput | number
-  unitCost?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  manufacturedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  receivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  supplierId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  purchaseOrderItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.EnumBatchStatusFieldUpdateOperationsInput | $Enums.BatchStatus
-  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  movements?: Prisma.InventoryMovementUncheckedUpdateManyWithoutBatchNestedInput
+export type InventoryBatchCreateManyVariantInputEnvelope = {
+  data: Prisma.InventoryBatchCreateManyVariantInput | Prisma.InventoryBatchCreateManyVariantInput[]
+  skipDuplicates?: boolean
 }
 
-export type InventoryBatchUncheckedUpdateManyWithoutVariantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  warehouseId?: Prisma.StringFieldUpdateOperationsInput | string
-  batchNumber?: Prisma.StringFieldUpdateOperationsInput | string
-  barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  quantity?: Prisma.IntFieldUpdateOperationsInput | number
-  initialQty?: Prisma.IntFieldUpdateOperationsInput | number
-  unitCost?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  manufacturedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  receivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  supplierId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  purchaseOrderItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.EnumBatchStatusFieldUpdateOperationsInput | $Enums.BatchStatus
-  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+export type InventoryBatchUpsertWithWhereUniqueWithoutVariantInput = {
+  where: Prisma.InventoryBatchWhereUniqueInput
+  update: Prisma.XOR<Prisma.InventoryBatchUpdateWithoutVariantInput, Prisma.InventoryBatchUncheckedUpdateWithoutVariantInput>
+  create: Prisma.XOR<Prisma.InventoryBatchCreateWithoutVariantInput, Prisma.InventoryBatchUncheckedCreateWithoutVariantInput>
+}
+
+export type InventoryBatchUpdateWithWhereUniqueWithoutVariantInput = {
+  where: Prisma.InventoryBatchWhereUniqueInput
+  data: Prisma.XOR<Prisma.InventoryBatchUpdateWithoutVariantInput, Prisma.InventoryBatchUncheckedUpdateWithoutVariantInput>
+}
+
+export type InventoryBatchUpdateManyWithWhereWithoutVariantInput = {
+  where: Prisma.InventoryBatchScalarWhereInput
+  data: Prisma.XOR<Prisma.InventoryBatchUpdateManyMutationInput, Prisma.InventoryBatchUncheckedUpdateManyWithoutVariantInput>
 }
 
 export type InventoryBatchCreateManyWarehouseInput = {
@@ -1583,6 +1501,88 @@ export type InventoryBatchUncheckedUpdateManyWithoutPurchaseOrderItemInput = {
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   receivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   supplierId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumBatchStatusFieldUpdateOperationsInput | $Enums.BatchStatus
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type InventoryBatchCreateManyVariantInput = {
+  id?: string
+  warehouseId: string
+  batchNumber: string
+  barcode?: string | null
+  quantity: number
+  initialQty: number
+  unitCost?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  manufacturedAt?: Date | string | null
+  expiresAt?: Date | string | null
+  receivedAt?: Date | string | null
+  supplierId?: string | null
+  purchaseOrderItemId?: string | null
+  status?: $Enums.BatchStatus
+  note?: string | null
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type InventoryBatchUpdateWithoutVariantInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  batchNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  initialQty?: Prisma.IntFieldUpdateOperationsInput | number
+  unitCost?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  manufacturedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  receivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumBatchStatusFieldUpdateOperationsInput | $Enums.BatchStatus
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  warehouse?: Prisma.WarehouseUpdateOneRequiredWithoutInventoryBatchesNestedInput
+  supplier?: Prisma.SupplierUpdateOneWithoutBatchesNestedInput
+  purchaseOrderItem?: Prisma.PurchaseOrderItemUpdateOneWithoutBatchesNestedInput
+  movements?: Prisma.InventoryMovementUpdateManyWithoutBatchNestedInput
+}
+
+export type InventoryBatchUncheckedUpdateWithoutVariantInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  warehouseId?: Prisma.StringFieldUpdateOperationsInput | string
+  batchNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  initialQty?: Prisma.IntFieldUpdateOperationsInput | number
+  unitCost?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  manufacturedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  receivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  supplierId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  purchaseOrderItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumBatchStatusFieldUpdateOperationsInput | $Enums.BatchStatus
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  movements?: Prisma.InventoryMovementUncheckedUpdateManyWithoutBatchNestedInput
+}
+
+export type InventoryBatchUncheckedUpdateManyWithoutVariantInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  warehouseId?: Prisma.StringFieldUpdateOperationsInput | string
+  batchNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  initialQty?: Prisma.IntFieldUpdateOperationsInput | number
+  unitCost?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  manufacturedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  receivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  supplierId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  purchaseOrderItemId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumBatchStatusFieldUpdateOperationsInput | $Enums.BatchStatus
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue

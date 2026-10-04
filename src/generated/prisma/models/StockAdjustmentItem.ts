@@ -525,48 +525,6 @@ export type StockAdjustmentItemSumOrderByAggregateInput = {
   unitCost?: Prisma.SortOrder
 }
 
-export type StockAdjustmentItemCreateNestedManyWithoutVariantInput = {
-  create?: Prisma.XOR<Prisma.StockAdjustmentItemCreateWithoutVariantInput, Prisma.StockAdjustmentItemUncheckedCreateWithoutVariantInput> | Prisma.StockAdjustmentItemCreateWithoutVariantInput[] | Prisma.StockAdjustmentItemUncheckedCreateWithoutVariantInput[]
-  connectOrCreate?: Prisma.StockAdjustmentItemCreateOrConnectWithoutVariantInput | Prisma.StockAdjustmentItemCreateOrConnectWithoutVariantInput[]
-  createMany?: Prisma.StockAdjustmentItemCreateManyVariantInputEnvelope
-  connect?: Prisma.StockAdjustmentItemWhereUniqueInput | Prisma.StockAdjustmentItemWhereUniqueInput[]
-}
-
-export type StockAdjustmentItemUncheckedCreateNestedManyWithoutVariantInput = {
-  create?: Prisma.XOR<Prisma.StockAdjustmentItemCreateWithoutVariantInput, Prisma.StockAdjustmentItemUncheckedCreateWithoutVariantInput> | Prisma.StockAdjustmentItemCreateWithoutVariantInput[] | Prisma.StockAdjustmentItemUncheckedCreateWithoutVariantInput[]
-  connectOrCreate?: Prisma.StockAdjustmentItemCreateOrConnectWithoutVariantInput | Prisma.StockAdjustmentItemCreateOrConnectWithoutVariantInput[]
-  createMany?: Prisma.StockAdjustmentItemCreateManyVariantInputEnvelope
-  connect?: Prisma.StockAdjustmentItemWhereUniqueInput | Prisma.StockAdjustmentItemWhereUniqueInput[]
-}
-
-export type StockAdjustmentItemUpdateManyWithoutVariantNestedInput = {
-  create?: Prisma.XOR<Prisma.StockAdjustmentItemCreateWithoutVariantInput, Prisma.StockAdjustmentItemUncheckedCreateWithoutVariantInput> | Prisma.StockAdjustmentItemCreateWithoutVariantInput[] | Prisma.StockAdjustmentItemUncheckedCreateWithoutVariantInput[]
-  connectOrCreate?: Prisma.StockAdjustmentItemCreateOrConnectWithoutVariantInput | Prisma.StockAdjustmentItemCreateOrConnectWithoutVariantInput[]
-  upsert?: Prisma.StockAdjustmentItemUpsertWithWhereUniqueWithoutVariantInput | Prisma.StockAdjustmentItemUpsertWithWhereUniqueWithoutVariantInput[]
-  createMany?: Prisma.StockAdjustmentItemCreateManyVariantInputEnvelope
-  set?: Prisma.StockAdjustmentItemWhereUniqueInput | Prisma.StockAdjustmentItemWhereUniqueInput[]
-  disconnect?: Prisma.StockAdjustmentItemWhereUniqueInput | Prisma.StockAdjustmentItemWhereUniqueInput[]
-  delete?: Prisma.StockAdjustmentItemWhereUniqueInput | Prisma.StockAdjustmentItemWhereUniqueInput[]
-  connect?: Prisma.StockAdjustmentItemWhereUniqueInput | Prisma.StockAdjustmentItemWhereUniqueInput[]
-  update?: Prisma.StockAdjustmentItemUpdateWithWhereUniqueWithoutVariantInput | Prisma.StockAdjustmentItemUpdateWithWhereUniqueWithoutVariantInput[]
-  updateMany?: Prisma.StockAdjustmentItemUpdateManyWithWhereWithoutVariantInput | Prisma.StockAdjustmentItemUpdateManyWithWhereWithoutVariantInput[]
-  deleteMany?: Prisma.StockAdjustmentItemScalarWhereInput | Prisma.StockAdjustmentItemScalarWhereInput[]
-}
-
-export type StockAdjustmentItemUncheckedUpdateManyWithoutVariantNestedInput = {
-  create?: Prisma.XOR<Prisma.StockAdjustmentItemCreateWithoutVariantInput, Prisma.StockAdjustmentItemUncheckedCreateWithoutVariantInput> | Prisma.StockAdjustmentItemCreateWithoutVariantInput[] | Prisma.StockAdjustmentItemUncheckedCreateWithoutVariantInput[]
-  connectOrCreate?: Prisma.StockAdjustmentItemCreateOrConnectWithoutVariantInput | Prisma.StockAdjustmentItemCreateOrConnectWithoutVariantInput[]
-  upsert?: Prisma.StockAdjustmentItemUpsertWithWhereUniqueWithoutVariantInput | Prisma.StockAdjustmentItemUpsertWithWhereUniqueWithoutVariantInput[]
-  createMany?: Prisma.StockAdjustmentItemCreateManyVariantInputEnvelope
-  set?: Prisma.StockAdjustmentItemWhereUniqueInput | Prisma.StockAdjustmentItemWhereUniqueInput[]
-  disconnect?: Prisma.StockAdjustmentItemWhereUniqueInput | Prisma.StockAdjustmentItemWhereUniqueInput[]
-  delete?: Prisma.StockAdjustmentItemWhereUniqueInput | Prisma.StockAdjustmentItemWhereUniqueInput[]
-  connect?: Prisma.StockAdjustmentItemWhereUniqueInput | Prisma.StockAdjustmentItemWhereUniqueInput[]
-  update?: Prisma.StockAdjustmentItemUpdateWithWhereUniqueWithoutVariantInput | Prisma.StockAdjustmentItemUpdateWithWhereUniqueWithoutVariantInput[]
-  updateMany?: Prisma.StockAdjustmentItemUpdateManyWithWhereWithoutVariantInput | Prisma.StockAdjustmentItemUpdateManyWithWhereWithoutVariantInput[]
-  deleteMany?: Prisma.StockAdjustmentItemScalarWhereInput | Prisma.StockAdjustmentItemScalarWhereInput[]
-}
-
 export type StockAdjustmentItemCreateNestedManyWithoutWarehouseInput = {
   create?: Prisma.XOR<Prisma.StockAdjustmentItemCreateWithoutWarehouseInput, Prisma.StockAdjustmentItemUncheckedCreateWithoutWarehouseInput> | Prisma.StockAdjustmentItemCreateWithoutWarehouseInput[] | Prisma.StockAdjustmentItemUncheckedCreateWithoutWarehouseInput[]
   connectOrCreate?: Prisma.StockAdjustmentItemCreateOrConnectWithoutWarehouseInput | Prisma.StockAdjustmentItemCreateOrConnectWithoutWarehouseInput[]
@@ -693,73 +651,46 @@ export type StockAdjustmentItemUncheckedUpdateManyWithoutAdjustmentNestedInput =
   deleteMany?: Prisma.StockAdjustmentItemScalarWhereInput | Prisma.StockAdjustmentItemScalarWhereInput[]
 }
 
-export type StockAdjustmentItemCreateWithoutVariantInput = {
-  id?: string
-  expectedQty?: number | null
-  actualQty?: number | null
-  adjustmentQty: number
-  unitCost?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  note?: string | null
-  createdAt?: Date | string
-  adjustment: Prisma.StockAdjustmentCreateNestedOneWithoutItemsInput
-  warehouse: Prisma.WarehouseCreateNestedOneWithoutStockAdjustmentItemsInput
-  location?: Prisma.StorageLocationCreateNestedOneWithoutAdjustmentItemsInput
+export type StockAdjustmentItemCreateNestedManyWithoutVariantInput = {
+  create?: Prisma.XOR<Prisma.StockAdjustmentItemCreateWithoutVariantInput, Prisma.StockAdjustmentItemUncheckedCreateWithoutVariantInput> | Prisma.StockAdjustmentItemCreateWithoutVariantInput[] | Prisma.StockAdjustmentItemUncheckedCreateWithoutVariantInput[]
+  connectOrCreate?: Prisma.StockAdjustmentItemCreateOrConnectWithoutVariantInput | Prisma.StockAdjustmentItemCreateOrConnectWithoutVariantInput[]
+  createMany?: Prisma.StockAdjustmentItemCreateManyVariantInputEnvelope
+  connect?: Prisma.StockAdjustmentItemWhereUniqueInput | Prisma.StockAdjustmentItemWhereUniqueInput[]
 }
 
-export type StockAdjustmentItemUncheckedCreateWithoutVariantInput = {
-  id?: string
-  adjustmentId: string
-  warehouseId: string
-  locationId?: string | null
-  expectedQty?: number | null
-  actualQty?: number | null
-  adjustmentQty: number
-  unitCost?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  note?: string | null
-  createdAt?: Date | string
+export type StockAdjustmentItemUncheckedCreateNestedManyWithoutVariantInput = {
+  create?: Prisma.XOR<Prisma.StockAdjustmentItemCreateWithoutVariantInput, Prisma.StockAdjustmentItemUncheckedCreateWithoutVariantInput> | Prisma.StockAdjustmentItemCreateWithoutVariantInput[] | Prisma.StockAdjustmentItemUncheckedCreateWithoutVariantInput[]
+  connectOrCreate?: Prisma.StockAdjustmentItemCreateOrConnectWithoutVariantInput | Prisma.StockAdjustmentItemCreateOrConnectWithoutVariantInput[]
+  createMany?: Prisma.StockAdjustmentItemCreateManyVariantInputEnvelope
+  connect?: Prisma.StockAdjustmentItemWhereUniqueInput | Prisma.StockAdjustmentItemWhereUniqueInput[]
 }
 
-export type StockAdjustmentItemCreateOrConnectWithoutVariantInput = {
-  where: Prisma.StockAdjustmentItemWhereUniqueInput
-  create: Prisma.XOR<Prisma.StockAdjustmentItemCreateWithoutVariantInput, Prisma.StockAdjustmentItemUncheckedCreateWithoutVariantInput>
+export type StockAdjustmentItemUpdateManyWithoutVariantNestedInput = {
+  create?: Prisma.XOR<Prisma.StockAdjustmentItemCreateWithoutVariantInput, Prisma.StockAdjustmentItemUncheckedCreateWithoutVariantInput> | Prisma.StockAdjustmentItemCreateWithoutVariantInput[] | Prisma.StockAdjustmentItemUncheckedCreateWithoutVariantInput[]
+  connectOrCreate?: Prisma.StockAdjustmentItemCreateOrConnectWithoutVariantInput | Prisma.StockAdjustmentItemCreateOrConnectWithoutVariantInput[]
+  upsert?: Prisma.StockAdjustmentItemUpsertWithWhereUniqueWithoutVariantInput | Prisma.StockAdjustmentItemUpsertWithWhereUniqueWithoutVariantInput[]
+  createMany?: Prisma.StockAdjustmentItemCreateManyVariantInputEnvelope
+  set?: Prisma.StockAdjustmentItemWhereUniqueInput | Prisma.StockAdjustmentItemWhereUniqueInput[]
+  disconnect?: Prisma.StockAdjustmentItemWhereUniqueInput | Prisma.StockAdjustmentItemWhereUniqueInput[]
+  delete?: Prisma.StockAdjustmentItemWhereUniqueInput | Prisma.StockAdjustmentItemWhereUniqueInput[]
+  connect?: Prisma.StockAdjustmentItemWhereUniqueInput | Prisma.StockAdjustmentItemWhereUniqueInput[]
+  update?: Prisma.StockAdjustmentItemUpdateWithWhereUniqueWithoutVariantInput | Prisma.StockAdjustmentItemUpdateWithWhereUniqueWithoutVariantInput[]
+  updateMany?: Prisma.StockAdjustmentItemUpdateManyWithWhereWithoutVariantInput | Prisma.StockAdjustmentItemUpdateManyWithWhereWithoutVariantInput[]
+  deleteMany?: Prisma.StockAdjustmentItemScalarWhereInput | Prisma.StockAdjustmentItemScalarWhereInput[]
 }
 
-export type StockAdjustmentItemCreateManyVariantInputEnvelope = {
-  data: Prisma.StockAdjustmentItemCreateManyVariantInput | Prisma.StockAdjustmentItemCreateManyVariantInput[]
-  skipDuplicates?: boolean
-}
-
-export type StockAdjustmentItemUpsertWithWhereUniqueWithoutVariantInput = {
-  where: Prisma.StockAdjustmentItemWhereUniqueInput
-  update: Prisma.XOR<Prisma.StockAdjustmentItemUpdateWithoutVariantInput, Prisma.StockAdjustmentItemUncheckedUpdateWithoutVariantInput>
-  create: Prisma.XOR<Prisma.StockAdjustmentItemCreateWithoutVariantInput, Prisma.StockAdjustmentItemUncheckedCreateWithoutVariantInput>
-}
-
-export type StockAdjustmentItemUpdateWithWhereUniqueWithoutVariantInput = {
-  where: Prisma.StockAdjustmentItemWhereUniqueInput
-  data: Prisma.XOR<Prisma.StockAdjustmentItemUpdateWithoutVariantInput, Prisma.StockAdjustmentItemUncheckedUpdateWithoutVariantInput>
-}
-
-export type StockAdjustmentItemUpdateManyWithWhereWithoutVariantInput = {
-  where: Prisma.StockAdjustmentItemScalarWhereInput
-  data: Prisma.XOR<Prisma.StockAdjustmentItemUpdateManyMutationInput, Prisma.StockAdjustmentItemUncheckedUpdateManyWithoutVariantInput>
-}
-
-export type StockAdjustmentItemScalarWhereInput = {
-  AND?: Prisma.StockAdjustmentItemScalarWhereInput | Prisma.StockAdjustmentItemScalarWhereInput[]
-  OR?: Prisma.StockAdjustmentItemScalarWhereInput[]
-  NOT?: Prisma.StockAdjustmentItemScalarWhereInput | Prisma.StockAdjustmentItemScalarWhereInput[]
-  id?: Prisma.StringFilter<"StockAdjustmentItem"> | string
-  adjustmentId?: Prisma.StringFilter<"StockAdjustmentItem"> | string
-  variantId?: Prisma.StringFilter<"StockAdjustmentItem"> | string
-  warehouseId?: Prisma.StringFilter<"StockAdjustmentItem"> | string
-  locationId?: Prisma.StringNullableFilter<"StockAdjustmentItem"> | string | null
-  expectedQty?: Prisma.IntNullableFilter<"StockAdjustmentItem"> | number | null
-  actualQty?: Prisma.IntNullableFilter<"StockAdjustmentItem"> | number | null
-  adjustmentQty?: Prisma.IntFilter<"StockAdjustmentItem"> | number
-  unitCost?: Prisma.DecimalNullableFilter<"StockAdjustmentItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  note?: Prisma.StringNullableFilter<"StockAdjustmentItem"> | string | null
-  createdAt?: Prisma.DateTimeFilter<"StockAdjustmentItem"> | Date | string
+export type StockAdjustmentItemUncheckedUpdateManyWithoutVariantNestedInput = {
+  create?: Prisma.XOR<Prisma.StockAdjustmentItemCreateWithoutVariantInput, Prisma.StockAdjustmentItemUncheckedCreateWithoutVariantInput> | Prisma.StockAdjustmentItemCreateWithoutVariantInput[] | Prisma.StockAdjustmentItemUncheckedCreateWithoutVariantInput[]
+  connectOrCreate?: Prisma.StockAdjustmentItemCreateOrConnectWithoutVariantInput | Prisma.StockAdjustmentItemCreateOrConnectWithoutVariantInput[]
+  upsert?: Prisma.StockAdjustmentItemUpsertWithWhereUniqueWithoutVariantInput | Prisma.StockAdjustmentItemUpsertWithWhereUniqueWithoutVariantInput[]
+  createMany?: Prisma.StockAdjustmentItemCreateManyVariantInputEnvelope
+  set?: Prisma.StockAdjustmentItemWhereUniqueInput | Prisma.StockAdjustmentItemWhereUniqueInput[]
+  disconnect?: Prisma.StockAdjustmentItemWhereUniqueInput | Prisma.StockAdjustmentItemWhereUniqueInput[]
+  delete?: Prisma.StockAdjustmentItemWhereUniqueInput | Prisma.StockAdjustmentItemWhereUniqueInput[]
+  connect?: Prisma.StockAdjustmentItemWhereUniqueInput | Prisma.StockAdjustmentItemWhereUniqueInput[]
+  update?: Prisma.StockAdjustmentItemUpdateWithWhereUniqueWithoutVariantInput | Prisma.StockAdjustmentItemUpdateWithWhereUniqueWithoutVariantInput[]
+  updateMany?: Prisma.StockAdjustmentItemUpdateManyWithWhereWithoutVariantInput | Prisma.StockAdjustmentItemUpdateManyWithWhereWithoutVariantInput[]
+  deleteMany?: Prisma.StockAdjustmentItemScalarWhereInput | Prisma.StockAdjustmentItemScalarWhereInput[]
 }
 
 export type StockAdjustmentItemCreateWithoutWarehouseInput = {
@@ -812,6 +743,23 @@ export type StockAdjustmentItemUpdateWithWhereUniqueWithoutWarehouseInput = {
 export type StockAdjustmentItemUpdateManyWithWhereWithoutWarehouseInput = {
   where: Prisma.StockAdjustmentItemScalarWhereInput
   data: Prisma.XOR<Prisma.StockAdjustmentItemUpdateManyMutationInput, Prisma.StockAdjustmentItemUncheckedUpdateManyWithoutWarehouseInput>
+}
+
+export type StockAdjustmentItemScalarWhereInput = {
+  AND?: Prisma.StockAdjustmentItemScalarWhereInput | Prisma.StockAdjustmentItemScalarWhereInput[]
+  OR?: Prisma.StockAdjustmentItemScalarWhereInput[]
+  NOT?: Prisma.StockAdjustmentItemScalarWhereInput | Prisma.StockAdjustmentItemScalarWhereInput[]
+  id?: Prisma.StringFilter<"StockAdjustmentItem"> | string
+  adjustmentId?: Prisma.StringFilter<"StockAdjustmentItem"> | string
+  variantId?: Prisma.StringFilter<"StockAdjustmentItem"> | string
+  warehouseId?: Prisma.StringFilter<"StockAdjustmentItem"> | string
+  locationId?: Prisma.StringNullableFilter<"StockAdjustmentItem"> | string | null
+  expectedQty?: Prisma.IntNullableFilter<"StockAdjustmentItem"> | number | null
+  actualQty?: Prisma.IntNullableFilter<"StockAdjustmentItem"> | number | null
+  adjustmentQty?: Prisma.IntFilter<"StockAdjustmentItem"> | number
+  unitCost?: Prisma.DecimalNullableFilter<"StockAdjustmentItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  note?: Prisma.StringNullableFilter<"StockAdjustmentItem"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"StockAdjustmentItem"> | Date | string
 }
 
 export type StockAdjustmentItemCreateWithoutLocationInput = {
@@ -918,7 +866,20 @@ export type StockAdjustmentItemUpdateManyWithWhereWithoutAdjustmentInput = {
   data: Prisma.XOR<Prisma.StockAdjustmentItemUpdateManyMutationInput, Prisma.StockAdjustmentItemUncheckedUpdateManyWithoutAdjustmentInput>
 }
 
-export type StockAdjustmentItemCreateManyVariantInput = {
+export type StockAdjustmentItemCreateWithoutVariantInput = {
+  id?: string
+  expectedQty?: number | null
+  actualQty?: number | null
+  adjustmentQty: number
+  unitCost?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  note?: string | null
+  createdAt?: Date | string
+  adjustment: Prisma.StockAdjustmentCreateNestedOneWithoutItemsInput
+  warehouse: Prisma.WarehouseCreateNestedOneWithoutStockAdjustmentItemsInput
+  location?: Prisma.StorageLocationCreateNestedOneWithoutAdjustmentItemsInput
+}
+
+export type StockAdjustmentItemUncheckedCreateWithoutVariantInput = {
   id?: string
   adjustmentId: string
   warehouseId: string
@@ -931,43 +892,30 @@ export type StockAdjustmentItemCreateManyVariantInput = {
   createdAt?: Date | string
 }
 
-export type StockAdjustmentItemUpdateWithoutVariantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  expectedQty?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  actualQty?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  adjustmentQty?: Prisma.IntFieldUpdateOperationsInput | number
-  unitCost?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  adjustment?: Prisma.StockAdjustmentUpdateOneRequiredWithoutItemsNestedInput
-  warehouse?: Prisma.WarehouseUpdateOneRequiredWithoutStockAdjustmentItemsNestedInput
-  location?: Prisma.StorageLocationUpdateOneWithoutAdjustmentItemsNestedInput
+export type StockAdjustmentItemCreateOrConnectWithoutVariantInput = {
+  where: Prisma.StockAdjustmentItemWhereUniqueInput
+  create: Prisma.XOR<Prisma.StockAdjustmentItemCreateWithoutVariantInput, Prisma.StockAdjustmentItemUncheckedCreateWithoutVariantInput>
 }
 
-export type StockAdjustmentItemUncheckedUpdateWithoutVariantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  adjustmentId?: Prisma.StringFieldUpdateOperationsInput | string
-  warehouseId?: Prisma.StringFieldUpdateOperationsInput | string
-  locationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  expectedQty?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  actualQty?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  adjustmentQty?: Prisma.IntFieldUpdateOperationsInput | number
-  unitCost?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+export type StockAdjustmentItemCreateManyVariantInputEnvelope = {
+  data: Prisma.StockAdjustmentItemCreateManyVariantInput | Prisma.StockAdjustmentItemCreateManyVariantInput[]
+  skipDuplicates?: boolean
 }
 
-export type StockAdjustmentItemUncheckedUpdateManyWithoutVariantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  adjustmentId?: Prisma.StringFieldUpdateOperationsInput | string
-  warehouseId?: Prisma.StringFieldUpdateOperationsInput | string
-  locationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  expectedQty?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  actualQty?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  adjustmentQty?: Prisma.IntFieldUpdateOperationsInput | number
-  unitCost?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+export type StockAdjustmentItemUpsertWithWhereUniqueWithoutVariantInput = {
+  where: Prisma.StockAdjustmentItemWhereUniqueInput
+  update: Prisma.XOR<Prisma.StockAdjustmentItemUpdateWithoutVariantInput, Prisma.StockAdjustmentItemUncheckedUpdateWithoutVariantInput>
+  create: Prisma.XOR<Prisma.StockAdjustmentItemCreateWithoutVariantInput, Prisma.StockAdjustmentItemUncheckedCreateWithoutVariantInput>
+}
+
+export type StockAdjustmentItemUpdateWithWhereUniqueWithoutVariantInput = {
+  where: Prisma.StockAdjustmentItemWhereUniqueInput
+  data: Prisma.XOR<Prisma.StockAdjustmentItemUpdateWithoutVariantInput, Prisma.StockAdjustmentItemUncheckedUpdateWithoutVariantInput>
+}
+
+export type StockAdjustmentItemUpdateManyWithWhereWithoutVariantInput = {
+  where: Prisma.StockAdjustmentItemScalarWhereInput
+  data: Prisma.XOR<Prisma.StockAdjustmentItemUpdateManyMutationInput, Prisma.StockAdjustmentItemUncheckedUpdateManyWithoutVariantInput>
 }
 
 export type StockAdjustmentItemCreateManyWarehouseInput = {
@@ -1116,6 +1064,58 @@ export type StockAdjustmentItemUncheckedUpdateWithoutAdjustmentInput = {
 export type StockAdjustmentItemUncheckedUpdateManyWithoutAdjustmentInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   variantId?: Prisma.StringFieldUpdateOperationsInput | string
+  warehouseId?: Prisma.StringFieldUpdateOperationsInput | string
+  locationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  expectedQty?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  actualQty?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  adjustmentQty?: Prisma.IntFieldUpdateOperationsInput | number
+  unitCost?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type StockAdjustmentItemCreateManyVariantInput = {
+  id?: string
+  adjustmentId: string
+  warehouseId: string
+  locationId?: string | null
+  expectedQty?: number | null
+  actualQty?: number | null
+  adjustmentQty: number
+  unitCost?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  note?: string | null
+  createdAt?: Date | string
+}
+
+export type StockAdjustmentItemUpdateWithoutVariantInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  expectedQty?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  actualQty?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  adjustmentQty?: Prisma.IntFieldUpdateOperationsInput | number
+  unitCost?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  adjustment?: Prisma.StockAdjustmentUpdateOneRequiredWithoutItemsNestedInput
+  warehouse?: Prisma.WarehouseUpdateOneRequiredWithoutStockAdjustmentItemsNestedInput
+  location?: Prisma.StorageLocationUpdateOneWithoutAdjustmentItemsNestedInput
+}
+
+export type StockAdjustmentItemUncheckedUpdateWithoutVariantInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  adjustmentId?: Prisma.StringFieldUpdateOperationsInput | string
+  warehouseId?: Prisma.StringFieldUpdateOperationsInput | string
+  locationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  expectedQty?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  actualQty?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  adjustmentQty?: Prisma.IntFieldUpdateOperationsInput | number
+  unitCost?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type StockAdjustmentItemUncheckedUpdateManyWithoutVariantInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  adjustmentId?: Prisma.StringFieldUpdateOperationsInput | string
   warehouseId?: Prisma.StringFieldUpdateOperationsInput | string
   locationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expectedQty?: Prisma.NullableIntFieldUpdateOperationsInput | number | null

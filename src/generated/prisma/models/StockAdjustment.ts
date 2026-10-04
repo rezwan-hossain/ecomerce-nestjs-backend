@@ -440,16 +440,6 @@ export type StockAdjustmentUncheckedUpdateManyInput = {
   appliedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
-export type StockAdjustmentListRelationFilter = {
-  every?: Prisma.StockAdjustmentWhereInput
-  some?: Prisma.StockAdjustmentWhereInput
-  none?: Prisma.StockAdjustmentWhereInput
-}
-
-export type StockAdjustmentOrderByRelationAggregateInput = {
-  _count?: Prisma.SortOrder
-}
-
 export type StockAdjustmentCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   adjustmentNumber?: Prisma.SortOrder
@@ -499,6 +489,42 @@ export type StockAdjustmentMinOrderByAggregateInput = {
 export type StockAdjustmentScalarRelationFilter = {
   is?: Prisma.StockAdjustmentWhereInput
   isNot?: Prisma.StockAdjustmentWhereInput
+}
+
+export type StockAdjustmentListRelationFilter = {
+  every?: Prisma.StockAdjustmentWhereInput
+  some?: Prisma.StockAdjustmentWhereInput
+  none?: Prisma.StockAdjustmentWhereInput
+}
+
+export type StockAdjustmentOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
+}
+
+export type EnumAdjustmentTypeFieldUpdateOperationsInput = {
+  set?: $Enums.AdjustmentType
+}
+
+export type EnumAdjustmentReasonFieldUpdateOperationsInput = {
+  set?: $Enums.AdjustmentReason
+}
+
+export type EnumAdjustmentStatusFieldUpdateOperationsInput = {
+  set?: $Enums.AdjustmentStatus
+}
+
+export type StockAdjustmentCreateNestedOneWithoutItemsInput = {
+  create?: Prisma.XOR<Prisma.StockAdjustmentCreateWithoutItemsInput, Prisma.StockAdjustmentUncheckedCreateWithoutItemsInput>
+  connectOrCreate?: Prisma.StockAdjustmentCreateOrConnectWithoutItemsInput
+  connect?: Prisma.StockAdjustmentWhereUniqueInput
+}
+
+export type StockAdjustmentUpdateOneRequiredWithoutItemsNestedInput = {
+  create?: Prisma.XOR<Prisma.StockAdjustmentCreateWithoutItemsInput, Prisma.StockAdjustmentUncheckedCreateWithoutItemsInput>
+  connectOrCreate?: Prisma.StockAdjustmentCreateOrConnectWithoutItemsInput
+  upsert?: Prisma.StockAdjustmentUpsertWithoutItemsInput
+  connect?: Prisma.StockAdjustmentWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.StockAdjustmentUpdateToOneWithWhereWithoutItemsInput, Prisma.StockAdjustmentUpdateWithoutItemsInput>, Prisma.StockAdjustmentUncheckedUpdateWithoutItemsInput>
 }
 
 export type StockAdjustmentCreateNestedManyWithoutCreatedByUserInput = {
@@ -585,30 +611,84 @@ export type StockAdjustmentUncheckedUpdateManyWithoutApprovedByUserNestedInput =
   deleteMany?: Prisma.StockAdjustmentScalarWhereInput | Prisma.StockAdjustmentScalarWhereInput[]
 }
 
-export type EnumAdjustmentTypeFieldUpdateOperationsInput = {
-  set?: $Enums.AdjustmentType
+export type StockAdjustmentCreateWithoutItemsInput = {
+  id?: string
+  adjustmentNumber: string
+  type: $Enums.AdjustmentType
+  reason: $Enums.AdjustmentReason
+  status?: $Enums.AdjustmentStatus
+  note?: string | null
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  approvedAt?: Date | string | null
+  appliedAt?: Date | string | null
+  createdByUser?: Prisma.UserCreateNestedOneWithoutStockAdjustmentsCreatedInput
+  approvedByUser?: Prisma.UserCreateNestedOneWithoutStockAdjustmentsApprovedInput
 }
 
-export type EnumAdjustmentReasonFieldUpdateOperationsInput = {
-  set?: $Enums.AdjustmentReason
+export type StockAdjustmentUncheckedCreateWithoutItemsInput = {
+  id?: string
+  adjustmentNumber: string
+  type: $Enums.AdjustmentType
+  reason: $Enums.AdjustmentReason
+  status?: $Enums.AdjustmentStatus
+  createdByUserId?: string | null
+  approvedByUserId?: string | null
+  note?: string | null
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  approvedAt?: Date | string | null
+  appliedAt?: Date | string | null
 }
 
-export type EnumAdjustmentStatusFieldUpdateOperationsInput = {
-  set?: $Enums.AdjustmentStatus
+export type StockAdjustmentCreateOrConnectWithoutItemsInput = {
+  where: Prisma.StockAdjustmentWhereUniqueInput
+  create: Prisma.XOR<Prisma.StockAdjustmentCreateWithoutItemsInput, Prisma.StockAdjustmentUncheckedCreateWithoutItemsInput>
 }
 
-export type StockAdjustmentCreateNestedOneWithoutItemsInput = {
-  create?: Prisma.XOR<Prisma.StockAdjustmentCreateWithoutItemsInput, Prisma.StockAdjustmentUncheckedCreateWithoutItemsInput>
-  connectOrCreate?: Prisma.StockAdjustmentCreateOrConnectWithoutItemsInput
-  connect?: Prisma.StockAdjustmentWhereUniqueInput
+export type StockAdjustmentUpsertWithoutItemsInput = {
+  update: Prisma.XOR<Prisma.StockAdjustmentUpdateWithoutItemsInput, Prisma.StockAdjustmentUncheckedUpdateWithoutItemsInput>
+  create: Prisma.XOR<Prisma.StockAdjustmentCreateWithoutItemsInput, Prisma.StockAdjustmentUncheckedCreateWithoutItemsInput>
+  where?: Prisma.StockAdjustmentWhereInput
 }
 
-export type StockAdjustmentUpdateOneRequiredWithoutItemsNestedInput = {
-  create?: Prisma.XOR<Prisma.StockAdjustmentCreateWithoutItemsInput, Prisma.StockAdjustmentUncheckedCreateWithoutItemsInput>
-  connectOrCreate?: Prisma.StockAdjustmentCreateOrConnectWithoutItemsInput
-  upsert?: Prisma.StockAdjustmentUpsertWithoutItemsInput
-  connect?: Prisma.StockAdjustmentWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.StockAdjustmentUpdateToOneWithWhereWithoutItemsInput, Prisma.StockAdjustmentUpdateWithoutItemsInput>, Prisma.StockAdjustmentUncheckedUpdateWithoutItemsInput>
+export type StockAdjustmentUpdateToOneWithWhereWithoutItemsInput = {
+  where?: Prisma.StockAdjustmentWhereInput
+  data: Prisma.XOR<Prisma.StockAdjustmentUpdateWithoutItemsInput, Prisma.StockAdjustmentUncheckedUpdateWithoutItemsInput>
+}
+
+export type StockAdjustmentUpdateWithoutItemsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  adjustmentNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumAdjustmentTypeFieldUpdateOperationsInput | $Enums.AdjustmentType
+  reason?: Prisma.EnumAdjustmentReasonFieldUpdateOperationsInput | $Enums.AdjustmentReason
+  status?: Prisma.EnumAdjustmentStatusFieldUpdateOperationsInput | $Enums.AdjustmentStatus
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  appliedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdByUser?: Prisma.UserUpdateOneWithoutStockAdjustmentsCreatedNestedInput
+  approvedByUser?: Prisma.UserUpdateOneWithoutStockAdjustmentsApprovedNestedInput
+}
+
+export type StockAdjustmentUncheckedUpdateWithoutItemsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  adjustmentNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumAdjustmentTypeFieldUpdateOperationsInput | $Enums.AdjustmentType
+  reason?: Prisma.EnumAdjustmentReasonFieldUpdateOperationsInput | $Enums.AdjustmentReason
+  status?: Prisma.EnumAdjustmentStatusFieldUpdateOperationsInput | $Enums.AdjustmentStatus
+  createdByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approvedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  appliedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type StockAdjustmentCreateWithoutCreatedByUserInput = {
@@ -744,86 +824,6 @@ export type StockAdjustmentUpdateWithWhereUniqueWithoutApprovedByUserInput = {
 export type StockAdjustmentUpdateManyWithWhereWithoutApprovedByUserInput = {
   where: Prisma.StockAdjustmentScalarWhereInput
   data: Prisma.XOR<Prisma.StockAdjustmentUpdateManyMutationInput, Prisma.StockAdjustmentUncheckedUpdateManyWithoutApprovedByUserInput>
-}
-
-export type StockAdjustmentCreateWithoutItemsInput = {
-  id?: string
-  adjustmentNumber: string
-  type: $Enums.AdjustmentType
-  reason: $Enums.AdjustmentReason
-  status?: $Enums.AdjustmentStatus
-  note?: string | null
-  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  approvedAt?: Date | string | null
-  appliedAt?: Date | string | null
-  createdByUser?: Prisma.UserCreateNestedOneWithoutStockAdjustmentsCreatedInput
-  approvedByUser?: Prisma.UserCreateNestedOneWithoutStockAdjustmentsApprovedInput
-}
-
-export type StockAdjustmentUncheckedCreateWithoutItemsInput = {
-  id?: string
-  adjustmentNumber: string
-  type: $Enums.AdjustmentType
-  reason: $Enums.AdjustmentReason
-  status?: $Enums.AdjustmentStatus
-  createdByUserId?: string | null
-  approvedByUserId?: string | null
-  note?: string | null
-  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  approvedAt?: Date | string | null
-  appliedAt?: Date | string | null
-}
-
-export type StockAdjustmentCreateOrConnectWithoutItemsInput = {
-  where: Prisma.StockAdjustmentWhereUniqueInput
-  create: Prisma.XOR<Prisma.StockAdjustmentCreateWithoutItemsInput, Prisma.StockAdjustmentUncheckedCreateWithoutItemsInput>
-}
-
-export type StockAdjustmentUpsertWithoutItemsInput = {
-  update: Prisma.XOR<Prisma.StockAdjustmentUpdateWithoutItemsInput, Prisma.StockAdjustmentUncheckedUpdateWithoutItemsInput>
-  create: Prisma.XOR<Prisma.StockAdjustmentCreateWithoutItemsInput, Prisma.StockAdjustmentUncheckedCreateWithoutItemsInput>
-  where?: Prisma.StockAdjustmentWhereInput
-}
-
-export type StockAdjustmentUpdateToOneWithWhereWithoutItemsInput = {
-  where?: Prisma.StockAdjustmentWhereInput
-  data: Prisma.XOR<Prisma.StockAdjustmentUpdateWithoutItemsInput, Prisma.StockAdjustmentUncheckedUpdateWithoutItemsInput>
-}
-
-export type StockAdjustmentUpdateWithoutItemsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  adjustmentNumber?: Prisma.StringFieldUpdateOperationsInput | string
-  type?: Prisma.EnumAdjustmentTypeFieldUpdateOperationsInput | $Enums.AdjustmentType
-  reason?: Prisma.EnumAdjustmentReasonFieldUpdateOperationsInput | $Enums.AdjustmentReason
-  status?: Prisma.EnumAdjustmentStatusFieldUpdateOperationsInput | $Enums.AdjustmentStatus
-  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  appliedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdByUser?: Prisma.UserUpdateOneWithoutStockAdjustmentsCreatedNestedInput
-  approvedByUser?: Prisma.UserUpdateOneWithoutStockAdjustmentsApprovedNestedInput
-}
-
-export type StockAdjustmentUncheckedUpdateWithoutItemsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  adjustmentNumber?: Prisma.StringFieldUpdateOperationsInput | string
-  type?: Prisma.EnumAdjustmentTypeFieldUpdateOperationsInput | $Enums.AdjustmentType
-  reason?: Prisma.EnumAdjustmentReasonFieldUpdateOperationsInput | $Enums.AdjustmentReason
-  status?: Prisma.EnumAdjustmentStatusFieldUpdateOperationsInput | $Enums.AdjustmentStatus
-  createdByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  approvedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  appliedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type StockAdjustmentCreateManyCreatedByUserInput = {

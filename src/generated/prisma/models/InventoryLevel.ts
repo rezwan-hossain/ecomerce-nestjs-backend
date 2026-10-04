@@ -643,48 +643,6 @@ export type InventoryLevelScalarRelationFilter = {
   isNot?: Prisma.InventoryLevelWhereInput
 }
 
-export type InventoryLevelCreateNestedManyWithoutVariantInput = {
-  create?: Prisma.XOR<Prisma.InventoryLevelCreateWithoutVariantInput, Prisma.InventoryLevelUncheckedCreateWithoutVariantInput> | Prisma.InventoryLevelCreateWithoutVariantInput[] | Prisma.InventoryLevelUncheckedCreateWithoutVariantInput[]
-  connectOrCreate?: Prisma.InventoryLevelCreateOrConnectWithoutVariantInput | Prisma.InventoryLevelCreateOrConnectWithoutVariantInput[]
-  createMany?: Prisma.InventoryLevelCreateManyVariantInputEnvelope
-  connect?: Prisma.InventoryLevelWhereUniqueInput | Prisma.InventoryLevelWhereUniqueInput[]
-}
-
-export type InventoryLevelUncheckedCreateNestedManyWithoutVariantInput = {
-  create?: Prisma.XOR<Prisma.InventoryLevelCreateWithoutVariantInput, Prisma.InventoryLevelUncheckedCreateWithoutVariantInput> | Prisma.InventoryLevelCreateWithoutVariantInput[] | Prisma.InventoryLevelUncheckedCreateWithoutVariantInput[]
-  connectOrCreate?: Prisma.InventoryLevelCreateOrConnectWithoutVariantInput | Prisma.InventoryLevelCreateOrConnectWithoutVariantInput[]
-  createMany?: Prisma.InventoryLevelCreateManyVariantInputEnvelope
-  connect?: Prisma.InventoryLevelWhereUniqueInput | Prisma.InventoryLevelWhereUniqueInput[]
-}
-
-export type InventoryLevelUpdateManyWithoutVariantNestedInput = {
-  create?: Prisma.XOR<Prisma.InventoryLevelCreateWithoutVariantInput, Prisma.InventoryLevelUncheckedCreateWithoutVariantInput> | Prisma.InventoryLevelCreateWithoutVariantInput[] | Prisma.InventoryLevelUncheckedCreateWithoutVariantInput[]
-  connectOrCreate?: Prisma.InventoryLevelCreateOrConnectWithoutVariantInput | Prisma.InventoryLevelCreateOrConnectWithoutVariantInput[]
-  upsert?: Prisma.InventoryLevelUpsertWithWhereUniqueWithoutVariantInput | Prisma.InventoryLevelUpsertWithWhereUniqueWithoutVariantInput[]
-  createMany?: Prisma.InventoryLevelCreateManyVariantInputEnvelope
-  set?: Prisma.InventoryLevelWhereUniqueInput | Prisma.InventoryLevelWhereUniqueInput[]
-  disconnect?: Prisma.InventoryLevelWhereUniqueInput | Prisma.InventoryLevelWhereUniqueInput[]
-  delete?: Prisma.InventoryLevelWhereUniqueInput | Prisma.InventoryLevelWhereUniqueInput[]
-  connect?: Prisma.InventoryLevelWhereUniqueInput | Prisma.InventoryLevelWhereUniqueInput[]
-  update?: Prisma.InventoryLevelUpdateWithWhereUniqueWithoutVariantInput | Prisma.InventoryLevelUpdateWithWhereUniqueWithoutVariantInput[]
-  updateMany?: Prisma.InventoryLevelUpdateManyWithWhereWithoutVariantInput | Prisma.InventoryLevelUpdateManyWithWhereWithoutVariantInput[]
-  deleteMany?: Prisma.InventoryLevelScalarWhereInput | Prisma.InventoryLevelScalarWhereInput[]
-}
-
-export type InventoryLevelUncheckedUpdateManyWithoutVariantNestedInput = {
-  create?: Prisma.XOR<Prisma.InventoryLevelCreateWithoutVariantInput, Prisma.InventoryLevelUncheckedCreateWithoutVariantInput> | Prisma.InventoryLevelCreateWithoutVariantInput[] | Prisma.InventoryLevelUncheckedCreateWithoutVariantInput[]
-  connectOrCreate?: Prisma.InventoryLevelCreateOrConnectWithoutVariantInput | Prisma.InventoryLevelCreateOrConnectWithoutVariantInput[]
-  upsert?: Prisma.InventoryLevelUpsertWithWhereUniqueWithoutVariantInput | Prisma.InventoryLevelUpsertWithWhereUniqueWithoutVariantInput[]
-  createMany?: Prisma.InventoryLevelCreateManyVariantInputEnvelope
-  set?: Prisma.InventoryLevelWhereUniqueInput | Prisma.InventoryLevelWhereUniqueInput[]
-  disconnect?: Prisma.InventoryLevelWhereUniqueInput | Prisma.InventoryLevelWhereUniqueInput[]
-  delete?: Prisma.InventoryLevelWhereUniqueInput | Prisma.InventoryLevelWhereUniqueInput[]
-  connect?: Prisma.InventoryLevelWhereUniqueInput | Prisma.InventoryLevelWhereUniqueInput[]
-  update?: Prisma.InventoryLevelUpdateWithWhereUniqueWithoutVariantInput | Prisma.InventoryLevelUpdateWithWhereUniqueWithoutVariantInput[]
-  updateMany?: Prisma.InventoryLevelUpdateManyWithWhereWithoutVariantInput | Prisma.InventoryLevelUpdateManyWithWhereWithoutVariantInput[]
-  deleteMany?: Prisma.InventoryLevelScalarWhereInput | Prisma.InventoryLevelScalarWhereInput[]
-}
-
 export type InventoryLevelCreateNestedManyWithoutWarehouseInput = {
   create?: Prisma.XOR<Prisma.InventoryLevelCreateWithoutWarehouseInput, Prisma.InventoryLevelUncheckedCreateWithoutWarehouseInput> | Prisma.InventoryLevelCreateWithoutWarehouseInput[] | Prisma.InventoryLevelUncheckedCreateWithoutWarehouseInput[]
   connectOrCreate?: Prisma.InventoryLevelCreateOrConnectWithoutWarehouseInput | Prisma.InventoryLevelCreateOrConnectWithoutWarehouseInput[]
@@ -725,6 +683,14 @@ export type InventoryLevelUncheckedUpdateManyWithoutWarehouseNestedInput = {
   update?: Prisma.InventoryLevelUpdateWithWhereUniqueWithoutWarehouseInput | Prisma.InventoryLevelUpdateWithWhereUniqueWithoutWarehouseInput[]
   updateMany?: Prisma.InventoryLevelUpdateManyWithWhereWithoutWarehouseInput | Prisma.InventoryLevelUpdateManyWithWhereWithoutWarehouseInput[]
   deleteMany?: Prisma.InventoryLevelScalarWhereInput | Prisma.InventoryLevelScalarWhereInput[]
+}
+
+export type DecimalFieldUpdateOperationsInput = {
+  set?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  increment?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  decrement?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  multiply?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
 export type InventoryLevelCreateNestedManyWithoutDefaultLocationInput = {
@@ -811,88 +777,46 @@ export type InventoryLevelUpdateOneRequiredWithoutReservationsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.InventoryLevelUpdateToOneWithWhereWithoutReservationsInput, Prisma.InventoryLevelUpdateWithoutReservationsInput>, Prisma.InventoryLevelUncheckedUpdateWithoutReservationsInput>
 }
 
-export type InventoryLevelCreateWithoutVariantInput = {
-  id?: string
-  onHand?: number
-  reserved?: number
-  available?: number
-  incoming?: number
-  damaged?: number
-  unitCost?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalCost?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  version?: number
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  defaultLocation?: Prisma.StorageLocationCreateNestedOneWithoutDefaultForInput
-  warehouse: Prisma.WarehouseCreateNestedOneWithoutInventoryLevelsInput
-  movements?: Prisma.InventoryMovementCreateNestedManyWithoutInventoryLevelInput
-  reservations?: Prisma.StockReservationCreateNestedManyWithoutInventoryLevelInput
-  locationStocks?: Prisma.LocationStockCreateNestedManyWithoutInventoryLevelInput
+export type InventoryLevelCreateNestedManyWithoutVariantInput = {
+  create?: Prisma.XOR<Prisma.InventoryLevelCreateWithoutVariantInput, Prisma.InventoryLevelUncheckedCreateWithoutVariantInput> | Prisma.InventoryLevelCreateWithoutVariantInput[] | Prisma.InventoryLevelUncheckedCreateWithoutVariantInput[]
+  connectOrCreate?: Prisma.InventoryLevelCreateOrConnectWithoutVariantInput | Prisma.InventoryLevelCreateOrConnectWithoutVariantInput[]
+  createMany?: Prisma.InventoryLevelCreateManyVariantInputEnvelope
+  connect?: Prisma.InventoryLevelWhereUniqueInput | Prisma.InventoryLevelWhereUniqueInput[]
 }
 
-export type InventoryLevelUncheckedCreateWithoutVariantInput = {
-  id?: string
-  warehouseId: string
-  onHand?: number
-  reserved?: number
-  available?: number
-  incoming?: number
-  damaged?: number
-  unitCost?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalCost?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  version?: number
-  defaultLocationId?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  movements?: Prisma.InventoryMovementUncheckedCreateNestedManyWithoutInventoryLevelInput
-  reservations?: Prisma.StockReservationUncheckedCreateNestedManyWithoutInventoryLevelInput
-  locationStocks?: Prisma.LocationStockUncheckedCreateNestedManyWithoutInventoryLevelInput
+export type InventoryLevelUncheckedCreateNestedManyWithoutVariantInput = {
+  create?: Prisma.XOR<Prisma.InventoryLevelCreateWithoutVariantInput, Prisma.InventoryLevelUncheckedCreateWithoutVariantInput> | Prisma.InventoryLevelCreateWithoutVariantInput[] | Prisma.InventoryLevelUncheckedCreateWithoutVariantInput[]
+  connectOrCreate?: Prisma.InventoryLevelCreateOrConnectWithoutVariantInput | Prisma.InventoryLevelCreateOrConnectWithoutVariantInput[]
+  createMany?: Prisma.InventoryLevelCreateManyVariantInputEnvelope
+  connect?: Prisma.InventoryLevelWhereUniqueInput | Prisma.InventoryLevelWhereUniqueInput[]
 }
 
-export type InventoryLevelCreateOrConnectWithoutVariantInput = {
-  where: Prisma.InventoryLevelWhereUniqueInput
-  create: Prisma.XOR<Prisma.InventoryLevelCreateWithoutVariantInput, Prisma.InventoryLevelUncheckedCreateWithoutVariantInput>
+export type InventoryLevelUpdateManyWithoutVariantNestedInput = {
+  create?: Prisma.XOR<Prisma.InventoryLevelCreateWithoutVariantInput, Prisma.InventoryLevelUncheckedCreateWithoutVariantInput> | Prisma.InventoryLevelCreateWithoutVariantInput[] | Prisma.InventoryLevelUncheckedCreateWithoutVariantInput[]
+  connectOrCreate?: Prisma.InventoryLevelCreateOrConnectWithoutVariantInput | Prisma.InventoryLevelCreateOrConnectWithoutVariantInput[]
+  upsert?: Prisma.InventoryLevelUpsertWithWhereUniqueWithoutVariantInput | Prisma.InventoryLevelUpsertWithWhereUniqueWithoutVariantInput[]
+  createMany?: Prisma.InventoryLevelCreateManyVariantInputEnvelope
+  set?: Prisma.InventoryLevelWhereUniqueInput | Prisma.InventoryLevelWhereUniqueInput[]
+  disconnect?: Prisma.InventoryLevelWhereUniqueInput | Prisma.InventoryLevelWhereUniqueInput[]
+  delete?: Prisma.InventoryLevelWhereUniqueInput | Prisma.InventoryLevelWhereUniqueInput[]
+  connect?: Prisma.InventoryLevelWhereUniqueInput | Prisma.InventoryLevelWhereUniqueInput[]
+  update?: Prisma.InventoryLevelUpdateWithWhereUniqueWithoutVariantInput | Prisma.InventoryLevelUpdateWithWhereUniqueWithoutVariantInput[]
+  updateMany?: Prisma.InventoryLevelUpdateManyWithWhereWithoutVariantInput | Prisma.InventoryLevelUpdateManyWithWhereWithoutVariantInput[]
+  deleteMany?: Prisma.InventoryLevelScalarWhereInput | Prisma.InventoryLevelScalarWhereInput[]
 }
 
-export type InventoryLevelCreateManyVariantInputEnvelope = {
-  data: Prisma.InventoryLevelCreateManyVariantInput | Prisma.InventoryLevelCreateManyVariantInput[]
-  skipDuplicates?: boolean
-}
-
-export type InventoryLevelUpsertWithWhereUniqueWithoutVariantInput = {
-  where: Prisma.InventoryLevelWhereUniqueInput
-  update: Prisma.XOR<Prisma.InventoryLevelUpdateWithoutVariantInput, Prisma.InventoryLevelUncheckedUpdateWithoutVariantInput>
-  create: Prisma.XOR<Prisma.InventoryLevelCreateWithoutVariantInput, Prisma.InventoryLevelUncheckedCreateWithoutVariantInput>
-}
-
-export type InventoryLevelUpdateWithWhereUniqueWithoutVariantInput = {
-  where: Prisma.InventoryLevelWhereUniqueInput
-  data: Prisma.XOR<Prisma.InventoryLevelUpdateWithoutVariantInput, Prisma.InventoryLevelUncheckedUpdateWithoutVariantInput>
-}
-
-export type InventoryLevelUpdateManyWithWhereWithoutVariantInput = {
-  where: Prisma.InventoryLevelScalarWhereInput
-  data: Prisma.XOR<Prisma.InventoryLevelUpdateManyMutationInput, Prisma.InventoryLevelUncheckedUpdateManyWithoutVariantInput>
-}
-
-export type InventoryLevelScalarWhereInput = {
-  AND?: Prisma.InventoryLevelScalarWhereInput | Prisma.InventoryLevelScalarWhereInput[]
-  OR?: Prisma.InventoryLevelScalarWhereInput[]
-  NOT?: Prisma.InventoryLevelScalarWhereInput | Prisma.InventoryLevelScalarWhereInput[]
-  id?: Prisma.StringFilter<"InventoryLevel"> | string
-  variantId?: Prisma.StringFilter<"InventoryLevel"> | string
-  warehouseId?: Prisma.StringFilter<"InventoryLevel"> | string
-  onHand?: Prisma.IntFilter<"InventoryLevel"> | number
-  reserved?: Prisma.IntFilter<"InventoryLevel"> | number
-  available?: Prisma.IntFilter<"InventoryLevel"> | number
-  incoming?: Prisma.IntFilter<"InventoryLevel"> | number
-  damaged?: Prisma.IntFilter<"InventoryLevel"> | number
-  unitCost?: Prisma.DecimalFilter<"InventoryLevel"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalCost?: Prisma.DecimalFilter<"InventoryLevel"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  version?: Prisma.IntFilter<"InventoryLevel"> | number
-  defaultLocationId?: Prisma.StringNullableFilter<"InventoryLevel"> | string | null
-  createdAt?: Prisma.DateTimeFilter<"InventoryLevel"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"InventoryLevel"> | Date | string
+export type InventoryLevelUncheckedUpdateManyWithoutVariantNestedInput = {
+  create?: Prisma.XOR<Prisma.InventoryLevelCreateWithoutVariantInput, Prisma.InventoryLevelUncheckedCreateWithoutVariantInput> | Prisma.InventoryLevelCreateWithoutVariantInput[] | Prisma.InventoryLevelUncheckedCreateWithoutVariantInput[]
+  connectOrCreate?: Prisma.InventoryLevelCreateOrConnectWithoutVariantInput | Prisma.InventoryLevelCreateOrConnectWithoutVariantInput[]
+  upsert?: Prisma.InventoryLevelUpsertWithWhereUniqueWithoutVariantInput | Prisma.InventoryLevelUpsertWithWhereUniqueWithoutVariantInput[]
+  createMany?: Prisma.InventoryLevelCreateManyVariantInputEnvelope
+  set?: Prisma.InventoryLevelWhereUniqueInput | Prisma.InventoryLevelWhereUniqueInput[]
+  disconnect?: Prisma.InventoryLevelWhereUniqueInput | Prisma.InventoryLevelWhereUniqueInput[]
+  delete?: Prisma.InventoryLevelWhereUniqueInput | Prisma.InventoryLevelWhereUniqueInput[]
+  connect?: Prisma.InventoryLevelWhereUniqueInput | Prisma.InventoryLevelWhereUniqueInput[]
+  update?: Prisma.InventoryLevelUpdateWithWhereUniqueWithoutVariantInput | Prisma.InventoryLevelUpdateWithWhereUniqueWithoutVariantInput[]
+  updateMany?: Prisma.InventoryLevelUpdateManyWithWhereWithoutVariantInput | Prisma.InventoryLevelUpdateManyWithWhereWithoutVariantInput[]
+  deleteMany?: Prisma.InventoryLevelScalarWhereInput | Prisma.InventoryLevelScalarWhereInput[]
 }
 
 export type InventoryLevelCreateWithoutWarehouseInput = {
@@ -957,6 +881,26 @@ export type InventoryLevelUpdateWithWhereUniqueWithoutWarehouseInput = {
 export type InventoryLevelUpdateManyWithWhereWithoutWarehouseInput = {
   where: Prisma.InventoryLevelScalarWhereInput
   data: Prisma.XOR<Prisma.InventoryLevelUpdateManyMutationInput, Prisma.InventoryLevelUncheckedUpdateManyWithoutWarehouseInput>
+}
+
+export type InventoryLevelScalarWhereInput = {
+  AND?: Prisma.InventoryLevelScalarWhereInput | Prisma.InventoryLevelScalarWhereInput[]
+  OR?: Prisma.InventoryLevelScalarWhereInput[]
+  NOT?: Prisma.InventoryLevelScalarWhereInput | Prisma.InventoryLevelScalarWhereInput[]
+  id?: Prisma.StringFilter<"InventoryLevel"> | string
+  variantId?: Prisma.StringFilter<"InventoryLevel"> | string
+  warehouseId?: Prisma.StringFilter<"InventoryLevel"> | string
+  onHand?: Prisma.IntFilter<"InventoryLevel"> | number
+  reserved?: Prisma.IntFilter<"InventoryLevel"> | number
+  available?: Prisma.IntFilter<"InventoryLevel"> | number
+  incoming?: Prisma.IntFilter<"InventoryLevel"> | number
+  damaged?: Prisma.IntFilter<"InventoryLevel"> | number
+  unitCost?: Prisma.DecimalFilter<"InventoryLevel"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCost?: Prisma.DecimalFilter<"InventoryLevel"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  version?: Prisma.IntFilter<"InventoryLevel"> | number
+  defaultLocationId?: Prisma.StringNullableFilter<"InventoryLevel"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"InventoryLevel"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"InventoryLevel"> | Date | string
 }
 
 export type InventoryLevelCreateWithoutDefaultLocationInput = {
@@ -1299,7 +1243,26 @@ export type InventoryLevelUncheckedUpdateWithoutReservationsInput = {
   locationStocks?: Prisma.LocationStockUncheckedUpdateManyWithoutInventoryLevelNestedInput
 }
 
-export type InventoryLevelCreateManyVariantInput = {
+export type InventoryLevelCreateWithoutVariantInput = {
+  id?: string
+  onHand?: number
+  reserved?: number
+  available?: number
+  incoming?: number
+  damaged?: number
+  unitCost?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCost?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  version?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  defaultLocation?: Prisma.StorageLocationCreateNestedOneWithoutDefaultForInput
+  warehouse: Prisma.WarehouseCreateNestedOneWithoutInventoryLevelsInput
+  movements?: Prisma.InventoryMovementCreateNestedManyWithoutInventoryLevelInput
+  reservations?: Prisma.StockReservationCreateNestedManyWithoutInventoryLevelInput
+  locationStocks?: Prisma.LocationStockCreateNestedManyWithoutInventoryLevelInput
+}
+
+export type InventoryLevelUncheckedCreateWithoutVariantInput = {
   id?: string
   warehouseId: string
   onHand?: number
@@ -1313,60 +1276,35 @@ export type InventoryLevelCreateManyVariantInput = {
   defaultLocationId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  movements?: Prisma.InventoryMovementUncheckedCreateNestedManyWithoutInventoryLevelInput
+  reservations?: Prisma.StockReservationUncheckedCreateNestedManyWithoutInventoryLevelInput
+  locationStocks?: Prisma.LocationStockUncheckedCreateNestedManyWithoutInventoryLevelInput
 }
 
-export type InventoryLevelUpdateWithoutVariantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  onHand?: Prisma.IntFieldUpdateOperationsInput | number
-  reserved?: Prisma.IntFieldUpdateOperationsInput | number
-  available?: Prisma.IntFieldUpdateOperationsInput | number
-  incoming?: Prisma.IntFieldUpdateOperationsInput | number
-  damaged?: Prisma.IntFieldUpdateOperationsInput | number
-  unitCost?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalCost?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  version?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  defaultLocation?: Prisma.StorageLocationUpdateOneWithoutDefaultForNestedInput
-  warehouse?: Prisma.WarehouseUpdateOneRequiredWithoutInventoryLevelsNestedInput
-  movements?: Prisma.InventoryMovementUpdateManyWithoutInventoryLevelNestedInput
-  reservations?: Prisma.StockReservationUpdateManyWithoutInventoryLevelNestedInput
-  locationStocks?: Prisma.LocationStockUpdateManyWithoutInventoryLevelNestedInput
+export type InventoryLevelCreateOrConnectWithoutVariantInput = {
+  where: Prisma.InventoryLevelWhereUniqueInput
+  create: Prisma.XOR<Prisma.InventoryLevelCreateWithoutVariantInput, Prisma.InventoryLevelUncheckedCreateWithoutVariantInput>
 }
 
-export type InventoryLevelUncheckedUpdateWithoutVariantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  warehouseId?: Prisma.StringFieldUpdateOperationsInput | string
-  onHand?: Prisma.IntFieldUpdateOperationsInput | number
-  reserved?: Prisma.IntFieldUpdateOperationsInput | number
-  available?: Prisma.IntFieldUpdateOperationsInput | number
-  incoming?: Prisma.IntFieldUpdateOperationsInput | number
-  damaged?: Prisma.IntFieldUpdateOperationsInput | number
-  unitCost?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalCost?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  version?: Prisma.IntFieldUpdateOperationsInput | number
-  defaultLocationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  movements?: Prisma.InventoryMovementUncheckedUpdateManyWithoutInventoryLevelNestedInput
-  reservations?: Prisma.StockReservationUncheckedUpdateManyWithoutInventoryLevelNestedInput
-  locationStocks?: Prisma.LocationStockUncheckedUpdateManyWithoutInventoryLevelNestedInput
+export type InventoryLevelCreateManyVariantInputEnvelope = {
+  data: Prisma.InventoryLevelCreateManyVariantInput | Prisma.InventoryLevelCreateManyVariantInput[]
+  skipDuplicates?: boolean
 }
 
-export type InventoryLevelUncheckedUpdateManyWithoutVariantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  warehouseId?: Prisma.StringFieldUpdateOperationsInput | string
-  onHand?: Prisma.IntFieldUpdateOperationsInput | number
-  reserved?: Prisma.IntFieldUpdateOperationsInput | number
-  available?: Prisma.IntFieldUpdateOperationsInput | number
-  incoming?: Prisma.IntFieldUpdateOperationsInput | number
-  damaged?: Prisma.IntFieldUpdateOperationsInput | number
-  unitCost?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalCost?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  version?: Prisma.IntFieldUpdateOperationsInput | number
-  defaultLocationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+export type InventoryLevelUpsertWithWhereUniqueWithoutVariantInput = {
+  where: Prisma.InventoryLevelWhereUniqueInput
+  update: Prisma.XOR<Prisma.InventoryLevelUpdateWithoutVariantInput, Prisma.InventoryLevelUncheckedUpdateWithoutVariantInput>
+  create: Prisma.XOR<Prisma.InventoryLevelCreateWithoutVariantInput, Prisma.InventoryLevelUncheckedCreateWithoutVariantInput>
+}
+
+export type InventoryLevelUpdateWithWhereUniqueWithoutVariantInput = {
+  where: Prisma.InventoryLevelWhereUniqueInput
+  data: Prisma.XOR<Prisma.InventoryLevelUpdateWithoutVariantInput, Prisma.InventoryLevelUncheckedUpdateWithoutVariantInput>
+}
+
+export type InventoryLevelUpdateManyWithWhereWithoutVariantInput = {
+  where: Prisma.InventoryLevelScalarWhereInput
+  data: Prisma.XOR<Prisma.InventoryLevelUpdateManyMutationInput, Prisma.InventoryLevelUncheckedUpdateManyWithoutVariantInput>
 }
 
 export type InventoryLevelCreateManyWarehouseInput = {
@@ -1505,6 +1443,76 @@ export type InventoryLevelUncheckedUpdateManyWithoutDefaultLocationInput = {
   unitCost?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalCost?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   version?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type InventoryLevelCreateManyVariantInput = {
+  id?: string
+  warehouseId: string
+  onHand?: number
+  reserved?: number
+  available?: number
+  incoming?: number
+  damaged?: number
+  unitCost?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCost?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  version?: number
+  defaultLocationId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type InventoryLevelUpdateWithoutVariantInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  onHand?: Prisma.IntFieldUpdateOperationsInput | number
+  reserved?: Prisma.IntFieldUpdateOperationsInput | number
+  available?: Prisma.IntFieldUpdateOperationsInput | number
+  incoming?: Prisma.IntFieldUpdateOperationsInput | number
+  damaged?: Prisma.IntFieldUpdateOperationsInput | number
+  unitCost?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCost?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  defaultLocation?: Prisma.StorageLocationUpdateOneWithoutDefaultForNestedInput
+  warehouse?: Prisma.WarehouseUpdateOneRequiredWithoutInventoryLevelsNestedInput
+  movements?: Prisma.InventoryMovementUpdateManyWithoutInventoryLevelNestedInput
+  reservations?: Prisma.StockReservationUpdateManyWithoutInventoryLevelNestedInput
+  locationStocks?: Prisma.LocationStockUpdateManyWithoutInventoryLevelNestedInput
+}
+
+export type InventoryLevelUncheckedUpdateWithoutVariantInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  warehouseId?: Prisma.StringFieldUpdateOperationsInput | string
+  onHand?: Prisma.IntFieldUpdateOperationsInput | number
+  reserved?: Prisma.IntFieldUpdateOperationsInput | number
+  available?: Prisma.IntFieldUpdateOperationsInput | number
+  incoming?: Prisma.IntFieldUpdateOperationsInput | number
+  damaged?: Prisma.IntFieldUpdateOperationsInput | number
+  unitCost?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCost?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  defaultLocationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  movements?: Prisma.InventoryMovementUncheckedUpdateManyWithoutInventoryLevelNestedInput
+  reservations?: Prisma.StockReservationUncheckedUpdateManyWithoutInventoryLevelNestedInput
+  locationStocks?: Prisma.LocationStockUncheckedUpdateManyWithoutInventoryLevelNestedInput
+}
+
+export type InventoryLevelUncheckedUpdateManyWithoutVariantInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  warehouseId?: Prisma.StringFieldUpdateOperationsInput | string
+  onHand?: Prisma.IntFieldUpdateOperationsInput | number
+  reserved?: Prisma.IntFieldUpdateOperationsInput | number
+  available?: Prisma.IntFieldUpdateOperationsInput | number
+  incoming?: Prisma.IntFieldUpdateOperationsInput | number
+  damaged?: Prisma.IntFieldUpdateOperationsInput | number
+  unitCost?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalCost?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  defaultLocationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }

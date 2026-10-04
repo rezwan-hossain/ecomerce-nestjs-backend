@@ -514,6 +514,11 @@ export type ProductVariantUncheckedUpdateManyInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
+export type ProductVariantScalarRelationFilter = {
+  is?: Prisma.ProductVariantWhereInput
+  isNot?: Prisma.ProductVariantWhereInput
+}
+
 export type ProductVariantListRelationFilter = {
   every?: Prisma.ProductVariantWhereInput
   some?: Prisma.ProductVariantWhereInput
@@ -580,92 +585,9 @@ export type ProductVariantSumOrderByAggregateInput = {
   lowStockThreshold?: Prisma.SortOrder
 }
 
-export type ProductVariantScalarRelationFilter = {
-  is?: Prisma.ProductVariantWhereInput
-  isNot?: Prisma.ProductVariantWhereInput
-}
-
 export type ProductVariantNullableScalarRelationFilter = {
   is?: Prisma.ProductVariantWhereInput | null
   isNot?: Prisma.ProductVariantWhereInput | null
-}
-
-export type ProductVariantCreateNestedManyWithoutProductInput = {
-  create?: Prisma.XOR<Prisma.ProductVariantCreateWithoutProductInput, Prisma.ProductVariantUncheckedCreateWithoutProductInput> | Prisma.ProductVariantCreateWithoutProductInput[] | Prisma.ProductVariantUncheckedCreateWithoutProductInput[]
-  connectOrCreate?: Prisma.ProductVariantCreateOrConnectWithoutProductInput | Prisma.ProductVariantCreateOrConnectWithoutProductInput[]
-  createMany?: Prisma.ProductVariantCreateManyProductInputEnvelope
-  connect?: Prisma.ProductVariantWhereUniqueInput | Prisma.ProductVariantWhereUniqueInput[]
-}
-
-export type ProductVariantUncheckedCreateNestedManyWithoutProductInput = {
-  create?: Prisma.XOR<Prisma.ProductVariantCreateWithoutProductInput, Prisma.ProductVariantUncheckedCreateWithoutProductInput> | Prisma.ProductVariantCreateWithoutProductInput[] | Prisma.ProductVariantUncheckedCreateWithoutProductInput[]
-  connectOrCreate?: Prisma.ProductVariantCreateOrConnectWithoutProductInput | Prisma.ProductVariantCreateOrConnectWithoutProductInput[]
-  createMany?: Prisma.ProductVariantCreateManyProductInputEnvelope
-  connect?: Prisma.ProductVariantWhereUniqueInput | Prisma.ProductVariantWhereUniqueInput[]
-}
-
-export type ProductVariantUpdateManyWithoutProductNestedInput = {
-  create?: Prisma.XOR<Prisma.ProductVariantCreateWithoutProductInput, Prisma.ProductVariantUncheckedCreateWithoutProductInput> | Prisma.ProductVariantCreateWithoutProductInput[] | Prisma.ProductVariantUncheckedCreateWithoutProductInput[]
-  connectOrCreate?: Prisma.ProductVariantCreateOrConnectWithoutProductInput | Prisma.ProductVariantCreateOrConnectWithoutProductInput[]
-  upsert?: Prisma.ProductVariantUpsertWithWhereUniqueWithoutProductInput | Prisma.ProductVariantUpsertWithWhereUniqueWithoutProductInput[]
-  createMany?: Prisma.ProductVariantCreateManyProductInputEnvelope
-  set?: Prisma.ProductVariantWhereUniqueInput | Prisma.ProductVariantWhereUniqueInput[]
-  disconnect?: Prisma.ProductVariantWhereUniqueInput | Prisma.ProductVariantWhereUniqueInput[]
-  delete?: Prisma.ProductVariantWhereUniqueInput | Prisma.ProductVariantWhereUniqueInput[]
-  connect?: Prisma.ProductVariantWhereUniqueInput | Prisma.ProductVariantWhereUniqueInput[]
-  update?: Prisma.ProductVariantUpdateWithWhereUniqueWithoutProductInput | Prisma.ProductVariantUpdateWithWhereUniqueWithoutProductInput[]
-  updateMany?: Prisma.ProductVariantUpdateManyWithWhereWithoutProductInput | Prisma.ProductVariantUpdateManyWithWhereWithoutProductInput[]
-  deleteMany?: Prisma.ProductVariantScalarWhereInput | Prisma.ProductVariantScalarWhereInput[]
-}
-
-export type ProductVariantUncheckedUpdateManyWithoutProductNestedInput = {
-  create?: Prisma.XOR<Prisma.ProductVariantCreateWithoutProductInput, Prisma.ProductVariantUncheckedCreateWithoutProductInput> | Prisma.ProductVariantCreateWithoutProductInput[] | Prisma.ProductVariantUncheckedCreateWithoutProductInput[]
-  connectOrCreate?: Prisma.ProductVariantCreateOrConnectWithoutProductInput | Prisma.ProductVariantCreateOrConnectWithoutProductInput[]
-  upsert?: Prisma.ProductVariantUpsertWithWhereUniqueWithoutProductInput | Prisma.ProductVariantUpsertWithWhereUniqueWithoutProductInput[]
-  createMany?: Prisma.ProductVariantCreateManyProductInputEnvelope
-  set?: Prisma.ProductVariantWhereUniqueInput | Prisma.ProductVariantWhereUniqueInput[]
-  disconnect?: Prisma.ProductVariantWhereUniqueInput | Prisma.ProductVariantWhereUniqueInput[]
-  delete?: Prisma.ProductVariantWhereUniqueInput | Prisma.ProductVariantWhereUniqueInput[]
-  connect?: Prisma.ProductVariantWhereUniqueInput | Prisma.ProductVariantWhereUniqueInput[]
-  update?: Prisma.ProductVariantUpdateWithWhereUniqueWithoutProductInput | Prisma.ProductVariantUpdateWithWhereUniqueWithoutProductInput[]
-  updateMany?: Prisma.ProductVariantUpdateManyWithWhereWithoutProductInput | Prisma.ProductVariantUpdateManyWithWhereWithoutProductInput[]
-  deleteMany?: Prisma.ProductVariantScalarWhereInput | Prisma.ProductVariantScalarWhereInput[]
-}
-
-export type DecimalFieldUpdateOperationsInput = {
-  set?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  increment?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  decrement?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  multiply?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
-}
-
-export type ProductVariantCreateNestedOneWithoutOptionValuesInput = {
-  create?: Prisma.XOR<Prisma.ProductVariantCreateWithoutOptionValuesInput, Prisma.ProductVariantUncheckedCreateWithoutOptionValuesInput>
-  connectOrCreate?: Prisma.ProductVariantCreateOrConnectWithoutOptionValuesInput
-  connect?: Prisma.ProductVariantWhereUniqueInput
-}
-
-export type ProductVariantUpdateOneRequiredWithoutOptionValuesNestedInput = {
-  create?: Prisma.XOR<Prisma.ProductVariantCreateWithoutOptionValuesInput, Prisma.ProductVariantUncheckedCreateWithoutOptionValuesInput>
-  connectOrCreate?: Prisma.ProductVariantCreateOrConnectWithoutOptionValuesInput
-  upsert?: Prisma.ProductVariantUpsertWithoutOptionValuesInput
-  connect?: Prisma.ProductVariantWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.ProductVariantUpdateToOneWithWhereWithoutOptionValuesInput, Prisma.ProductVariantUpdateWithoutOptionValuesInput>, Prisma.ProductVariantUncheckedUpdateWithoutOptionValuesInput>
-}
-
-export type ProductVariantCreateNestedOneWithoutImagesInput = {
-  create?: Prisma.XOR<Prisma.ProductVariantCreateWithoutImagesInput, Prisma.ProductVariantUncheckedCreateWithoutImagesInput>
-  connectOrCreate?: Prisma.ProductVariantCreateOrConnectWithoutImagesInput
-  connect?: Prisma.ProductVariantWhereUniqueInput
-}
-
-export type ProductVariantUpdateOneRequiredWithoutImagesNestedInput = {
-  create?: Prisma.XOR<Prisma.ProductVariantCreateWithoutImagesInput, Prisma.ProductVariantUncheckedCreateWithoutImagesInput>
-  connectOrCreate?: Prisma.ProductVariantCreateOrConnectWithoutImagesInput
-  upsert?: Prisma.ProductVariantUpsertWithoutImagesInput
-  connect?: Prisma.ProductVariantWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.ProductVariantUpdateToOneWithWhereWithoutImagesInput, Prisma.ProductVariantUpdateWithoutImagesInput>, Prisma.ProductVariantUncheckedUpdateWithoutImagesInput>
 }
 
 export type ProductVariantCreateNestedOneWithoutInventoryLevelsInput = {
@@ -780,6 +702,76 @@ export type ProductVariantUpdateOneRequiredWithoutInventoryAlertsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ProductVariantUpdateToOneWithWhereWithoutInventoryAlertsInput, Prisma.ProductVariantUpdateWithoutInventoryAlertsInput>, Prisma.ProductVariantUncheckedUpdateWithoutInventoryAlertsInput>
 }
 
+export type ProductVariantCreateNestedManyWithoutProductInput = {
+  create?: Prisma.XOR<Prisma.ProductVariantCreateWithoutProductInput, Prisma.ProductVariantUncheckedCreateWithoutProductInput> | Prisma.ProductVariantCreateWithoutProductInput[] | Prisma.ProductVariantUncheckedCreateWithoutProductInput[]
+  connectOrCreate?: Prisma.ProductVariantCreateOrConnectWithoutProductInput | Prisma.ProductVariantCreateOrConnectWithoutProductInput[]
+  createMany?: Prisma.ProductVariantCreateManyProductInputEnvelope
+  connect?: Prisma.ProductVariantWhereUniqueInput | Prisma.ProductVariantWhereUniqueInput[]
+}
+
+export type ProductVariantUncheckedCreateNestedManyWithoutProductInput = {
+  create?: Prisma.XOR<Prisma.ProductVariantCreateWithoutProductInput, Prisma.ProductVariantUncheckedCreateWithoutProductInput> | Prisma.ProductVariantCreateWithoutProductInput[] | Prisma.ProductVariantUncheckedCreateWithoutProductInput[]
+  connectOrCreate?: Prisma.ProductVariantCreateOrConnectWithoutProductInput | Prisma.ProductVariantCreateOrConnectWithoutProductInput[]
+  createMany?: Prisma.ProductVariantCreateManyProductInputEnvelope
+  connect?: Prisma.ProductVariantWhereUniqueInput | Prisma.ProductVariantWhereUniqueInput[]
+}
+
+export type ProductVariantUpdateManyWithoutProductNestedInput = {
+  create?: Prisma.XOR<Prisma.ProductVariantCreateWithoutProductInput, Prisma.ProductVariantUncheckedCreateWithoutProductInput> | Prisma.ProductVariantCreateWithoutProductInput[] | Prisma.ProductVariantUncheckedCreateWithoutProductInput[]
+  connectOrCreate?: Prisma.ProductVariantCreateOrConnectWithoutProductInput | Prisma.ProductVariantCreateOrConnectWithoutProductInput[]
+  upsert?: Prisma.ProductVariantUpsertWithWhereUniqueWithoutProductInput | Prisma.ProductVariantUpsertWithWhereUniqueWithoutProductInput[]
+  createMany?: Prisma.ProductVariantCreateManyProductInputEnvelope
+  set?: Prisma.ProductVariantWhereUniqueInput | Prisma.ProductVariantWhereUniqueInput[]
+  disconnect?: Prisma.ProductVariantWhereUniqueInput | Prisma.ProductVariantWhereUniqueInput[]
+  delete?: Prisma.ProductVariantWhereUniqueInput | Prisma.ProductVariantWhereUniqueInput[]
+  connect?: Prisma.ProductVariantWhereUniqueInput | Prisma.ProductVariantWhereUniqueInput[]
+  update?: Prisma.ProductVariantUpdateWithWhereUniqueWithoutProductInput | Prisma.ProductVariantUpdateWithWhereUniqueWithoutProductInput[]
+  updateMany?: Prisma.ProductVariantUpdateManyWithWhereWithoutProductInput | Prisma.ProductVariantUpdateManyWithWhereWithoutProductInput[]
+  deleteMany?: Prisma.ProductVariantScalarWhereInput | Prisma.ProductVariantScalarWhereInput[]
+}
+
+export type ProductVariantUncheckedUpdateManyWithoutProductNestedInput = {
+  create?: Prisma.XOR<Prisma.ProductVariantCreateWithoutProductInput, Prisma.ProductVariantUncheckedCreateWithoutProductInput> | Prisma.ProductVariantCreateWithoutProductInput[] | Prisma.ProductVariantUncheckedCreateWithoutProductInput[]
+  connectOrCreate?: Prisma.ProductVariantCreateOrConnectWithoutProductInput | Prisma.ProductVariantCreateOrConnectWithoutProductInput[]
+  upsert?: Prisma.ProductVariantUpsertWithWhereUniqueWithoutProductInput | Prisma.ProductVariantUpsertWithWhereUniqueWithoutProductInput[]
+  createMany?: Prisma.ProductVariantCreateManyProductInputEnvelope
+  set?: Prisma.ProductVariantWhereUniqueInput | Prisma.ProductVariantWhereUniqueInput[]
+  disconnect?: Prisma.ProductVariantWhereUniqueInput | Prisma.ProductVariantWhereUniqueInput[]
+  delete?: Prisma.ProductVariantWhereUniqueInput | Prisma.ProductVariantWhereUniqueInput[]
+  connect?: Prisma.ProductVariantWhereUniqueInput | Prisma.ProductVariantWhereUniqueInput[]
+  update?: Prisma.ProductVariantUpdateWithWhereUniqueWithoutProductInput | Prisma.ProductVariantUpdateWithWhereUniqueWithoutProductInput[]
+  updateMany?: Prisma.ProductVariantUpdateManyWithWhereWithoutProductInput | Prisma.ProductVariantUpdateManyWithWhereWithoutProductInput[]
+  deleteMany?: Prisma.ProductVariantScalarWhereInput | Prisma.ProductVariantScalarWhereInput[]
+}
+
+export type ProductVariantCreateNestedOneWithoutOptionValuesInput = {
+  create?: Prisma.XOR<Prisma.ProductVariantCreateWithoutOptionValuesInput, Prisma.ProductVariantUncheckedCreateWithoutOptionValuesInput>
+  connectOrCreate?: Prisma.ProductVariantCreateOrConnectWithoutOptionValuesInput
+  connect?: Prisma.ProductVariantWhereUniqueInput
+}
+
+export type ProductVariantUpdateOneRequiredWithoutOptionValuesNestedInput = {
+  create?: Prisma.XOR<Prisma.ProductVariantCreateWithoutOptionValuesInput, Prisma.ProductVariantUncheckedCreateWithoutOptionValuesInput>
+  connectOrCreate?: Prisma.ProductVariantCreateOrConnectWithoutOptionValuesInput
+  upsert?: Prisma.ProductVariantUpsertWithoutOptionValuesInput
+  connect?: Prisma.ProductVariantWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProductVariantUpdateToOneWithWhereWithoutOptionValuesInput, Prisma.ProductVariantUpdateWithoutOptionValuesInput>, Prisma.ProductVariantUncheckedUpdateWithoutOptionValuesInput>
+}
+
+export type ProductVariantCreateNestedOneWithoutImagesInput = {
+  create?: Prisma.XOR<Prisma.ProductVariantCreateWithoutImagesInput, Prisma.ProductVariantUncheckedCreateWithoutImagesInput>
+  connectOrCreate?: Prisma.ProductVariantCreateOrConnectWithoutImagesInput
+  connect?: Prisma.ProductVariantWhereUniqueInput
+}
+
+export type ProductVariantUpdateOneRequiredWithoutImagesNestedInput = {
+  create?: Prisma.XOR<Prisma.ProductVariantCreateWithoutImagesInput, Prisma.ProductVariantUncheckedCreateWithoutImagesInput>
+  connectOrCreate?: Prisma.ProductVariantCreateOrConnectWithoutImagesInput
+  upsert?: Prisma.ProductVariantUpsertWithoutImagesInput
+  connect?: Prisma.ProductVariantWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProductVariantUpdateToOneWithWhereWithoutImagesInput, Prisma.ProductVariantUpdateWithoutImagesInput>, Prisma.ProductVariantUncheckedUpdateWithoutImagesInput>
+}
+
 export type ProductVariantCreateNestedOneWithoutCartItemsInput = {
   create?: Prisma.XOR<Prisma.ProductVariantCreateWithoutCartItemsInput, Prisma.ProductVariantUncheckedCreateWithoutCartItemsInput>
   connectOrCreate?: Prisma.ProductVariantCreateOrConnectWithoutCartItemsInput
@@ -824,330 +816,6 @@ export type ProductVariantUpdateOneWithoutPromotionTargetsNestedInput = {
   delete?: Prisma.ProductVariantWhereInput | boolean
   connect?: Prisma.ProductVariantWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.ProductVariantUpdateToOneWithWhereWithoutPromotionTargetsInput, Prisma.ProductVariantUpdateWithoutPromotionTargetsInput>, Prisma.ProductVariantUncheckedUpdateWithoutPromotionTargetsInput>
-}
-
-export type ProductVariantCreateWithoutProductInput = {
-  id?: string
-  sku: string
-  price: runtime.Decimal | runtime.DecimalJsLike | number | string
-  stock?: number
-  isActive?: boolean
-  lowStockThreshold?: number
-  optionKey?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  optionValues?: Prisma.VariantOptionValueCreateNestedManyWithoutVariantInput
-  images?: Prisma.VariantImageCreateNestedManyWithoutVariantInput
-  cartItems?: Prisma.CartItemCreateNestedManyWithoutVariantInput
-  promotionTargets?: Prisma.PromotionTargetCreateNestedManyWithoutVariantInput
-  inventoryLevels?: Prisma.InventoryLevelCreateNestedManyWithoutVariantInput
-  stockReservations?: Prisma.StockReservationCreateNestedManyWithoutVariantInput
-  inventoryBatches?: Prisma.InventoryBatchCreateNestedManyWithoutVariantInput
-  purchaseOrderItems?: Prisma.PurchaseOrderItemCreateNestedManyWithoutVariantInput
-  transferItems?: Prisma.InventoryTransferItemCreateNestedManyWithoutVariantInput
-  stockAdjustmentItems?: Prisma.StockAdjustmentItemCreateNestedManyWithoutVariantInput
-  reorderRules?: Prisma.ReorderRuleCreateNestedManyWithoutVariantInput
-  inventoryAlerts?: Prisma.InventoryAlertCreateNestedManyWithoutVariantInput
-  orderItems?: Prisma.OrderItemCreateNestedManyWithoutVariantInput
-}
-
-export type ProductVariantUncheckedCreateWithoutProductInput = {
-  id?: string
-  sku: string
-  price: runtime.Decimal | runtime.DecimalJsLike | number | string
-  stock?: number
-  isActive?: boolean
-  lowStockThreshold?: number
-  optionKey?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  optionValues?: Prisma.VariantOptionValueUncheckedCreateNestedManyWithoutVariantInput
-  images?: Prisma.VariantImageUncheckedCreateNestedManyWithoutVariantInput
-  cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutVariantInput
-  promotionTargets?: Prisma.PromotionTargetUncheckedCreateNestedManyWithoutVariantInput
-  inventoryLevels?: Prisma.InventoryLevelUncheckedCreateNestedManyWithoutVariantInput
-  stockReservations?: Prisma.StockReservationUncheckedCreateNestedManyWithoutVariantInput
-  inventoryBatches?: Prisma.InventoryBatchUncheckedCreateNestedManyWithoutVariantInput
-  purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutVariantInput
-  transferItems?: Prisma.InventoryTransferItemUncheckedCreateNestedManyWithoutVariantInput
-  stockAdjustmentItems?: Prisma.StockAdjustmentItemUncheckedCreateNestedManyWithoutVariantInput
-  reorderRules?: Prisma.ReorderRuleUncheckedCreateNestedManyWithoutVariantInput
-  inventoryAlerts?: Prisma.InventoryAlertUncheckedCreateNestedManyWithoutVariantInput
-  orderItems?: Prisma.OrderItemUncheckedCreateNestedManyWithoutVariantInput
-}
-
-export type ProductVariantCreateOrConnectWithoutProductInput = {
-  where: Prisma.ProductVariantWhereUniqueInput
-  create: Prisma.XOR<Prisma.ProductVariantCreateWithoutProductInput, Prisma.ProductVariantUncheckedCreateWithoutProductInput>
-}
-
-export type ProductVariantCreateManyProductInputEnvelope = {
-  data: Prisma.ProductVariantCreateManyProductInput | Prisma.ProductVariantCreateManyProductInput[]
-  skipDuplicates?: boolean
-}
-
-export type ProductVariantUpsertWithWhereUniqueWithoutProductInput = {
-  where: Prisma.ProductVariantWhereUniqueInput
-  update: Prisma.XOR<Prisma.ProductVariantUpdateWithoutProductInput, Prisma.ProductVariantUncheckedUpdateWithoutProductInput>
-  create: Prisma.XOR<Prisma.ProductVariantCreateWithoutProductInput, Prisma.ProductVariantUncheckedCreateWithoutProductInput>
-}
-
-export type ProductVariantUpdateWithWhereUniqueWithoutProductInput = {
-  where: Prisma.ProductVariantWhereUniqueInput
-  data: Prisma.XOR<Prisma.ProductVariantUpdateWithoutProductInput, Prisma.ProductVariantUncheckedUpdateWithoutProductInput>
-}
-
-export type ProductVariantUpdateManyWithWhereWithoutProductInput = {
-  where: Prisma.ProductVariantScalarWhereInput
-  data: Prisma.XOR<Prisma.ProductVariantUpdateManyMutationInput, Prisma.ProductVariantUncheckedUpdateManyWithoutProductInput>
-}
-
-export type ProductVariantScalarWhereInput = {
-  AND?: Prisma.ProductVariantScalarWhereInput | Prisma.ProductVariantScalarWhereInput[]
-  OR?: Prisma.ProductVariantScalarWhereInput[]
-  NOT?: Prisma.ProductVariantScalarWhereInput | Prisma.ProductVariantScalarWhereInput[]
-  id?: Prisma.StringFilter<"ProductVariant"> | string
-  productId?: Prisma.StringFilter<"ProductVariant"> | string
-  sku?: Prisma.StringFilter<"ProductVariant"> | string
-  price?: Prisma.DecimalFilter<"ProductVariant"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  stock?: Prisma.IntFilter<"ProductVariant"> | number
-  isActive?: Prisma.BoolFilter<"ProductVariant"> | boolean
-  lowStockThreshold?: Prisma.IntFilter<"ProductVariant"> | number
-  optionKey?: Prisma.StringNullableFilter<"ProductVariant"> | string | null
-  createdAt?: Prisma.DateTimeFilter<"ProductVariant"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"ProductVariant"> | Date | string
-}
-
-export type ProductVariantCreateWithoutOptionValuesInput = {
-  id?: string
-  sku: string
-  price: runtime.Decimal | runtime.DecimalJsLike | number | string
-  stock?: number
-  isActive?: boolean
-  lowStockThreshold?: number
-  optionKey?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  product: Prisma.ProductCreateNestedOneWithoutVariantsInput
-  images?: Prisma.VariantImageCreateNestedManyWithoutVariantInput
-  cartItems?: Prisma.CartItemCreateNestedManyWithoutVariantInput
-  promotionTargets?: Prisma.PromotionTargetCreateNestedManyWithoutVariantInput
-  inventoryLevels?: Prisma.InventoryLevelCreateNestedManyWithoutVariantInput
-  stockReservations?: Prisma.StockReservationCreateNestedManyWithoutVariantInput
-  inventoryBatches?: Prisma.InventoryBatchCreateNestedManyWithoutVariantInput
-  purchaseOrderItems?: Prisma.PurchaseOrderItemCreateNestedManyWithoutVariantInput
-  transferItems?: Prisma.InventoryTransferItemCreateNestedManyWithoutVariantInput
-  stockAdjustmentItems?: Prisma.StockAdjustmentItemCreateNestedManyWithoutVariantInput
-  reorderRules?: Prisma.ReorderRuleCreateNestedManyWithoutVariantInput
-  inventoryAlerts?: Prisma.InventoryAlertCreateNestedManyWithoutVariantInput
-  orderItems?: Prisma.OrderItemCreateNestedManyWithoutVariantInput
-}
-
-export type ProductVariantUncheckedCreateWithoutOptionValuesInput = {
-  id?: string
-  productId: string
-  sku: string
-  price: runtime.Decimal | runtime.DecimalJsLike | number | string
-  stock?: number
-  isActive?: boolean
-  lowStockThreshold?: number
-  optionKey?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  images?: Prisma.VariantImageUncheckedCreateNestedManyWithoutVariantInput
-  cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutVariantInput
-  promotionTargets?: Prisma.PromotionTargetUncheckedCreateNestedManyWithoutVariantInput
-  inventoryLevels?: Prisma.InventoryLevelUncheckedCreateNestedManyWithoutVariantInput
-  stockReservations?: Prisma.StockReservationUncheckedCreateNestedManyWithoutVariantInput
-  inventoryBatches?: Prisma.InventoryBatchUncheckedCreateNestedManyWithoutVariantInput
-  purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutVariantInput
-  transferItems?: Prisma.InventoryTransferItemUncheckedCreateNestedManyWithoutVariantInput
-  stockAdjustmentItems?: Prisma.StockAdjustmentItemUncheckedCreateNestedManyWithoutVariantInput
-  reorderRules?: Prisma.ReorderRuleUncheckedCreateNestedManyWithoutVariantInput
-  inventoryAlerts?: Prisma.InventoryAlertUncheckedCreateNestedManyWithoutVariantInput
-  orderItems?: Prisma.OrderItemUncheckedCreateNestedManyWithoutVariantInput
-}
-
-export type ProductVariantCreateOrConnectWithoutOptionValuesInput = {
-  where: Prisma.ProductVariantWhereUniqueInput
-  create: Prisma.XOR<Prisma.ProductVariantCreateWithoutOptionValuesInput, Prisma.ProductVariantUncheckedCreateWithoutOptionValuesInput>
-}
-
-export type ProductVariantUpsertWithoutOptionValuesInput = {
-  update: Prisma.XOR<Prisma.ProductVariantUpdateWithoutOptionValuesInput, Prisma.ProductVariantUncheckedUpdateWithoutOptionValuesInput>
-  create: Prisma.XOR<Prisma.ProductVariantCreateWithoutOptionValuesInput, Prisma.ProductVariantUncheckedCreateWithoutOptionValuesInput>
-  where?: Prisma.ProductVariantWhereInput
-}
-
-export type ProductVariantUpdateToOneWithWhereWithoutOptionValuesInput = {
-  where?: Prisma.ProductVariantWhereInput
-  data: Prisma.XOR<Prisma.ProductVariantUpdateWithoutOptionValuesInput, Prisma.ProductVariantUncheckedUpdateWithoutOptionValuesInput>
-}
-
-export type ProductVariantUpdateWithoutOptionValuesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  sku?: Prisma.StringFieldUpdateOperationsInput | string
-  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  stock?: Prisma.IntFieldUpdateOperationsInput | number
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lowStockThreshold?: Prisma.IntFieldUpdateOperationsInput | number
-  optionKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  product?: Prisma.ProductUpdateOneRequiredWithoutVariantsNestedInput
-  images?: Prisma.VariantImageUpdateManyWithoutVariantNestedInput
-  cartItems?: Prisma.CartItemUpdateManyWithoutVariantNestedInput
-  promotionTargets?: Prisma.PromotionTargetUpdateManyWithoutVariantNestedInput
-  inventoryLevels?: Prisma.InventoryLevelUpdateManyWithoutVariantNestedInput
-  stockReservations?: Prisma.StockReservationUpdateManyWithoutVariantNestedInput
-  inventoryBatches?: Prisma.InventoryBatchUpdateManyWithoutVariantNestedInput
-  purchaseOrderItems?: Prisma.PurchaseOrderItemUpdateManyWithoutVariantNestedInput
-  transferItems?: Prisma.InventoryTransferItemUpdateManyWithoutVariantNestedInput
-  stockAdjustmentItems?: Prisma.StockAdjustmentItemUpdateManyWithoutVariantNestedInput
-  reorderRules?: Prisma.ReorderRuleUpdateManyWithoutVariantNestedInput
-  inventoryAlerts?: Prisma.InventoryAlertUpdateManyWithoutVariantNestedInput
-  orderItems?: Prisma.OrderItemUpdateManyWithoutVariantNestedInput
-}
-
-export type ProductVariantUncheckedUpdateWithoutOptionValuesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  productId?: Prisma.StringFieldUpdateOperationsInput | string
-  sku?: Prisma.StringFieldUpdateOperationsInput | string
-  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  stock?: Prisma.IntFieldUpdateOperationsInput | number
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lowStockThreshold?: Prisma.IntFieldUpdateOperationsInput | number
-  optionKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  images?: Prisma.VariantImageUncheckedUpdateManyWithoutVariantNestedInput
-  cartItems?: Prisma.CartItemUncheckedUpdateManyWithoutVariantNestedInput
-  promotionTargets?: Prisma.PromotionTargetUncheckedUpdateManyWithoutVariantNestedInput
-  inventoryLevels?: Prisma.InventoryLevelUncheckedUpdateManyWithoutVariantNestedInput
-  stockReservations?: Prisma.StockReservationUncheckedUpdateManyWithoutVariantNestedInput
-  inventoryBatches?: Prisma.InventoryBatchUncheckedUpdateManyWithoutVariantNestedInput
-  purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutVariantNestedInput
-  transferItems?: Prisma.InventoryTransferItemUncheckedUpdateManyWithoutVariantNestedInput
-  stockAdjustmentItems?: Prisma.StockAdjustmentItemUncheckedUpdateManyWithoutVariantNestedInput
-  reorderRules?: Prisma.ReorderRuleUncheckedUpdateManyWithoutVariantNestedInput
-  inventoryAlerts?: Prisma.InventoryAlertUncheckedUpdateManyWithoutVariantNestedInput
-  orderItems?: Prisma.OrderItemUncheckedUpdateManyWithoutVariantNestedInput
-}
-
-export type ProductVariantCreateWithoutImagesInput = {
-  id?: string
-  sku: string
-  price: runtime.Decimal | runtime.DecimalJsLike | number | string
-  stock?: number
-  isActive?: boolean
-  lowStockThreshold?: number
-  optionKey?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  product: Prisma.ProductCreateNestedOneWithoutVariantsInput
-  optionValues?: Prisma.VariantOptionValueCreateNestedManyWithoutVariantInput
-  cartItems?: Prisma.CartItemCreateNestedManyWithoutVariantInput
-  promotionTargets?: Prisma.PromotionTargetCreateNestedManyWithoutVariantInput
-  inventoryLevels?: Prisma.InventoryLevelCreateNestedManyWithoutVariantInput
-  stockReservations?: Prisma.StockReservationCreateNestedManyWithoutVariantInput
-  inventoryBatches?: Prisma.InventoryBatchCreateNestedManyWithoutVariantInput
-  purchaseOrderItems?: Prisma.PurchaseOrderItemCreateNestedManyWithoutVariantInput
-  transferItems?: Prisma.InventoryTransferItemCreateNestedManyWithoutVariantInput
-  stockAdjustmentItems?: Prisma.StockAdjustmentItemCreateNestedManyWithoutVariantInput
-  reorderRules?: Prisma.ReorderRuleCreateNestedManyWithoutVariantInput
-  inventoryAlerts?: Prisma.InventoryAlertCreateNestedManyWithoutVariantInput
-  orderItems?: Prisma.OrderItemCreateNestedManyWithoutVariantInput
-}
-
-export type ProductVariantUncheckedCreateWithoutImagesInput = {
-  id?: string
-  productId: string
-  sku: string
-  price: runtime.Decimal | runtime.DecimalJsLike | number | string
-  stock?: number
-  isActive?: boolean
-  lowStockThreshold?: number
-  optionKey?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  optionValues?: Prisma.VariantOptionValueUncheckedCreateNestedManyWithoutVariantInput
-  cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutVariantInput
-  promotionTargets?: Prisma.PromotionTargetUncheckedCreateNestedManyWithoutVariantInput
-  inventoryLevels?: Prisma.InventoryLevelUncheckedCreateNestedManyWithoutVariantInput
-  stockReservations?: Prisma.StockReservationUncheckedCreateNestedManyWithoutVariantInput
-  inventoryBatches?: Prisma.InventoryBatchUncheckedCreateNestedManyWithoutVariantInput
-  purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutVariantInput
-  transferItems?: Prisma.InventoryTransferItemUncheckedCreateNestedManyWithoutVariantInput
-  stockAdjustmentItems?: Prisma.StockAdjustmentItemUncheckedCreateNestedManyWithoutVariantInput
-  reorderRules?: Prisma.ReorderRuleUncheckedCreateNestedManyWithoutVariantInput
-  inventoryAlerts?: Prisma.InventoryAlertUncheckedCreateNestedManyWithoutVariantInput
-  orderItems?: Prisma.OrderItemUncheckedCreateNestedManyWithoutVariantInput
-}
-
-export type ProductVariantCreateOrConnectWithoutImagesInput = {
-  where: Prisma.ProductVariantWhereUniqueInput
-  create: Prisma.XOR<Prisma.ProductVariantCreateWithoutImagesInput, Prisma.ProductVariantUncheckedCreateWithoutImagesInput>
-}
-
-export type ProductVariantUpsertWithoutImagesInput = {
-  update: Prisma.XOR<Prisma.ProductVariantUpdateWithoutImagesInput, Prisma.ProductVariantUncheckedUpdateWithoutImagesInput>
-  create: Prisma.XOR<Prisma.ProductVariantCreateWithoutImagesInput, Prisma.ProductVariantUncheckedCreateWithoutImagesInput>
-  where?: Prisma.ProductVariantWhereInput
-}
-
-export type ProductVariantUpdateToOneWithWhereWithoutImagesInput = {
-  where?: Prisma.ProductVariantWhereInput
-  data: Prisma.XOR<Prisma.ProductVariantUpdateWithoutImagesInput, Prisma.ProductVariantUncheckedUpdateWithoutImagesInput>
-}
-
-export type ProductVariantUpdateWithoutImagesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  sku?: Prisma.StringFieldUpdateOperationsInput | string
-  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  stock?: Prisma.IntFieldUpdateOperationsInput | number
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lowStockThreshold?: Prisma.IntFieldUpdateOperationsInput | number
-  optionKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  product?: Prisma.ProductUpdateOneRequiredWithoutVariantsNestedInput
-  optionValues?: Prisma.VariantOptionValueUpdateManyWithoutVariantNestedInput
-  cartItems?: Prisma.CartItemUpdateManyWithoutVariantNestedInput
-  promotionTargets?: Prisma.PromotionTargetUpdateManyWithoutVariantNestedInput
-  inventoryLevels?: Prisma.InventoryLevelUpdateManyWithoutVariantNestedInput
-  stockReservations?: Prisma.StockReservationUpdateManyWithoutVariantNestedInput
-  inventoryBatches?: Prisma.InventoryBatchUpdateManyWithoutVariantNestedInput
-  purchaseOrderItems?: Prisma.PurchaseOrderItemUpdateManyWithoutVariantNestedInput
-  transferItems?: Prisma.InventoryTransferItemUpdateManyWithoutVariantNestedInput
-  stockAdjustmentItems?: Prisma.StockAdjustmentItemUpdateManyWithoutVariantNestedInput
-  reorderRules?: Prisma.ReorderRuleUpdateManyWithoutVariantNestedInput
-  inventoryAlerts?: Prisma.InventoryAlertUpdateManyWithoutVariantNestedInput
-  orderItems?: Prisma.OrderItemUpdateManyWithoutVariantNestedInput
-}
-
-export type ProductVariantUncheckedUpdateWithoutImagesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  productId?: Prisma.StringFieldUpdateOperationsInput | string
-  sku?: Prisma.StringFieldUpdateOperationsInput | string
-  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  stock?: Prisma.IntFieldUpdateOperationsInput | number
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lowStockThreshold?: Prisma.IntFieldUpdateOperationsInput | number
-  optionKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  optionValues?: Prisma.VariantOptionValueUncheckedUpdateManyWithoutVariantNestedInput
-  cartItems?: Prisma.CartItemUncheckedUpdateManyWithoutVariantNestedInput
-  promotionTargets?: Prisma.PromotionTargetUncheckedUpdateManyWithoutVariantNestedInput
-  inventoryLevels?: Prisma.InventoryLevelUncheckedUpdateManyWithoutVariantNestedInput
-  stockReservations?: Prisma.StockReservationUncheckedUpdateManyWithoutVariantNestedInput
-  inventoryBatches?: Prisma.InventoryBatchUncheckedUpdateManyWithoutVariantNestedInput
-  purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutVariantNestedInput
-  transferItems?: Prisma.InventoryTransferItemUncheckedUpdateManyWithoutVariantNestedInput
-  stockAdjustmentItems?: Prisma.StockAdjustmentItemUncheckedUpdateManyWithoutVariantNestedInput
-  reorderRules?: Prisma.ReorderRuleUncheckedUpdateManyWithoutVariantNestedInput
-  inventoryAlerts?: Prisma.InventoryAlertUncheckedUpdateManyWithoutVariantNestedInput
-  orderItems?: Prisma.OrderItemUncheckedUpdateManyWithoutVariantNestedInput
 }
 
 export type ProductVariantCreateWithoutInventoryLevelsInput = {
@@ -2075,6 +1743,330 @@ export type ProductVariantUncheckedUpdateWithoutInventoryAlertsInput = {
   transferItems?: Prisma.InventoryTransferItemUncheckedUpdateManyWithoutVariantNestedInput
   stockAdjustmentItems?: Prisma.StockAdjustmentItemUncheckedUpdateManyWithoutVariantNestedInput
   reorderRules?: Prisma.ReorderRuleUncheckedUpdateManyWithoutVariantNestedInput
+  orderItems?: Prisma.OrderItemUncheckedUpdateManyWithoutVariantNestedInput
+}
+
+export type ProductVariantCreateWithoutProductInput = {
+  id?: string
+  sku: string
+  price: runtime.Decimal | runtime.DecimalJsLike | number | string
+  stock?: number
+  isActive?: boolean
+  lowStockThreshold?: number
+  optionKey?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  optionValues?: Prisma.VariantOptionValueCreateNestedManyWithoutVariantInput
+  images?: Prisma.VariantImageCreateNestedManyWithoutVariantInput
+  cartItems?: Prisma.CartItemCreateNestedManyWithoutVariantInput
+  promotionTargets?: Prisma.PromotionTargetCreateNestedManyWithoutVariantInput
+  inventoryLevels?: Prisma.InventoryLevelCreateNestedManyWithoutVariantInput
+  stockReservations?: Prisma.StockReservationCreateNestedManyWithoutVariantInput
+  inventoryBatches?: Prisma.InventoryBatchCreateNestedManyWithoutVariantInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemCreateNestedManyWithoutVariantInput
+  transferItems?: Prisma.InventoryTransferItemCreateNestedManyWithoutVariantInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemCreateNestedManyWithoutVariantInput
+  reorderRules?: Prisma.ReorderRuleCreateNestedManyWithoutVariantInput
+  inventoryAlerts?: Prisma.InventoryAlertCreateNestedManyWithoutVariantInput
+  orderItems?: Prisma.OrderItemCreateNestedManyWithoutVariantInput
+}
+
+export type ProductVariantUncheckedCreateWithoutProductInput = {
+  id?: string
+  sku: string
+  price: runtime.Decimal | runtime.DecimalJsLike | number | string
+  stock?: number
+  isActive?: boolean
+  lowStockThreshold?: number
+  optionKey?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  optionValues?: Prisma.VariantOptionValueUncheckedCreateNestedManyWithoutVariantInput
+  images?: Prisma.VariantImageUncheckedCreateNestedManyWithoutVariantInput
+  cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutVariantInput
+  promotionTargets?: Prisma.PromotionTargetUncheckedCreateNestedManyWithoutVariantInput
+  inventoryLevels?: Prisma.InventoryLevelUncheckedCreateNestedManyWithoutVariantInput
+  stockReservations?: Prisma.StockReservationUncheckedCreateNestedManyWithoutVariantInput
+  inventoryBatches?: Prisma.InventoryBatchUncheckedCreateNestedManyWithoutVariantInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutVariantInput
+  transferItems?: Prisma.InventoryTransferItemUncheckedCreateNestedManyWithoutVariantInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUncheckedCreateNestedManyWithoutVariantInput
+  reorderRules?: Prisma.ReorderRuleUncheckedCreateNestedManyWithoutVariantInput
+  inventoryAlerts?: Prisma.InventoryAlertUncheckedCreateNestedManyWithoutVariantInput
+  orderItems?: Prisma.OrderItemUncheckedCreateNestedManyWithoutVariantInput
+}
+
+export type ProductVariantCreateOrConnectWithoutProductInput = {
+  where: Prisma.ProductVariantWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProductVariantCreateWithoutProductInput, Prisma.ProductVariantUncheckedCreateWithoutProductInput>
+}
+
+export type ProductVariantCreateManyProductInputEnvelope = {
+  data: Prisma.ProductVariantCreateManyProductInput | Prisma.ProductVariantCreateManyProductInput[]
+  skipDuplicates?: boolean
+}
+
+export type ProductVariantUpsertWithWhereUniqueWithoutProductInput = {
+  where: Prisma.ProductVariantWhereUniqueInput
+  update: Prisma.XOR<Prisma.ProductVariantUpdateWithoutProductInput, Prisma.ProductVariantUncheckedUpdateWithoutProductInput>
+  create: Prisma.XOR<Prisma.ProductVariantCreateWithoutProductInput, Prisma.ProductVariantUncheckedCreateWithoutProductInput>
+}
+
+export type ProductVariantUpdateWithWhereUniqueWithoutProductInput = {
+  where: Prisma.ProductVariantWhereUniqueInput
+  data: Prisma.XOR<Prisma.ProductVariantUpdateWithoutProductInput, Prisma.ProductVariantUncheckedUpdateWithoutProductInput>
+}
+
+export type ProductVariantUpdateManyWithWhereWithoutProductInput = {
+  where: Prisma.ProductVariantScalarWhereInput
+  data: Prisma.XOR<Prisma.ProductVariantUpdateManyMutationInput, Prisma.ProductVariantUncheckedUpdateManyWithoutProductInput>
+}
+
+export type ProductVariantScalarWhereInput = {
+  AND?: Prisma.ProductVariantScalarWhereInput | Prisma.ProductVariantScalarWhereInput[]
+  OR?: Prisma.ProductVariantScalarWhereInput[]
+  NOT?: Prisma.ProductVariantScalarWhereInput | Prisma.ProductVariantScalarWhereInput[]
+  id?: Prisma.StringFilter<"ProductVariant"> | string
+  productId?: Prisma.StringFilter<"ProductVariant"> | string
+  sku?: Prisma.StringFilter<"ProductVariant"> | string
+  price?: Prisma.DecimalFilter<"ProductVariant"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  stock?: Prisma.IntFilter<"ProductVariant"> | number
+  isActive?: Prisma.BoolFilter<"ProductVariant"> | boolean
+  lowStockThreshold?: Prisma.IntFilter<"ProductVariant"> | number
+  optionKey?: Prisma.StringNullableFilter<"ProductVariant"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"ProductVariant"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"ProductVariant"> | Date | string
+}
+
+export type ProductVariantCreateWithoutOptionValuesInput = {
+  id?: string
+  sku: string
+  price: runtime.Decimal | runtime.DecimalJsLike | number | string
+  stock?: number
+  isActive?: boolean
+  lowStockThreshold?: number
+  optionKey?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  product: Prisma.ProductCreateNestedOneWithoutVariantsInput
+  images?: Prisma.VariantImageCreateNestedManyWithoutVariantInput
+  cartItems?: Prisma.CartItemCreateNestedManyWithoutVariantInput
+  promotionTargets?: Prisma.PromotionTargetCreateNestedManyWithoutVariantInput
+  inventoryLevels?: Prisma.InventoryLevelCreateNestedManyWithoutVariantInput
+  stockReservations?: Prisma.StockReservationCreateNestedManyWithoutVariantInput
+  inventoryBatches?: Prisma.InventoryBatchCreateNestedManyWithoutVariantInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemCreateNestedManyWithoutVariantInput
+  transferItems?: Prisma.InventoryTransferItemCreateNestedManyWithoutVariantInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemCreateNestedManyWithoutVariantInput
+  reorderRules?: Prisma.ReorderRuleCreateNestedManyWithoutVariantInput
+  inventoryAlerts?: Prisma.InventoryAlertCreateNestedManyWithoutVariantInput
+  orderItems?: Prisma.OrderItemCreateNestedManyWithoutVariantInput
+}
+
+export type ProductVariantUncheckedCreateWithoutOptionValuesInput = {
+  id?: string
+  productId: string
+  sku: string
+  price: runtime.Decimal | runtime.DecimalJsLike | number | string
+  stock?: number
+  isActive?: boolean
+  lowStockThreshold?: number
+  optionKey?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  images?: Prisma.VariantImageUncheckedCreateNestedManyWithoutVariantInput
+  cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutVariantInput
+  promotionTargets?: Prisma.PromotionTargetUncheckedCreateNestedManyWithoutVariantInput
+  inventoryLevels?: Prisma.InventoryLevelUncheckedCreateNestedManyWithoutVariantInput
+  stockReservations?: Prisma.StockReservationUncheckedCreateNestedManyWithoutVariantInput
+  inventoryBatches?: Prisma.InventoryBatchUncheckedCreateNestedManyWithoutVariantInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutVariantInput
+  transferItems?: Prisma.InventoryTransferItemUncheckedCreateNestedManyWithoutVariantInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUncheckedCreateNestedManyWithoutVariantInput
+  reorderRules?: Prisma.ReorderRuleUncheckedCreateNestedManyWithoutVariantInput
+  inventoryAlerts?: Prisma.InventoryAlertUncheckedCreateNestedManyWithoutVariantInput
+  orderItems?: Prisma.OrderItemUncheckedCreateNestedManyWithoutVariantInput
+}
+
+export type ProductVariantCreateOrConnectWithoutOptionValuesInput = {
+  where: Prisma.ProductVariantWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProductVariantCreateWithoutOptionValuesInput, Prisma.ProductVariantUncheckedCreateWithoutOptionValuesInput>
+}
+
+export type ProductVariantUpsertWithoutOptionValuesInput = {
+  update: Prisma.XOR<Prisma.ProductVariantUpdateWithoutOptionValuesInput, Prisma.ProductVariantUncheckedUpdateWithoutOptionValuesInput>
+  create: Prisma.XOR<Prisma.ProductVariantCreateWithoutOptionValuesInput, Prisma.ProductVariantUncheckedCreateWithoutOptionValuesInput>
+  where?: Prisma.ProductVariantWhereInput
+}
+
+export type ProductVariantUpdateToOneWithWhereWithoutOptionValuesInput = {
+  where?: Prisma.ProductVariantWhereInput
+  data: Prisma.XOR<Prisma.ProductVariantUpdateWithoutOptionValuesInput, Prisma.ProductVariantUncheckedUpdateWithoutOptionValuesInput>
+}
+
+export type ProductVariantUpdateWithoutOptionValuesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  sku?: Prisma.StringFieldUpdateOperationsInput | string
+  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  stock?: Prisma.IntFieldUpdateOperationsInput | number
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lowStockThreshold?: Prisma.IntFieldUpdateOperationsInput | number
+  optionKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  product?: Prisma.ProductUpdateOneRequiredWithoutVariantsNestedInput
+  images?: Prisma.VariantImageUpdateManyWithoutVariantNestedInput
+  cartItems?: Prisma.CartItemUpdateManyWithoutVariantNestedInput
+  promotionTargets?: Prisma.PromotionTargetUpdateManyWithoutVariantNestedInput
+  inventoryLevels?: Prisma.InventoryLevelUpdateManyWithoutVariantNestedInput
+  stockReservations?: Prisma.StockReservationUpdateManyWithoutVariantNestedInput
+  inventoryBatches?: Prisma.InventoryBatchUpdateManyWithoutVariantNestedInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemUpdateManyWithoutVariantNestedInput
+  transferItems?: Prisma.InventoryTransferItemUpdateManyWithoutVariantNestedInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUpdateManyWithoutVariantNestedInput
+  reorderRules?: Prisma.ReorderRuleUpdateManyWithoutVariantNestedInput
+  inventoryAlerts?: Prisma.InventoryAlertUpdateManyWithoutVariantNestedInput
+  orderItems?: Prisma.OrderItemUpdateManyWithoutVariantNestedInput
+}
+
+export type ProductVariantUncheckedUpdateWithoutOptionValuesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  productId?: Prisma.StringFieldUpdateOperationsInput | string
+  sku?: Prisma.StringFieldUpdateOperationsInput | string
+  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  stock?: Prisma.IntFieldUpdateOperationsInput | number
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lowStockThreshold?: Prisma.IntFieldUpdateOperationsInput | number
+  optionKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  images?: Prisma.VariantImageUncheckedUpdateManyWithoutVariantNestedInput
+  cartItems?: Prisma.CartItemUncheckedUpdateManyWithoutVariantNestedInput
+  promotionTargets?: Prisma.PromotionTargetUncheckedUpdateManyWithoutVariantNestedInput
+  inventoryLevels?: Prisma.InventoryLevelUncheckedUpdateManyWithoutVariantNestedInput
+  stockReservations?: Prisma.StockReservationUncheckedUpdateManyWithoutVariantNestedInput
+  inventoryBatches?: Prisma.InventoryBatchUncheckedUpdateManyWithoutVariantNestedInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutVariantNestedInput
+  transferItems?: Prisma.InventoryTransferItemUncheckedUpdateManyWithoutVariantNestedInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUncheckedUpdateManyWithoutVariantNestedInput
+  reorderRules?: Prisma.ReorderRuleUncheckedUpdateManyWithoutVariantNestedInput
+  inventoryAlerts?: Prisma.InventoryAlertUncheckedUpdateManyWithoutVariantNestedInput
+  orderItems?: Prisma.OrderItemUncheckedUpdateManyWithoutVariantNestedInput
+}
+
+export type ProductVariantCreateWithoutImagesInput = {
+  id?: string
+  sku: string
+  price: runtime.Decimal | runtime.DecimalJsLike | number | string
+  stock?: number
+  isActive?: boolean
+  lowStockThreshold?: number
+  optionKey?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  product: Prisma.ProductCreateNestedOneWithoutVariantsInput
+  optionValues?: Prisma.VariantOptionValueCreateNestedManyWithoutVariantInput
+  cartItems?: Prisma.CartItemCreateNestedManyWithoutVariantInput
+  promotionTargets?: Prisma.PromotionTargetCreateNestedManyWithoutVariantInput
+  inventoryLevels?: Prisma.InventoryLevelCreateNestedManyWithoutVariantInput
+  stockReservations?: Prisma.StockReservationCreateNestedManyWithoutVariantInput
+  inventoryBatches?: Prisma.InventoryBatchCreateNestedManyWithoutVariantInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemCreateNestedManyWithoutVariantInput
+  transferItems?: Prisma.InventoryTransferItemCreateNestedManyWithoutVariantInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemCreateNestedManyWithoutVariantInput
+  reorderRules?: Prisma.ReorderRuleCreateNestedManyWithoutVariantInput
+  inventoryAlerts?: Prisma.InventoryAlertCreateNestedManyWithoutVariantInput
+  orderItems?: Prisma.OrderItemCreateNestedManyWithoutVariantInput
+}
+
+export type ProductVariantUncheckedCreateWithoutImagesInput = {
+  id?: string
+  productId: string
+  sku: string
+  price: runtime.Decimal | runtime.DecimalJsLike | number | string
+  stock?: number
+  isActive?: boolean
+  lowStockThreshold?: number
+  optionKey?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  optionValues?: Prisma.VariantOptionValueUncheckedCreateNestedManyWithoutVariantInput
+  cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutVariantInput
+  promotionTargets?: Prisma.PromotionTargetUncheckedCreateNestedManyWithoutVariantInput
+  inventoryLevels?: Prisma.InventoryLevelUncheckedCreateNestedManyWithoutVariantInput
+  stockReservations?: Prisma.StockReservationUncheckedCreateNestedManyWithoutVariantInput
+  inventoryBatches?: Prisma.InventoryBatchUncheckedCreateNestedManyWithoutVariantInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutVariantInput
+  transferItems?: Prisma.InventoryTransferItemUncheckedCreateNestedManyWithoutVariantInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUncheckedCreateNestedManyWithoutVariantInput
+  reorderRules?: Prisma.ReorderRuleUncheckedCreateNestedManyWithoutVariantInput
+  inventoryAlerts?: Prisma.InventoryAlertUncheckedCreateNestedManyWithoutVariantInput
+  orderItems?: Prisma.OrderItemUncheckedCreateNestedManyWithoutVariantInput
+}
+
+export type ProductVariantCreateOrConnectWithoutImagesInput = {
+  where: Prisma.ProductVariantWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProductVariantCreateWithoutImagesInput, Prisma.ProductVariantUncheckedCreateWithoutImagesInput>
+}
+
+export type ProductVariantUpsertWithoutImagesInput = {
+  update: Prisma.XOR<Prisma.ProductVariantUpdateWithoutImagesInput, Prisma.ProductVariantUncheckedUpdateWithoutImagesInput>
+  create: Prisma.XOR<Prisma.ProductVariantCreateWithoutImagesInput, Prisma.ProductVariantUncheckedCreateWithoutImagesInput>
+  where?: Prisma.ProductVariantWhereInput
+}
+
+export type ProductVariantUpdateToOneWithWhereWithoutImagesInput = {
+  where?: Prisma.ProductVariantWhereInput
+  data: Prisma.XOR<Prisma.ProductVariantUpdateWithoutImagesInput, Prisma.ProductVariantUncheckedUpdateWithoutImagesInput>
+}
+
+export type ProductVariantUpdateWithoutImagesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  sku?: Prisma.StringFieldUpdateOperationsInput | string
+  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  stock?: Prisma.IntFieldUpdateOperationsInput | number
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lowStockThreshold?: Prisma.IntFieldUpdateOperationsInput | number
+  optionKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  product?: Prisma.ProductUpdateOneRequiredWithoutVariantsNestedInput
+  optionValues?: Prisma.VariantOptionValueUpdateManyWithoutVariantNestedInput
+  cartItems?: Prisma.CartItemUpdateManyWithoutVariantNestedInput
+  promotionTargets?: Prisma.PromotionTargetUpdateManyWithoutVariantNestedInput
+  inventoryLevels?: Prisma.InventoryLevelUpdateManyWithoutVariantNestedInput
+  stockReservations?: Prisma.StockReservationUpdateManyWithoutVariantNestedInput
+  inventoryBatches?: Prisma.InventoryBatchUpdateManyWithoutVariantNestedInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemUpdateManyWithoutVariantNestedInput
+  transferItems?: Prisma.InventoryTransferItemUpdateManyWithoutVariantNestedInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUpdateManyWithoutVariantNestedInput
+  reorderRules?: Prisma.ReorderRuleUpdateManyWithoutVariantNestedInput
+  inventoryAlerts?: Prisma.InventoryAlertUpdateManyWithoutVariantNestedInput
+  orderItems?: Prisma.OrderItemUpdateManyWithoutVariantNestedInput
+}
+
+export type ProductVariantUncheckedUpdateWithoutImagesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  productId?: Prisma.StringFieldUpdateOperationsInput | string
+  sku?: Prisma.StringFieldUpdateOperationsInput | string
+  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  stock?: Prisma.IntFieldUpdateOperationsInput | number
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lowStockThreshold?: Prisma.IntFieldUpdateOperationsInput | number
+  optionKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  optionValues?: Prisma.VariantOptionValueUncheckedUpdateManyWithoutVariantNestedInput
+  cartItems?: Prisma.CartItemUncheckedUpdateManyWithoutVariantNestedInput
+  promotionTargets?: Prisma.PromotionTargetUncheckedUpdateManyWithoutVariantNestedInput
+  inventoryLevels?: Prisma.InventoryLevelUncheckedUpdateManyWithoutVariantNestedInput
+  stockReservations?: Prisma.StockReservationUncheckedUpdateManyWithoutVariantNestedInput
+  inventoryBatches?: Prisma.InventoryBatchUncheckedUpdateManyWithoutVariantNestedInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutVariantNestedInput
+  transferItems?: Prisma.InventoryTransferItemUncheckedUpdateManyWithoutVariantNestedInput
+  stockAdjustmentItems?: Prisma.StockAdjustmentItemUncheckedUpdateManyWithoutVariantNestedInput
+  reorderRules?: Prisma.ReorderRuleUncheckedUpdateManyWithoutVariantNestedInput
+  inventoryAlerts?: Prisma.InventoryAlertUncheckedUpdateManyWithoutVariantNestedInput
   orderItems?: Prisma.OrderItemUncheckedUpdateManyWithoutVariantNestedInput
 }
 

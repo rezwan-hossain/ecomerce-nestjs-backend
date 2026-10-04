@@ -777,48 +777,6 @@ export type InventoryMovementSumOrderByAggregateInput = {
   totalCost?: Prisma.SortOrder
 }
 
-export type InventoryMovementCreateNestedManyWithoutPerformedByUserInput = {
-  create?: Prisma.XOR<Prisma.InventoryMovementCreateWithoutPerformedByUserInput, Prisma.InventoryMovementUncheckedCreateWithoutPerformedByUserInput> | Prisma.InventoryMovementCreateWithoutPerformedByUserInput[] | Prisma.InventoryMovementUncheckedCreateWithoutPerformedByUserInput[]
-  connectOrCreate?: Prisma.InventoryMovementCreateOrConnectWithoutPerformedByUserInput | Prisma.InventoryMovementCreateOrConnectWithoutPerformedByUserInput[]
-  createMany?: Prisma.InventoryMovementCreateManyPerformedByUserInputEnvelope
-  connect?: Prisma.InventoryMovementWhereUniqueInput | Prisma.InventoryMovementWhereUniqueInput[]
-}
-
-export type InventoryMovementUncheckedCreateNestedManyWithoutPerformedByUserInput = {
-  create?: Prisma.XOR<Prisma.InventoryMovementCreateWithoutPerformedByUserInput, Prisma.InventoryMovementUncheckedCreateWithoutPerformedByUserInput> | Prisma.InventoryMovementCreateWithoutPerformedByUserInput[] | Prisma.InventoryMovementUncheckedCreateWithoutPerformedByUserInput[]
-  connectOrCreate?: Prisma.InventoryMovementCreateOrConnectWithoutPerformedByUserInput | Prisma.InventoryMovementCreateOrConnectWithoutPerformedByUserInput[]
-  createMany?: Prisma.InventoryMovementCreateManyPerformedByUserInputEnvelope
-  connect?: Prisma.InventoryMovementWhereUniqueInput | Prisma.InventoryMovementWhereUniqueInput[]
-}
-
-export type InventoryMovementUpdateManyWithoutPerformedByUserNestedInput = {
-  create?: Prisma.XOR<Prisma.InventoryMovementCreateWithoutPerformedByUserInput, Prisma.InventoryMovementUncheckedCreateWithoutPerformedByUserInput> | Prisma.InventoryMovementCreateWithoutPerformedByUserInput[] | Prisma.InventoryMovementUncheckedCreateWithoutPerformedByUserInput[]
-  connectOrCreate?: Prisma.InventoryMovementCreateOrConnectWithoutPerformedByUserInput | Prisma.InventoryMovementCreateOrConnectWithoutPerformedByUserInput[]
-  upsert?: Prisma.InventoryMovementUpsertWithWhereUniqueWithoutPerformedByUserInput | Prisma.InventoryMovementUpsertWithWhereUniqueWithoutPerformedByUserInput[]
-  createMany?: Prisma.InventoryMovementCreateManyPerformedByUserInputEnvelope
-  set?: Prisma.InventoryMovementWhereUniqueInput | Prisma.InventoryMovementWhereUniqueInput[]
-  disconnect?: Prisma.InventoryMovementWhereUniqueInput | Prisma.InventoryMovementWhereUniqueInput[]
-  delete?: Prisma.InventoryMovementWhereUniqueInput | Prisma.InventoryMovementWhereUniqueInput[]
-  connect?: Prisma.InventoryMovementWhereUniqueInput | Prisma.InventoryMovementWhereUniqueInput[]
-  update?: Prisma.InventoryMovementUpdateWithWhereUniqueWithoutPerformedByUserInput | Prisma.InventoryMovementUpdateWithWhereUniqueWithoutPerformedByUserInput[]
-  updateMany?: Prisma.InventoryMovementUpdateManyWithWhereWithoutPerformedByUserInput | Prisma.InventoryMovementUpdateManyWithWhereWithoutPerformedByUserInput[]
-  deleteMany?: Prisma.InventoryMovementScalarWhereInput | Prisma.InventoryMovementScalarWhereInput[]
-}
-
-export type InventoryMovementUncheckedUpdateManyWithoutPerformedByUserNestedInput = {
-  create?: Prisma.XOR<Prisma.InventoryMovementCreateWithoutPerformedByUserInput, Prisma.InventoryMovementUncheckedCreateWithoutPerformedByUserInput> | Prisma.InventoryMovementCreateWithoutPerformedByUserInput[] | Prisma.InventoryMovementUncheckedCreateWithoutPerformedByUserInput[]
-  connectOrCreate?: Prisma.InventoryMovementCreateOrConnectWithoutPerformedByUserInput | Prisma.InventoryMovementCreateOrConnectWithoutPerformedByUserInput[]
-  upsert?: Prisma.InventoryMovementUpsertWithWhereUniqueWithoutPerformedByUserInput | Prisma.InventoryMovementUpsertWithWhereUniqueWithoutPerformedByUserInput[]
-  createMany?: Prisma.InventoryMovementCreateManyPerformedByUserInputEnvelope
-  set?: Prisma.InventoryMovementWhereUniqueInput | Prisma.InventoryMovementWhereUniqueInput[]
-  disconnect?: Prisma.InventoryMovementWhereUniqueInput | Prisma.InventoryMovementWhereUniqueInput[]
-  delete?: Prisma.InventoryMovementWhereUniqueInput | Prisma.InventoryMovementWhereUniqueInput[]
-  connect?: Prisma.InventoryMovementWhereUniqueInput | Prisma.InventoryMovementWhereUniqueInput[]
-  update?: Prisma.InventoryMovementUpdateWithWhereUniqueWithoutPerformedByUserInput | Prisma.InventoryMovementUpdateWithWhereUniqueWithoutPerformedByUserInput[]
-  updateMany?: Prisma.InventoryMovementUpdateManyWithWhereWithoutPerformedByUserInput | Prisma.InventoryMovementUpdateManyWithWhereWithoutPerformedByUserInput[]
-  deleteMany?: Prisma.InventoryMovementScalarWhereInput | Prisma.InventoryMovementScalarWhereInput[]
-}
-
 export type InventoryMovementCreateNestedManyWithoutSourceWarehouseInput = {
   create?: Prisma.XOR<Prisma.InventoryMovementCreateWithoutSourceWarehouseInput, Prisma.InventoryMovementUncheckedCreateWithoutSourceWarehouseInput> | Prisma.InventoryMovementCreateWithoutSourceWarehouseInput[] | Prisma.InventoryMovementUncheckedCreateWithoutSourceWarehouseInput[]
   connectOrCreate?: Prisma.InventoryMovementCreateOrConnectWithoutSourceWarehouseInput | Prisma.InventoryMovementCreateOrConnectWithoutSourceWarehouseInput[]
@@ -1099,106 +1057,46 @@ export type InventoryMovementUncheckedUpdateManyWithoutBatchNestedInput = {
   deleteMany?: Prisma.InventoryMovementScalarWhereInput | Prisma.InventoryMovementScalarWhereInput[]
 }
 
-export type InventoryMovementCreateWithoutPerformedByUserInput = {
-  id?: string
-  type: $Enums.MovementType
-  direction: $Enums.MovementDirection
-  quantity: number
-  onHandBefore: number
-  onHandAfter: number
-  reservedBefore?: number | null
-  reservedAfter?: number | null
-  unitCost?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  totalCost?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  referenceType?: $Enums.ReferenceType | null
-  referenceId?: string | null
-  note?: string | null
-  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Date | string
-  inventoryLevel: Prisma.InventoryLevelCreateNestedOneWithoutMovementsInput
-  sourceWarehouse?: Prisma.WarehouseCreateNestedOneWithoutMovementsAsSourceInput
-  destWarehouse?: Prisma.WarehouseCreateNestedOneWithoutMovementsAsDestInput
-  fromLocation?: Prisma.StorageLocationCreateNestedOneWithoutMovementsFromInput
-  toLocation?: Prisma.StorageLocationCreateNestedOneWithoutMovementsToInput
-  batch?: Prisma.InventoryBatchCreateNestedOneWithoutMovementsInput
+export type InventoryMovementCreateNestedManyWithoutPerformedByUserInput = {
+  create?: Prisma.XOR<Prisma.InventoryMovementCreateWithoutPerformedByUserInput, Prisma.InventoryMovementUncheckedCreateWithoutPerformedByUserInput> | Prisma.InventoryMovementCreateWithoutPerformedByUserInput[] | Prisma.InventoryMovementUncheckedCreateWithoutPerformedByUserInput[]
+  connectOrCreate?: Prisma.InventoryMovementCreateOrConnectWithoutPerformedByUserInput | Prisma.InventoryMovementCreateOrConnectWithoutPerformedByUserInput[]
+  createMany?: Prisma.InventoryMovementCreateManyPerformedByUserInputEnvelope
+  connect?: Prisma.InventoryMovementWhereUniqueInput | Prisma.InventoryMovementWhereUniqueInput[]
 }
 
-export type InventoryMovementUncheckedCreateWithoutPerformedByUserInput = {
-  id?: string
-  inventoryLevelId: string
-  type: $Enums.MovementType
-  direction: $Enums.MovementDirection
-  quantity: number
-  onHandBefore: number
-  onHandAfter: number
-  reservedBefore?: number | null
-  reservedAfter?: number | null
-  unitCost?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  totalCost?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  referenceType?: $Enums.ReferenceType | null
-  referenceId?: string | null
-  sourceWarehouseId?: string | null
-  destWarehouseId?: string | null
-  fromLocationId?: string | null
-  toLocationId?: string | null
-  batchId?: string | null
-  note?: string | null
-  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Date | string
+export type InventoryMovementUncheckedCreateNestedManyWithoutPerformedByUserInput = {
+  create?: Prisma.XOR<Prisma.InventoryMovementCreateWithoutPerformedByUserInput, Prisma.InventoryMovementUncheckedCreateWithoutPerformedByUserInput> | Prisma.InventoryMovementCreateWithoutPerformedByUserInput[] | Prisma.InventoryMovementUncheckedCreateWithoutPerformedByUserInput[]
+  connectOrCreate?: Prisma.InventoryMovementCreateOrConnectWithoutPerformedByUserInput | Prisma.InventoryMovementCreateOrConnectWithoutPerformedByUserInput[]
+  createMany?: Prisma.InventoryMovementCreateManyPerformedByUserInputEnvelope
+  connect?: Prisma.InventoryMovementWhereUniqueInput | Prisma.InventoryMovementWhereUniqueInput[]
 }
 
-export type InventoryMovementCreateOrConnectWithoutPerformedByUserInput = {
-  where: Prisma.InventoryMovementWhereUniqueInput
-  create: Prisma.XOR<Prisma.InventoryMovementCreateWithoutPerformedByUserInput, Prisma.InventoryMovementUncheckedCreateWithoutPerformedByUserInput>
+export type InventoryMovementUpdateManyWithoutPerformedByUserNestedInput = {
+  create?: Prisma.XOR<Prisma.InventoryMovementCreateWithoutPerformedByUserInput, Prisma.InventoryMovementUncheckedCreateWithoutPerformedByUserInput> | Prisma.InventoryMovementCreateWithoutPerformedByUserInput[] | Prisma.InventoryMovementUncheckedCreateWithoutPerformedByUserInput[]
+  connectOrCreate?: Prisma.InventoryMovementCreateOrConnectWithoutPerformedByUserInput | Prisma.InventoryMovementCreateOrConnectWithoutPerformedByUserInput[]
+  upsert?: Prisma.InventoryMovementUpsertWithWhereUniqueWithoutPerformedByUserInput | Prisma.InventoryMovementUpsertWithWhereUniqueWithoutPerformedByUserInput[]
+  createMany?: Prisma.InventoryMovementCreateManyPerformedByUserInputEnvelope
+  set?: Prisma.InventoryMovementWhereUniqueInput | Prisma.InventoryMovementWhereUniqueInput[]
+  disconnect?: Prisma.InventoryMovementWhereUniqueInput | Prisma.InventoryMovementWhereUniqueInput[]
+  delete?: Prisma.InventoryMovementWhereUniqueInput | Prisma.InventoryMovementWhereUniqueInput[]
+  connect?: Prisma.InventoryMovementWhereUniqueInput | Prisma.InventoryMovementWhereUniqueInput[]
+  update?: Prisma.InventoryMovementUpdateWithWhereUniqueWithoutPerformedByUserInput | Prisma.InventoryMovementUpdateWithWhereUniqueWithoutPerformedByUserInput[]
+  updateMany?: Prisma.InventoryMovementUpdateManyWithWhereWithoutPerformedByUserInput | Prisma.InventoryMovementUpdateManyWithWhereWithoutPerformedByUserInput[]
+  deleteMany?: Prisma.InventoryMovementScalarWhereInput | Prisma.InventoryMovementScalarWhereInput[]
 }
 
-export type InventoryMovementCreateManyPerformedByUserInputEnvelope = {
-  data: Prisma.InventoryMovementCreateManyPerformedByUserInput | Prisma.InventoryMovementCreateManyPerformedByUserInput[]
-  skipDuplicates?: boolean
-}
-
-export type InventoryMovementUpsertWithWhereUniqueWithoutPerformedByUserInput = {
-  where: Prisma.InventoryMovementWhereUniqueInput
-  update: Prisma.XOR<Prisma.InventoryMovementUpdateWithoutPerformedByUserInput, Prisma.InventoryMovementUncheckedUpdateWithoutPerformedByUserInput>
-  create: Prisma.XOR<Prisma.InventoryMovementCreateWithoutPerformedByUserInput, Prisma.InventoryMovementUncheckedCreateWithoutPerformedByUserInput>
-}
-
-export type InventoryMovementUpdateWithWhereUniqueWithoutPerformedByUserInput = {
-  where: Prisma.InventoryMovementWhereUniqueInput
-  data: Prisma.XOR<Prisma.InventoryMovementUpdateWithoutPerformedByUserInput, Prisma.InventoryMovementUncheckedUpdateWithoutPerformedByUserInput>
-}
-
-export type InventoryMovementUpdateManyWithWhereWithoutPerformedByUserInput = {
-  where: Prisma.InventoryMovementScalarWhereInput
-  data: Prisma.XOR<Prisma.InventoryMovementUpdateManyMutationInput, Prisma.InventoryMovementUncheckedUpdateManyWithoutPerformedByUserInput>
-}
-
-export type InventoryMovementScalarWhereInput = {
-  AND?: Prisma.InventoryMovementScalarWhereInput | Prisma.InventoryMovementScalarWhereInput[]
-  OR?: Prisma.InventoryMovementScalarWhereInput[]
-  NOT?: Prisma.InventoryMovementScalarWhereInput | Prisma.InventoryMovementScalarWhereInput[]
-  id?: Prisma.StringFilter<"InventoryMovement"> | string
-  inventoryLevelId?: Prisma.StringFilter<"InventoryMovement"> | string
-  type?: Prisma.EnumMovementTypeFilter<"InventoryMovement"> | $Enums.MovementType
-  direction?: Prisma.EnumMovementDirectionFilter<"InventoryMovement"> | $Enums.MovementDirection
-  quantity?: Prisma.IntFilter<"InventoryMovement"> | number
-  onHandBefore?: Prisma.IntFilter<"InventoryMovement"> | number
-  onHandAfter?: Prisma.IntFilter<"InventoryMovement"> | number
-  reservedBefore?: Prisma.IntNullableFilter<"InventoryMovement"> | number | null
-  reservedAfter?: Prisma.IntNullableFilter<"InventoryMovement"> | number | null
-  unitCost?: Prisma.DecimalNullableFilter<"InventoryMovement"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  totalCost?: Prisma.DecimalNullableFilter<"InventoryMovement"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  referenceType?: Prisma.EnumReferenceTypeNullableFilter<"InventoryMovement"> | $Enums.ReferenceType | null
-  referenceId?: Prisma.StringNullableFilter<"InventoryMovement"> | string | null
-  sourceWarehouseId?: Prisma.StringNullableFilter<"InventoryMovement"> | string | null
-  destWarehouseId?: Prisma.StringNullableFilter<"InventoryMovement"> | string | null
-  fromLocationId?: Prisma.StringNullableFilter<"InventoryMovement"> | string | null
-  toLocationId?: Prisma.StringNullableFilter<"InventoryMovement"> | string | null
-  performedByUserId?: Prisma.StringNullableFilter<"InventoryMovement"> | string | null
-  batchId?: Prisma.StringNullableFilter<"InventoryMovement"> | string | null
-  note?: Prisma.StringNullableFilter<"InventoryMovement"> | string | null
-  metadata?: Prisma.JsonNullableFilter<"InventoryMovement">
-  createdAt?: Prisma.DateTimeFilter<"InventoryMovement"> | Date | string
+export type InventoryMovementUncheckedUpdateManyWithoutPerformedByUserNestedInput = {
+  create?: Prisma.XOR<Prisma.InventoryMovementCreateWithoutPerformedByUserInput, Prisma.InventoryMovementUncheckedCreateWithoutPerformedByUserInput> | Prisma.InventoryMovementCreateWithoutPerformedByUserInput[] | Prisma.InventoryMovementUncheckedCreateWithoutPerformedByUserInput[]
+  connectOrCreate?: Prisma.InventoryMovementCreateOrConnectWithoutPerformedByUserInput | Prisma.InventoryMovementCreateOrConnectWithoutPerformedByUserInput[]
+  upsert?: Prisma.InventoryMovementUpsertWithWhereUniqueWithoutPerformedByUserInput | Prisma.InventoryMovementUpsertWithWhereUniqueWithoutPerformedByUserInput[]
+  createMany?: Prisma.InventoryMovementCreateManyPerformedByUserInputEnvelope
+  set?: Prisma.InventoryMovementWhereUniqueInput | Prisma.InventoryMovementWhereUniqueInput[]
+  disconnect?: Prisma.InventoryMovementWhereUniqueInput | Prisma.InventoryMovementWhereUniqueInput[]
+  delete?: Prisma.InventoryMovementWhereUniqueInput | Prisma.InventoryMovementWhereUniqueInput[]
+  connect?: Prisma.InventoryMovementWhereUniqueInput | Prisma.InventoryMovementWhereUniqueInput[]
+  update?: Prisma.InventoryMovementUpdateWithWhereUniqueWithoutPerformedByUserInput | Prisma.InventoryMovementUpdateWithWhereUniqueWithoutPerformedByUserInput[]
+  updateMany?: Prisma.InventoryMovementUpdateManyWithWhereWithoutPerformedByUserInput | Prisma.InventoryMovementUpdateManyWithWhereWithoutPerformedByUserInput[]
+  deleteMany?: Prisma.InventoryMovementScalarWhereInput | Prisma.InventoryMovementScalarWhereInput[]
 }
 
 export type InventoryMovementCreateWithoutSourceWarehouseInput = {
@@ -1331,6 +1229,34 @@ export type InventoryMovementUpdateWithWhereUniqueWithoutSourceWarehouseInput = 
 export type InventoryMovementUpdateManyWithWhereWithoutSourceWarehouseInput = {
   where: Prisma.InventoryMovementScalarWhereInput
   data: Prisma.XOR<Prisma.InventoryMovementUpdateManyMutationInput, Prisma.InventoryMovementUncheckedUpdateManyWithoutSourceWarehouseInput>
+}
+
+export type InventoryMovementScalarWhereInput = {
+  AND?: Prisma.InventoryMovementScalarWhereInput | Prisma.InventoryMovementScalarWhereInput[]
+  OR?: Prisma.InventoryMovementScalarWhereInput[]
+  NOT?: Prisma.InventoryMovementScalarWhereInput | Prisma.InventoryMovementScalarWhereInput[]
+  id?: Prisma.StringFilter<"InventoryMovement"> | string
+  inventoryLevelId?: Prisma.StringFilter<"InventoryMovement"> | string
+  type?: Prisma.EnumMovementTypeFilter<"InventoryMovement"> | $Enums.MovementType
+  direction?: Prisma.EnumMovementDirectionFilter<"InventoryMovement"> | $Enums.MovementDirection
+  quantity?: Prisma.IntFilter<"InventoryMovement"> | number
+  onHandBefore?: Prisma.IntFilter<"InventoryMovement"> | number
+  onHandAfter?: Prisma.IntFilter<"InventoryMovement"> | number
+  reservedBefore?: Prisma.IntNullableFilter<"InventoryMovement"> | number | null
+  reservedAfter?: Prisma.IntNullableFilter<"InventoryMovement"> | number | null
+  unitCost?: Prisma.DecimalNullableFilter<"InventoryMovement"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  totalCost?: Prisma.DecimalNullableFilter<"InventoryMovement"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  referenceType?: Prisma.EnumReferenceTypeNullableFilter<"InventoryMovement"> | $Enums.ReferenceType | null
+  referenceId?: Prisma.StringNullableFilter<"InventoryMovement"> | string | null
+  sourceWarehouseId?: Prisma.StringNullableFilter<"InventoryMovement"> | string | null
+  destWarehouseId?: Prisma.StringNullableFilter<"InventoryMovement"> | string | null
+  fromLocationId?: Prisma.StringNullableFilter<"InventoryMovement"> | string | null
+  toLocationId?: Prisma.StringNullableFilter<"InventoryMovement"> | string | null
+  performedByUserId?: Prisma.StringNullableFilter<"InventoryMovement"> | string | null
+  batchId?: Prisma.StringNullableFilter<"InventoryMovement"> | string | null
+  note?: Prisma.StringNullableFilter<"InventoryMovement"> | string | null
+  metadata?: Prisma.JsonNullableFilter<"InventoryMovement">
+  createdAt?: Prisma.DateTimeFilter<"InventoryMovement"> | Date | string
 }
 
 export type InventoryMovementUpsertWithWhereUniqueWithoutDestWarehouseInput = {
@@ -1645,7 +1571,31 @@ export type InventoryMovementUpdateManyWithWhereWithoutBatchInput = {
   data: Prisma.XOR<Prisma.InventoryMovementUpdateManyMutationInput, Prisma.InventoryMovementUncheckedUpdateManyWithoutBatchInput>
 }
 
-export type InventoryMovementCreateManyPerformedByUserInput = {
+export type InventoryMovementCreateWithoutPerformedByUserInput = {
+  id?: string
+  type: $Enums.MovementType
+  direction: $Enums.MovementDirection
+  quantity: number
+  onHandBefore: number
+  onHandAfter: number
+  reservedBefore?: number | null
+  reservedAfter?: number | null
+  unitCost?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  totalCost?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  referenceType?: $Enums.ReferenceType | null
+  referenceId?: string | null
+  note?: string | null
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Date | string
+  inventoryLevel: Prisma.InventoryLevelCreateNestedOneWithoutMovementsInput
+  sourceWarehouse?: Prisma.WarehouseCreateNestedOneWithoutMovementsAsSourceInput
+  destWarehouse?: Prisma.WarehouseCreateNestedOneWithoutMovementsAsDestInput
+  fromLocation?: Prisma.StorageLocationCreateNestedOneWithoutMovementsFromInput
+  toLocation?: Prisma.StorageLocationCreateNestedOneWithoutMovementsToInput
+  batch?: Prisma.InventoryBatchCreateNestedOneWithoutMovementsInput
+}
+
+export type InventoryMovementUncheckedCreateWithoutPerformedByUserInput = {
   id?: string
   inventoryLevelId: string
   type: $Enums.MovementType
@@ -1669,76 +1619,30 @@ export type InventoryMovementCreateManyPerformedByUserInput = {
   createdAt?: Date | string
 }
 
-export type InventoryMovementUpdateWithoutPerformedByUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  type?: Prisma.EnumMovementTypeFieldUpdateOperationsInput | $Enums.MovementType
-  direction?: Prisma.EnumMovementDirectionFieldUpdateOperationsInput | $Enums.MovementDirection
-  quantity?: Prisma.IntFieldUpdateOperationsInput | number
-  onHandBefore?: Prisma.IntFieldUpdateOperationsInput | number
-  onHandAfter?: Prisma.IntFieldUpdateOperationsInput | number
-  reservedBefore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  reservedAfter?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  unitCost?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  totalCost?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  referenceType?: Prisma.NullableEnumReferenceTypeFieldUpdateOperationsInput | $Enums.ReferenceType | null
-  referenceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  inventoryLevel?: Prisma.InventoryLevelUpdateOneRequiredWithoutMovementsNestedInput
-  sourceWarehouse?: Prisma.WarehouseUpdateOneWithoutMovementsAsSourceNestedInput
-  destWarehouse?: Prisma.WarehouseUpdateOneWithoutMovementsAsDestNestedInput
-  fromLocation?: Prisma.StorageLocationUpdateOneWithoutMovementsFromNestedInput
-  toLocation?: Prisma.StorageLocationUpdateOneWithoutMovementsToNestedInput
-  batch?: Prisma.InventoryBatchUpdateOneWithoutMovementsNestedInput
+export type InventoryMovementCreateOrConnectWithoutPerformedByUserInput = {
+  where: Prisma.InventoryMovementWhereUniqueInput
+  create: Prisma.XOR<Prisma.InventoryMovementCreateWithoutPerformedByUserInput, Prisma.InventoryMovementUncheckedCreateWithoutPerformedByUserInput>
 }
 
-export type InventoryMovementUncheckedUpdateWithoutPerformedByUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  inventoryLevelId?: Prisma.StringFieldUpdateOperationsInput | string
-  type?: Prisma.EnumMovementTypeFieldUpdateOperationsInput | $Enums.MovementType
-  direction?: Prisma.EnumMovementDirectionFieldUpdateOperationsInput | $Enums.MovementDirection
-  quantity?: Prisma.IntFieldUpdateOperationsInput | number
-  onHandBefore?: Prisma.IntFieldUpdateOperationsInput | number
-  onHandAfter?: Prisma.IntFieldUpdateOperationsInput | number
-  reservedBefore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  reservedAfter?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  unitCost?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  totalCost?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  referenceType?: Prisma.NullableEnumReferenceTypeFieldUpdateOperationsInput | $Enums.ReferenceType | null
-  referenceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sourceWarehouseId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  destWarehouseId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  fromLocationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  toLocationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  batchId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+export type InventoryMovementCreateManyPerformedByUserInputEnvelope = {
+  data: Prisma.InventoryMovementCreateManyPerformedByUserInput | Prisma.InventoryMovementCreateManyPerformedByUserInput[]
+  skipDuplicates?: boolean
 }
 
-export type InventoryMovementUncheckedUpdateManyWithoutPerformedByUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  inventoryLevelId?: Prisma.StringFieldUpdateOperationsInput | string
-  type?: Prisma.EnumMovementTypeFieldUpdateOperationsInput | $Enums.MovementType
-  direction?: Prisma.EnumMovementDirectionFieldUpdateOperationsInput | $Enums.MovementDirection
-  quantity?: Prisma.IntFieldUpdateOperationsInput | number
-  onHandBefore?: Prisma.IntFieldUpdateOperationsInput | number
-  onHandAfter?: Prisma.IntFieldUpdateOperationsInput | number
-  reservedBefore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  reservedAfter?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  unitCost?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  totalCost?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  referenceType?: Prisma.NullableEnumReferenceTypeFieldUpdateOperationsInput | $Enums.ReferenceType | null
-  referenceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sourceWarehouseId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  destWarehouseId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  fromLocationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  toLocationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  batchId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+export type InventoryMovementUpsertWithWhereUniqueWithoutPerformedByUserInput = {
+  where: Prisma.InventoryMovementWhereUniqueInput
+  update: Prisma.XOR<Prisma.InventoryMovementUpdateWithoutPerformedByUserInput, Prisma.InventoryMovementUncheckedUpdateWithoutPerformedByUserInput>
+  create: Prisma.XOR<Prisma.InventoryMovementCreateWithoutPerformedByUserInput, Prisma.InventoryMovementUncheckedCreateWithoutPerformedByUserInput>
+}
+
+export type InventoryMovementUpdateWithWhereUniqueWithoutPerformedByUserInput = {
+  where: Prisma.InventoryMovementWhereUniqueInput
+  data: Prisma.XOR<Prisma.InventoryMovementUpdateWithoutPerformedByUserInput, Prisma.InventoryMovementUncheckedUpdateWithoutPerformedByUserInput>
+}
+
+export type InventoryMovementUpdateManyWithWhereWithoutPerformedByUserInput = {
+  where: Prisma.InventoryMovementScalarWhereInput
+  data: Prisma.XOR<Prisma.InventoryMovementUpdateManyMutationInput, Prisma.InventoryMovementUncheckedUpdateManyWithoutPerformedByUserInput>
 }
 
 export type InventoryMovementCreateManySourceWarehouseInput = {
@@ -2312,6 +2216,102 @@ export type InventoryMovementUncheckedUpdateManyWithoutBatchInput = {
   fromLocationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   toLocationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   performedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type InventoryMovementCreateManyPerformedByUserInput = {
+  id?: string
+  inventoryLevelId: string
+  type: $Enums.MovementType
+  direction: $Enums.MovementDirection
+  quantity: number
+  onHandBefore: number
+  onHandAfter: number
+  reservedBefore?: number | null
+  reservedAfter?: number | null
+  unitCost?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  totalCost?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  referenceType?: $Enums.ReferenceType | null
+  referenceId?: string | null
+  sourceWarehouseId?: string | null
+  destWarehouseId?: string | null
+  fromLocationId?: string | null
+  toLocationId?: string | null
+  batchId?: string | null
+  note?: string | null
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Date | string
+}
+
+export type InventoryMovementUpdateWithoutPerformedByUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumMovementTypeFieldUpdateOperationsInput | $Enums.MovementType
+  direction?: Prisma.EnumMovementDirectionFieldUpdateOperationsInput | $Enums.MovementDirection
+  quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  onHandBefore?: Prisma.IntFieldUpdateOperationsInput | number
+  onHandAfter?: Prisma.IntFieldUpdateOperationsInput | number
+  reservedBefore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reservedAfter?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  unitCost?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  totalCost?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  referenceType?: Prisma.NullableEnumReferenceTypeFieldUpdateOperationsInput | $Enums.ReferenceType | null
+  referenceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  inventoryLevel?: Prisma.InventoryLevelUpdateOneRequiredWithoutMovementsNestedInput
+  sourceWarehouse?: Prisma.WarehouseUpdateOneWithoutMovementsAsSourceNestedInput
+  destWarehouse?: Prisma.WarehouseUpdateOneWithoutMovementsAsDestNestedInput
+  fromLocation?: Prisma.StorageLocationUpdateOneWithoutMovementsFromNestedInput
+  toLocation?: Prisma.StorageLocationUpdateOneWithoutMovementsToNestedInput
+  batch?: Prisma.InventoryBatchUpdateOneWithoutMovementsNestedInput
+}
+
+export type InventoryMovementUncheckedUpdateWithoutPerformedByUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  inventoryLevelId?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumMovementTypeFieldUpdateOperationsInput | $Enums.MovementType
+  direction?: Prisma.EnumMovementDirectionFieldUpdateOperationsInput | $Enums.MovementDirection
+  quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  onHandBefore?: Prisma.IntFieldUpdateOperationsInput | number
+  onHandAfter?: Prisma.IntFieldUpdateOperationsInput | number
+  reservedBefore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reservedAfter?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  unitCost?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  totalCost?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  referenceType?: Prisma.NullableEnumReferenceTypeFieldUpdateOperationsInput | $Enums.ReferenceType | null
+  referenceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceWarehouseId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  destWarehouseId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fromLocationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toLocationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  batchId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type InventoryMovementUncheckedUpdateManyWithoutPerformedByUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  inventoryLevelId?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumMovementTypeFieldUpdateOperationsInput | $Enums.MovementType
+  direction?: Prisma.EnumMovementDirectionFieldUpdateOperationsInput | $Enums.MovementDirection
+  quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  onHandBefore?: Prisma.IntFieldUpdateOperationsInput | number
+  onHandAfter?: Prisma.IntFieldUpdateOperationsInput | number
+  reservedBefore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reservedAfter?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  unitCost?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  totalCost?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  referenceType?: Prisma.NullableEnumReferenceTypeFieldUpdateOperationsInput | $Enums.ReferenceType | null
+  referenceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceWarehouseId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  destWarehouseId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fromLocationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toLocationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  batchId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string

@@ -663,8 +663,32 @@ export type WarehouseNullableScalarRelationFilter = {
   isNot?: Prisma.WarehouseWhereInput | null
 }
 
+export type StringFieldUpdateOperationsInput = {
+  set?: string
+}
+
 export type EnumWarehouseTypeFieldUpdateOperationsInput = {
   set?: $Enums.WarehouseType
+}
+
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: string | null
+}
+
+export type BoolFieldUpdateOperationsInput = {
+  set?: boolean
+}
+
+export type IntFieldUpdateOperationsInput = {
+  set?: number
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
+export type DateTimeFieldUpdateOperationsInput = {
+  set?: Date | string
 }
 
 export type WarehouseCreateNestedOneWithoutInventoryLevelsInput = {

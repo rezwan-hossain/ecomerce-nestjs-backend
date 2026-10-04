@@ -527,90 +527,6 @@ export type InventoryTransferScalarRelationFilter = {
   isNot?: Prisma.InventoryTransferWhereInput
 }
 
-export type InventoryTransferCreateNestedManyWithoutInitiatedByUserInput = {
-  create?: Prisma.XOR<Prisma.InventoryTransferCreateWithoutInitiatedByUserInput, Prisma.InventoryTransferUncheckedCreateWithoutInitiatedByUserInput> | Prisma.InventoryTransferCreateWithoutInitiatedByUserInput[] | Prisma.InventoryTransferUncheckedCreateWithoutInitiatedByUserInput[]
-  connectOrCreate?: Prisma.InventoryTransferCreateOrConnectWithoutInitiatedByUserInput | Prisma.InventoryTransferCreateOrConnectWithoutInitiatedByUserInput[]
-  createMany?: Prisma.InventoryTransferCreateManyInitiatedByUserInputEnvelope
-  connect?: Prisma.InventoryTransferWhereUniqueInput | Prisma.InventoryTransferWhereUniqueInput[]
-}
-
-export type InventoryTransferCreateNestedManyWithoutReceivedByUserInput = {
-  create?: Prisma.XOR<Prisma.InventoryTransferCreateWithoutReceivedByUserInput, Prisma.InventoryTransferUncheckedCreateWithoutReceivedByUserInput> | Prisma.InventoryTransferCreateWithoutReceivedByUserInput[] | Prisma.InventoryTransferUncheckedCreateWithoutReceivedByUserInput[]
-  connectOrCreate?: Prisma.InventoryTransferCreateOrConnectWithoutReceivedByUserInput | Prisma.InventoryTransferCreateOrConnectWithoutReceivedByUserInput[]
-  createMany?: Prisma.InventoryTransferCreateManyReceivedByUserInputEnvelope
-  connect?: Prisma.InventoryTransferWhereUniqueInput | Prisma.InventoryTransferWhereUniqueInput[]
-}
-
-export type InventoryTransferUncheckedCreateNestedManyWithoutInitiatedByUserInput = {
-  create?: Prisma.XOR<Prisma.InventoryTransferCreateWithoutInitiatedByUserInput, Prisma.InventoryTransferUncheckedCreateWithoutInitiatedByUserInput> | Prisma.InventoryTransferCreateWithoutInitiatedByUserInput[] | Prisma.InventoryTransferUncheckedCreateWithoutInitiatedByUserInput[]
-  connectOrCreate?: Prisma.InventoryTransferCreateOrConnectWithoutInitiatedByUserInput | Prisma.InventoryTransferCreateOrConnectWithoutInitiatedByUserInput[]
-  createMany?: Prisma.InventoryTransferCreateManyInitiatedByUserInputEnvelope
-  connect?: Prisma.InventoryTransferWhereUniqueInput | Prisma.InventoryTransferWhereUniqueInput[]
-}
-
-export type InventoryTransferUncheckedCreateNestedManyWithoutReceivedByUserInput = {
-  create?: Prisma.XOR<Prisma.InventoryTransferCreateWithoutReceivedByUserInput, Prisma.InventoryTransferUncheckedCreateWithoutReceivedByUserInput> | Prisma.InventoryTransferCreateWithoutReceivedByUserInput[] | Prisma.InventoryTransferUncheckedCreateWithoutReceivedByUserInput[]
-  connectOrCreate?: Prisma.InventoryTransferCreateOrConnectWithoutReceivedByUserInput | Prisma.InventoryTransferCreateOrConnectWithoutReceivedByUserInput[]
-  createMany?: Prisma.InventoryTransferCreateManyReceivedByUserInputEnvelope
-  connect?: Prisma.InventoryTransferWhereUniqueInput | Prisma.InventoryTransferWhereUniqueInput[]
-}
-
-export type InventoryTransferUpdateManyWithoutInitiatedByUserNestedInput = {
-  create?: Prisma.XOR<Prisma.InventoryTransferCreateWithoutInitiatedByUserInput, Prisma.InventoryTransferUncheckedCreateWithoutInitiatedByUserInput> | Prisma.InventoryTransferCreateWithoutInitiatedByUserInput[] | Prisma.InventoryTransferUncheckedCreateWithoutInitiatedByUserInput[]
-  connectOrCreate?: Prisma.InventoryTransferCreateOrConnectWithoutInitiatedByUserInput | Prisma.InventoryTransferCreateOrConnectWithoutInitiatedByUserInput[]
-  upsert?: Prisma.InventoryTransferUpsertWithWhereUniqueWithoutInitiatedByUserInput | Prisma.InventoryTransferUpsertWithWhereUniqueWithoutInitiatedByUserInput[]
-  createMany?: Prisma.InventoryTransferCreateManyInitiatedByUserInputEnvelope
-  set?: Prisma.InventoryTransferWhereUniqueInput | Prisma.InventoryTransferWhereUniqueInput[]
-  disconnect?: Prisma.InventoryTransferWhereUniqueInput | Prisma.InventoryTransferWhereUniqueInput[]
-  delete?: Prisma.InventoryTransferWhereUniqueInput | Prisma.InventoryTransferWhereUniqueInput[]
-  connect?: Prisma.InventoryTransferWhereUniqueInput | Prisma.InventoryTransferWhereUniqueInput[]
-  update?: Prisma.InventoryTransferUpdateWithWhereUniqueWithoutInitiatedByUserInput | Prisma.InventoryTransferUpdateWithWhereUniqueWithoutInitiatedByUserInput[]
-  updateMany?: Prisma.InventoryTransferUpdateManyWithWhereWithoutInitiatedByUserInput | Prisma.InventoryTransferUpdateManyWithWhereWithoutInitiatedByUserInput[]
-  deleteMany?: Prisma.InventoryTransferScalarWhereInput | Prisma.InventoryTransferScalarWhereInput[]
-}
-
-export type InventoryTransferUpdateManyWithoutReceivedByUserNestedInput = {
-  create?: Prisma.XOR<Prisma.InventoryTransferCreateWithoutReceivedByUserInput, Prisma.InventoryTransferUncheckedCreateWithoutReceivedByUserInput> | Prisma.InventoryTransferCreateWithoutReceivedByUserInput[] | Prisma.InventoryTransferUncheckedCreateWithoutReceivedByUserInput[]
-  connectOrCreate?: Prisma.InventoryTransferCreateOrConnectWithoutReceivedByUserInput | Prisma.InventoryTransferCreateOrConnectWithoutReceivedByUserInput[]
-  upsert?: Prisma.InventoryTransferUpsertWithWhereUniqueWithoutReceivedByUserInput | Prisma.InventoryTransferUpsertWithWhereUniqueWithoutReceivedByUserInput[]
-  createMany?: Prisma.InventoryTransferCreateManyReceivedByUserInputEnvelope
-  set?: Prisma.InventoryTransferWhereUniqueInput | Prisma.InventoryTransferWhereUniqueInput[]
-  disconnect?: Prisma.InventoryTransferWhereUniqueInput | Prisma.InventoryTransferWhereUniqueInput[]
-  delete?: Prisma.InventoryTransferWhereUniqueInput | Prisma.InventoryTransferWhereUniqueInput[]
-  connect?: Prisma.InventoryTransferWhereUniqueInput | Prisma.InventoryTransferWhereUniqueInput[]
-  update?: Prisma.InventoryTransferUpdateWithWhereUniqueWithoutReceivedByUserInput | Prisma.InventoryTransferUpdateWithWhereUniqueWithoutReceivedByUserInput[]
-  updateMany?: Prisma.InventoryTransferUpdateManyWithWhereWithoutReceivedByUserInput | Prisma.InventoryTransferUpdateManyWithWhereWithoutReceivedByUserInput[]
-  deleteMany?: Prisma.InventoryTransferScalarWhereInput | Prisma.InventoryTransferScalarWhereInput[]
-}
-
-export type InventoryTransferUncheckedUpdateManyWithoutInitiatedByUserNestedInput = {
-  create?: Prisma.XOR<Prisma.InventoryTransferCreateWithoutInitiatedByUserInput, Prisma.InventoryTransferUncheckedCreateWithoutInitiatedByUserInput> | Prisma.InventoryTransferCreateWithoutInitiatedByUserInput[] | Prisma.InventoryTransferUncheckedCreateWithoutInitiatedByUserInput[]
-  connectOrCreate?: Prisma.InventoryTransferCreateOrConnectWithoutInitiatedByUserInput | Prisma.InventoryTransferCreateOrConnectWithoutInitiatedByUserInput[]
-  upsert?: Prisma.InventoryTransferUpsertWithWhereUniqueWithoutInitiatedByUserInput | Prisma.InventoryTransferUpsertWithWhereUniqueWithoutInitiatedByUserInput[]
-  createMany?: Prisma.InventoryTransferCreateManyInitiatedByUserInputEnvelope
-  set?: Prisma.InventoryTransferWhereUniqueInput | Prisma.InventoryTransferWhereUniqueInput[]
-  disconnect?: Prisma.InventoryTransferWhereUniqueInput | Prisma.InventoryTransferWhereUniqueInput[]
-  delete?: Prisma.InventoryTransferWhereUniqueInput | Prisma.InventoryTransferWhereUniqueInput[]
-  connect?: Prisma.InventoryTransferWhereUniqueInput | Prisma.InventoryTransferWhereUniqueInput[]
-  update?: Prisma.InventoryTransferUpdateWithWhereUniqueWithoutInitiatedByUserInput | Prisma.InventoryTransferUpdateWithWhereUniqueWithoutInitiatedByUserInput[]
-  updateMany?: Prisma.InventoryTransferUpdateManyWithWhereWithoutInitiatedByUserInput | Prisma.InventoryTransferUpdateManyWithWhereWithoutInitiatedByUserInput[]
-  deleteMany?: Prisma.InventoryTransferScalarWhereInput | Prisma.InventoryTransferScalarWhereInput[]
-}
-
-export type InventoryTransferUncheckedUpdateManyWithoutReceivedByUserNestedInput = {
-  create?: Prisma.XOR<Prisma.InventoryTransferCreateWithoutReceivedByUserInput, Prisma.InventoryTransferUncheckedCreateWithoutReceivedByUserInput> | Prisma.InventoryTransferCreateWithoutReceivedByUserInput[] | Prisma.InventoryTransferUncheckedCreateWithoutReceivedByUserInput[]
-  connectOrCreate?: Prisma.InventoryTransferCreateOrConnectWithoutReceivedByUserInput | Prisma.InventoryTransferCreateOrConnectWithoutReceivedByUserInput[]
-  upsert?: Prisma.InventoryTransferUpsertWithWhereUniqueWithoutReceivedByUserInput | Prisma.InventoryTransferUpsertWithWhereUniqueWithoutReceivedByUserInput[]
-  createMany?: Prisma.InventoryTransferCreateManyReceivedByUserInputEnvelope
-  set?: Prisma.InventoryTransferWhereUniqueInput | Prisma.InventoryTransferWhereUniqueInput[]
-  disconnect?: Prisma.InventoryTransferWhereUniqueInput | Prisma.InventoryTransferWhereUniqueInput[]
-  delete?: Prisma.InventoryTransferWhereUniqueInput | Prisma.InventoryTransferWhereUniqueInput[]
-  connect?: Prisma.InventoryTransferWhereUniqueInput | Prisma.InventoryTransferWhereUniqueInput[]
-  update?: Prisma.InventoryTransferUpdateWithWhereUniqueWithoutReceivedByUserInput | Prisma.InventoryTransferUpdateWithWhereUniqueWithoutReceivedByUserInput[]
-  updateMany?: Prisma.InventoryTransferUpdateManyWithWhereWithoutReceivedByUserInput | Prisma.InventoryTransferUpdateManyWithWhereWithoutReceivedByUserInput[]
-  deleteMany?: Prisma.InventoryTransferScalarWhereInput | Prisma.InventoryTransferScalarWhereInput[]
-}
-
 export type InventoryTransferCreateNestedManyWithoutFromWarehouseInput = {
   create?: Prisma.XOR<Prisma.InventoryTransferCreateWithoutFromWarehouseInput, Prisma.InventoryTransferUncheckedCreateWithoutFromWarehouseInput> | Prisma.InventoryTransferCreateWithoutFromWarehouseInput[] | Prisma.InventoryTransferUncheckedCreateWithoutFromWarehouseInput[]
   connectOrCreate?: Prisma.InventoryTransferCreateOrConnectWithoutFromWarehouseInput | Prisma.InventoryTransferCreateOrConnectWithoutFromWarehouseInput[]
@@ -713,144 +629,88 @@ export type InventoryTransferUpdateOneRequiredWithoutItemsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.InventoryTransferUpdateToOneWithWhereWithoutItemsInput, Prisma.InventoryTransferUpdateWithoutItemsInput>, Prisma.InventoryTransferUncheckedUpdateWithoutItemsInput>
 }
 
-export type InventoryTransferCreateWithoutInitiatedByUserInput = {
-  id?: string
-  transferNumber: string
-  status?: $Enums.TransferStatus
-  shippedAt?: Date | string | null
-  receivedAt?: Date | string | null
-  cancelledAt?: Date | string | null
-  note?: string | null
-  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  fromWarehouse: Prisma.WarehouseCreateNestedOneWithoutTransfersFromInput
-  toWarehouse: Prisma.WarehouseCreateNestedOneWithoutTransfersToInput
-  items?: Prisma.InventoryTransferItemCreateNestedManyWithoutTransferInput
-  receivedByUser?: Prisma.UserCreateNestedOneWithoutTransfersReceivedInput
+export type InventoryTransferCreateNestedManyWithoutInitiatedByUserInput = {
+  create?: Prisma.XOR<Prisma.InventoryTransferCreateWithoutInitiatedByUserInput, Prisma.InventoryTransferUncheckedCreateWithoutInitiatedByUserInput> | Prisma.InventoryTransferCreateWithoutInitiatedByUserInput[] | Prisma.InventoryTransferUncheckedCreateWithoutInitiatedByUserInput[]
+  connectOrCreate?: Prisma.InventoryTransferCreateOrConnectWithoutInitiatedByUserInput | Prisma.InventoryTransferCreateOrConnectWithoutInitiatedByUserInput[]
+  createMany?: Prisma.InventoryTransferCreateManyInitiatedByUserInputEnvelope
+  connect?: Prisma.InventoryTransferWhereUniqueInput | Prisma.InventoryTransferWhereUniqueInput[]
 }
 
-export type InventoryTransferUncheckedCreateWithoutInitiatedByUserInput = {
-  id?: string
-  transferNumber: string
-  fromWarehouseId: string
-  toWarehouseId: string
-  status?: $Enums.TransferStatus
-  receivedByUserId?: string | null
-  shippedAt?: Date | string | null
-  receivedAt?: Date | string | null
-  cancelledAt?: Date | string | null
-  note?: string | null
-  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  items?: Prisma.InventoryTransferItemUncheckedCreateNestedManyWithoutTransferInput
+export type InventoryTransferCreateNestedManyWithoutReceivedByUserInput = {
+  create?: Prisma.XOR<Prisma.InventoryTransferCreateWithoutReceivedByUserInput, Prisma.InventoryTransferUncheckedCreateWithoutReceivedByUserInput> | Prisma.InventoryTransferCreateWithoutReceivedByUserInput[] | Prisma.InventoryTransferUncheckedCreateWithoutReceivedByUserInput[]
+  connectOrCreate?: Prisma.InventoryTransferCreateOrConnectWithoutReceivedByUserInput | Prisma.InventoryTransferCreateOrConnectWithoutReceivedByUserInput[]
+  createMany?: Prisma.InventoryTransferCreateManyReceivedByUserInputEnvelope
+  connect?: Prisma.InventoryTransferWhereUniqueInput | Prisma.InventoryTransferWhereUniqueInput[]
 }
 
-export type InventoryTransferCreateOrConnectWithoutInitiatedByUserInput = {
-  where: Prisma.InventoryTransferWhereUniqueInput
-  create: Prisma.XOR<Prisma.InventoryTransferCreateWithoutInitiatedByUserInput, Prisma.InventoryTransferUncheckedCreateWithoutInitiatedByUserInput>
+export type InventoryTransferUncheckedCreateNestedManyWithoutInitiatedByUserInput = {
+  create?: Prisma.XOR<Prisma.InventoryTransferCreateWithoutInitiatedByUserInput, Prisma.InventoryTransferUncheckedCreateWithoutInitiatedByUserInput> | Prisma.InventoryTransferCreateWithoutInitiatedByUserInput[] | Prisma.InventoryTransferUncheckedCreateWithoutInitiatedByUserInput[]
+  connectOrCreate?: Prisma.InventoryTransferCreateOrConnectWithoutInitiatedByUserInput | Prisma.InventoryTransferCreateOrConnectWithoutInitiatedByUserInput[]
+  createMany?: Prisma.InventoryTransferCreateManyInitiatedByUserInputEnvelope
+  connect?: Prisma.InventoryTransferWhereUniqueInput | Prisma.InventoryTransferWhereUniqueInput[]
 }
 
-export type InventoryTransferCreateManyInitiatedByUserInputEnvelope = {
-  data: Prisma.InventoryTransferCreateManyInitiatedByUserInput | Prisma.InventoryTransferCreateManyInitiatedByUserInput[]
-  skipDuplicates?: boolean
+export type InventoryTransferUncheckedCreateNestedManyWithoutReceivedByUserInput = {
+  create?: Prisma.XOR<Prisma.InventoryTransferCreateWithoutReceivedByUserInput, Prisma.InventoryTransferUncheckedCreateWithoutReceivedByUserInput> | Prisma.InventoryTransferCreateWithoutReceivedByUserInput[] | Prisma.InventoryTransferUncheckedCreateWithoutReceivedByUserInput[]
+  connectOrCreate?: Prisma.InventoryTransferCreateOrConnectWithoutReceivedByUserInput | Prisma.InventoryTransferCreateOrConnectWithoutReceivedByUserInput[]
+  createMany?: Prisma.InventoryTransferCreateManyReceivedByUserInputEnvelope
+  connect?: Prisma.InventoryTransferWhereUniqueInput | Prisma.InventoryTransferWhereUniqueInput[]
 }
 
-export type InventoryTransferCreateWithoutReceivedByUserInput = {
-  id?: string
-  transferNumber: string
-  status?: $Enums.TransferStatus
-  shippedAt?: Date | string | null
-  receivedAt?: Date | string | null
-  cancelledAt?: Date | string | null
-  note?: string | null
-  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  fromWarehouse: Prisma.WarehouseCreateNestedOneWithoutTransfersFromInput
-  toWarehouse: Prisma.WarehouseCreateNestedOneWithoutTransfersToInput
-  items?: Prisma.InventoryTransferItemCreateNestedManyWithoutTransferInput
-  initiatedByUser?: Prisma.UserCreateNestedOneWithoutTransfersInitiatedInput
+export type InventoryTransferUpdateManyWithoutInitiatedByUserNestedInput = {
+  create?: Prisma.XOR<Prisma.InventoryTransferCreateWithoutInitiatedByUserInput, Prisma.InventoryTransferUncheckedCreateWithoutInitiatedByUserInput> | Prisma.InventoryTransferCreateWithoutInitiatedByUserInput[] | Prisma.InventoryTransferUncheckedCreateWithoutInitiatedByUserInput[]
+  connectOrCreate?: Prisma.InventoryTransferCreateOrConnectWithoutInitiatedByUserInput | Prisma.InventoryTransferCreateOrConnectWithoutInitiatedByUserInput[]
+  upsert?: Prisma.InventoryTransferUpsertWithWhereUniqueWithoutInitiatedByUserInput | Prisma.InventoryTransferUpsertWithWhereUniqueWithoutInitiatedByUserInput[]
+  createMany?: Prisma.InventoryTransferCreateManyInitiatedByUserInputEnvelope
+  set?: Prisma.InventoryTransferWhereUniqueInput | Prisma.InventoryTransferWhereUniqueInput[]
+  disconnect?: Prisma.InventoryTransferWhereUniqueInput | Prisma.InventoryTransferWhereUniqueInput[]
+  delete?: Prisma.InventoryTransferWhereUniqueInput | Prisma.InventoryTransferWhereUniqueInput[]
+  connect?: Prisma.InventoryTransferWhereUniqueInput | Prisma.InventoryTransferWhereUniqueInput[]
+  update?: Prisma.InventoryTransferUpdateWithWhereUniqueWithoutInitiatedByUserInput | Prisma.InventoryTransferUpdateWithWhereUniqueWithoutInitiatedByUserInput[]
+  updateMany?: Prisma.InventoryTransferUpdateManyWithWhereWithoutInitiatedByUserInput | Prisma.InventoryTransferUpdateManyWithWhereWithoutInitiatedByUserInput[]
+  deleteMany?: Prisma.InventoryTransferScalarWhereInput | Prisma.InventoryTransferScalarWhereInput[]
 }
 
-export type InventoryTransferUncheckedCreateWithoutReceivedByUserInput = {
-  id?: string
-  transferNumber: string
-  fromWarehouseId: string
-  toWarehouseId: string
-  status?: $Enums.TransferStatus
-  initiatedByUserId?: string | null
-  shippedAt?: Date | string | null
-  receivedAt?: Date | string | null
-  cancelledAt?: Date | string | null
-  note?: string | null
-  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  items?: Prisma.InventoryTransferItemUncheckedCreateNestedManyWithoutTransferInput
+export type InventoryTransferUpdateManyWithoutReceivedByUserNestedInput = {
+  create?: Prisma.XOR<Prisma.InventoryTransferCreateWithoutReceivedByUserInput, Prisma.InventoryTransferUncheckedCreateWithoutReceivedByUserInput> | Prisma.InventoryTransferCreateWithoutReceivedByUserInput[] | Prisma.InventoryTransferUncheckedCreateWithoutReceivedByUserInput[]
+  connectOrCreate?: Prisma.InventoryTransferCreateOrConnectWithoutReceivedByUserInput | Prisma.InventoryTransferCreateOrConnectWithoutReceivedByUserInput[]
+  upsert?: Prisma.InventoryTransferUpsertWithWhereUniqueWithoutReceivedByUserInput | Prisma.InventoryTransferUpsertWithWhereUniqueWithoutReceivedByUserInput[]
+  createMany?: Prisma.InventoryTransferCreateManyReceivedByUserInputEnvelope
+  set?: Prisma.InventoryTransferWhereUniqueInput | Prisma.InventoryTransferWhereUniqueInput[]
+  disconnect?: Prisma.InventoryTransferWhereUniqueInput | Prisma.InventoryTransferWhereUniqueInput[]
+  delete?: Prisma.InventoryTransferWhereUniqueInput | Prisma.InventoryTransferWhereUniqueInput[]
+  connect?: Prisma.InventoryTransferWhereUniqueInput | Prisma.InventoryTransferWhereUniqueInput[]
+  update?: Prisma.InventoryTransferUpdateWithWhereUniqueWithoutReceivedByUserInput | Prisma.InventoryTransferUpdateWithWhereUniqueWithoutReceivedByUserInput[]
+  updateMany?: Prisma.InventoryTransferUpdateManyWithWhereWithoutReceivedByUserInput | Prisma.InventoryTransferUpdateManyWithWhereWithoutReceivedByUserInput[]
+  deleteMany?: Prisma.InventoryTransferScalarWhereInput | Prisma.InventoryTransferScalarWhereInput[]
 }
 
-export type InventoryTransferCreateOrConnectWithoutReceivedByUserInput = {
-  where: Prisma.InventoryTransferWhereUniqueInput
-  create: Prisma.XOR<Prisma.InventoryTransferCreateWithoutReceivedByUserInput, Prisma.InventoryTransferUncheckedCreateWithoutReceivedByUserInput>
+export type InventoryTransferUncheckedUpdateManyWithoutInitiatedByUserNestedInput = {
+  create?: Prisma.XOR<Prisma.InventoryTransferCreateWithoutInitiatedByUserInput, Prisma.InventoryTransferUncheckedCreateWithoutInitiatedByUserInput> | Prisma.InventoryTransferCreateWithoutInitiatedByUserInput[] | Prisma.InventoryTransferUncheckedCreateWithoutInitiatedByUserInput[]
+  connectOrCreate?: Prisma.InventoryTransferCreateOrConnectWithoutInitiatedByUserInput | Prisma.InventoryTransferCreateOrConnectWithoutInitiatedByUserInput[]
+  upsert?: Prisma.InventoryTransferUpsertWithWhereUniqueWithoutInitiatedByUserInput | Prisma.InventoryTransferUpsertWithWhereUniqueWithoutInitiatedByUserInput[]
+  createMany?: Prisma.InventoryTransferCreateManyInitiatedByUserInputEnvelope
+  set?: Prisma.InventoryTransferWhereUniqueInput | Prisma.InventoryTransferWhereUniqueInput[]
+  disconnect?: Prisma.InventoryTransferWhereUniqueInput | Prisma.InventoryTransferWhereUniqueInput[]
+  delete?: Prisma.InventoryTransferWhereUniqueInput | Prisma.InventoryTransferWhereUniqueInput[]
+  connect?: Prisma.InventoryTransferWhereUniqueInput | Prisma.InventoryTransferWhereUniqueInput[]
+  update?: Prisma.InventoryTransferUpdateWithWhereUniqueWithoutInitiatedByUserInput | Prisma.InventoryTransferUpdateWithWhereUniqueWithoutInitiatedByUserInput[]
+  updateMany?: Prisma.InventoryTransferUpdateManyWithWhereWithoutInitiatedByUserInput | Prisma.InventoryTransferUpdateManyWithWhereWithoutInitiatedByUserInput[]
+  deleteMany?: Prisma.InventoryTransferScalarWhereInput | Prisma.InventoryTransferScalarWhereInput[]
 }
 
-export type InventoryTransferCreateManyReceivedByUserInputEnvelope = {
-  data: Prisma.InventoryTransferCreateManyReceivedByUserInput | Prisma.InventoryTransferCreateManyReceivedByUserInput[]
-  skipDuplicates?: boolean
-}
-
-export type InventoryTransferUpsertWithWhereUniqueWithoutInitiatedByUserInput = {
-  where: Prisma.InventoryTransferWhereUniqueInput
-  update: Prisma.XOR<Prisma.InventoryTransferUpdateWithoutInitiatedByUserInput, Prisma.InventoryTransferUncheckedUpdateWithoutInitiatedByUserInput>
-  create: Prisma.XOR<Prisma.InventoryTransferCreateWithoutInitiatedByUserInput, Prisma.InventoryTransferUncheckedCreateWithoutInitiatedByUserInput>
-}
-
-export type InventoryTransferUpdateWithWhereUniqueWithoutInitiatedByUserInput = {
-  where: Prisma.InventoryTransferWhereUniqueInput
-  data: Prisma.XOR<Prisma.InventoryTransferUpdateWithoutInitiatedByUserInput, Prisma.InventoryTransferUncheckedUpdateWithoutInitiatedByUserInput>
-}
-
-export type InventoryTransferUpdateManyWithWhereWithoutInitiatedByUserInput = {
-  where: Prisma.InventoryTransferScalarWhereInput
-  data: Prisma.XOR<Prisma.InventoryTransferUpdateManyMutationInput, Prisma.InventoryTransferUncheckedUpdateManyWithoutInitiatedByUserInput>
-}
-
-export type InventoryTransferScalarWhereInput = {
-  AND?: Prisma.InventoryTransferScalarWhereInput | Prisma.InventoryTransferScalarWhereInput[]
-  OR?: Prisma.InventoryTransferScalarWhereInput[]
-  NOT?: Prisma.InventoryTransferScalarWhereInput | Prisma.InventoryTransferScalarWhereInput[]
-  id?: Prisma.StringFilter<"InventoryTransfer"> | string
-  transferNumber?: Prisma.StringFilter<"InventoryTransfer"> | string
-  fromWarehouseId?: Prisma.StringFilter<"InventoryTransfer"> | string
-  toWarehouseId?: Prisma.StringFilter<"InventoryTransfer"> | string
-  status?: Prisma.EnumTransferStatusFilter<"InventoryTransfer"> | $Enums.TransferStatus
-  initiatedByUserId?: Prisma.StringNullableFilter<"InventoryTransfer"> | string | null
-  receivedByUserId?: Prisma.StringNullableFilter<"InventoryTransfer"> | string | null
-  shippedAt?: Prisma.DateTimeNullableFilter<"InventoryTransfer"> | Date | string | null
-  receivedAt?: Prisma.DateTimeNullableFilter<"InventoryTransfer"> | Date | string | null
-  cancelledAt?: Prisma.DateTimeNullableFilter<"InventoryTransfer"> | Date | string | null
-  note?: Prisma.StringNullableFilter<"InventoryTransfer"> | string | null
-  metadata?: Prisma.JsonNullableFilter<"InventoryTransfer">
-  createdAt?: Prisma.DateTimeFilter<"InventoryTransfer"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"InventoryTransfer"> | Date | string
-}
-
-export type InventoryTransferUpsertWithWhereUniqueWithoutReceivedByUserInput = {
-  where: Prisma.InventoryTransferWhereUniqueInput
-  update: Prisma.XOR<Prisma.InventoryTransferUpdateWithoutReceivedByUserInput, Prisma.InventoryTransferUncheckedUpdateWithoutReceivedByUserInput>
-  create: Prisma.XOR<Prisma.InventoryTransferCreateWithoutReceivedByUserInput, Prisma.InventoryTransferUncheckedCreateWithoutReceivedByUserInput>
-}
-
-export type InventoryTransferUpdateWithWhereUniqueWithoutReceivedByUserInput = {
-  where: Prisma.InventoryTransferWhereUniqueInput
-  data: Prisma.XOR<Prisma.InventoryTransferUpdateWithoutReceivedByUserInput, Prisma.InventoryTransferUncheckedUpdateWithoutReceivedByUserInput>
-}
-
-export type InventoryTransferUpdateManyWithWhereWithoutReceivedByUserInput = {
-  where: Prisma.InventoryTransferScalarWhereInput
-  data: Prisma.XOR<Prisma.InventoryTransferUpdateManyMutationInput, Prisma.InventoryTransferUncheckedUpdateManyWithoutReceivedByUserInput>
+export type InventoryTransferUncheckedUpdateManyWithoutReceivedByUserNestedInput = {
+  create?: Prisma.XOR<Prisma.InventoryTransferCreateWithoutReceivedByUserInput, Prisma.InventoryTransferUncheckedCreateWithoutReceivedByUserInput> | Prisma.InventoryTransferCreateWithoutReceivedByUserInput[] | Prisma.InventoryTransferUncheckedCreateWithoutReceivedByUserInput[]
+  connectOrCreate?: Prisma.InventoryTransferCreateOrConnectWithoutReceivedByUserInput | Prisma.InventoryTransferCreateOrConnectWithoutReceivedByUserInput[]
+  upsert?: Prisma.InventoryTransferUpsertWithWhereUniqueWithoutReceivedByUserInput | Prisma.InventoryTransferUpsertWithWhereUniqueWithoutReceivedByUserInput[]
+  createMany?: Prisma.InventoryTransferCreateManyReceivedByUserInputEnvelope
+  set?: Prisma.InventoryTransferWhereUniqueInput | Prisma.InventoryTransferWhereUniqueInput[]
+  disconnect?: Prisma.InventoryTransferWhereUniqueInput | Prisma.InventoryTransferWhereUniqueInput[]
+  delete?: Prisma.InventoryTransferWhereUniqueInput | Prisma.InventoryTransferWhereUniqueInput[]
+  connect?: Prisma.InventoryTransferWhereUniqueInput | Prisma.InventoryTransferWhereUniqueInput[]
+  update?: Prisma.InventoryTransferUpdateWithWhereUniqueWithoutReceivedByUserInput | Prisma.InventoryTransferUpdateWithWhereUniqueWithoutReceivedByUserInput[]
+  updateMany?: Prisma.InventoryTransferUpdateManyWithWhereWithoutReceivedByUserInput | Prisma.InventoryTransferUpdateManyWithWhereWithoutReceivedByUserInput[]
+  deleteMany?: Prisma.InventoryTransferScalarWhereInput | Prisma.InventoryTransferScalarWhereInput[]
 }
 
 export type InventoryTransferCreateWithoutFromWarehouseInput = {
@@ -957,6 +817,26 @@ export type InventoryTransferUpdateManyWithWhereWithoutFromWarehouseInput = {
   data: Prisma.XOR<Prisma.InventoryTransferUpdateManyMutationInput, Prisma.InventoryTransferUncheckedUpdateManyWithoutFromWarehouseInput>
 }
 
+export type InventoryTransferScalarWhereInput = {
+  AND?: Prisma.InventoryTransferScalarWhereInput | Prisma.InventoryTransferScalarWhereInput[]
+  OR?: Prisma.InventoryTransferScalarWhereInput[]
+  NOT?: Prisma.InventoryTransferScalarWhereInput | Prisma.InventoryTransferScalarWhereInput[]
+  id?: Prisma.StringFilter<"InventoryTransfer"> | string
+  transferNumber?: Prisma.StringFilter<"InventoryTransfer"> | string
+  fromWarehouseId?: Prisma.StringFilter<"InventoryTransfer"> | string
+  toWarehouseId?: Prisma.StringFilter<"InventoryTransfer"> | string
+  status?: Prisma.EnumTransferStatusFilter<"InventoryTransfer"> | $Enums.TransferStatus
+  initiatedByUserId?: Prisma.StringNullableFilter<"InventoryTransfer"> | string | null
+  receivedByUserId?: Prisma.StringNullableFilter<"InventoryTransfer"> | string | null
+  shippedAt?: Prisma.DateTimeNullableFilter<"InventoryTransfer"> | Date | string | null
+  receivedAt?: Prisma.DateTimeNullableFilter<"InventoryTransfer"> | Date | string | null
+  cancelledAt?: Prisma.DateTimeNullableFilter<"InventoryTransfer"> | Date | string | null
+  note?: Prisma.StringNullableFilter<"InventoryTransfer"> | string | null
+  metadata?: Prisma.JsonNullableFilter<"InventoryTransfer">
+  createdAt?: Prisma.DateTimeFilter<"InventoryTransfer"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"InventoryTransfer"> | Date | string
+}
+
 export type InventoryTransferUpsertWithWhereUniqueWithoutToWarehouseInput = {
   where: Prisma.InventoryTransferWhereUniqueInput
   update: Prisma.XOR<Prisma.InventoryTransferUpdateWithoutToWarehouseInput, Prisma.InventoryTransferUncheckedUpdateWithoutToWarehouseInput>
@@ -1045,6 +925,258 @@ export type InventoryTransferUncheckedUpdateWithoutItemsInput = {
   transferNumber?: Prisma.StringFieldUpdateOperationsInput | string
   fromWarehouseId?: Prisma.StringFieldUpdateOperationsInput | string
   toWarehouseId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumTransferStatusFieldUpdateOperationsInput | $Enums.TransferStatus
+  initiatedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  receivedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  receivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancelledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type InventoryTransferCreateWithoutInitiatedByUserInput = {
+  id?: string
+  transferNumber: string
+  status?: $Enums.TransferStatus
+  shippedAt?: Date | string | null
+  receivedAt?: Date | string | null
+  cancelledAt?: Date | string | null
+  note?: string | null
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  fromWarehouse: Prisma.WarehouseCreateNestedOneWithoutTransfersFromInput
+  toWarehouse: Prisma.WarehouseCreateNestedOneWithoutTransfersToInput
+  items?: Prisma.InventoryTransferItemCreateNestedManyWithoutTransferInput
+  receivedByUser?: Prisma.UserCreateNestedOneWithoutTransfersReceivedInput
+}
+
+export type InventoryTransferUncheckedCreateWithoutInitiatedByUserInput = {
+  id?: string
+  transferNumber: string
+  fromWarehouseId: string
+  toWarehouseId: string
+  status?: $Enums.TransferStatus
+  receivedByUserId?: string | null
+  shippedAt?: Date | string | null
+  receivedAt?: Date | string | null
+  cancelledAt?: Date | string | null
+  note?: string | null
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  items?: Prisma.InventoryTransferItemUncheckedCreateNestedManyWithoutTransferInput
+}
+
+export type InventoryTransferCreateOrConnectWithoutInitiatedByUserInput = {
+  where: Prisma.InventoryTransferWhereUniqueInput
+  create: Prisma.XOR<Prisma.InventoryTransferCreateWithoutInitiatedByUserInput, Prisma.InventoryTransferUncheckedCreateWithoutInitiatedByUserInput>
+}
+
+export type InventoryTransferCreateManyInitiatedByUserInputEnvelope = {
+  data: Prisma.InventoryTransferCreateManyInitiatedByUserInput | Prisma.InventoryTransferCreateManyInitiatedByUserInput[]
+  skipDuplicates?: boolean
+}
+
+export type InventoryTransferCreateWithoutReceivedByUserInput = {
+  id?: string
+  transferNumber: string
+  status?: $Enums.TransferStatus
+  shippedAt?: Date | string | null
+  receivedAt?: Date | string | null
+  cancelledAt?: Date | string | null
+  note?: string | null
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  fromWarehouse: Prisma.WarehouseCreateNestedOneWithoutTransfersFromInput
+  toWarehouse: Prisma.WarehouseCreateNestedOneWithoutTransfersToInput
+  items?: Prisma.InventoryTransferItemCreateNestedManyWithoutTransferInput
+  initiatedByUser?: Prisma.UserCreateNestedOneWithoutTransfersInitiatedInput
+}
+
+export type InventoryTransferUncheckedCreateWithoutReceivedByUserInput = {
+  id?: string
+  transferNumber: string
+  fromWarehouseId: string
+  toWarehouseId: string
+  status?: $Enums.TransferStatus
+  initiatedByUserId?: string | null
+  shippedAt?: Date | string | null
+  receivedAt?: Date | string | null
+  cancelledAt?: Date | string | null
+  note?: string | null
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  items?: Prisma.InventoryTransferItemUncheckedCreateNestedManyWithoutTransferInput
+}
+
+export type InventoryTransferCreateOrConnectWithoutReceivedByUserInput = {
+  where: Prisma.InventoryTransferWhereUniqueInput
+  create: Prisma.XOR<Prisma.InventoryTransferCreateWithoutReceivedByUserInput, Prisma.InventoryTransferUncheckedCreateWithoutReceivedByUserInput>
+}
+
+export type InventoryTransferCreateManyReceivedByUserInputEnvelope = {
+  data: Prisma.InventoryTransferCreateManyReceivedByUserInput | Prisma.InventoryTransferCreateManyReceivedByUserInput[]
+  skipDuplicates?: boolean
+}
+
+export type InventoryTransferUpsertWithWhereUniqueWithoutInitiatedByUserInput = {
+  where: Prisma.InventoryTransferWhereUniqueInput
+  update: Prisma.XOR<Prisma.InventoryTransferUpdateWithoutInitiatedByUserInput, Prisma.InventoryTransferUncheckedUpdateWithoutInitiatedByUserInput>
+  create: Prisma.XOR<Prisma.InventoryTransferCreateWithoutInitiatedByUserInput, Prisma.InventoryTransferUncheckedCreateWithoutInitiatedByUserInput>
+}
+
+export type InventoryTransferUpdateWithWhereUniqueWithoutInitiatedByUserInput = {
+  where: Prisma.InventoryTransferWhereUniqueInput
+  data: Prisma.XOR<Prisma.InventoryTransferUpdateWithoutInitiatedByUserInput, Prisma.InventoryTransferUncheckedUpdateWithoutInitiatedByUserInput>
+}
+
+export type InventoryTransferUpdateManyWithWhereWithoutInitiatedByUserInput = {
+  where: Prisma.InventoryTransferScalarWhereInput
+  data: Prisma.XOR<Prisma.InventoryTransferUpdateManyMutationInput, Prisma.InventoryTransferUncheckedUpdateManyWithoutInitiatedByUserInput>
+}
+
+export type InventoryTransferUpsertWithWhereUniqueWithoutReceivedByUserInput = {
+  where: Prisma.InventoryTransferWhereUniqueInput
+  update: Prisma.XOR<Prisma.InventoryTransferUpdateWithoutReceivedByUserInput, Prisma.InventoryTransferUncheckedUpdateWithoutReceivedByUserInput>
+  create: Prisma.XOR<Prisma.InventoryTransferCreateWithoutReceivedByUserInput, Prisma.InventoryTransferUncheckedCreateWithoutReceivedByUserInput>
+}
+
+export type InventoryTransferUpdateWithWhereUniqueWithoutReceivedByUserInput = {
+  where: Prisma.InventoryTransferWhereUniqueInput
+  data: Prisma.XOR<Prisma.InventoryTransferUpdateWithoutReceivedByUserInput, Prisma.InventoryTransferUncheckedUpdateWithoutReceivedByUserInput>
+}
+
+export type InventoryTransferUpdateManyWithWhereWithoutReceivedByUserInput = {
+  where: Prisma.InventoryTransferScalarWhereInput
+  data: Prisma.XOR<Prisma.InventoryTransferUpdateManyMutationInput, Prisma.InventoryTransferUncheckedUpdateManyWithoutReceivedByUserInput>
+}
+
+export type InventoryTransferCreateManyFromWarehouseInput = {
+  id?: string
+  transferNumber: string
+  toWarehouseId: string
+  status?: $Enums.TransferStatus
+  initiatedByUserId?: string | null
+  receivedByUserId?: string | null
+  shippedAt?: Date | string | null
+  receivedAt?: Date | string | null
+  cancelledAt?: Date | string | null
+  note?: string | null
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type InventoryTransferCreateManyToWarehouseInput = {
+  id?: string
+  transferNumber: string
+  fromWarehouseId: string
+  status?: $Enums.TransferStatus
+  initiatedByUserId?: string | null
+  receivedByUserId?: string | null
+  shippedAt?: Date | string | null
+  receivedAt?: Date | string | null
+  cancelledAt?: Date | string | null
+  note?: string | null
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type InventoryTransferUpdateWithoutFromWarehouseInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  transferNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumTransferStatusFieldUpdateOperationsInput | $Enums.TransferStatus
+  shippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  receivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancelledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  toWarehouse?: Prisma.WarehouseUpdateOneRequiredWithoutTransfersToNestedInput
+  items?: Prisma.InventoryTransferItemUpdateManyWithoutTransferNestedInput
+  initiatedByUser?: Prisma.UserUpdateOneWithoutTransfersInitiatedNestedInput
+  receivedByUser?: Prisma.UserUpdateOneWithoutTransfersReceivedNestedInput
+}
+
+export type InventoryTransferUncheckedUpdateWithoutFromWarehouseInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  transferNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  toWarehouseId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumTransferStatusFieldUpdateOperationsInput | $Enums.TransferStatus
+  initiatedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  receivedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  receivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancelledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  items?: Prisma.InventoryTransferItemUncheckedUpdateManyWithoutTransferNestedInput
+}
+
+export type InventoryTransferUncheckedUpdateManyWithoutFromWarehouseInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  transferNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  toWarehouseId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumTransferStatusFieldUpdateOperationsInput | $Enums.TransferStatus
+  initiatedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  receivedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  receivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancelledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type InventoryTransferUpdateWithoutToWarehouseInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  transferNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumTransferStatusFieldUpdateOperationsInput | $Enums.TransferStatus
+  shippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  receivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancelledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  fromWarehouse?: Prisma.WarehouseUpdateOneRequiredWithoutTransfersFromNestedInput
+  items?: Prisma.InventoryTransferItemUpdateManyWithoutTransferNestedInput
+  initiatedByUser?: Prisma.UserUpdateOneWithoutTransfersInitiatedNestedInput
+  receivedByUser?: Prisma.UserUpdateOneWithoutTransfersReceivedNestedInput
+}
+
+export type InventoryTransferUncheckedUpdateWithoutToWarehouseInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  transferNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  fromWarehouseId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumTransferStatusFieldUpdateOperationsInput | $Enums.TransferStatus
+  initiatedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  receivedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  receivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancelledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  items?: Prisma.InventoryTransferItemUncheckedUpdateManyWithoutTransferNestedInput
+}
+
+export type InventoryTransferUncheckedUpdateManyWithoutToWarehouseInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  transferNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  fromWarehouseId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumTransferStatusFieldUpdateOperationsInput | $Enums.TransferStatus
   initiatedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   receivedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1180,138 +1312,6 @@ export type InventoryTransferUncheckedUpdateManyWithoutReceivedByUserInput = {
   toWarehouseId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumTransferStatusFieldUpdateOperationsInput | $Enums.TransferStatus
   initiatedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  shippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  receivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  cancelledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type InventoryTransferCreateManyFromWarehouseInput = {
-  id?: string
-  transferNumber: string
-  toWarehouseId: string
-  status?: $Enums.TransferStatus
-  initiatedByUserId?: string | null
-  receivedByUserId?: string | null
-  shippedAt?: Date | string | null
-  receivedAt?: Date | string | null
-  cancelledAt?: Date | string | null
-  note?: string | null
-  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Date | string
-  updatedAt?: Date | string
-}
-
-export type InventoryTransferCreateManyToWarehouseInput = {
-  id?: string
-  transferNumber: string
-  fromWarehouseId: string
-  status?: $Enums.TransferStatus
-  initiatedByUserId?: string | null
-  receivedByUserId?: string | null
-  shippedAt?: Date | string | null
-  receivedAt?: Date | string | null
-  cancelledAt?: Date | string | null
-  note?: string | null
-  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Date | string
-  updatedAt?: Date | string
-}
-
-export type InventoryTransferUpdateWithoutFromWarehouseInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  transferNumber?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumTransferStatusFieldUpdateOperationsInput | $Enums.TransferStatus
-  shippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  receivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  cancelledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  toWarehouse?: Prisma.WarehouseUpdateOneRequiredWithoutTransfersToNestedInput
-  items?: Prisma.InventoryTransferItemUpdateManyWithoutTransferNestedInput
-  initiatedByUser?: Prisma.UserUpdateOneWithoutTransfersInitiatedNestedInput
-  receivedByUser?: Prisma.UserUpdateOneWithoutTransfersReceivedNestedInput
-}
-
-export type InventoryTransferUncheckedUpdateWithoutFromWarehouseInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  transferNumber?: Prisma.StringFieldUpdateOperationsInput | string
-  toWarehouseId?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumTransferStatusFieldUpdateOperationsInput | $Enums.TransferStatus
-  initiatedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  receivedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  shippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  receivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  cancelledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  items?: Prisma.InventoryTransferItemUncheckedUpdateManyWithoutTransferNestedInput
-}
-
-export type InventoryTransferUncheckedUpdateManyWithoutFromWarehouseInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  transferNumber?: Prisma.StringFieldUpdateOperationsInput | string
-  toWarehouseId?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumTransferStatusFieldUpdateOperationsInput | $Enums.TransferStatus
-  initiatedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  receivedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  shippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  receivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  cancelledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type InventoryTransferUpdateWithoutToWarehouseInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  transferNumber?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumTransferStatusFieldUpdateOperationsInput | $Enums.TransferStatus
-  shippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  receivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  cancelledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  fromWarehouse?: Prisma.WarehouseUpdateOneRequiredWithoutTransfersFromNestedInput
-  items?: Prisma.InventoryTransferItemUpdateManyWithoutTransferNestedInput
-  initiatedByUser?: Prisma.UserUpdateOneWithoutTransfersInitiatedNestedInput
-  receivedByUser?: Prisma.UserUpdateOneWithoutTransfersReceivedNestedInput
-}
-
-export type InventoryTransferUncheckedUpdateWithoutToWarehouseInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  transferNumber?: Prisma.StringFieldUpdateOperationsInput | string
-  fromWarehouseId?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumTransferStatusFieldUpdateOperationsInput | $Enums.TransferStatus
-  initiatedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  receivedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  shippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  receivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  cancelledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  items?: Prisma.InventoryTransferItemUncheckedUpdateManyWithoutTransferNestedInput
-}
-
-export type InventoryTransferUncheckedUpdateManyWithoutToWarehouseInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  transferNumber?: Prisma.StringFieldUpdateOperationsInput | string
-  fromWarehouseId?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumTransferStatusFieldUpdateOperationsInput | $Enums.TransferStatus
-  initiatedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  receivedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   receivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancelledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null

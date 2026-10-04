@@ -29,8 +29,8 @@ export * from "./enums.js"
  * const prisma = new PrismaClient({
  *   adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL })
  * })
- * // Fetch zero or more Users
- * const users = await prisma.user.findMany()
+ * // Fetch zero or more Warehouses
+ * const warehouses = await prisma.warehouse.findMany()
  * ```
  * 
  * Read more in our [docs](https://pris.ly/d/client).
@@ -39,6 +39,86 @@ export const PrismaClient = $Class.getPrismaClientClass()
 export type PrismaClient<LogOpts extends Prisma.LogLevel = never, OmitOpts extends Prisma.PrismaClientOptions["omit"] = Prisma.PrismaClientOptions["omit"], ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = $Class.PrismaClient<LogOpts, OmitOpts, ExtArgs>
 export { Prisma }
 
+/**
+ * Model Warehouse
+ * 
+ */
+export type Warehouse = Prisma.WarehouseModel
+/**
+ * Model InventoryLevel
+ * 
+ */
+export type InventoryLevel = Prisma.InventoryLevelModel
+/**
+ * Model StorageLocation
+ * 
+ */
+export type StorageLocation = Prisma.StorageLocationModel
+/**
+ * Model LocationStock
+ * 
+ */
+export type LocationStock = Prisma.LocationStockModel
+/**
+ * Model InventoryMovement
+ * 
+ */
+export type InventoryMovement = Prisma.InventoryMovementModel
+/**
+ * Model StockReservation
+ * 
+ */
+export type StockReservation = Prisma.StockReservationModel
+/**
+ * Model InventoryBatch
+ * 
+ */
+export type InventoryBatch = Prisma.InventoryBatchModel
+/**
+ * Model Supplier
+ * 
+ */
+export type Supplier = Prisma.SupplierModel
+/**
+ * Model PurchaseOrder
+ * 
+ */
+export type PurchaseOrder = Prisma.PurchaseOrderModel
+/**
+ * Model PurchaseOrderItem
+ * 
+ */
+export type PurchaseOrderItem = Prisma.PurchaseOrderItemModel
+/**
+ * Model InventoryTransfer
+ * 
+ */
+export type InventoryTransfer = Prisma.InventoryTransferModel
+/**
+ * Model InventoryTransferItem
+ * 
+ */
+export type InventoryTransferItem = Prisma.InventoryTransferItemModel
+/**
+ * Model StockAdjustment
+ * 
+ */
+export type StockAdjustment = Prisma.StockAdjustmentModel
+/**
+ * Model StockAdjustmentItem
+ * 
+ */
+export type StockAdjustmentItem = Prisma.StockAdjustmentItemModel
+/**
+ * Model ReorderRule
+ * 
+ */
+export type ReorderRule = Prisma.ReorderRuleModel
+/**
+ * Model InventoryAlert
+ * 
+ */
+export type InventoryAlert = Prisma.InventoryAlertModel
 /**
  * Model User
  * 
@@ -124,86 +204,6 @@ export type TemplateOption = Prisma.TemplateOptionModel
  * 
  */
 export type TemplateOptionValue = Prisma.TemplateOptionValueModel
-/**
- * Model Warehouse
- * 
- */
-export type Warehouse = Prisma.WarehouseModel
-/**
- * Model InventoryLevel
- * 
- */
-export type InventoryLevel = Prisma.InventoryLevelModel
-/**
- * Model StorageLocation
- * 
- */
-export type StorageLocation = Prisma.StorageLocationModel
-/**
- * Model LocationStock
- * 
- */
-export type LocationStock = Prisma.LocationStockModel
-/**
- * Model InventoryMovement
- * 
- */
-export type InventoryMovement = Prisma.InventoryMovementModel
-/**
- * Model StockReservation
- * 
- */
-export type StockReservation = Prisma.StockReservationModel
-/**
- * Model InventoryBatch
- * 
- */
-export type InventoryBatch = Prisma.InventoryBatchModel
-/**
- * Model Supplier
- * 
- */
-export type Supplier = Prisma.SupplierModel
-/**
- * Model PurchaseOrder
- * 
- */
-export type PurchaseOrder = Prisma.PurchaseOrderModel
-/**
- * Model PurchaseOrderItem
- * 
- */
-export type PurchaseOrderItem = Prisma.PurchaseOrderItemModel
-/**
- * Model InventoryTransfer
- * 
- */
-export type InventoryTransfer = Prisma.InventoryTransferModel
-/**
- * Model InventoryTransferItem
- * 
- */
-export type InventoryTransferItem = Prisma.InventoryTransferItemModel
-/**
- * Model StockAdjustment
- * 
- */
-export type StockAdjustment = Prisma.StockAdjustmentModel
-/**
- * Model StockAdjustmentItem
- * 
- */
-export type StockAdjustmentItem = Prisma.StockAdjustmentItemModel
-/**
- * Model ReorderRule
- * 
- */
-export type ReorderRule = Prisma.ReorderRuleModel
-/**
- * Model InventoryAlert
- * 
- */
-export type InventoryAlert = Prisma.InventoryAlertModel
 /**
  * Model Review
  * 

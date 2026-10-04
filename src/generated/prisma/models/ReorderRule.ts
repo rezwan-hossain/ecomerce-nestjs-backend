@@ -587,48 +587,6 @@ export type ReorderRuleSumOrderByAggregateInput = {
   maxStock?: Prisma.SortOrder
 }
 
-export type ReorderRuleCreateNestedManyWithoutVariantInput = {
-  create?: Prisma.XOR<Prisma.ReorderRuleCreateWithoutVariantInput, Prisma.ReorderRuleUncheckedCreateWithoutVariantInput> | Prisma.ReorderRuleCreateWithoutVariantInput[] | Prisma.ReorderRuleUncheckedCreateWithoutVariantInput[]
-  connectOrCreate?: Prisma.ReorderRuleCreateOrConnectWithoutVariantInput | Prisma.ReorderRuleCreateOrConnectWithoutVariantInput[]
-  createMany?: Prisma.ReorderRuleCreateManyVariantInputEnvelope
-  connect?: Prisma.ReorderRuleWhereUniqueInput | Prisma.ReorderRuleWhereUniqueInput[]
-}
-
-export type ReorderRuleUncheckedCreateNestedManyWithoutVariantInput = {
-  create?: Prisma.XOR<Prisma.ReorderRuleCreateWithoutVariantInput, Prisma.ReorderRuleUncheckedCreateWithoutVariantInput> | Prisma.ReorderRuleCreateWithoutVariantInput[] | Prisma.ReorderRuleUncheckedCreateWithoutVariantInput[]
-  connectOrCreate?: Prisma.ReorderRuleCreateOrConnectWithoutVariantInput | Prisma.ReorderRuleCreateOrConnectWithoutVariantInput[]
-  createMany?: Prisma.ReorderRuleCreateManyVariantInputEnvelope
-  connect?: Prisma.ReorderRuleWhereUniqueInput | Prisma.ReorderRuleWhereUniqueInput[]
-}
-
-export type ReorderRuleUpdateManyWithoutVariantNestedInput = {
-  create?: Prisma.XOR<Prisma.ReorderRuleCreateWithoutVariantInput, Prisma.ReorderRuleUncheckedCreateWithoutVariantInput> | Prisma.ReorderRuleCreateWithoutVariantInput[] | Prisma.ReorderRuleUncheckedCreateWithoutVariantInput[]
-  connectOrCreate?: Prisma.ReorderRuleCreateOrConnectWithoutVariantInput | Prisma.ReorderRuleCreateOrConnectWithoutVariantInput[]
-  upsert?: Prisma.ReorderRuleUpsertWithWhereUniqueWithoutVariantInput | Prisma.ReorderRuleUpsertWithWhereUniqueWithoutVariantInput[]
-  createMany?: Prisma.ReorderRuleCreateManyVariantInputEnvelope
-  set?: Prisma.ReorderRuleWhereUniqueInput | Prisma.ReorderRuleWhereUniqueInput[]
-  disconnect?: Prisma.ReorderRuleWhereUniqueInput | Prisma.ReorderRuleWhereUniqueInput[]
-  delete?: Prisma.ReorderRuleWhereUniqueInput | Prisma.ReorderRuleWhereUniqueInput[]
-  connect?: Prisma.ReorderRuleWhereUniqueInput | Prisma.ReorderRuleWhereUniqueInput[]
-  update?: Prisma.ReorderRuleUpdateWithWhereUniqueWithoutVariantInput | Prisma.ReorderRuleUpdateWithWhereUniqueWithoutVariantInput[]
-  updateMany?: Prisma.ReorderRuleUpdateManyWithWhereWithoutVariantInput | Prisma.ReorderRuleUpdateManyWithWhereWithoutVariantInput[]
-  deleteMany?: Prisma.ReorderRuleScalarWhereInput | Prisma.ReorderRuleScalarWhereInput[]
-}
-
-export type ReorderRuleUncheckedUpdateManyWithoutVariantNestedInput = {
-  create?: Prisma.XOR<Prisma.ReorderRuleCreateWithoutVariantInput, Prisma.ReorderRuleUncheckedCreateWithoutVariantInput> | Prisma.ReorderRuleCreateWithoutVariantInput[] | Prisma.ReorderRuleUncheckedCreateWithoutVariantInput[]
-  connectOrCreate?: Prisma.ReorderRuleCreateOrConnectWithoutVariantInput | Prisma.ReorderRuleCreateOrConnectWithoutVariantInput[]
-  upsert?: Prisma.ReorderRuleUpsertWithWhereUniqueWithoutVariantInput | Prisma.ReorderRuleUpsertWithWhereUniqueWithoutVariantInput[]
-  createMany?: Prisma.ReorderRuleCreateManyVariantInputEnvelope
-  set?: Prisma.ReorderRuleWhereUniqueInput | Prisma.ReorderRuleWhereUniqueInput[]
-  disconnect?: Prisma.ReorderRuleWhereUniqueInput | Prisma.ReorderRuleWhereUniqueInput[]
-  delete?: Prisma.ReorderRuleWhereUniqueInput | Prisma.ReorderRuleWhereUniqueInput[]
-  connect?: Prisma.ReorderRuleWhereUniqueInput | Prisma.ReorderRuleWhereUniqueInput[]
-  update?: Prisma.ReorderRuleUpdateWithWhereUniqueWithoutVariantInput | Prisma.ReorderRuleUpdateWithWhereUniqueWithoutVariantInput[]
-  updateMany?: Prisma.ReorderRuleUpdateManyWithWhereWithoutVariantInput | Prisma.ReorderRuleUpdateManyWithWhereWithoutVariantInput[]
-  deleteMany?: Prisma.ReorderRuleScalarWhereInput | Prisma.ReorderRuleScalarWhereInput[]
-}
-
 export type ReorderRuleCreateNestedManyWithoutWarehouseInput = {
   create?: Prisma.XOR<Prisma.ReorderRuleCreateWithoutWarehouseInput, Prisma.ReorderRuleUncheckedCreateWithoutWarehouseInput> | Prisma.ReorderRuleCreateWithoutWarehouseInput[] | Prisma.ReorderRuleUncheckedCreateWithoutWarehouseInput[]
   connectOrCreate?: Prisma.ReorderRuleCreateOrConnectWithoutWarehouseInput | Prisma.ReorderRuleCreateOrConnectWithoutWarehouseInput[]
@@ -713,82 +671,46 @@ export type ReorderRuleUncheckedUpdateManyWithoutPreferredSupplierNestedInput = 
   deleteMany?: Prisma.ReorderRuleScalarWhereInput | Prisma.ReorderRuleScalarWhereInput[]
 }
 
-export type ReorderRuleCreateWithoutVariantInput = {
-  id?: string
-  reorderPoint: number
-  reorderQty: number
-  safetyStock?: number
-  maxStock?: number | null
-  isActive?: boolean
-  autoReorder?: boolean
-  lastTriggeredAt?: Date | string | null
-  lastOrderedAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  warehouse: Prisma.WarehouseCreateNestedOneWithoutReorderRulesInput
-  preferredSupplier?: Prisma.SupplierCreateNestedOneWithoutReorderRulesInput
+export type ReorderRuleCreateNestedManyWithoutVariantInput = {
+  create?: Prisma.XOR<Prisma.ReorderRuleCreateWithoutVariantInput, Prisma.ReorderRuleUncheckedCreateWithoutVariantInput> | Prisma.ReorderRuleCreateWithoutVariantInput[] | Prisma.ReorderRuleUncheckedCreateWithoutVariantInput[]
+  connectOrCreate?: Prisma.ReorderRuleCreateOrConnectWithoutVariantInput | Prisma.ReorderRuleCreateOrConnectWithoutVariantInput[]
+  createMany?: Prisma.ReorderRuleCreateManyVariantInputEnvelope
+  connect?: Prisma.ReorderRuleWhereUniqueInput | Prisma.ReorderRuleWhereUniqueInput[]
 }
 
-export type ReorderRuleUncheckedCreateWithoutVariantInput = {
-  id?: string
-  warehouseId: string
-  reorderPoint: number
-  reorderQty: number
-  safetyStock?: number
-  maxStock?: number | null
-  isActive?: boolean
-  autoReorder?: boolean
-  preferredSupplierId?: string | null
-  lastTriggeredAt?: Date | string | null
-  lastOrderedAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
+export type ReorderRuleUncheckedCreateNestedManyWithoutVariantInput = {
+  create?: Prisma.XOR<Prisma.ReorderRuleCreateWithoutVariantInput, Prisma.ReorderRuleUncheckedCreateWithoutVariantInput> | Prisma.ReorderRuleCreateWithoutVariantInput[] | Prisma.ReorderRuleUncheckedCreateWithoutVariantInput[]
+  connectOrCreate?: Prisma.ReorderRuleCreateOrConnectWithoutVariantInput | Prisma.ReorderRuleCreateOrConnectWithoutVariantInput[]
+  createMany?: Prisma.ReorderRuleCreateManyVariantInputEnvelope
+  connect?: Prisma.ReorderRuleWhereUniqueInput | Prisma.ReorderRuleWhereUniqueInput[]
 }
 
-export type ReorderRuleCreateOrConnectWithoutVariantInput = {
-  where: Prisma.ReorderRuleWhereUniqueInput
-  create: Prisma.XOR<Prisma.ReorderRuleCreateWithoutVariantInput, Prisma.ReorderRuleUncheckedCreateWithoutVariantInput>
+export type ReorderRuleUpdateManyWithoutVariantNestedInput = {
+  create?: Prisma.XOR<Prisma.ReorderRuleCreateWithoutVariantInput, Prisma.ReorderRuleUncheckedCreateWithoutVariantInput> | Prisma.ReorderRuleCreateWithoutVariantInput[] | Prisma.ReorderRuleUncheckedCreateWithoutVariantInput[]
+  connectOrCreate?: Prisma.ReorderRuleCreateOrConnectWithoutVariantInput | Prisma.ReorderRuleCreateOrConnectWithoutVariantInput[]
+  upsert?: Prisma.ReorderRuleUpsertWithWhereUniqueWithoutVariantInput | Prisma.ReorderRuleUpsertWithWhereUniqueWithoutVariantInput[]
+  createMany?: Prisma.ReorderRuleCreateManyVariantInputEnvelope
+  set?: Prisma.ReorderRuleWhereUniqueInput | Prisma.ReorderRuleWhereUniqueInput[]
+  disconnect?: Prisma.ReorderRuleWhereUniqueInput | Prisma.ReorderRuleWhereUniqueInput[]
+  delete?: Prisma.ReorderRuleWhereUniqueInput | Prisma.ReorderRuleWhereUniqueInput[]
+  connect?: Prisma.ReorderRuleWhereUniqueInput | Prisma.ReorderRuleWhereUniqueInput[]
+  update?: Prisma.ReorderRuleUpdateWithWhereUniqueWithoutVariantInput | Prisma.ReorderRuleUpdateWithWhereUniqueWithoutVariantInput[]
+  updateMany?: Prisma.ReorderRuleUpdateManyWithWhereWithoutVariantInput | Prisma.ReorderRuleUpdateManyWithWhereWithoutVariantInput[]
+  deleteMany?: Prisma.ReorderRuleScalarWhereInput | Prisma.ReorderRuleScalarWhereInput[]
 }
 
-export type ReorderRuleCreateManyVariantInputEnvelope = {
-  data: Prisma.ReorderRuleCreateManyVariantInput | Prisma.ReorderRuleCreateManyVariantInput[]
-  skipDuplicates?: boolean
-}
-
-export type ReorderRuleUpsertWithWhereUniqueWithoutVariantInput = {
-  where: Prisma.ReorderRuleWhereUniqueInput
-  update: Prisma.XOR<Prisma.ReorderRuleUpdateWithoutVariantInput, Prisma.ReorderRuleUncheckedUpdateWithoutVariantInput>
-  create: Prisma.XOR<Prisma.ReorderRuleCreateWithoutVariantInput, Prisma.ReorderRuleUncheckedCreateWithoutVariantInput>
-}
-
-export type ReorderRuleUpdateWithWhereUniqueWithoutVariantInput = {
-  where: Prisma.ReorderRuleWhereUniqueInput
-  data: Prisma.XOR<Prisma.ReorderRuleUpdateWithoutVariantInput, Prisma.ReorderRuleUncheckedUpdateWithoutVariantInput>
-}
-
-export type ReorderRuleUpdateManyWithWhereWithoutVariantInput = {
-  where: Prisma.ReorderRuleScalarWhereInput
-  data: Prisma.XOR<Prisma.ReorderRuleUpdateManyMutationInput, Prisma.ReorderRuleUncheckedUpdateManyWithoutVariantInput>
-}
-
-export type ReorderRuleScalarWhereInput = {
-  AND?: Prisma.ReorderRuleScalarWhereInput | Prisma.ReorderRuleScalarWhereInput[]
-  OR?: Prisma.ReorderRuleScalarWhereInput[]
-  NOT?: Prisma.ReorderRuleScalarWhereInput | Prisma.ReorderRuleScalarWhereInput[]
-  id?: Prisma.StringFilter<"ReorderRule"> | string
-  variantId?: Prisma.StringFilter<"ReorderRule"> | string
-  warehouseId?: Prisma.StringFilter<"ReorderRule"> | string
-  reorderPoint?: Prisma.IntFilter<"ReorderRule"> | number
-  reorderQty?: Prisma.IntFilter<"ReorderRule"> | number
-  safetyStock?: Prisma.IntFilter<"ReorderRule"> | number
-  maxStock?: Prisma.IntNullableFilter<"ReorderRule"> | number | null
-  isActive?: Prisma.BoolFilter<"ReorderRule"> | boolean
-  autoReorder?: Prisma.BoolFilter<"ReorderRule"> | boolean
-  preferredSupplierId?: Prisma.StringNullableFilter<"ReorderRule"> | string | null
-  lastTriggeredAt?: Prisma.DateTimeNullableFilter<"ReorderRule"> | Date | string | null
-  lastOrderedAt?: Prisma.DateTimeNullableFilter<"ReorderRule"> | Date | string | null
-  createdAt?: Prisma.DateTimeFilter<"ReorderRule"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"ReorderRule"> | Date | string
+export type ReorderRuleUncheckedUpdateManyWithoutVariantNestedInput = {
+  create?: Prisma.XOR<Prisma.ReorderRuleCreateWithoutVariantInput, Prisma.ReorderRuleUncheckedCreateWithoutVariantInput> | Prisma.ReorderRuleCreateWithoutVariantInput[] | Prisma.ReorderRuleUncheckedCreateWithoutVariantInput[]
+  connectOrCreate?: Prisma.ReorderRuleCreateOrConnectWithoutVariantInput | Prisma.ReorderRuleCreateOrConnectWithoutVariantInput[]
+  upsert?: Prisma.ReorderRuleUpsertWithWhereUniqueWithoutVariantInput | Prisma.ReorderRuleUpsertWithWhereUniqueWithoutVariantInput[]
+  createMany?: Prisma.ReorderRuleCreateManyVariantInputEnvelope
+  set?: Prisma.ReorderRuleWhereUniqueInput | Prisma.ReorderRuleWhereUniqueInput[]
+  disconnect?: Prisma.ReorderRuleWhereUniqueInput | Prisma.ReorderRuleWhereUniqueInput[]
+  delete?: Prisma.ReorderRuleWhereUniqueInput | Prisma.ReorderRuleWhereUniqueInput[]
+  connect?: Prisma.ReorderRuleWhereUniqueInput | Prisma.ReorderRuleWhereUniqueInput[]
+  update?: Prisma.ReorderRuleUpdateWithWhereUniqueWithoutVariantInput | Prisma.ReorderRuleUpdateWithWhereUniqueWithoutVariantInput[]
+  updateMany?: Prisma.ReorderRuleUpdateManyWithWhereWithoutVariantInput | Prisma.ReorderRuleUpdateManyWithWhereWithoutVariantInput[]
+  deleteMany?: Prisma.ReorderRuleScalarWhereInput | Prisma.ReorderRuleScalarWhereInput[]
 }
 
 export type ReorderRuleCreateWithoutWarehouseInput = {
@@ -849,6 +771,26 @@ export type ReorderRuleUpdateManyWithWhereWithoutWarehouseInput = {
   data: Prisma.XOR<Prisma.ReorderRuleUpdateManyMutationInput, Prisma.ReorderRuleUncheckedUpdateManyWithoutWarehouseInput>
 }
 
+export type ReorderRuleScalarWhereInput = {
+  AND?: Prisma.ReorderRuleScalarWhereInput | Prisma.ReorderRuleScalarWhereInput[]
+  OR?: Prisma.ReorderRuleScalarWhereInput[]
+  NOT?: Prisma.ReorderRuleScalarWhereInput | Prisma.ReorderRuleScalarWhereInput[]
+  id?: Prisma.StringFilter<"ReorderRule"> | string
+  variantId?: Prisma.StringFilter<"ReorderRule"> | string
+  warehouseId?: Prisma.StringFilter<"ReorderRule"> | string
+  reorderPoint?: Prisma.IntFilter<"ReorderRule"> | number
+  reorderQty?: Prisma.IntFilter<"ReorderRule"> | number
+  safetyStock?: Prisma.IntFilter<"ReorderRule"> | number
+  maxStock?: Prisma.IntNullableFilter<"ReorderRule"> | number | null
+  isActive?: Prisma.BoolFilter<"ReorderRule"> | boolean
+  autoReorder?: Prisma.BoolFilter<"ReorderRule"> | boolean
+  preferredSupplierId?: Prisma.StringNullableFilter<"ReorderRule"> | string | null
+  lastTriggeredAt?: Prisma.DateTimeNullableFilter<"ReorderRule"> | Date | string | null
+  lastOrderedAt?: Prisma.DateTimeNullableFilter<"ReorderRule"> | Date | string | null
+  createdAt?: Prisma.DateTimeFilter<"ReorderRule"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"ReorderRule"> | Date | string
+}
+
 export type ReorderRuleCreateWithoutPreferredSupplierInput = {
   id?: string
   reorderPoint: number
@@ -907,7 +849,23 @@ export type ReorderRuleUpdateManyWithWhereWithoutPreferredSupplierInput = {
   data: Prisma.XOR<Prisma.ReorderRuleUpdateManyMutationInput, Prisma.ReorderRuleUncheckedUpdateManyWithoutPreferredSupplierInput>
 }
 
-export type ReorderRuleCreateManyVariantInput = {
+export type ReorderRuleCreateWithoutVariantInput = {
+  id?: string
+  reorderPoint: number
+  reorderQty: number
+  safetyStock?: number
+  maxStock?: number | null
+  isActive?: boolean
+  autoReorder?: boolean
+  lastTriggeredAt?: Date | string | null
+  lastOrderedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  warehouse: Prisma.WarehouseCreateNestedOneWithoutReorderRulesInput
+  preferredSupplier?: Prisma.SupplierCreateNestedOneWithoutReorderRulesInput
+}
+
+export type ReorderRuleUncheckedCreateWithoutVariantInput = {
   id?: string
   warehouseId: string
   reorderPoint: number
@@ -923,52 +881,30 @@ export type ReorderRuleCreateManyVariantInput = {
   updatedAt?: Date | string
 }
 
-export type ReorderRuleUpdateWithoutVariantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  reorderPoint?: Prisma.IntFieldUpdateOperationsInput | number
-  reorderQty?: Prisma.IntFieldUpdateOperationsInput | number
-  safetyStock?: Prisma.IntFieldUpdateOperationsInput | number
-  maxStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  autoReorder?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lastTriggeredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lastOrderedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  warehouse?: Prisma.WarehouseUpdateOneRequiredWithoutReorderRulesNestedInput
-  preferredSupplier?: Prisma.SupplierUpdateOneWithoutReorderRulesNestedInput
+export type ReorderRuleCreateOrConnectWithoutVariantInput = {
+  where: Prisma.ReorderRuleWhereUniqueInput
+  create: Prisma.XOR<Prisma.ReorderRuleCreateWithoutVariantInput, Prisma.ReorderRuleUncheckedCreateWithoutVariantInput>
 }
 
-export type ReorderRuleUncheckedUpdateWithoutVariantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  warehouseId?: Prisma.StringFieldUpdateOperationsInput | string
-  reorderPoint?: Prisma.IntFieldUpdateOperationsInput | number
-  reorderQty?: Prisma.IntFieldUpdateOperationsInput | number
-  safetyStock?: Prisma.IntFieldUpdateOperationsInput | number
-  maxStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  autoReorder?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  preferredSupplierId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastTriggeredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lastOrderedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+export type ReorderRuleCreateManyVariantInputEnvelope = {
+  data: Prisma.ReorderRuleCreateManyVariantInput | Prisma.ReorderRuleCreateManyVariantInput[]
+  skipDuplicates?: boolean
 }
 
-export type ReorderRuleUncheckedUpdateManyWithoutVariantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  warehouseId?: Prisma.StringFieldUpdateOperationsInput | string
-  reorderPoint?: Prisma.IntFieldUpdateOperationsInput | number
-  reorderQty?: Prisma.IntFieldUpdateOperationsInput | number
-  safetyStock?: Prisma.IntFieldUpdateOperationsInput | number
-  maxStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  autoReorder?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  preferredSupplierId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastTriggeredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lastOrderedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+export type ReorderRuleUpsertWithWhereUniqueWithoutVariantInput = {
+  where: Prisma.ReorderRuleWhereUniqueInput
+  update: Prisma.XOR<Prisma.ReorderRuleUpdateWithoutVariantInput, Prisma.ReorderRuleUncheckedUpdateWithoutVariantInput>
+  create: Prisma.XOR<Prisma.ReorderRuleCreateWithoutVariantInput, Prisma.ReorderRuleUncheckedCreateWithoutVariantInput>
+}
+
+export type ReorderRuleUpdateWithWhereUniqueWithoutVariantInput = {
+  where: Prisma.ReorderRuleWhereUniqueInput
+  data: Prisma.XOR<Prisma.ReorderRuleUpdateWithoutVariantInput, Prisma.ReorderRuleUncheckedUpdateWithoutVariantInput>
+}
+
+export type ReorderRuleUpdateManyWithWhereWithoutVariantInput = {
+  where: Prisma.ReorderRuleScalarWhereInput
+  data: Prisma.XOR<Prisma.ReorderRuleUpdateManyMutationInput, Prisma.ReorderRuleUncheckedUpdateManyWithoutVariantInput>
 }
 
 export type ReorderRuleCreateManyWarehouseInput = {
@@ -1093,6 +1029,70 @@ export type ReorderRuleUncheckedUpdateManyWithoutPreferredSupplierInput = {
   maxStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   autoReorder?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastTriggeredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastOrderedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type ReorderRuleCreateManyVariantInput = {
+  id?: string
+  warehouseId: string
+  reorderPoint: number
+  reorderQty: number
+  safetyStock?: number
+  maxStock?: number | null
+  isActive?: boolean
+  autoReorder?: boolean
+  preferredSupplierId?: string | null
+  lastTriggeredAt?: Date | string | null
+  lastOrderedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type ReorderRuleUpdateWithoutVariantInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  reorderPoint?: Prisma.IntFieldUpdateOperationsInput | number
+  reorderQty?: Prisma.IntFieldUpdateOperationsInput | number
+  safetyStock?: Prisma.IntFieldUpdateOperationsInput | number
+  maxStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  autoReorder?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastTriggeredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastOrderedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  warehouse?: Prisma.WarehouseUpdateOneRequiredWithoutReorderRulesNestedInput
+  preferredSupplier?: Prisma.SupplierUpdateOneWithoutReorderRulesNestedInput
+}
+
+export type ReorderRuleUncheckedUpdateWithoutVariantInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  warehouseId?: Prisma.StringFieldUpdateOperationsInput | string
+  reorderPoint?: Prisma.IntFieldUpdateOperationsInput | number
+  reorderQty?: Prisma.IntFieldUpdateOperationsInput | number
+  safetyStock?: Prisma.IntFieldUpdateOperationsInput | number
+  maxStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  autoReorder?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  preferredSupplierId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastTriggeredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastOrderedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type ReorderRuleUncheckedUpdateManyWithoutVariantInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  warehouseId?: Prisma.StringFieldUpdateOperationsInput | string
+  reorderPoint?: Prisma.IntFieldUpdateOperationsInput | number
+  reorderQty?: Prisma.IntFieldUpdateOperationsInput | number
+  safetyStock?: Prisma.IntFieldUpdateOperationsInput | number
+  maxStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  autoReorder?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  preferredSupplierId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastTriggeredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lastOrderedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string

@@ -1,0 +1,826 @@
+// ═══════════════════════════════════════════════════
+//  INVENTORY MANAGEMENT
+//
+//  Warehouse ── InventoryLevel (variant × warehouse, current state)
+//                    └── InventoryMovement (immutable ledger)
+//                    └── StockReservation  (held for orders)
+//
+//  Source documents that produce movements:
+//    PurchaseOrder (inbound) · InventoryTransfer (warehouse → warehouse)
+//    StockAdjustment (counts / write-offs) · Order (reservations / sales)
+//
+//  Invariants (also enforced by CHECK constraints in the migration):
+//    available = onHand - reserved, all quantities >= 0
+//    ProductVariant.stock = SUM(available) over active PHYSICAL/STORE warehouses
+// ═══════════════════════════════════════════════════
+
+// ───────────────────────────────────────────────────
+//  WAREHOUSE / LOCATION
+// ───────────────────────────────────────────────────
+model Warehouse {
+  id   String @id @default(uuid(7))
+  name String @unique
+  code String @unique // short code: "DHK-01", "CTG-MAIN"
+
+  type WarehouseType @default(PHYSICAL)
+
+  // Address
+  addressLine1 String?
+  addressLine2 String?
+  city         String?
+  state        String?
+  postalCode   String?
+  country      String?
+
+  isActive  Boolean @default(true)
+  isDefault Boolean @default(false) // primary fulfillment center (at most one — partial unique index)
+
+  // Fulfillment routing: higher priority warehouses are reserved from first
+  priority Int @default(0)
+
+  inventoryLevels      InventoryLevel[]
+  movementsAsSource    InventoryMovement[]   @relation("MovementSourceWarehouse")
+  movementsAsDest      InventoryMovement[]   @relation("MovementDestWarehouse")
+  transfersFrom        InventoryTransfer[]   @relation("TransferFrom")
+  transfersTo          InventoryTransfer[]   @relation("TransferTo")
+  purchaseOrderItems   PurchaseOrderItem[]
+  stockReservations    StockReservation[]
+  stockAdjustmentItems StockAdjustmentItem[]
+  reorderRules         ReorderRule[]
+  inventoryAlerts      InventoryAlert[]
+  inventoryBatches     InventoryBatch[]
+  storageLocations     StorageLocation[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([isDefault], map: "warehouses_single_default_key", where: { isDefault: true })
+  @@index([isActive])
+  @@index([type])
+  @@map("warehouses")
+}
+
+enum WarehouseType {
+  PHYSICAL // real warehouse
+  STORE // retail store with inventory
+  VIRTUAL_DAMAGE // virtual: damaged goods hold
+  VIRTUAL_QC // virtual: quality check hold
+  VIRTUAL_RETURN // virtual: returns processing
+}
+
+// ───────────────────────────────────────────────────
+//  INVENTORY LEVEL  (the "current state" table)
+//  One row per (variant × warehouse)
+// ───────────────────────────────────────────────────
+model InventoryLevel {
+  id String @id @default(uuid(7))
+
+  variantId   String
+  warehouseId String
+
+  // Core quantities
+  onHand    Int @default(0) // physically present (sellable condition)
+  reserved  Int @default(0) // held for orders not yet shipped
+  available Int @default(0) // onHand - reserved (denormalized for perf)
+  incoming  Int @default(0) // expected from open purchase orders / transfers
+
+  // Damaged / held aside (not sellable, NOT included in onHand)
+  damaged Int @default(0)
+
+  // Cost tracking (weighted average)
+  unitCost  Decimal @default(0) @db.Decimal(12, 4) // avg cost per unit
+  totalCost Decimal @default(0) @db.Decimal(14, 4) // unitCost × onHand
+
+  // Optimistic concurrency control — bumped on every change
+  version Int @default(0)
+
+  // Where this variant normally lives in this warehouse: receiving puts
+  // stock here and picking tries it first. NULL → the warehouse's
+  // UNASSIGNED location. Must belong to the same warehouse (service-checked).
+  defaultLocationId String?
+  defaultLocation   StorageLocation? @relation("DefaultLocation", fields: [defaultLocationId], references: [id], onDelete: SetNull)
+
+  variant   ProductVariant @relation(fields: [variantId], references: [id], onDelete: Cascade)
+  warehouse Warehouse      @relation(fields: [warehouseId], references: [id], onDelete: Restrict)
+
+  movements      InventoryMovement[]
+  reservations   StockReservation[]
+  locationStocks LocationStock[] // per-rack split; SUM(quantity) = onHand
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([variantId, warehouseId]) // also serves lookups by variantId
+  @@unique([id, warehouseId]) // target of LocationStock's same-warehouse FK
+  @@index([warehouseId])
+  @@index([defaultLocationId])
+  @@map("inventory_levels")
+}
+
+// ───────────────────────────────────────────────────
+//  STORAGE LOCATION  (rack / shelf / bin inside a warehouse)
+//  Optional hierarchy via parent: ZONE → AISLE → RACK → SHELF → BIN.
+//  Every warehouse has an UNASSIGNED location that catches stock whose rack
+//  isn't known yet.
+// ───────────────────────────────────────────────────
+model StorageLocation {
+  id String @id @default(uuid(7))
+
+  warehouseId String
+  warehouse   Warehouse @relation(fields: [warehouseId], references: [id], onDelete: Restrict)
+
+  code String // unique within the warehouse: "A-03", "A-03-02", "UNASSIGNED"
+  name String?
+  type LocationType @default(RACK)
+
+  // Optional parent in the same warehouse (e.g. shelf → rack)
+  parentId String?
+  parent   StorageLocation?  @relation("LocationTree", fields: [parentId], references: [id], onDelete: Restrict)
+  children StorageLocation[] @relation("LocationTree")
+
+  // Picking prefers pickable locations; others (receiving dock, QC shelf)
+  // are only used when the pickable ones run out.
+  isPickable   Boolean @default(true)
+  isActive     Boolean @default(true)
+  // Walk order for pick lists (lower first)
+  pickSequence Int     @default(0)
+
+  locationStocks  LocationStock[]
+  defaultFor      InventoryLevel[]      @relation("DefaultLocation")
+  movementsFrom   InventoryMovement[]   @relation("MovementFromLocation")
+  movementsTo     InventoryMovement[]   @relation("MovementToLocation")
+  adjustmentItems StockAdjustmentItem[]
+
+  note String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([warehouseId, code])
+  @@unique([id, warehouseId]) // target of LocationStock's same-warehouse FK
+  @@index([parentId])
+  @@index([warehouseId, isActive])
+  @@map("storage_locations")
+}
+
+enum LocationType {
+  ZONE
+  AISLE
+  RACK
+  SHELF
+  BIN
+  RECEIVING // inbound dock
+  STAGING // holding area (also used for UNASSIGNED)
+  PACKING
+}
+
+// ───────────────────────────────────────────────────
+//  LOCATION STOCK  (variant × rack quantity)
+//  Splits InventoryLevel.onHand across racks:
+//    SUM(quantity) over a level's rows = InventoryLevel.onHand
+//  Reservations stay at warehouse level; racks only matter physically
+//  (put-away, picking, counting, moving).
+// ───────────────────────────────────────────────────
+model LocationStock {
+  id String @id @default(uuid(7))
+
+  inventoryLevelId String
+  locationId       String
+  // Shared by both FKs below, so the DB guarantees the rack and the level
+  // are in the same warehouse.
+  warehouseId      String
+
+  quantity Int @default(0)
+
+  inventoryLevel InventoryLevel  @relation(fields: [inventoryLevelId, warehouseId], references: [id, warehouseId], onDelete: Cascade)
+  location       StorageLocation @relation(fields: [locationId, warehouseId], references: [id, warehouseId], onDelete: Restrict)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([inventoryLevelId, locationId])
+  @@index([locationId]) // "what's on rack A-03"
+  @@map("location_stocks")
+}
+
+// ───────────────────────────────────────────────────
+//  INVENTORY MOVEMENT  (the immutable ledger)
+//  Every stock change = one movement row. Never update or delete one —
+//  to correct a mistake, record a counter-movement.
+// ───────────────────────────────────────────────────
+model InventoryMovement {
+  id String @id @default(uuid(7))
+
+  inventoryLevelId String
+  inventoryLevel   InventoryLevel @relation(fields: [inventoryLevelId], references: [id], onDelete: Restrict)
+
+  // What happened
+  type      MovementType
+  direction MovementDirection // IN / OUT change onHand; INTERNAL only moves reserved
+
+  // Quantities
+  quantity       Int // always positive; direction gives the sign
+  onHandBefore   Int // snapshot for audit
+  onHandAfter    Int
+  reservedBefore Int?
+  reservedAfter  Int?
+
+  // Cost at time of movement (for COGS)
+  unitCost  Decimal? @db.Decimal(12, 4)
+  totalCost Decimal? @db.Decimal(14, 4)
+
+  // WHY — polymorphic reference to the source document
+  referenceType ReferenceType?
+  referenceId   String? // id of order, PO, transfer, adjustment, reservation…
+
+  // WHERE — for transfers
+  sourceWarehouseId String?
+  destWarehouseId   String?
+  sourceWarehouse   Warehouse? @relation("MovementSourceWarehouse", fields: [sourceWarehouseId], references: [id], onDelete: SetNull)
+  destWarehouse     Warehouse? @relation("MovementDestWarehouse", fields: [destWarehouseId], references: [id], onDelete: SetNull)
+
+  // WHERE inside the warehouse. OUT movements set fromLocation, IN movements
+  // set toLocation, LOCATION_MOVE sets both. NULL on reservation movements
+  // and on history recorded before racks existed.
+  fromLocationId String?
+  toLocationId   String?
+  fromLocation   StorageLocation? @relation("MovementFromLocation", fields: [fromLocationId], references: [id], onDelete: Restrict)
+  toLocation     StorageLocation? @relation("MovementToLocation", fields: [toLocationId], references: [id], onDelete: Restrict)
+
+  // WHO
+  performedByUserId String?
+  performedByUser   User?   @relation(fields: [performedByUserId], references: [id], onDelete: SetNull)
+
+  // Batch / lot (optional)
+  batchId String?
+  batch   InventoryBatch? @relation(fields: [batchId], references: [id], onDelete: SetNull)
+
+  note     String?
+  metadata Json?
+
+  createdAt DateTime @default(now())
+
+  @@index([inventoryLevelId, createdAt])
+  @@index([type])
+  @@index([referenceType, referenceId])
+  @@index([batchId])
+  @@index([fromLocationId])
+  @@index([toLocationId])
+  @@index([performedByUserId])
+  @@index([createdAt])
+  @@map("inventory_movements")
+}
+
+enum MovementType {
+  // Inbound (direction IN)
+  PURCHASE_RECEIVED
+  RETURN_RESTOCKED
+  ADJUSTMENT_INCREASE
+  TRANSFER_IN
+  INITIAL_STOCK
+
+  // Outbound (direction OUT)
+  SALE
+  ADJUSTMENT_DECREASE
+  TRANSFER_OUT
+  DAMAGED
+  LOST
+  EXPIRED
+  SAMPLE
+  WRITE_OFF
+
+  // Reservation lifecycle (direction INTERNAL — onHand unchanged).
+  // Committing a reservation is recorded as a SALE (OUT) carrying the
+  // reservedBefore/After snapshot, so there's no separate COMMITTED type.
+  RESERVATION_CREATED
+  RESERVATION_RELEASED
+  RESERVATION_EXPIRED
+
+  // Rack → rack inside one warehouse (direction INTERNAL — onHand unchanged)
+  LOCATION_MOVE
+}
+
+enum MovementDirection {
+  IN
+  OUT
+  INTERNAL
+}
+
+enum ReferenceType {
+  ORDER
+  ORDER_ITEM
+  PURCHASE_ORDER
+  PURCHASE_ORDER_ITEM
+  TRANSFER
+  ADJUSTMENT
+  RETURN
+  RESERVATION
+}
+
+// ───────────────────────────────────────────────────
+//  STOCK RESERVATION
+//  Holds stock for an order between checkout and shipment
+// ───────────────────────────────────────────────────
+model StockReservation {
+  id String @id @default(uuid(7))
+
+  inventoryLevelId String
+  inventoryLevel   InventoryLevel @relation(fields: [inventoryLevelId], references: [id], onDelete: Restrict)
+
+  // Denormalized from inventoryLevel for cheap per-variant/per-warehouse
+  // queries; always written together with inventoryLevelId.
+  variantId   String
+  warehouseId String
+
+  orderId     String?
+  orderItemId String?
+
+  quantity Int
+  status   ReservationStatus @default(ACTIVE)
+
+  // Auto-expiry (swept by a background job)
+  expiresAt DateTime
+
+  reservedAt  DateTime  @default(now())
+  committedAt DateTime?
+  releasedAt  DateTime?
+  expiredAt   DateTime?
+
+  variant   ProductVariant @relation(fields: [variantId], references: [id], onDelete: Restrict)
+  warehouse Warehouse      @relation(fields: [warehouseId], references: [id], onDelete: Restrict)
+  order     Order?         @relation(fields: [orderId], references: [id], onDelete: SetNull)
+  orderItem OrderItem?     @relation(fields: [orderItemId], references: [id], onDelete: SetNull)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([inventoryLevelId])
+  @@index([variantId])
+  @@index([orderId])
+  @@index([status, expiresAt]) // expiry sweep; also serves status-only filters
+  @@map("stock_reservations")
+}
+
+enum ReservationStatus {
+  ACTIVE // stock is held
+  COMMITTED // order shipped, reservation converted to a SALE
+  RELEASED // order cancelled, stock freed
+  EXPIRED // TTL exceeded, auto-released
+}
+
+// ───────────────────────────────────────────────────
+//  BATCH / LOT TRACKING
+//  For products that need traceability (food, cosmetics, pharma…)
+// ───────────────────────────────────────────────────
+model InventoryBatch {
+  id String @id @default(uuid(7))
+
+  variantId String
+  variant   ProductVariant @relation(fields: [variantId], references: [id], onDelete: Cascade)
+
+  // Where this batch's units are. Transferring part of a batch creates a row
+  // with the same batchNumber at the destination warehouse.
+  warehouseId String
+  warehouse   Warehouse @relation(fields: [warehouseId], references: [id], onDelete: Restrict)
+
+  batchNumber String // supplier's batch/lot number
+  barcode     String?
+
+  quantity   Int // remaining in this batch at this warehouse
+  initialQty Int // originally received here
+
+  unitCost Decimal? @db.Decimal(12, 4)
+
+  manufacturedAt DateTime?
+  expiresAt      DateTime?
+  receivedAt     DateTime?
+
+  supplierId String?
+  supplier   Supplier? @relation(fields: [supplierId], references: [id], onDelete: SetNull)
+
+  purchaseOrderItemId String?
+  purchaseOrderItem   PurchaseOrderItem? @relation(fields: [purchaseOrderItemId], references: [id], onDelete: SetNull)
+
+  status BatchStatus @default(AVAILABLE)
+
+  movements InventoryMovement[]
+
+  note     String?
+  metadata Json?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([variantId, warehouseId, batchNumber])
+  @@index([warehouseId])
+  @@index([expiresAt]) // EXPIRING_SOON sweep
+  @@index([status])
+  @@index([supplierId])
+  @@index([purchaseOrderItemId])
+  @@map("inventory_batches")
+}
+
+enum BatchStatus {
+  AVAILABLE
+  DEPLETED
+  EXPIRED
+  QUARANTINED
+  RECALLED
+}
+
+// ───────────────────────────────────────────────────
+//  SUPPLIER
+// ───────────────────────────────────────────────────
+model Supplier {
+  id   String @id @default(uuid(7))
+  name String
+  code String @unique // "SUP-001"
+
+  contactName  String?
+  contactEmail String?
+  contactPhone String?
+
+  company String?
+  website String?
+
+  addressLine1 String?
+  addressLine2 String?
+  city         String?
+  state        String?
+  postalCode   String?
+  country      String?
+
+  paymentTerms String? // "Net 30", "COD"
+  leadTimeDays Int? // typical delivery lead time
+
+  isActive Boolean @default(true)
+
+  purchaseOrders PurchaseOrder[]
+  batches        InventoryBatch[]
+  reorderRules   ReorderRule[]
+
+  note     String?
+  metadata Json?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([isActive])
+  @@map("suppliers")
+}
+
+// ───────────────────────────────────────────────────
+//  PURCHASE ORDER  (inbound stock)
+// ───────────────────────────────────────────────────
+model PurchaseOrder {
+  id String @id @default(uuid(7))
+
+  poNumber String @unique // "PO-2026-00042"
+
+  supplierId String
+  supplier   Supplier @relation(fields: [supplierId], references: [id], onDelete: Restrict)
+
+  status PurchaseOrderStatus @default(DRAFT)
+
+  currency String @default("BDT")
+
+  subtotalAmount Decimal @default(0) @db.Decimal(12, 2)
+  taxAmount      Decimal @default(0) @db.Decimal(12, 2)
+  shippingAmount Decimal @default(0) @db.Decimal(12, 2)
+  totalAmount    Decimal @default(0) @db.Decimal(12, 2)
+
+  orderedAt   DateTime?
+  expectedAt  DateTime? // expected delivery
+  receivedAt  DateTime? // fully received
+  cancelledAt DateTime?
+
+  items PurchaseOrderItem[]
+
+  createdByUserId  String?
+  approvedByUserId String?
+  createdByUser    User?   @relation("PurchaseOrderCreatedBy", fields: [createdByUserId], references: [id], onDelete: SetNull)
+  approvedByUser   User?   @relation("PurchaseOrderApprovedBy", fields: [approvedByUserId], references: [id], onDelete: SetNull)
+
+  note     String?
+  metadata Json?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([supplierId])
+  @@index([status])
+  @@index([orderedAt])
+  @@map("purchase_orders")
+}
+
+enum PurchaseOrderStatus {
+  DRAFT
+  SUBMITTED // sent to supplier
+  CONFIRMED // supplier accepted
+  PARTIAL // some items received
+  RECEIVED // all items received
+  CANCELLED
+  CLOSED // reconciled and done
+}
+
+model PurchaseOrderItem {
+  id String @id @default(uuid(7))
+
+  purchaseOrderId String
+  purchaseOrder   PurchaseOrder @relation(fields: [purchaseOrderId], references: [id], onDelete: Cascade)
+
+  variantId String
+  variant   ProductVariant @relation(fields: [variantId], references: [id], onDelete: Restrict)
+
+  // Receiving warehouse
+  warehouseId String
+  warehouse   Warehouse @relation(fields: [warehouseId], references: [id], onDelete: Restrict)
+
+  orderedQty  Int
+  receivedQty Int @default(0)
+  damagedQty  Int @default(0)
+
+  unitCost  Decimal @db.Decimal(12, 4)
+  totalCost Decimal @db.Decimal(14, 4)
+
+  status PurchaseOrderItemStatus @default(PENDING)
+
+  batches InventoryBatch[]
+
+  note String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([purchaseOrderId, variantId, warehouseId]) // one line per variant per receiving warehouse
+  @@index([variantId])
+  @@index([warehouseId])
+  @@map("purchase_order_items")
+}
+
+enum PurchaseOrderItemStatus {
+  PENDING
+  PARTIAL
+  RECEIVED
+  CANCELLED
+}
+
+// ───────────────────────────────────────────────────
+//  INVENTORY TRANSFER  (warehouse → warehouse)
+// ───────────────────────────────────────────────────
+model InventoryTransfer {
+  id String @id @default(uuid(7))
+
+  transferNumber String @unique // "TRF-2026-00012"
+
+  fromWarehouseId String
+  toWarehouseId   String
+  fromWarehouse   Warehouse @relation("TransferFrom", fields: [fromWarehouseId], references: [id], onDelete: Restrict)
+  toWarehouse     Warehouse @relation("TransferTo", fields: [toWarehouseId], references: [id], onDelete: Restrict)
+
+  status TransferStatus @default(DRAFT)
+
+  items InventoryTransferItem[]
+
+  initiatedByUserId String?
+  receivedByUserId  String?
+  initiatedByUser   User?   @relation("TransferInitiatedBy", fields: [initiatedByUserId], references: [id], onDelete: SetNull)
+  receivedByUser    User?   @relation("TransferReceivedBy", fields: [receivedByUserId], references: [id], onDelete: SetNull)
+
+  shippedAt   DateTime?
+  receivedAt  DateTime?
+  cancelledAt DateTime?
+
+  note     String?
+  metadata Json?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([fromWarehouseId])
+  @@index([toWarehouseId])
+  @@index([status])
+  @@map("inventory_transfers")
+}
+
+enum TransferStatus {
+  DRAFT
+  PENDING // approved, waiting to ship
+  IN_TRANSIT // shipped from source (TRANSFER_OUT written)
+  PARTIAL // some items received
+  COMPLETED // all items received (TRANSFER_IN written)
+  CANCELLED
+}
+
+model InventoryTransferItem {
+  id String @id @default(uuid(7))
+
+  transferId String
+  transfer   InventoryTransfer @relation(fields: [transferId], references: [id], onDelete: Cascade)
+
+  variantId String
+  variant   ProductVariant @relation(fields: [variantId], references: [id], onDelete: Restrict)
+
+  sentQty     Int
+  receivedQty Int @default(0)
+  damagedQty  Int @default(0)
+
+  // Source warehouse's average cost when shipped; booked as the unit cost of
+  // the TRANSFER_IN so the destination's weighted average stays correct.
+  unitCost Decimal? @db.Decimal(12, 4)
+
+  note String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([transferId, variantId])
+  @@index([variantId])
+  @@map("inventory_transfer_items")
+}
+
+// ───────────────────────────────────────────────────
+//  STOCK ADJUSTMENT  (manual corrections)
+//  Cycle counts, damage write-offs, shrinkage
+// ───────────────────────────────────────────────────
+model StockAdjustment {
+  id String @id @default(uuid(7))
+
+  adjustmentNumber String @unique // "ADJ-2026-00003"
+
+  type   AdjustmentType
+  reason AdjustmentReason
+  status AdjustmentStatus @default(PENDING)
+
+  createdByUserId  String?
+  approvedByUserId String?
+  createdByUser    User?   @relation("AdjustmentCreatedBy", fields: [createdByUserId], references: [id], onDelete: SetNull)
+  approvedByUser   User?   @relation("AdjustmentApprovedBy", fields: [approvedByUserId], references: [id], onDelete: SetNull)
+
+  items StockAdjustmentItem[]
+
+  note     String?
+  metadata Json?
+
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  approvedAt DateTime?
+  appliedAt  DateTime?
+
+  @@index([type])
+  @@index([status])
+  @@index([createdAt])
+  @@map("stock_adjustments")
+}
+
+enum AdjustmentType {
+  INCREASE
+  DECREASE
+  CYCLE_COUNT // set to an exact counted number (can go up or down)
+}
+
+enum AdjustmentReason {
+  CYCLE_COUNT
+  DAMAGE
+  THEFT
+  LOSS
+  EXPIRY
+  CORRECTION
+  OPENING_STOCK
+  PROMOTIONAL
+  OTHER
+}
+
+enum AdjustmentStatus {
+  PENDING
+  APPROVED
+  APPLIED // stock levels actually changed
+  REJECTED
+  CANCELLED
+}
+
+model StockAdjustmentItem {
+  id String @id @default(uuid(7))
+
+  adjustmentId String
+  adjustment   StockAdjustment @relation(fields: [adjustmentId], references: [id], onDelete: Cascade)
+
+  variantId   String
+  warehouseId String
+  variant     ProductVariant @relation(fields: [variantId], references: [id], onDelete: Restrict)
+  warehouse   Warehouse      @relation(fields: [warehouseId], references: [id], onDelete: Restrict)
+
+  // Rack the count/correction applies to; NULL → whole warehouse (the
+  // service then picks/puts away using the default rack rules).
+  locationId String?
+  location   StorageLocation? @relation(fields: [locationId], references: [id], onDelete: Restrict)
+
+  // CYCLE_COUNT: system count vs physical count
+  expectedQty Int?
+  actualQty   Int?
+
+  // Signed delta: + increase / - decrease (for CYCLE_COUNT: actual - expected)
+  adjustmentQty Int
+
+  unitCost Decimal? @db.Decimal(12, 4)
+
+  note String?
+
+  createdAt DateTime @default(now())
+
+  // NULL locationIds never collide in Postgres, so "whole warehouse" lines
+  // are de-duplicated in code.
+  @@unique([adjustmentId, variantId, warehouseId, locationId])
+  @@index([variantId])
+  @@index([warehouseId])
+  @@map("stock_adjustment_items")
+}
+
+// ───────────────────────────────────────────────────
+//  REORDER RULES / LOW STOCK ALERTS
+// ───────────────────────────────────────────────────
+model ReorderRule {
+  id String @id @default(uuid(7))
+
+  variantId   String
+  warehouseId String
+  variant     ProductVariant @relation(fields: [variantId], references: [id], onDelete: Cascade)
+  warehouse   Warehouse      @relation(fields: [warehouseId], references: [id], onDelete: Cascade)
+
+  reorderPoint Int // when available <= this → alert / auto-PO
+  reorderQty   Int // how many to order
+  safetyStock  Int  @default(0) // minimum to always keep
+  maxStock     Int? // optional ceiling (OVERSTOCK alert)
+
+  isActive    Boolean @default(true)
+  autoReorder Boolean @default(false) // draft a PO automatically, or just alert
+
+  preferredSupplierId String?
+  preferredSupplier   Supplier? @relation(fields: [preferredSupplierId], references: [id], onDelete: SetNull)
+
+  lastTriggeredAt DateTime?
+  lastOrderedAt   DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([variantId, warehouseId])
+  @@index([isActive])
+  @@map("reorder_rules")
+}
+
+model InventoryAlert {
+  id String @id @default(uuid(7))
+
+  variantId   String
+  warehouseId String? // null = across all warehouses
+  variant     ProductVariant @relation(fields: [variantId], references: [id], onDelete: Cascade)
+  warehouse   Warehouse?     @relation(fields: [warehouseId], references: [id], onDelete: Cascade)
+
+  type   InventoryAlertType
+  status InventoryAlertStatus @default(ACTIVE)
+
+  title   String
+  message String?
+
+  // State when the alert fired
+  currentStock Int
+  threshold    Int?
+
+  acknowledgedByUserId String?
+  acknowledgedByUser   User?     @relation(fields: [acknowledgedByUserId], references: [id], onDelete: SetNull)
+  acknowledgedAt       DateTime?
+  resolvedAt           DateTime?
+
+  metadata Json?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // At most one open alert per variant/warehouse/type — the sweep updates it
+  // instead of inserting duplicates. (Postgres treats NULL warehouseIds as
+  // distinct, so store-wide alerts must be de-duplicated in code.)
+  @@unique([variantId, warehouseId, type], map: "inventory_alerts_one_active_key", where: { status: "ACTIVE" })
+  @@index([type, status])
+  @@index([variantId])
+  @@index([warehouseId])
+  @@index([status])
+  @@index([createdAt])
+  @@map("inventory_alerts")
+}
+
+enum InventoryAlertType {
+  LOW_STOCK
+  OUT_OF_STOCK
+  OVERSTOCK
+  EXPIRING_SOON
+  NEGATIVE_STOCK // should never happen — indicates a bug
+  REORDER_TRIGGERED
+}
+
+enum InventoryAlertStatus {
+  ACTIVE
+  ACKNOWLEDGED
+  RESOLVED
+  DISMISSED
+}
