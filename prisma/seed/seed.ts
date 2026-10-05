@@ -1,11 +1,17 @@
 /**
- * Development seed: catalog, users, reviews, campaigns and promotions.
+ * Development seed: catalog, users, reviews, campaigns, promotions and
+ * inventory (warehouses, racks, suppliers, purchase orders, transfers,
+ * adjustments, reorder rules and alerts).
  *
  *   npx prisma db seed
  *
  * Idempotent — every row is looked up by its natural key (slug, name, email,
  * SKU) first and only created when missing, so re-running is a no-op and rows
  * you already have (e.g. the "Nike" brand) are reused, never modified.
+ *
+ * Inventory documents (POs, transfers, adjustments) are keyed by their number
+ * and booked through InventoryService.applyMovement(), so levels, rack stock,
+ * the movement ledger and ProductVariant.stock stay consistent.
  *
  * Product data and images come from DummyJSON (https://dummyjson.com),
  * snapshotted in products.json; images are served from cdn.dummyjson.com.
@@ -16,16 +22,28 @@ import { join } from 'path';
 import { PrismaPg } from '@prisma/adapter-pg';
 import { Prisma, PrismaClient } from '../../src/generated/prisma/client';
 import type {
+  AdjustmentReason,
+  AdjustmentStatus,
+  AdjustmentType,
+  InventoryAlertType,
+  MovementType,
+  PurchaseOrderItemStatus,
+  PurchaseOrderStatus,
   PromotionTargetType,
   PromotionType,
   PromotionScope,
   PromotionStatus,
+  TransferStatus,
 } from '../../src/generated/prisma/enums';
 import { createSlug } from '../../src/common/utils/slug.util';
+import { InventoryService } from '../../src/modules/inventory/inventory.service';
+import type { PrismaService } from '../../src/prisma/prisma.service';
 
 const prisma = new PrismaClient({
   adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL! }),
 });
+// Only uses the Prisma client, so it can run outside the Nest container.
+const inventory = new InventoryService(prisma as unknown as PrismaService);
 
 // ─── Fixture ──────────────────────────────────────────────────
 
@@ -52,6 +70,8 @@ const fixture: Record<string, FixtureProduct[]> = JSON.parse(
 // ─── Config ───────────────────────────────────────────────────
 
 const USD_TO_BDT = 120;
+/** Landed cost as a share of the selling price. */
+const COST_RATIO = 0.6;
 const DAY = 24 * 60 * 60 * 1000;
 const NOW = Date.now();
 
@@ -162,6 +182,9 @@ const toBdt = (usd: number) => Math.round((usd * USD_TO_BDT) / 10) * 10;
 /** Must match buildOptionKey() in products.service.ts. */
 const buildOptionKey = (ids: string[]) =>
   ids.length ? [...ids].sort().join(':') : null;
+
+const costOf = (price: Prisma.Decimal | string | number) =>
+  new Prisma.Decimal(price).mul(COST_RATIO).toDecimalPlaces(2);
 
 const skuFor = (slug: string, value?: string) =>
   (value ? `${slug}-${value}` : slug).toUpperCase().slice(0, 64);
@@ -486,13 +509,20 @@ const SUPPLIERS = [
 ];
 
 async function seedSuppliers() {
+  const ids = new Map<string, string>();
   let created = 0;
   for (const { code, ...data } of SUPPLIERS) {
-    if (await prisma.supplier.findUnique({ where: { code } })) continue;
-    await prisma.supplier.create({ data: { code, country: 'BD', ...data } });
-    created++;
+    let row = await prisma.supplier.findUnique({ where: { code } });
+    if (!row) {
+      row = await prisma.supplier.create({
+        data: { code, country: 'BD', ...data },
+      });
+      created++;
+    }
+    ids.set(code, row.id);
   }
   log('suppliers', created, SUPPLIERS.length);
+  return ids;
 }
 
 async function seedProducts(deps: {
@@ -543,6 +573,7 @@ async function seedProducts(deps: {
         const soldOut = index % 4 === 3 && i === values.length - 1;
         const stock = soldOut ? 0 : stockEach;
         const rackId = rackIds[rackCursor++ % rackIds.length];
+        const unitCost = costOf(price);
         return {
           sku: skuFor(slug, value),
           price: price.toFixed(2),
@@ -554,6 +585,8 @@ async function seedProducts(deps: {
               warehouseId: deps.warehouses.get('MAIN')!,
               onHand: stock,
               available: stock,
+              unitCost,
+              totalCost: unitCost.mul(stock),
               defaultLocationId: rackId,
               // Racks must add up to onHand: all of it sits on the default rack.
               locationStocks: stock
@@ -567,6 +600,8 @@ async function seedProducts(deps: {
                       quantity: stock,
                       onHandBefore: 0,
                       onHandAfter: stock,
+                      unitCost,
+                      totalCost: unitCost.mul(stock),
                       toLocationId: rackId,
                       note: 'Seed opening stock',
                     },
@@ -957,6 +992,641 @@ async function seedPromotions(deps: {
   log('promotions', created, promotions.length);
 }
 
+// ─── Inventory operations ─────────────────────────────────────
+//
+// Each document is created once, keyed by its number, and its stock effect
+// is booked in the same transaction. Lines whose stock isn't there any more
+// (e.g. you sold it through the API) skip the whole document with a warning.
+
+interface InventoryDeps {
+  warehouses: Map<string, string>;
+  suppliers: Map<string, string>;
+  adminId: string;
+}
+
+const TX_OPTIONS = { timeout: 60_000 };
+
+const ago = (days?: number) =>
+  days === undefined ? null : new Date(NOW - days * DAY);
+const ahead = (days?: number) =>
+  days === undefined ? null : new Date(NOW + days * DAY);
+
+/** SKU → variant, or null (with a warning) when any SKU is missing. */
+async function variantsBySku(doc: string, skus: string[]) {
+  const rows = await prisma.productVariant.findMany({
+    where: { sku: { in: skus } },
+    select: {
+      id: true,
+      sku: true,
+      price: true,
+      inventoryLevels: {
+        select: {
+          warehouseId: true,
+          onHand: true,
+          available: true,
+          unitCost: true,
+        },
+      },
+    },
+  });
+  const bySku = new Map(rows.map((v) => [v.sku, v]));
+  const missing = skus.filter((sku) => !bySku.has(sku));
+  if (missing.length) {
+    console.warn(`  ! ${doc} skipped: unknown SKU(s) ${missing.join(', ')}`);
+    return null;
+  }
+  return bySku;
+}
+
+type SeedVariant =
+  NonNullable<Awaited<ReturnType<typeof variantsBySku>>> extends Map<
+    string,
+    infer V
+  >
+    ? V
+    : never;
+
+const levelAt = (v: SeedVariant, warehouseId: string) =>
+  v.inventoryLevels.find((l) => l.warehouseId === warehouseId);
+
+/** Adds open (ordered or in-transit, not yet booked) units to `incoming`. */
+async function addIncoming(
+  tx: Prisma.TransactionClient,
+  variantId: string,
+  warehouseId: string,
+  quantity: number,
+) {
+  if (quantity <= 0) return;
+  await inventory.ensureLevel(tx, variantId, warehouseId);
+  await tx.inventoryLevel.update({
+    where: { variantId_warehouseId: { variantId, warehouseId } },
+    data: { incoming: { increment: quantity } },
+  });
+}
+
+async function seedReorderRules(deps: InventoryDeps) {
+  const mainId = deps.warehouses.get('MAIN')!;
+  const variants = await prisma.productVariant.findMany({
+    where: { inventoryLevels: { some: { warehouseId: mainId } } },
+    select: {
+      id: true,
+      product: {
+        select: {
+          categories: {
+            where: { category: { slug: 'electronics' } },
+            select: { categoryId: true },
+          },
+        },
+      },
+    },
+  });
+
+  const { count } = await prisma.reorderRule.createMany({
+    data: variants.map((v) => {
+      // Electronics are imported: smaller, rarer orders, drafted automatically.
+      const imported = v.product.categories.length > 0;
+      return {
+        variantId: v.id,
+        warehouseId: mainId,
+        reorderPoint: imported ? 3 : 5,
+        reorderQty: imported ? 10 : 24,
+        safetyStock: imported ? 1 : 2,
+        maxStock: imported ? 60 : 120,
+        autoReorder: imported,
+        preferredSupplierId: deps.suppliers.get(
+          imported ? 'SUP-002' : 'SUP-001',
+        ),
+      };
+    }),
+    skipDuplicates: true,
+  });
+  log('reorder rules', count, variants.length);
+}
+
+/** Statuses whose unreceived quantity counts as `incoming`. */
+const OPEN_PO_STATUSES: PurchaseOrderStatus[] = [
+  'SUBMITTED',
+  'CONFIRMED',
+  'PARTIAL',
+];
+
+const PURCHASE_ORDERS: {
+  poNumber: string;
+  supplier: string;
+  status: PurchaseOrderStatus;
+  orderedDaysAgo?: number;
+  expectedInDays?: number;
+  receivedDaysAgo?: number; // when the received lines arrived
+  note: string;
+  lines: { sku: string; ordered: number; received?: number; batch?: string }[];
+}[] = [
+  {
+    poNumber: 'PO-2026-00001',
+    supplier: 'SUP-002',
+    status: 'RECEIVED',
+    orderedDaysAgo: 20,
+    expectedInDays: -12,
+    receivedDaysAgo: 12,
+    note: 'Restock of best-selling Apple devices.',
+    lines: [
+      {
+        sku: 'IPHONE-13-PRO-128GB',
+        ordered: 20,
+        received: 20,
+        batch: 'APL-2609-A',
+      },
+      {
+        sku: 'APPLE-MACBOOK-PRO-14-INCH-SPACE-GREY-16GB',
+        ordered: 10,
+        received: 10,
+        batch: 'APL-2609-B',
+      },
+    ],
+  },
+  {
+    poNumber: 'PO-2026-00002',
+    supplier: 'SUP-001',
+    status: 'PARTIAL',
+    orderedDaysAgo: 10,
+    expectedInDays: 3,
+    receivedDaysAgo: 2,
+    note: 'Puma trainers — supplier is shipping in two lots.',
+    lines: [
+      {
+        sku: 'PUMA-FUTURE-RIDER-TRAINERS-40',
+        ordered: 24,
+        received: 24,
+        batch: 'PUM-2610-01',
+      },
+      {
+        sku: 'PUMA-FUTURE-RIDER-TRAINERS-41',
+        ordered: 24,
+        received: 12,
+        batch: 'PUM-2610-02',
+      },
+      { sku: 'PUMA-FUTURE-RIDER-TRAINERS-42', ordered: 24 },
+    ],
+  },
+  {
+    poNumber: 'PO-2026-00003',
+    supplier: 'SUP-001',
+    status: 'CONFIRMED',
+    orderedDaysAgo: 3,
+    expectedInDays: 5,
+    note: 'Short sleeve shirts are nearly sold out.',
+    lines: ['S', 'M', 'L', 'XL'].map((size) => ({
+      sku: `MAN-SHORT-SLEEVE-SHIRT-${size}`,
+      ordered: 30,
+    })),
+  },
+  {
+    poNumber: 'PO-2026-00004',
+    supplier: 'SUP-002',
+    status: 'DRAFT',
+    note: 'Draft — waiting on a price quote.',
+    lines: [
+      { sku: 'SAMSUNG-GALAXY-S8-128GB', ordered: 15 },
+      { sku: 'SAMSUNG-GALAXY-S8-256GB', ordered: 15 },
+    ],
+  },
+];
+
+async function seedPurchaseOrders(deps: InventoryDeps) {
+  const mainId = deps.warehouses.get('MAIN')!;
+  let created = 0;
+
+  for (const po of PURCHASE_ORDERS) {
+    if (
+      await prisma.purchaseOrder.findUnique({
+        where: { poNumber: po.poNumber },
+      })
+    )
+      continue;
+    const variants = await variantsBySku(
+      po.poNumber,
+      po.lines.map((l) => l.sku),
+    );
+    if (!variants) continue;
+
+    const supplierId = deps.suppliers.get(po.supplier)!;
+    const lines = po.lines.map((l) => {
+      const variant = variants.get(l.sku)!;
+      const received = l.received ?? 0;
+      const unitCost = costOf(variant.price);
+      return {
+        ...l,
+        received,
+        variantId: variant.id,
+        unitCost,
+        totalCost: unitCost.mul(l.ordered),
+        status: (received === l.ordered
+          ? 'RECEIVED'
+          : received > 0
+            ? 'PARTIAL'
+            : 'PENDING') as PurchaseOrderItemStatus,
+      };
+    });
+    const subtotal = lines.reduce(
+      (sum, l) => sum.plus(l.totalCost),
+      new Prisma.Decimal(0),
+    );
+
+    await prisma.$transaction(async (tx) => {
+      const order = await tx.purchaseOrder.create({
+        data: {
+          poNumber: po.poNumber,
+          supplierId,
+          status: po.status,
+          subtotalAmount: subtotal.toDecimalPlaces(2),
+          totalAmount: subtotal.toDecimalPlaces(2),
+          orderedAt: ago(po.orderedDaysAgo),
+          expectedAt: ahead(po.expectedInDays),
+          receivedAt: po.status === 'RECEIVED' ? ago(po.receivedDaysAgo) : null,
+          createdByUserId: deps.adminId,
+          approvedByUserId: po.status === 'DRAFT' ? null : deps.adminId,
+          note: po.note,
+          items: {
+            create: lines.map((l) => ({
+              variantId: l.variantId,
+              warehouseId: mainId,
+              orderedQty: l.ordered,
+              receivedQty: l.received,
+              unitCost: l.unitCost,
+              totalCost: l.totalCost,
+              status: l.status,
+            })),
+          },
+        },
+        include: { items: true },
+      });
+
+      for (const line of lines) {
+        if (line.received) {
+          const item = order.items.find((i) => i.variantId === line.variantId)!;
+          const batch = await tx.inventoryBatch.create({
+            data: {
+              variantId: line.variantId,
+              warehouseId: mainId,
+              batchNumber: line.batch!,
+              quantity: line.received,
+              initialQty: line.received,
+              unitCost: line.unitCost,
+              receivedAt: ago(po.receivedDaysAgo),
+              supplierId,
+              purchaseOrderItemId: item.id,
+            },
+          });
+          await inventory.applyMovement(tx, {
+            variantId: line.variantId,
+            warehouseId: mainId,
+            type: 'PURCHASE_RECEIVED',
+            quantity: line.received,
+            unitCost: line.unitCost,
+            referenceType: 'PURCHASE_ORDER',
+            referenceId: order.id,
+            batchId: batch.id,
+            userId: deps.adminId,
+            note: `Received on ${po.poNumber}`,
+          });
+        }
+        if (OPEN_PO_STATUSES.includes(po.status))
+          await addIncoming(
+            tx,
+            line.variantId,
+            mainId,
+            line.ordered - line.received,
+          );
+      }
+    }, TX_OPTIONS);
+    created++;
+  }
+
+  log('purchase orders', created, PURCHASE_ORDERS.length);
+}
+
+const TRANSFERS: {
+  transferNumber: string;
+  from: string;
+  to: string;
+  status: TransferStatus;
+  shippedDaysAgo: number;
+  receivedDaysAgo?: number;
+  note: string;
+  lines: { sku: string; quantity: number }[];
+}[] = [
+  {
+    transferNumber: 'TRF-2026-00001',
+    from: 'MAIN',
+    to: 'CTG-STORE',
+    status: 'COMPLETED',
+    shippedDaysAgo: 6,
+    receivedDaysAgo: 4,
+    note: 'Stock the Chattogram store with accessories.',
+    lines: [
+      { sku: 'PRADA-WOMEN-BAG', quantity: 10 },
+      { sku: 'ROLEX-SUBMARINER-WATCH', quantity: 5 },
+      { sku: 'BLACK-SUN-GLASSES', quantity: 15 },
+    ],
+  },
+  {
+    transferNumber: 'TRF-2026-00002',
+    from: 'MAIN',
+    to: 'CTG-STORE',
+    status: 'IN_TRANSIT',
+    shippedDaysAgo: 1,
+    note: 'Plaid shirts for the store window.',
+    lines: [
+      { sku: 'MAN-PLAID-SHIRT-M', quantity: 6 },
+      { sku: 'MAN-PLAID-SHIRT-L', quantity: 6 },
+    ],
+  },
+];
+
+async function seedTransfers(deps: InventoryDeps) {
+  let created = 0;
+
+  for (const t of TRANSFERS) {
+    if (
+      await prisma.inventoryTransfer.findUnique({
+        where: { transferNumber: t.transferNumber },
+      })
+    )
+      continue;
+    const variants = await variantsBySku(
+      t.transferNumber,
+      t.lines.map((l) => l.sku),
+    );
+    if (!variants) continue;
+
+    const fromId = deps.warehouses.get(t.from)!;
+    const toId = deps.warehouses.get(t.to)!;
+    const short = t.lines.filter(
+      (l) =>
+        (levelAt(variants.get(l.sku)!, fromId)?.available ?? 0) < l.quantity,
+    );
+    if (short.length) {
+      console.warn(
+        `  ! ${t.transferNumber} skipped: not enough stock of ${short.map((l) => l.sku).join(', ')}`,
+      );
+      continue;
+    }
+
+    const completed = t.status === 'COMPLETED';
+    const lines = t.lines.map((l) => {
+      const variant = variants.get(l.sku)!;
+      return {
+        ...l,
+        variantId: variant.id,
+        unitCost: levelAt(variant, fromId)!.unitCost,
+      };
+    });
+
+    await prisma.$transaction(async (tx) => {
+      const transfer = await tx.inventoryTransfer.create({
+        data: {
+          transferNumber: t.transferNumber,
+          fromWarehouseId: fromId,
+          toWarehouseId: toId,
+          status: t.status,
+          initiatedByUserId: deps.adminId,
+          receivedByUserId: completed ? deps.adminId : null,
+          shippedAt: ago(t.shippedDaysAgo),
+          receivedAt: completed ? ago(t.receivedDaysAgo) : null,
+          note: t.note,
+          items: {
+            create: lines.map((l) => ({
+              variantId: l.variantId,
+              sentQty: l.quantity,
+              receivedQty: completed ? l.quantity : 0,
+              unitCost: l.unitCost,
+            })),
+          },
+        },
+      });
+
+      const ref = {
+        referenceType: 'TRANSFER' as const,
+        referenceId: transfer.id,
+        sourceWarehouseId: fromId,
+        destWarehouseId: toId,
+        userId: deps.adminId,
+        note: t.transferNumber,
+      };
+      for (const line of lines) {
+        await inventory.applyMovement(tx, {
+          ...ref,
+          variantId: line.variantId,
+          warehouseId: fromId,
+          type: 'TRANSFER_OUT',
+          quantity: line.quantity,
+        });
+        if (completed) {
+          await inventory.ensureLevel(tx, line.variantId, toId);
+          await inventory.applyMovement(tx, {
+            ...ref,
+            variantId: line.variantId,
+            warehouseId: toId,
+            type: 'TRANSFER_IN',
+            quantity: line.quantity,
+            unitCost: line.unitCost,
+          });
+        } else {
+          await addIncoming(tx, line.variantId, toId, line.quantity);
+        }
+      }
+    }, TX_OPTIONS);
+    created++;
+  }
+
+  log('transfers', created, TRANSFERS.length);
+}
+
+const ADJUSTMENTS: {
+  adjustmentNumber: string;
+  type: AdjustmentType;
+  reason: AdjustmentReason;
+  status: AdjustmentStatus;
+  note: string;
+  // `delta` is the change to onHand at MAIN; `movement` overrides the
+  // default ADJUSTMENT_INCREASE / ADJUSTMENT_DECREASE ledger type.
+  lines: { sku: string; delta: number; movement?: MovementType }[];
+}[] = [
+  {
+    adjustmentNumber: 'ADJ-2026-00001',
+    type: 'DECREASE',
+    reason: 'DAMAGE',
+    status: 'APPLIED',
+    note: 'Water damage found while unpacking.',
+    lines: [
+      { sku: 'PUMA-FUTURE-RIDER-TRAINERS-44', delta: -2, movement: 'DAMAGED' },
+    ],
+  },
+  {
+    adjustmentNumber: 'ADJ-2026-00002',
+    type: 'CYCLE_COUNT',
+    reason: 'CYCLE_COUNT',
+    status: 'APPLIED',
+    note: 'Weekly count of high-value watches.',
+    lines: [
+      { sku: 'ROLEX-SUBMARINER-WATCH', delta: -1 },
+      { sku: 'ROLEX-DATEJUST', delta: 0 },
+    ],
+  },
+  {
+    adjustmentNumber: 'ADJ-2026-00003',
+    type: 'INCREASE',
+    reason: 'CORRECTION',
+    status: 'PENDING',
+    note: 'Extra units found at the receiving dock — awaiting approval.',
+    lines: [{ sku: 'CLASSIC-SUN-GLASSES', delta: 5 }],
+  },
+];
+
+async function seedAdjustments(deps: InventoryDeps) {
+  const mainId = deps.warehouses.get('MAIN')!;
+  let created = 0;
+
+  for (const a of ADJUSTMENTS) {
+    if (
+      await prisma.stockAdjustment.findUnique({
+        where: { adjustmentNumber: a.adjustmentNumber },
+      })
+    )
+      continue;
+    const variants = await variantsBySku(
+      a.adjustmentNumber,
+      a.lines.map((l) => l.sku),
+    );
+    if (!variants) continue;
+
+    const applied = a.status === 'APPLIED';
+    const lines = a.lines.map((l) => {
+      const variant = variants.get(l.sku)!;
+      const level = levelAt(variant, mainId);
+      return { ...l, variantId: variant.id, level };
+    });
+    const short = lines.filter(
+      (l) => !l.level || (applied && l.level.available + l.delta < 0),
+    );
+    if (short.length) {
+      console.warn(
+        `  ! ${a.adjustmentNumber} skipped: not enough stock of ${short.map((l) => l.sku).join(', ')}`,
+      );
+      continue;
+    }
+
+    await prisma.$transaction(async (tx) => {
+      const adjustment = await tx.stockAdjustment.create({
+        data: {
+          adjustmentNumber: a.adjustmentNumber,
+          type: a.type,
+          reason: a.reason,
+          status: a.status,
+          createdByUserId: deps.adminId,
+          approvedByUserId: applied ? deps.adminId : null,
+          approvedAt: applied ? new Date(NOW) : null,
+          appliedAt: applied ? new Date(NOW) : null,
+          note: a.note,
+          items: {
+            create: lines.map((l) => ({
+              variantId: l.variantId,
+              warehouseId: mainId,
+              ...(a.type === 'CYCLE_COUNT' && {
+                expectedQty: l.level!.onHand,
+                actualQty: l.level!.onHand + l.delta,
+              }),
+              adjustmentQty: l.delta,
+              unitCost: l.level!.unitCost,
+            })),
+          },
+        },
+      });
+
+      if (!applied) return;
+      for (const line of lines) {
+        if (!line.delta) continue;
+        await inventory.applyMovement(tx, {
+          variantId: line.variantId,
+          warehouseId: mainId,
+          type:
+            line.movement ??
+            (line.delta > 0 ? 'ADJUSTMENT_INCREASE' : 'ADJUSTMENT_DECREASE'),
+          quantity: Math.abs(line.delta),
+          referenceType: 'ADJUSTMENT',
+          referenceId: adjustment.id,
+          userId: deps.adminId,
+          note: `${a.adjustmentNumber}: ${a.note}`,
+        });
+      }
+    }, TX_OPTIONS);
+    created++;
+  }
+
+  log('adjustments', created, ADJUSTMENTS.length);
+}
+
+/**
+ * Raises LOW_STOCK / OUT_OF_STOCK alerts at MAIN from the reorder rules,
+ * once per variant and type (a resolved alert isn't raised again).
+ */
+async function seedAlerts(deps: InventoryDeps) {
+  const mainId = deps.warehouses.get('MAIN')!;
+  const rules = await prisma.reorderRule.findMany({
+    where: { warehouseId: mainId, isActive: true },
+    select: {
+      variantId: true,
+      reorderPoint: true,
+      variant: {
+        select: {
+          sku: true,
+          inventoryLevels: {
+            where: { warehouseId: mainId },
+            select: { available: true },
+          },
+        },
+      },
+    },
+  });
+  const existing = await prisma.inventoryAlert.findMany({
+    where: { warehouseId: mainId },
+    select: { variantId: true, type: true },
+  });
+  const seen = new Set(existing.map((a) => `${a.variantId}:${a.type}`));
+
+  const data: Prisma.InventoryAlertCreateManyInput[] = [];
+  let total = 0;
+  for (const r of rules) {
+    const available = r.variant.inventoryLevels[0]?.available ?? 0;
+    const type: InventoryAlertType | null =
+      available === 0
+        ? 'OUT_OF_STOCK'
+        : available <= r.reorderPoint
+          ? 'LOW_STOCK'
+          : null;
+    if (!type) continue;
+    total++;
+    if (seen.has(`${r.variantId}:${type}`)) continue;
+    data.push({
+      variantId: r.variantId,
+      warehouseId: mainId,
+      type,
+      title:
+        type === 'OUT_OF_STOCK'
+          ? `${r.variant.sku} is out of stock`
+          : `${r.variant.sku} is running low`,
+      message: `${available} available at Main Warehouse (reorder point ${r.reorderPoint}).`,
+      currentStock: available,
+      threshold: r.reorderPoint,
+    });
+  }
+
+  const { count } = await prisma.inventoryAlert.createMany({
+    data,
+    skipDuplicates: true,
+  });
+  log('inventory alerts', count, total);
+}
+
 // ─── Main ─────────────────────────────────────────────────────
 
 async function main() {
@@ -969,7 +1639,7 @@ async function main() {
   const users = await seedUsers();
   const warehouses = await seedWarehouses();
   const mainRacks = await seedLocations(warehouses);
-  await seedSuppliers();
+  const suppliers = await seedSuppliers();
   await seedProducts({
     warehouses,
     mainRacks,
@@ -981,6 +1651,17 @@ async function main() {
   });
   const campaigns = await seedCampaigns({ categories, brands });
   await seedPromotions({ categories, brands, tags, campaigns });
+
+  const ops = {
+    warehouses,
+    suppliers,
+    adminId: users.get('admin@shop.test')!,
+  };
+  await seedReorderRules(ops);
+  await seedPurchaseOrders(ops);
+  await seedTransfers(ops);
+  await seedAdjustments(ops);
+  await seedAlerts(ops);
   console.log('Done.');
 }
 
