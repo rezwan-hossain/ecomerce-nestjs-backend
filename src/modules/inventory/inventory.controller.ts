@@ -18,6 +18,7 @@ import {
   InventoryQueryDto,
   MoveStockDto,
   MovementQueryDto,
+  ReceiveStockDto,
   SetDefaultLocationDto,
   StockCountDto,
   UpdateThresholdDto,
@@ -62,6 +63,14 @@ export class InventoryController {
   @HttpCode(HttpStatus.CREATED)
   adjust(@Body() dto: AdjustStockItemDto, @Query('actedBy') actedBy?: string) {
     return this.inventoryService.adjust(dto, actedBy);
+  }
+
+  // ── POST /api/v1/inventory/receive ──────────────
+  // Goods from a supplier: each item becomes a batch + PURCHASE_RECEIVED.
+  @Post('receive')
+  @HttpCode(HttpStatus.CREATED)
+  receive(@Body() dto: ReceiveStockDto, @Query('actedBy') actedBy?: string) {
+    return this.inventoryService.receive(dto, actedBy);
   }
 
   // ── POST /api/v1/inventory/adjustments/bulk ─────

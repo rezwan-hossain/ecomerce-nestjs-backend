@@ -45,6 +45,9 @@ export const createProductSchema = z.object({
   status: productStatusEnum.optional().default('DRAFT'),
   isActive: z.boolean().optional().default(true),
   brandId: z.string().uuid().optional(),
+  // Where the opening stock came from. Set → each variant's stock is booked
+  // as a supplier batch (PURCHASE_RECEIVED) instead of INITIAL_STOCK.
+  supplierId: z.string().uuid().optional(),
   images: z.array(productImageSchema).optional(),
   categoryIds: z.array(z.string().uuid()).optional(),
   primaryCategoryId: z.string().uuid().optional(),

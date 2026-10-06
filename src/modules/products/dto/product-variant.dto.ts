@@ -9,6 +9,8 @@ export const addVariantSchema = z.object({
   // What one unit cost you to buy/make. Optional; recorded as the opening
   // stock's unit cost so stock value and margins are right from day one.
   costPrice: z.coerce.number().nonnegative().multipleOf(0.0001).optional(),
+  // Where the opening stock came from (see createProductSchema.supplierId).
+  supplierId: z.string().uuid().optional(),
   isActive: z.boolean().optional().default(true),
   optionValueIds: z.array(z.string().uuid()).optional(),
   images: z.array(variantImageSchema).optional(),

@@ -47,6 +47,7 @@ function createMockPrisma() {
     variantOptionValue: { createMany: jest.fn() },
     variantImage: { createMany: jest.fn() },
     brand: { findUnique: jest.fn() },
+    supplier: { findUnique: jest.fn() },
     category: { count: jest.fn() },
     tag: { count: jest.fn() },
     option: { count: jest.fn() },
@@ -198,6 +199,48 @@ describe('ProductsService', () => {
       await expect(
         service.createProduct(baseCreateDto({ brandId: 'missing-brand' })),
       ).rejects.toThrow(BadRequestException);
+    });
+
+    it('rejects a supplier that does not exist', async () => {
+      prisma.supplier.findUnique.mockResolvedValue(null);
+
+      await expect(
+        service.createProduct(baseCreateDto({ supplierId: 'missing' })),
+      ).rejects.toThrow(BadRequestException);
+    });
+
+    it('rejects an inactive supplier', async () => {
+      prisma.supplier.findUnique.mockResolvedValue({ isActive: false });
+
+      await expect(
+        service.createProduct(baseCreateDto({ supplierId: 'sup-old' })),
+      ).rejects.toThrow(BadRequestException);
+    });
+
+    it("passes supplierId to every variant's opening stock", async () => {
+      prisma.supplier.findUnique.mockResolvedValue({ isActive: true });
+      prisma.product.create.mockResolvedValue({ id: 'p1' });
+      prisma.productVariant.create
+        .mockResolvedValueOnce({ id: 'v1', stock: 20 })
+        .mockResolvedValueOnce({ id: 'v2', stock: 10 });
+
+      await service.createProduct(
+        baseCreateDto({
+          supplierId: 'sup-1',
+          variants: [
+            baseVariant({ sku: 'SKU-M', stock: 20, costPrice: 450 }),
+            baseVariant({ sku: 'SKU-L', stock: 10, costPrice: 450 }),
+          ],
+        }),
+      );
+
+      expect(inventory.recordInitialStock).toHaveBeenCalledTimes(2);
+      expect(inventory.recordInitialStock).toHaveBeenNthCalledWith(
+        2,
+        expect.anything(),
+        { id: 'v2', stock: 10 },
+        { unitCost: 450, supplierId: 'sup-1' },
+      );
     });
 
     it('rejects duplicate SKUs against existing variants', async () => {

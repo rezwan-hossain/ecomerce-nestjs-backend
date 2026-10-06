@@ -1,5 +1,7 @@
+import { randomUUID } from 'crypto';
 import {
   BadRequestException,
+  ConflictException,
   Injectable,
   InternalServerErrorException,
   NotFoundException,
@@ -26,6 +28,7 @@ import {
   InventoryQueryDto,
   MoveStockDto,
   MovementQueryDto,
+  ReceiveStockDto,
   SetDefaultLocationDto,
   StockCountDto,
   UpdateThresholdDto,
@@ -49,6 +52,25 @@ export interface StockChange {
   note?: string | null;
   userId?: string | null;
   metadata?: Prisma.InputJsonValue;
+}
+
+/**
+ * Goods bought from a supplier. Each receipt becomes its own InventoryBatch
+ * (traceable to the supplier) plus a PURCHASE_RECEIVED movement.
+ */
+export interface StockReceipt {
+  variantId: string;
+  warehouseId?: string | null; // defaults to the default warehouse
+  locationId?: string | null; // put-away rack; same rules as StockChange
+  quantity: number;
+  unitCost?: Decimal.Value | null;
+  supplierId?: string | null;
+  batchNumber?: string | null; // supplier's lot number; generated if omitted
+  manufacturedAt?: Date | null;
+  expiresAt?: Date | null;
+  reference?: string | null; // supplier invoice / delivery note number
+  note?: string | null;
+  userId?: string | null;
 }
 
 export interface LocationMove {
@@ -156,6 +178,12 @@ type Leg = { locationId: string; quantity: number };
 type Movement = Awaited<
   ReturnType<Prisma.TransactionClient['inventoryMovement']['create']>
 >;
+
+/** "RCV-20261006-1A2B3C4D" — used when the supplier gives no lot number. */
+export function generateBatchNumber(date = new Date()): string {
+  const day = date.toISOString().slice(0, 10).replace(/-/g, '');
+  return `RCV-${day}-${randomUUID().slice(0, 8).toUpperCase()}`;
+}
 
 export function stockStatusOf(v: {
   stock: number;
@@ -349,12 +377,18 @@ export class InventoryService {
    * the default warehouse and, if it was created with stock, books that as
    * INITIAL_STOCK (which also re-syncs ProductVariant.stock). `unitCost`
    * seeds the average cost — even with zero stock, so later restocks
-   * recorded without a cost still get a sensible value.
+   * recorded without a cost still get a sensible value. With `supplierId`
+   * the stock is booked as received from that supplier (a batch +
+   * PURCHASE_RECEIVED) instead of INITIAL_STOCK.
    */
   async recordInitialStock(
     tx: Prisma.TransactionClient,
     variant: { id: string; stock: number },
-    opts: { unitCost?: Decimal.Value | null; userId?: string | null } = {},
+    opts: {
+      unitCost?: Decimal.Value | null;
+      supplierId?: string | null;
+      userId?: string | null;
+    } = {},
   ) {
     const warehouseId = await this.getDefaultWarehouseId(tx);
     const level = await this.ensureLevel(tx, variant.id, warehouseId);
@@ -367,6 +401,17 @@ export class InventoryService {
       }
       return null;
     }
+    if (opts.supplierId) {
+      return this.receiveStock(tx, {
+        variantId: variant.id,
+        warehouseId,
+        quantity: variant.stock,
+        unitCost: opts.unitCost,
+        supplierId: opts.supplierId,
+        note: 'Opening stock',
+        userId: opts.userId,
+      });
+    }
     // Lands on UNASSIGNED until a default rack is set.
     return this.applyMovement(tx, {
       variantId: variant.id,
@@ -375,6 +420,79 @@ export class InventoryService {
       quantity: variant.stock,
       unitCost: opts.unitCost,
       userId: opts.userId,
+    });
+  }
+
+  /**
+   * Books goods received from a supplier: creates the batch, then a
+   * PURCHASE_RECEIVED movement linked to it (which updates onHand, the
+   * average cost, the rack and ProductVariant.stock).
+   */
+  async receiveStock(
+    tx: Prisma.TransactionClient,
+    receipt: StockReceipt,
+  ): Promise<Movement[]> {
+    const { variantId, quantity, reference } = receipt;
+    if (!Number.isInteger(quantity) || quantity <= 0) {
+      throw new BadRequestException('Quantity must be a positive integer');
+    }
+    if (receipt.supplierId) {
+      await this.assertActiveSupplier(tx, receipt.supplierId);
+    }
+
+    const warehouseId =
+      receipt.warehouseId ?? (await this.getDefaultWarehouseId(tx));
+    const batchNumber = receipt.batchNumber ?? generateBatchNumber();
+    const duplicate = await tx.inventoryBatch.findUnique({
+      where: {
+        variantId_warehouseId_batchNumber: {
+          variantId,
+          warehouseId,
+          batchNumber,
+        },
+      },
+      select: { id: true },
+    });
+    if (duplicate) {
+      throw new ConflictException(
+        `Batch "${batchNumber}" was already received for SKU "${await this.skuOf(tx, variantId)}" at this warehouse`,
+      );
+    }
+
+    // Locks the level first, so a missing variant/warehouse is a 404.
+    await this.lockLevel(tx, variantId, warehouseId);
+    const unitCost =
+      receipt.unitCost != null ? new Decimal(receipt.unitCost) : null;
+    const batch = await tx.inventoryBatch.create({
+      data: {
+        variantId,
+        warehouseId,
+        batchNumber,
+        quantity,
+        initialQty: quantity,
+        unitCost,
+        manufacturedAt: receipt.manufacturedAt ?? null,
+        expiresAt: receipt.expiresAt ?? null,
+        receivedAt: new Date(),
+        supplierId: receipt.supplierId ?? null,
+        note: reference ?? null,
+      },
+    });
+
+    return this.applyMovement(tx, {
+      variantId,
+      warehouseId,
+      locationId: receipt.locationId,
+      type: 'PURCHASE_RECEIVED',
+      quantity,
+      unitCost,
+      batchId: batch.id,
+      note:
+        [receipt.note, reference && `Ref: ${reference}`]
+          .filter(Boolean)
+          .join(' — ') || null,
+      userId: receipt.userId,
+      metadata: reference ? { reference } : undefined,
     });
   }
 
@@ -743,6 +861,29 @@ export class InventoryService {
       this.applyMovement(tx, this.toStockChange(dto, actedBy)),
     );
     return { message: 'Stock updated', data: movements };
+  }
+
+  async receive(dto: ReceiveStockDto, actedBy?: string) {
+    const movements = await this.runInTransaction(async (tx) => {
+      const created: Movement[] = [];
+      for (const item of dto.items) {
+        created.push(
+          ...(await this.receiveStock(tx, {
+            ...item,
+            warehouseId: dto.warehouseId,
+            supplierId: dto.supplierId,
+            reference: dto.reference,
+            note: dto.note,
+            userId: actedBy,
+          })),
+        );
+      }
+      return created;
+    });
+    return {
+      message: `${dto.items.length} item(s) received`,
+      data: movements,
+    };
   }
 
   async bulkAdjust(dto: BulkAdjustStockDto, actedBy?: string) {
@@ -1223,6 +1364,22 @@ export class InventoryService {
     }
     if (!loc.isActive && !opts.allowInactive) {
       throw new BadRequestException(`Location "${loc.code}" is inactive`);
+    }
+  }
+
+  private async assertActiveSupplier(
+    tx: Prisma.TransactionClient,
+    supplierId: string,
+  ) {
+    const supplier = await tx.supplier.findUnique({
+      where: { id: supplierId },
+      select: { isActive: true, name: true },
+    });
+    if (!supplier) {
+      throw new BadRequestException(`Supplier "${supplierId}" not found`);
+    }
+    if (!supplier.isActive) {
+      throw new BadRequestException(`Supplier "${supplier.name}" is inactive`);
     }
   }
 

@@ -54,6 +54,18 @@ export class ProductsService {
     if (!exists) throw new BadRequestException(`Brand "${brandId}" not found`);
   }
 
+  private async validateSupplier(supplierId?: string | null) {
+    if (!supplierId) return;
+    const supplier = await this.prisma.supplier.findUnique({
+      where: { id: supplierId },
+      select: { isActive: true },
+    });
+    if (!supplier)
+      throw new BadRequestException(`Supplier "${supplierId}" not found`);
+    if (!supplier.isActive)
+      throw new BadRequestException(`Supplier "${supplierId}" is inactive`);
+  }
+
   private async validateCategories(categoryIds?: string[]) {
     if (!categoryIds?.length) return;
     const uniqueIds = [...new Set(categoryIds)];
@@ -192,6 +204,7 @@ export class ProductsService {
 
     // Cross-entity validations
     await this.validateBrand(dto.brandId);
+    await this.validateSupplier(dto.supplierId);
     await this.validateCategories(dto.categoryIds);
     await this.validateTags(dto.tagIds);
     await this.validateOptions(dto.optionIds);
@@ -299,6 +312,7 @@ export class ProductsService {
           });
           await this.inventory.recordInitialStock(tx, variant, {
             unitCost: v.costPrice,
+            supplierId: dto.supplierId,
           });
 
           if (v.optionValueIds?.length) {
@@ -745,6 +759,7 @@ export class ProductsService {
 
   async addVariant(productId: string, dto: AddVariantDto) {
     await this.ensureProductExists(productId);
+    await this.validateSupplier(dto.supplierId);
 
     // SKU uniqueness
     const skuExists = await this.prisma.productVariant.findUnique({
@@ -803,6 +818,7 @@ export class ProductsService {
         });
         await this.inventory.recordInitialStock(tx, variant, {
           unitCost: dto.costPrice,
+          supplierId: dto.supplierId,
         });
 
         if (dto.optionValueIds?.length) {

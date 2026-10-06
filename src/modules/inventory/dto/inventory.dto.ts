@@ -78,6 +78,35 @@ export const bulkAdjustStockSchema = z.object({
 
 export class BulkAdjustStockDto extends createZodDto(bulkAdjustStockSchema) {}
 
+// Goods received from a supplier: one batch + PURCHASE_RECEIVED per item,
+// all-or-nothing.
+export const receiveStockItemSchema = z
+  .object({
+    variantId: z.string().uuid(),
+    // Rack to put away to; omitted → default rack, else UNASSIGNED.
+    locationId: z.string().uuid().optional(),
+    quantity: z.number().int().positive(),
+    unitCost: z.number().nonnegative().optional(),
+    // Supplier's lot number; generated (RCV-YYYYMMDD-XXXXXXXX) if omitted.
+    batchNumber: z.string().trim().min(1).max(100).optional(),
+    manufacturedAt: z.coerce.date().optional(),
+    expiresAt: z.coerce.date().optional(),
+  })
+  .refine(
+    (i) => !i.manufacturedAt || !i.expiresAt || i.manufacturedAt < i.expiresAt,
+    { message: 'expiresAt must be after manufacturedAt', path: ['expiresAt'] },
+  );
+
+export const receiveStockSchema = z.object({
+  supplierId: z.string().uuid(),
+  warehouseId: z.string().uuid().optional(), // defaults to the default warehouse
+  reference: z.string().trim().max(100).optional(), // invoice / delivery note
+  note,
+  items: z.array(receiveStockItemSchema).min(1).max(200),
+});
+
+export class ReceiveStockDto extends createZodDto(receiveStockSchema) {}
+
 // Stock take: set the exact physically counted quantity.
 export const stockCountSchema = z.object({
   warehouseId: z.string().uuid().optional(), // defaults to the default warehouse

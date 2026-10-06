@@ -1,10 +1,15 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import {
   BadRequestException,
+  ConflictException,
   InternalServerErrorException,
 } from '@nestjs/common';
 import { Decimal } from '@prisma/client/runtime/client';
-import { InventoryService, stockStatusOf } from './inventory.service';
+import {
+  generateBatchNumber,
+  InventoryService,
+  stockStatusOf,
+} from './inventory.service';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { Prisma } from 'src/generated/prisma/client';
 
@@ -84,6 +89,18 @@ function createMockPrisma() {
       update: jest.fn(),
     },
     productVariant: { findUnique: jest.fn() },
+    supplier: {
+      findUnique: jest
+        .fn()
+        .mockResolvedValue({ isActive: true, name: 'Bengal Leather Co.' }),
+    },
+    inventoryBatch: {
+      findUnique: jest.fn().mockResolvedValue(null),
+      create: jest.fn((args: { data: object }) => ({
+        id: 'batch-1',
+        ...args.data,
+      })),
+    },
     $queryRaw: jest.fn(),
     $executeRaw: jest.fn(),
   };
@@ -619,6 +636,127 @@ describe('InventoryService', () => {
           toLocationId: UNASSIGNED,
         }),
       ]);
+    });
+  });
+
+  describe('recordInitialStock with a supplier', () => {
+    it('books PURCHASE_RECEIVED linked to a supplier batch', async () => {
+      tx.$queryRaw.mockResolvedValue([level({ onHand: 0 })]);
+
+      const movements = await service.recordInitialStock(
+        asTx(),
+        { id: VARIANT, stock: 20 },
+        { unitCost: 450, supplierId: 'sup-1' },
+      );
+
+      const batch = callArg<{
+        data: { supplierId: string; quantity: number; initialQty: number };
+      }>(tx.inventoryBatch.create).data;
+      expect(batch).toMatchObject({
+        supplierId: 'sup-1',
+        quantity: 20,
+        initialQty: 20,
+      });
+      expect(movements).toEqual([
+        expect.objectContaining({
+          type: 'PURCHASE_RECEIVED',
+          direction: 'IN',
+          quantity: 20,
+          batchId: 'batch-1',
+        }),
+      ]);
+    });
+
+    it('creates no batch when there is no stock', async () => {
+      await service.recordInitialStock(
+        asTx(),
+        { id: VARIANT, stock: 0 },
+        { supplierId: 'sup-1' },
+      );
+      expect(tx.inventoryBatch.create).not.toHaveBeenCalled();
+    });
+  });
+
+  // ═════════════════════════════════════════════════
+  //   receiveStock
+  // ═════════════════════════════════════════════════
+
+  describe('receiveStock', () => {
+    const receipt = {
+      variantId: VARIANT,
+      quantity: 30,
+      unitCost: 900,
+      supplierId: 'sup-1',
+    };
+
+    it('keeps the reference on the batch and the movement', async () => {
+      tx.$queryRaw.mockResolvedValue([level({ onHand: 0 })]);
+
+      const [movement] = await service.receiveStock(asTx(), {
+        ...receipt,
+        batchNumber: 'LOT-7',
+        reference: 'INV-4512',
+      });
+
+      expect(
+        callArg<{ data: { batchNumber: string; note: string } }>(
+          tx.inventoryBatch.create,
+        ).data,
+      ).toMatchObject({ batchNumber: 'LOT-7', note: 'INV-4512' });
+      expect(movement).toMatchObject({
+        type: 'PURCHASE_RECEIVED',
+        batchId: 'batch-1',
+        note: 'Ref: INV-4512',
+        metadata: { reference: 'INV-4512' },
+      });
+      expect(movement.unitCost?.toString()).toBe('900');
+    });
+
+    it('generates a batch number when none is given', async () => {
+      tx.$queryRaw.mockResolvedValue([level({ onHand: 0 })]);
+
+      await service.receiveStock(asTx(), receipt);
+
+      expect(
+        callArg<{ data: { batchNumber: string } }>(tx.inventoryBatch.create)
+          .data.batchNumber,
+      ).toMatch(/^RCV-\d{8}-[0-9A-F]{8}$/);
+    });
+
+    it('rejects an inactive supplier', async () => {
+      tx.supplier.findUnique.mockResolvedValue({
+        isActive: false,
+        name: 'Old Co.',
+      });
+
+      await expect(service.receiveStock(asTx(), receipt)).rejects.toThrow(
+        BadRequestException,
+      );
+      expect(tx.inventoryBatch.create).not.toHaveBeenCalled();
+    });
+
+    it('rejects a batch number already received', async () => {
+      tx.inventoryBatch.findUnique.mockResolvedValue({ id: 'batch-old' });
+      tx.productVariant.findUnique.mockResolvedValue({ sku: 'WALLET-BROWN' });
+
+      await expect(
+        service.receiveStock(asTx(), { ...receipt, batchNumber: 'LOT-7' }),
+      ).rejects.toThrow(ConflictException);
+      expect(tx.inventoryBatch.create).not.toHaveBeenCalled();
+    });
+
+    it('rejects a non-positive quantity', async () => {
+      await expect(
+        service.receiveStock(asTx(), { ...receipt, quantity: 0 }),
+      ).rejects.toThrow(BadRequestException);
+    });
+  });
+
+  describe('generateBatchNumber', () => {
+    it('stamps the receiving date', () => {
+      expect(generateBatchNumber(new Date('2026-10-06T10:00:00Z'))).toMatch(
+        /^RCV-20261006-[0-9A-F]{8}$/,
+      );
     });
   });
 
