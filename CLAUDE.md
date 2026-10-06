@@ -23,7 +23,7 @@ npm run test:cov
 npm run test:e2e             # e2e tests (test/*.e2e-spec.ts), separate jest config: test/jest-e2e.json
 npx jest path/to/file.spec.ts                 # run a single unit test file
 npx jest -t "test name"                       # run tests matching a name
-npx jest --config ./test/jest-e2e.json path/to/file.e2e-spec.ts   # single e2e test
+npm run test:e2e -- path/to/file.e2e-spec.ts  # single e2e test
 
 # Prisma
 npx prisma generate          # regenerate client into src/generated/prisma (run after any prisma/*.prisma change)
@@ -31,7 +31,9 @@ npx prisma migrate dev        # create/apply a migration in dev
 npx prisma studio
 ```
 
-Unit tests live next to the code they test (`*.spec.ts`, Jest `rootDir` is `src`). E2E tests live under `test/` and use `test/jest-e2e.json`.
+Unit tests live next to the code they test (`*.spec.ts`, Jest `rootDir` is `src`). E2E tests live under `test/` and use `test/jest-e2e.json`; they run against a separate `<db>_test` database (`TEST_DATABASE_URL`, or `DATABASE_URL` with `_test` appended) that `test/e2e-global-setup.ts` creates and migrates, and refuse any database not ending in `_test`. `test:e2e` needs `--experimental-vm-modules` because Prisma 7 loads its engine with a dynamic import.
+
+`npm run backfill:location-levels -- [--dry-run]` numbers existing shelves (`levelNumber`) and bins (`slotIndex`); idempotent.
 
 ## Environment
 
@@ -52,4 +54,5 @@ NestJS 11 + Prisma 7 (postgres) backend with Zod-based validation (`nestjs-zod`)
 - `id`s are UUIDv7 (`@default(uuid(7))`) except `Tag.id`, which is UUIDv4 — the `:id` route in `ProductsController.findOneById` distinguishes UUID vs slug lookups using a UUIDv7-specific regex.
 - Logging uses `nestjs-pino` (`src/common/logger/logger.module.ts`), pretty-printed outside production; note `app.useLogger(app.get(Logger))` is currently commented out in `main.ts`.
 - Swagger/OpenAPI docs are served at `/api` (see `main.ts`).
+- **Rack map** (`src/modules/inventory/floor-plan/`, API in `docs/api/rack-map.md`): floor-level locations carry a placement (`mapCenterX/Y`, `mapLength/Depth`, `mapRotation`); geometry, pick planning, put-away and rack layout are pure, unit-tested modules there. `planPick()` in `floor-plan/pick-plan.ts` is the one pick order used by real picking and by the pick-route endpoint, so keep them together. Layout edits never write `InventoryMovement`s; bin moves and counts go through `InventoryService`.
 - `CategoriesService`/`CategoriesController` and the `users` module are currently stubs/skeletons compared to `products` — don't assume they follow the same maturity level when reading them for patterns.

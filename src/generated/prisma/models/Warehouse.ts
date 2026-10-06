@@ -28,10 +28,14 @@ export type AggregateWarehouse = {
 
 export type WarehouseAvgAggregateOutputType = {
   priority: number | null
+  floorWidth: runtime.Decimal | null
+  floorDepth: runtime.Decimal | null
 }
 
 export type WarehouseSumAggregateOutputType = {
   priority: number | null
+  floorWidth: runtime.Decimal | null
+  floorDepth: runtime.Decimal | null
 }
 
 export type WarehouseMinAggregateOutputType = {
@@ -48,6 +52,8 @@ export type WarehouseMinAggregateOutputType = {
   isActive: boolean | null
   isDefault: boolean | null
   priority: number | null
+  floorWidth: runtime.Decimal | null
+  floorDepth: runtime.Decimal | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -66,6 +72,8 @@ export type WarehouseMaxAggregateOutputType = {
   isActive: boolean | null
   isDefault: boolean | null
   priority: number | null
+  floorWidth: runtime.Decimal | null
+  floorDepth: runtime.Decimal | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -84,6 +92,8 @@ export type WarehouseCountAggregateOutputType = {
   isActive: number
   isDefault: number
   priority: number
+  floorWidth: number
+  floorDepth: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -92,10 +102,14 @@ export type WarehouseCountAggregateOutputType = {
 
 export type WarehouseAvgAggregateInputType = {
   priority?: true
+  floorWidth?: true
+  floorDepth?: true
 }
 
 export type WarehouseSumAggregateInputType = {
   priority?: true
+  floorWidth?: true
+  floorDepth?: true
 }
 
 export type WarehouseMinAggregateInputType = {
@@ -112,6 +126,8 @@ export type WarehouseMinAggregateInputType = {
   isActive?: true
   isDefault?: true
   priority?: true
+  floorWidth?: true
+  floorDepth?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -130,6 +146,8 @@ export type WarehouseMaxAggregateInputType = {
   isActive?: true
   isDefault?: true
   priority?: true
+  floorWidth?: true
+  floorDepth?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -148,6 +166,8 @@ export type WarehouseCountAggregateInputType = {
   isActive?: true
   isDefault?: true
   priority?: true
+  floorWidth?: true
+  floorDepth?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -253,6 +273,8 @@ export type WarehouseGroupByOutputType = {
   isActive: boolean
   isDefault: boolean
   priority: number
+  floorWidth: runtime.Decimal | null
+  floorDepth: runtime.Decimal | null
   createdAt: Date
   updatedAt: Date
   _count: WarehouseCountAggregateOutputType | null
@@ -294,6 +316,8 @@ export type WarehouseWhereInput = {
   isActive?: Prisma.BoolFilter<"Warehouse"> | boolean
   isDefault?: Prisma.BoolFilter<"Warehouse"> | boolean
   priority?: Prisma.IntFilter<"Warehouse"> | number
+  floorWidth?: Prisma.DecimalNullableFilter<"Warehouse"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floorDepth?: Prisma.DecimalNullableFilter<"Warehouse"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFilter<"Warehouse"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Warehouse"> | Date | string
   inventoryLevels?: Prisma.InventoryLevelListRelationFilter
@@ -324,6 +348,8 @@ export type WarehouseOrderByWithRelationInput = {
   isActive?: Prisma.SortOrder
   isDefault?: Prisma.SortOrder
   priority?: Prisma.SortOrder
+  floorWidth?: Prisma.SortOrderInput | Prisma.SortOrder
+  floorDepth?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   inventoryLevels?: Prisma.InventoryLevelOrderByRelationAggregateInput
@@ -357,6 +383,8 @@ export type WarehouseWhereUniqueInput = Prisma.AtLeast<{
   country?: Prisma.StringNullableFilter<"Warehouse"> | string | null
   isActive?: Prisma.BoolFilter<"Warehouse"> | boolean
   priority?: Prisma.IntFilter<"Warehouse"> | number
+  floorWidth?: Prisma.DecimalNullableFilter<"Warehouse"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floorDepth?: Prisma.DecimalNullableFilter<"Warehouse"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFilter<"Warehouse"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Warehouse"> | Date | string
   inventoryLevels?: Prisma.InventoryLevelListRelationFilter
@@ -387,6 +415,8 @@ export type WarehouseOrderByWithAggregationInput = {
   isActive?: Prisma.SortOrder
   isDefault?: Prisma.SortOrder
   priority?: Prisma.SortOrder
+  floorWidth?: Prisma.SortOrderInput | Prisma.SortOrder
+  floorDepth?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.WarehouseCountOrderByAggregateInput
@@ -413,6 +443,8 @@ export type WarehouseScalarWhereWithAggregatesInput = {
   isActive?: Prisma.BoolWithAggregatesFilter<"Warehouse"> | boolean
   isDefault?: Prisma.BoolWithAggregatesFilter<"Warehouse"> | boolean
   priority?: Prisma.IntWithAggregatesFilter<"Warehouse"> | number
+  floorWidth?: Prisma.DecimalNullableWithAggregatesFilter<"Warehouse"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floorDepth?: Prisma.DecimalNullableWithAggregatesFilter<"Warehouse"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Warehouse"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Warehouse"> | Date | string
 }
@@ -431,6 +463,8 @@ export type WarehouseCreateInput = {
   isActive?: boolean
   isDefault?: boolean
   priority?: number
+  floorWidth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floorDepth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   inventoryLevels?: Prisma.InventoryLevelCreateNestedManyWithoutWarehouseInput
@@ -461,6 +495,8 @@ export type WarehouseUncheckedCreateInput = {
   isActive?: boolean
   isDefault?: boolean
   priority?: number
+  floorWidth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floorDepth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   inventoryLevels?: Prisma.InventoryLevelUncheckedCreateNestedManyWithoutWarehouseInput
@@ -491,6 +527,8 @@ export type WarehouseUpdateInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priority?: Prisma.IntFieldUpdateOperationsInput | number
+  floorWidth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floorDepth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   inventoryLevels?: Prisma.InventoryLevelUpdateManyWithoutWarehouseNestedInput
@@ -521,6 +559,8 @@ export type WarehouseUncheckedUpdateInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priority?: Prisma.IntFieldUpdateOperationsInput | number
+  floorWidth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floorDepth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   inventoryLevels?: Prisma.InventoryLevelUncheckedUpdateManyWithoutWarehouseNestedInput
@@ -551,6 +591,8 @@ export type WarehouseCreateManyInput = {
   isActive?: boolean
   isDefault?: boolean
   priority?: number
+  floorWidth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floorDepth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -569,6 +611,8 @@ export type WarehouseUpdateManyMutationInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priority?: Prisma.IntFieldUpdateOperationsInput | number
+  floorWidth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floorDepth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -587,6 +631,8 @@ export type WarehouseUncheckedUpdateManyInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priority?: Prisma.IntFieldUpdateOperationsInput | number
+  floorWidth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floorDepth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -605,12 +651,16 @@ export type WarehouseCountOrderByAggregateInput = {
   isActive?: Prisma.SortOrder
   isDefault?: Prisma.SortOrder
   priority?: Prisma.SortOrder
+  floorWidth?: Prisma.SortOrder
+  floorDepth?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type WarehouseAvgOrderByAggregateInput = {
   priority?: Prisma.SortOrder
+  floorWidth?: Prisma.SortOrder
+  floorDepth?: Prisma.SortOrder
 }
 
 export type WarehouseMaxOrderByAggregateInput = {
@@ -627,6 +677,8 @@ export type WarehouseMaxOrderByAggregateInput = {
   isActive?: Prisma.SortOrder
   isDefault?: Prisma.SortOrder
   priority?: Prisma.SortOrder
+  floorWidth?: Prisma.SortOrder
+  floorDepth?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -645,12 +697,16 @@ export type WarehouseMinOrderByAggregateInput = {
   isActive?: Prisma.SortOrder
   isDefault?: Prisma.SortOrder
   priority?: Prisma.SortOrder
+  floorWidth?: Prisma.SortOrder
+  floorDepth?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type WarehouseSumOrderByAggregateInput = {
   priority?: Prisma.SortOrder
+  floorWidth?: Prisma.SortOrder
+  floorDepth?: Prisma.SortOrder
 }
 
 export type WarehouseScalarRelationFilter = {
@@ -685,6 +741,14 @@ export type IntFieldUpdateOperationsInput = {
   decrement?: number
   multiply?: number
   divide?: number
+}
+
+export type NullableDecimalFieldUpdateOperationsInput = {
+  set?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  increment?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  decrement?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  multiply?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
 export type DateTimeFieldUpdateOperationsInput = {
@@ -879,6 +943,8 @@ export type WarehouseCreateWithoutInventoryLevelsInput = {
   isActive?: boolean
   isDefault?: boolean
   priority?: number
+  floorWidth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floorDepth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   movementsAsSource?: Prisma.InventoryMovementCreateNestedManyWithoutSourceWarehouseInput
@@ -908,6 +974,8 @@ export type WarehouseUncheckedCreateWithoutInventoryLevelsInput = {
   isActive?: boolean
   isDefault?: boolean
   priority?: number
+  floorWidth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floorDepth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   movementsAsSource?: Prisma.InventoryMovementUncheckedCreateNestedManyWithoutSourceWarehouseInput
@@ -953,6 +1021,8 @@ export type WarehouseUpdateWithoutInventoryLevelsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priority?: Prisma.IntFieldUpdateOperationsInput | number
+  floorWidth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floorDepth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   movementsAsSource?: Prisma.InventoryMovementUpdateManyWithoutSourceWarehouseNestedInput
@@ -982,6 +1052,8 @@ export type WarehouseUncheckedUpdateWithoutInventoryLevelsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priority?: Prisma.IntFieldUpdateOperationsInput | number
+  floorWidth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floorDepth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   movementsAsSource?: Prisma.InventoryMovementUncheckedUpdateManyWithoutSourceWarehouseNestedInput
@@ -1011,6 +1083,8 @@ export type WarehouseCreateWithoutStorageLocationsInput = {
   isActive?: boolean
   isDefault?: boolean
   priority?: number
+  floorWidth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floorDepth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   inventoryLevels?: Prisma.InventoryLevelCreateNestedManyWithoutWarehouseInput
@@ -1040,6 +1114,8 @@ export type WarehouseUncheckedCreateWithoutStorageLocationsInput = {
   isActive?: boolean
   isDefault?: boolean
   priority?: number
+  floorWidth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floorDepth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   inventoryLevels?: Prisma.InventoryLevelUncheckedCreateNestedManyWithoutWarehouseInput
@@ -1085,6 +1161,8 @@ export type WarehouseUpdateWithoutStorageLocationsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priority?: Prisma.IntFieldUpdateOperationsInput | number
+  floorWidth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floorDepth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   inventoryLevels?: Prisma.InventoryLevelUpdateManyWithoutWarehouseNestedInput
@@ -1114,6 +1192,8 @@ export type WarehouseUncheckedUpdateWithoutStorageLocationsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priority?: Prisma.IntFieldUpdateOperationsInput | number
+  floorWidth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floorDepth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   inventoryLevels?: Prisma.InventoryLevelUncheckedUpdateManyWithoutWarehouseNestedInput
@@ -1143,6 +1223,8 @@ export type WarehouseCreateWithoutMovementsAsSourceInput = {
   isActive?: boolean
   isDefault?: boolean
   priority?: number
+  floorWidth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floorDepth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   inventoryLevels?: Prisma.InventoryLevelCreateNestedManyWithoutWarehouseInput
@@ -1172,6 +1254,8 @@ export type WarehouseUncheckedCreateWithoutMovementsAsSourceInput = {
   isActive?: boolean
   isDefault?: boolean
   priority?: number
+  floorWidth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floorDepth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   inventoryLevels?: Prisma.InventoryLevelUncheckedCreateNestedManyWithoutWarehouseInput
@@ -1206,6 +1290,8 @@ export type WarehouseCreateWithoutMovementsAsDestInput = {
   isActive?: boolean
   isDefault?: boolean
   priority?: number
+  floorWidth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floorDepth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   inventoryLevels?: Prisma.InventoryLevelCreateNestedManyWithoutWarehouseInput
@@ -1235,6 +1321,8 @@ export type WarehouseUncheckedCreateWithoutMovementsAsDestInput = {
   isActive?: boolean
   isDefault?: boolean
   priority?: number
+  floorWidth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floorDepth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   inventoryLevels?: Prisma.InventoryLevelUncheckedCreateNestedManyWithoutWarehouseInput
@@ -1280,6 +1368,8 @@ export type WarehouseUpdateWithoutMovementsAsSourceInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priority?: Prisma.IntFieldUpdateOperationsInput | number
+  floorWidth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floorDepth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   inventoryLevels?: Prisma.InventoryLevelUpdateManyWithoutWarehouseNestedInput
@@ -1309,6 +1399,8 @@ export type WarehouseUncheckedUpdateWithoutMovementsAsSourceInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priority?: Prisma.IntFieldUpdateOperationsInput | number
+  floorWidth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floorDepth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   inventoryLevels?: Prisma.InventoryLevelUncheckedUpdateManyWithoutWarehouseNestedInput
@@ -1349,6 +1441,8 @@ export type WarehouseUpdateWithoutMovementsAsDestInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priority?: Prisma.IntFieldUpdateOperationsInput | number
+  floorWidth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floorDepth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   inventoryLevels?: Prisma.InventoryLevelUpdateManyWithoutWarehouseNestedInput
@@ -1378,6 +1472,8 @@ export type WarehouseUncheckedUpdateWithoutMovementsAsDestInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priority?: Prisma.IntFieldUpdateOperationsInput | number
+  floorWidth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floorDepth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   inventoryLevels?: Prisma.InventoryLevelUncheckedUpdateManyWithoutWarehouseNestedInput
@@ -1407,6 +1503,8 @@ export type WarehouseCreateWithoutStockReservationsInput = {
   isActive?: boolean
   isDefault?: boolean
   priority?: number
+  floorWidth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floorDepth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   inventoryLevels?: Prisma.InventoryLevelCreateNestedManyWithoutWarehouseInput
@@ -1436,6 +1534,8 @@ export type WarehouseUncheckedCreateWithoutStockReservationsInput = {
   isActive?: boolean
   isDefault?: boolean
   priority?: number
+  floorWidth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floorDepth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   inventoryLevels?: Prisma.InventoryLevelUncheckedCreateNestedManyWithoutWarehouseInput
@@ -1481,6 +1581,8 @@ export type WarehouseUpdateWithoutStockReservationsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priority?: Prisma.IntFieldUpdateOperationsInput | number
+  floorWidth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floorDepth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   inventoryLevels?: Prisma.InventoryLevelUpdateManyWithoutWarehouseNestedInput
@@ -1510,6 +1612,8 @@ export type WarehouseUncheckedUpdateWithoutStockReservationsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priority?: Prisma.IntFieldUpdateOperationsInput | number
+  floorWidth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floorDepth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   inventoryLevels?: Prisma.InventoryLevelUncheckedUpdateManyWithoutWarehouseNestedInput
@@ -1539,6 +1643,8 @@ export type WarehouseCreateWithoutInventoryBatchesInput = {
   isActive?: boolean
   isDefault?: boolean
   priority?: number
+  floorWidth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floorDepth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   inventoryLevels?: Prisma.InventoryLevelCreateNestedManyWithoutWarehouseInput
@@ -1568,6 +1674,8 @@ export type WarehouseUncheckedCreateWithoutInventoryBatchesInput = {
   isActive?: boolean
   isDefault?: boolean
   priority?: number
+  floorWidth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floorDepth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   inventoryLevels?: Prisma.InventoryLevelUncheckedCreateNestedManyWithoutWarehouseInput
@@ -1613,6 +1721,8 @@ export type WarehouseUpdateWithoutInventoryBatchesInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priority?: Prisma.IntFieldUpdateOperationsInput | number
+  floorWidth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floorDepth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   inventoryLevels?: Prisma.InventoryLevelUpdateManyWithoutWarehouseNestedInput
@@ -1642,6 +1752,8 @@ export type WarehouseUncheckedUpdateWithoutInventoryBatchesInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priority?: Prisma.IntFieldUpdateOperationsInput | number
+  floorWidth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floorDepth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   inventoryLevels?: Prisma.InventoryLevelUncheckedUpdateManyWithoutWarehouseNestedInput
@@ -1671,6 +1783,8 @@ export type WarehouseCreateWithoutPurchaseOrderItemsInput = {
   isActive?: boolean
   isDefault?: boolean
   priority?: number
+  floorWidth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floorDepth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   inventoryLevels?: Prisma.InventoryLevelCreateNestedManyWithoutWarehouseInput
@@ -1700,6 +1814,8 @@ export type WarehouseUncheckedCreateWithoutPurchaseOrderItemsInput = {
   isActive?: boolean
   isDefault?: boolean
   priority?: number
+  floorWidth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floorDepth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   inventoryLevels?: Prisma.InventoryLevelUncheckedCreateNestedManyWithoutWarehouseInput
@@ -1745,6 +1861,8 @@ export type WarehouseUpdateWithoutPurchaseOrderItemsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priority?: Prisma.IntFieldUpdateOperationsInput | number
+  floorWidth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floorDepth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   inventoryLevels?: Prisma.InventoryLevelUpdateManyWithoutWarehouseNestedInput
@@ -1774,6 +1892,8 @@ export type WarehouseUncheckedUpdateWithoutPurchaseOrderItemsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priority?: Prisma.IntFieldUpdateOperationsInput | number
+  floorWidth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floorDepth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   inventoryLevels?: Prisma.InventoryLevelUncheckedUpdateManyWithoutWarehouseNestedInput
@@ -1803,6 +1923,8 @@ export type WarehouseCreateWithoutTransfersFromInput = {
   isActive?: boolean
   isDefault?: boolean
   priority?: number
+  floorWidth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floorDepth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   inventoryLevels?: Prisma.InventoryLevelCreateNestedManyWithoutWarehouseInput
@@ -1832,6 +1954,8 @@ export type WarehouseUncheckedCreateWithoutTransfersFromInput = {
   isActive?: boolean
   isDefault?: boolean
   priority?: number
+  floorWidth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floorDepth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   inventoryLevels?: Prisma.InventoryLevelUncheckedCreateNestedManyWithoutWarehouseInput
@@ -1866,6 +1990,8 @@ export type WarehouseCreateWithoutTransfersToInput = {
   isActive?: boolean
   isDefault?: boolean
   priority?: number
+  floorWidth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floorDepth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   inventoryLevels?: Prisma.InventoryLevelCreateNestedManyWithoutWarehouseInput
@@ -1895,6 +2021,8 @@ export type WarehouseUncheckedCreateWithoutTransfersToInput = {
   isActive?: boolean
   isDefault?: boolean
   priority?: number
+  floorWidth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floorDepth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   inventoryLevels?: Prisma.InventoryLevelUncheckedCreateNestedManyWithoutWarehouseInput
@@ -1940,6 +2068,8 @@ export type WarehouseUpdateWithoutTransfersFromInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priority?: Prisma.IntFieldUpdateOperationsInput | number
+  floorWidth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floorDepth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   inventoryLevels?: Prisma.InventoryLevelUpdateManyWithoutWarehouseNestedInput
@@ -1969,6 +2099,8 @@ export type WarehouseUncheckedUpdateWithoutTransfersFromInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priority?: Prisma.IntFieldUpdateOperationsInput | number
+  floorWidth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floorDepth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   inventoryLevels?: Prisma.InventoryLevelUncheckedUpdateManyWithoutWarehouseNestedInput
@@ -2009,6 +2141,8 @@ export type WarehouseUpdateWithoutTransfersToInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priority?: Prisma.IntFieldUpdateOperationsInput | number
+  floorWidth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floorDepth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   inventoryLevels?: Prisma.InventoryLevelUpdateManyWithoutWarehouseNestedInput
@@ -2038,6 +2172,8 @@ export type WarehouseUncheckedUpdateWithoutTransfersToInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priority?: Prisma.IntFieldUpdateOperationsInput | number
+  floorWidth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floorDepth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   inventoryLevels?: Prisma.InventoryLevelUncheckedUpdateManyWithoutWarehouseNestedInput
@@ -2067,6 +2203,8 @@ export type WarehouseCreateWithoutStockAdjustmentItemsInput = {
   isActive?: boolean
   isDefault?: boolean
   priority?: number
+  floorWidth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floorDepth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   inventoryLevels?: Prisma.InventoryLevelCreateNestedManyWithoutWarehouseInput
@@ -2096,6 +2234,8 @@ export type WarehouseUncheckedCreateWithoutStockAdjustmentItemsInput = {
   isActive?: boolean
   isDefault?: boolean
   priority?: number
+  floorWidth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floorDepth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   inventoryLevels?: Prisma.InventoryLevelUncheckedCreateNestedManyWithoutWarehouseInput
@@ -2141,6 +2281,8 @@ export type WarehouseUpdateWithoutStockAdjustmentItemsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priority?: Prisma.IntFieldUpdateOperationsInput | number
+  floorWidth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floorDepth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   inventoryLevels?: Prisma.InventoryLevelUpdateManyWithoutWarehouseNestedInput
@@ -2170,6 +2312,8 @@ export type WarehouseUncheckedUpdateWithoutStockAdjustmentItemsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priority?: Prisma.IntFieldUpdateOperationsInput | number
+  floorWidth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floorDepth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   inventoryLevels?: Prisma.InventoryLevelUncheckedUpdateManyWithoutWarehouseNestedInput
@@ -2199,6 +2343,8 @@ export type WarehouseCreateWithoutReorderRulesInput = {
   isActive?: boolean
   isDefault?: boolean
   priority?: number
+  floorWidth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floorDepth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   inventoryLevels?: Prisma.InventoryLevelCreateNestedManyWithoutWarehouseInput
@@ -2228,6 +2374,8 @@ export type WarehouseUncheckedCreateWithoutReorderRulesInput = {
   isActive?: boolean
   isDefault?: boolean
   priority?: number
+  floorWidth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floorDepth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   inventoryLevels?: Prisma.InventoryLevelUncheckedCreateNestedManyWithoutWarehouseInput
@@ -2273,6 +2421,8 @@ export type WarehouseUpdateWithoutReorderRulesInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priority?: Prisma.IntFieldUpdateOperationsInput | number
+  floorWidth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floorDepth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   inventoryLevels?: Prisma.InventoryLevelUpdateManyWithoutWarehouseNestedInput
@@ -2302,6 +2452,8 @@ export type WarehouseUncheckedUpdateWithoutReorderRulesInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priority?: Prisma.IntFieldUpdateOperationsInput | number
+  floorWidth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floorDepth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   inventoryLevels?: Prisma.InventoryLevelUncheckedUpdateManyWithoutWarehouseNestedInput
@@ -2331,6 +2483,8 @@ export type WarehouseCreateWithoutInventoryAlertsInput = {
   isActive?: boolean
   isDefault?: boolean
   priority?: number
+  floorWidth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floorDepth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   inventoryLevels?: Prisma.InventoryLevelCreateNestedManyWithoutWarehouseInput
@@ -2360,6 +2514,8 @@ export type WarehouseUncheckedCreateWithoutInventoryAlertsInput = {
   isActive?: boolean
   isDefault?: boolean
   priority?: number
+  floorWidth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floorDepth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   inventoryLevels?: Prisma.InventoryLevelUncheckedCreateNestedManyWithoutWarehouseInput
@@ -2405,6 +2561,8 @@ export type WarehouseUpdateWithoutInventoryAlertsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priority?: Prisma.IntFieldUpdateOperationsInput | number
+  floorWidth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floorDepth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   inventoryLevels?: Prisma.InventoryLevelUpdateManyWithoutWarehouseNestedInput
@@ -2434,6 +2592,8 @@ export type WarehouseUncheckedUpdateWithoutInventoryAlertsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
   priority?: Prisma.IntFieldUpdateOperationsInput | number
+  floorWidth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floorDepth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   inventoryLevels?: Prisma.InventoryLevelUncheckedUpdateManyWithoutWarehouseNestedInput
@@ -2593,6 +2753,8 @@ export type WarehouseSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   isActive?: boolean
   isDefault?: boolean
   priority?: boolean
+  floorWidth?: boolean
+  floorDepth?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   inventoryLevels?: boolean | Prisma.Warehouse$inventoryLevelsArgs<ExtArgs>
@@ -2624,6 +2786,8 @@ export type WarehouseSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   isActive?: boolean
   isDefault?: boolean
   priority?: boolean
+  floorWidth?: boolean
+  floorDepth?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["warehouse"]>
@@ -2642,6 +2806,8 @@ export type WarehouseSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   isActive?: boolean
   isDefault?: boolean
   priority?: boolean
+  floorWidth?: boolean
+  floorDepth?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["warehouse"]>
@@ -2660,11 +2826,13 @@ export type WarehouseSelectScalar = {
   isActive?: boolean
   isDefault?: boolean
   priority?: boolean
+  floorWidth?: boolean
+  floorDepth?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type WarehouseOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "code" | "type" | "addressLine1" | "addressLine2" | "city" | "state" | "postalCode" | "country" | "isActive" | "isDefault" | "priority" | "createdAt" | "updatedAt", ExtArgs["result"]["warehouse"]>
+export type WarehouseOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "code" | "type" | "addressLine1" | "addressLine2" | "city" | "state" | "postalCode" | "country" | "isActive" | "isDefault" | "priority" | "floorWidth" | "floorDepth" | "createdAt" | "updatedAt", ExtArgs["result"]["warehouse"]>
 export type WarehouseInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   inventoryLevels?: boolean | Prisma.Warehouse$inventoryLevelsArgs<ExtArgs>
   movementsAsSource?: boolean | Prisma.Warehouse$movementsAsSourceArgs<ExtArgs>
@@ -2713,6 +2881,8 @@ export type $WarehousePayload<ExtArgs extends runtime.Types.Extensions.InternalA
     isActive: boolean
     isDefault: boolean
     priority: number
+    floorWidth: runtime.Decimal | null
+    floorDepth: runtime.Decimal | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["warehouse"]>
@@ -3163,6 +3333,8 @@ export interface WarehouseFieldRefs {
   readonly isActive: Prisma.FieldRef<"Warehouse", 'Boolean'>
   readonly isDefault: Prisma.FieldRef<"Warehouse", 'Boolean'>
   readonly priority: Prisma.FieldRef<"Warehouse", 'Int'>
+  readonly floorWidth: Prisma.FieldRef<"Warehouse", 'Decimal'>
+  readonly floorDepth: Prisma.FieldRef<"Warehouse", 'Decimal'>
   readonly createdAt: Prisma.FieldRef<"Warehouse", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Warehouse", 'DateTime'>
 }

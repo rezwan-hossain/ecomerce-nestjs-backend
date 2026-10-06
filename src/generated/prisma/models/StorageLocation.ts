@@ -28,10 +28,24 @@ export type AggregateStorageLocation = {
 
 export type StorageLocationAvgAggregateOutputType = {
   pickSequence: number | null
+  mapCenterX: runtime.Decimal | null
+  mapCenterY: runtime.Decimal | null
+  mapLength: runtime.Decimal | null
+  mapDepth: runtime.Decimal | null
+  mapRotation: number | null
+  levelNumber: number | null
+  slotIndex: number | null
 }
 
 export type StorageLocationSumAggregateOutputType = {
   pickSequence: number | null
+  mapCenterX: runtime.Decimal | null
+  mapCenterY: runtime.Decimal | null
+  mapLength: runtime.Decimal | null
+  mapDepth: runtime.Decimal | null
+  mapRotation: number | null
+  levelNumber: number | null
+  slotIndex: number | null
 }
 
 export type StorageLocationMinAggregateOutputType = {
@@ -44,6 +58,13 @@ export type StorageLocationMinAggregateOutputType = {
   isPickable: boolean | null
   isActive: boolean | null
   pickSequence: number | null
+  mapCenterX: runtime.Decimal | null
+  mapCenterY: runtime.Decimal | null
+  mapLength: runtime.Decimal | null
+  mapDepth: runtime.Decimal | null
+  mapRotation: number | null
+  levelNumber: number | null
+  slotIndex: number | null
   note: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -59,6 +80,13 @@ export type StorageLocationMaxAggregateOutputType = {
   isPickable: boolean | null
   isActive: boolean | null
   pickSequence: number | null
+  mapCenterX: runtime.Decimal | null
+  mapCenterY: runtime.Decimal | null
+  mapLength: runtime.Decimal | null
+  mapDepth: runtime.Decimal | null
+  mapRotation: number | null
+  levelNumber: number | null
+  slotIndex: number | null
   note: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -74,6 +102,13 @@ export type StorageLocationCountAggregateOutputType = {
   isPickable: number
   isActive: number
   pickSequence: number
+  mapCenterX: number
+  mapCenterY: number
+  mapLength: number
+  mapDepth: number
+  mapRotation: number
+  levelNumber: number
+  slotIndex: number
   note: number
   createdAt: number
   updatedAt: number
@@ -83,10 +118,24 @@ export type StorageLocationCountAggregateOutputType = {
 
 export type StorageLocationAvgAggregateInputType = {
   pickSequence?: true
+  mapCenterX?: true
+  mapCenterY?: true
+  mapLength?: true
+  mapDepth?: true
+  mapRotation?: true
+  levelNumber?: true
+  slotIndex?: true
 }
 
 export type StorageLocationSumAggregateInputType = {
   pickSequence?: true
+  mapCenterX?: true
+  mapCenterY?: true
+  mapLength?: true
+  mapDepth?: true
+  mapRotation?: true
+  levelNumber?: true
+  slotIndex?: true
 }
 
 export type StorageLocationMinAggregateInputType = {
@@ -99,6 +148,13 @@ export type StorageLocationMinAggregateInputType = {
   isPickable?: true
   isActive?: true
   pickSequence?: true
+  mapCenterX?: true
+  mapCenterY?: true
+  mapLength?: true
+  mapDepth?: true
+  mapRotation?: true
+  levelNumber?: true
+  slotIndex?: true
   note?: true
   createdAt?: true
   updatedAt?: true
@@ -114,6 +170,13 @@ export type StorageLocationMaxAggregateInputType = {
   isPickable?: true
   isActive?: true
   pickSequence?: true
+  mapCenterX?: true
+  mapCenterY?: true
+  mapLength?: true
+  mapDepth?: true
+  mapRotation?: true
+  levelNumber?: true
+  slotIndex?: true
   note?: true
   createdAt?: true
   updatedAt?: true
@@ -129,6 +192,13 @@ export type StorageLocationCountAggregateInputType = {
   isPickable?: true
   isActive?: true
   pickSequence?: true
+  mapCenterX?: true
+  mapCenterY?: true
+  mapLength?: true
+  mapDepth?: true
+  mapRotation?: true
+  levelNumber?: true
+  slotIndex?: true
   note?: true
   createdAt?: true
   updatedAt?: true
@@ -231,6 +301,13 @@ export type StorageLocationGroupByOutputType = {
   isPickable: boolean
   isActive: boolean
   pickSequence: number
+  mapCenterX: runtime.Decimal | null
+  mapCenterY: runtime.Decimal | null
+  mapLength: runtime.Decimal | null
+  mapDepth: runtime.Decimal | null
+  mapRotation: number
+  levelNumber: number | null
+  slotIndex: number | null
   note: string | null
   createdAt: Date
   updatedAt: Date
@@ -269,6 +346,13 @@ export type StorageLocationWhereInput = {
   isPickable?: Prisma.BoolFilter<"StorageLocation"> | boolean
   isActive?: Prisma.BoolFilter<"StorageLocation"> | boolean
   pickSequence?: Prisma.IntFilter<"StorageLocation"> | number
+  mapCenterX?: Prisma.DecimalNullableFilter<"StorageLocation"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapCenterY?: Prisma.DecimalNullableFilter<"StorageLocation"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapLength?: Prisma.DecimalNullableFilter<"StorageLocation"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapDepth?: Prisma.DecimalNullableFilter<"StorageLocation"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapRotation?: Prisma.IntFilter<"StorageLocation"> | number
+  levelNumber?: Prisma.IntNullableFilter<"StorageLocation"> | number | null
+  slotIndex?: Prisma.IntNullableFilter<"StorageLocation"> | number | null
   note?: Prisma.StringNullableFilter<"StorageLocation"> | string | null
   createdAt?: Prisma.DateTimeFilter<"StorageLocation"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"StorageLocation"> | Date | string
@@ -292,6 +376,13 @@ export type StorageLocationOrderByWithRelationInput = {
   isPickable?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   pickSequence?: Prisma.SortOrder
+  mapCenterX?: Prisma.SortOrderInput | Prisma.SortOrder
+  mapCenterY?: Prisma.SortOrderInput | Prisma.SortOrder
+  mapLength?: Prisma.SortOrderInput | Prisma.SortOrder
+  mapDepth?: Prisma.SortOrderInput | Prisma.SortOrder
+  mapRotation?: Prisma.SortOrder
+  levelNumber?: Prisma.SortOrderInput | Prisma.SortOrder
+  slotIndex?: Prisma.SortOrderInput | Prisma.SortOrder
   note?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -309,6 +400,8 @@ export type StorageLocationWhereUniqueInput = Prisma.AtLeast<{
   id?: string
   warehouseId_code?: Prisma.StorageLocationWarehouseIdCodeCompoundUniqueInput
   id_warehouseId?: Prisma.StorageLocationIdWarehouseIdCompoundUniqueInput
+  parentId_levelNumber?: Prisma.StorageLocationParentIdLevelNumberCompoundUniqueInput
+  parentId_slotIndex?: Prisma.StorageLocationParentIdSlotIndexCompoundUniqueInput
   AND?: Prisma.StorageLocationWhereInput | Prisma.StorageLocationWhereInput[]
   OR?: Prisma.StorageLocationWhereInput[]
   NOT?: Prisma.StorageLocationWhereInput | Prisma.StorageLocationWhereInput[]
@@ -320,6 +413,13 @@ export type StorageLocationWhereUniqueInput = Prisma.AtLeast<{
   isPickable?: Prisma.BoolFilter<"StorageLocation"> | boolean
   isActive?: Prisma.BoolFilter<"StorageLocation"> | boolean
   pickSequence?: Prisma.IntFilter<"StorageLocation"> | number
+  mapCenterX?: Prisma.DecimalNullableFilter<"StorageLocation"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapCenterY?: Prisma.DecimalNullableFilter<"StorageLocation"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapLength?: Prisma.DecimalNullableFilter<"StorageLocation"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapDepth?: Prisma.DecimalNullableFilter<"StorageLocation"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapRotation?: Prisma.IntFilter<"StorageLocation"> | number
+  levelNumber?: Prisma.IntNullableFilter<"StorageLocation"> | number | null
+  slotIndex?: Prisma.IntNullableFilter<"StorageLocation"> | number | null
   note?: Prisma.StringNullableFilter<"StorageLocation"> | string | null
   createdAt?: Prisma.DateTimeFilter<"StorageLocation"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"StorageLocation"> | Date | string
@@ -331,7 +431,7 @@ export type StorageLocationWhereUniqueInput = Prisma.AtLeast<{
   movementsFrom?: Prisma.InventoryMovementListRelationFilter
   movementsTo?: Prisma.InventoryMovementListRelationFilter
   adjustmentItems?: Prisma.StockAdjustmentItemListRelationFilter
-}, "id" | "warehouseId_code" | "id_warehouseId">
+}, "id" | "warehouseId_code" | "id_warehouseId" | "parentId_levelNumber" | "parentId_slotIndex">
 
 export type StorageLocationOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -343,6 +443,13 @@ export type StorageLocationOrderByWithAggregationInput = {
   isPickable?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   pickSequence?: Prisma.SortOrder
+  mapCenterX?: Prisma.SortOrderInput | Prisma.SortOrder
+  mapCenterY?: Prisma.SortOrderInput | Prisma.SortOrder
+  mapLength?: Prisma.SortOrderInput | Prisma.SortOrder
+  mapDepth?: Prisma.SortOrderInput | Prisma.SortOrder
+  mapRotation?: Prisma.SortOrder
+  levelNumber?: Prisma.SortOrderInput | Prisma.SortOrder
+  slotIndex?: Prisma.SortOrderInput | Prisma.SortOrder
   note?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -366,6 +473,13 @@ export type StorageLocationScalarWhereWithAggregatesInput = {
   isPickable?: Prisma.BoolWithAggregatesFilter<"StorageLocation"> | boolean
   isActive?: Prisma.BoolWithAggregatesFilter<"StorageLocation"> | boolean
   pickSequence?: Prisma.IntWithAggregatesFilter<"StorageLocation"> | number
+  mapCenterX?: Prisma.DecimalNullableWithAggregatesFilter<"StorageLocation"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapCenterY?: Prisma.DecimalNullableWithAggregatesFilter<"StorageLocation"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapLength?: Prisma.DecimalNullableWithAggregatesFilter<"StorageLocation"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapDepth?: Prisma.DecimalNullableWithAggregatesFilter<"StorageLocation"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapRotation?: Prisma.IntWithAggregatesFilter<"StorageLocation"> | number
+  levelNumber?: Prisma.IntNullableWithAggregatesFilter<"StorageLocation"> | number | null
+  slotIndex?: Prisma.IntNullableWithAggregatesFilter<"StorageLocation"> | number | null
   note?: Prisma.StringNullableWithAggregatesFilter<"StorageLocation"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"StorageLocation"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"StorageLocation"> | Date | string
@@ -379,6 +493,13 @@ export type StorageLocationCreateInput = {
   isPickable?: boolean
   isActive?: boolean
   pickSequence?: number
+  mapCenterX?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapCenterY?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapLength?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapDepth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapRotation?: number
+  levelNumber?: number | null
+  slotIndex?: number | null
   note?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -402,6 +523,13 @@ export type StorageLocationUncheckedCreateInput = {
   isPickable?: boolean
   isActive?: boolean
   pickSequence?: number
+  mapCenterX?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapCenterY?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapLength?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapDepth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapRotation?: number
+  levelNumber?: number | null
+  slotIndex?: number | null
   note?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -421,6 +549,13 @@ export type StorageLocationUpdateInput = {
   isPickable?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pickSequence?: Prisma.IntFieldUpdateOperationsInput | number
+  mapCenterX?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapCenterY?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapLength?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapDepth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapRotation?: Prisma.IntFieldUpdateOperationsInput | number
+  levelNumber?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  slotIndex?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -444,6 +579,13 @@ export type StorageLocationUncheckedUpdateInput = {
   isPickable?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pickSequence?: Prisma.IntFieldUpdateOperationsInput | number
+  mapCenterX?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapCenterY?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapLength?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapDepth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapRotation?: Prisma.IntFieldUpdateOperationsInput | number
+  levelNumber?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  slotIndex?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -465,6 +607,13 @@ export type StorageLocationCreateManyInput = {
   isPickable?: boolean
   isActive?: boolean
   pickSequence?: number
+  mapCenterX?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapCenterY?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapLength?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapDepth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapRotation?: number
+  levelNumber?: number | null
+  slotIndex?: number | null
   note?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -478,6 +627,13 @@ export type StorageLocationUpdateManyMutationInput = {
   isPickable?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pickSequence?: Prisma.IntFieldUpdateOperationsInput | number
+  mapCenterX?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapCenterY?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapLength?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapDepth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapRotation?: Prisma.IntFieldUpdateOperationsInput | number
+  levelNumber?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  slotIndex?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -493,6 +649,13 @@ export type StorageLocationUncheckedUpdateManyInput = {
   isPickable?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pickSequence?: Prisma.IntFieldUpdateOperationsInput | number
+  mapCenterX?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapCenterY?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapLength?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapDepth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapRotation?: Prisma.IntFieldUpdateOperationsInput | number
+  levelNumber?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  slotIndex?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -523,6 +686,16 @@ export type StorageLocationIdWarehouseIdCompoundUniqueInput = {
   warehouseId: string
 }
 
+export type StorageLocationParentIdLevelNumberCompoundUniqueInput = {
+  parentId: string
+  levelNumber: number
+}
+
+export type StorageLocationParentIdSlotIndexCompoundUniqueInput = {
+  parentId: string
+  slotIndex: number
+}
+
 export type StorageLocationCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   warehouseId?: Prisma.SortOrder
@@ -533,6 +706,13 @@ export type StorageLocationCountOrderByAggregateInput = {
   isPickable?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   pickSequence?: Prisma.SortOrder
+  mapCenterX?: Prisma.SortOrder
+  mapCenterY?: Prisma.SortOrder
+  mapLength?: Prisma.SortOrder
+  mapDepth?: Prisma.SortOrder
+  mapRotation?: Prisma.SortOrder
+  levelNumber?: Prisma.SortOrder
+  slotIndex?: Prisma.SortOrder
   note?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -540,6 +720,13 @@ export type StorageLocationCountOrderByAggregateInput = {
 
 export type StorageLocationAvgOrderByAggregateInput = {
   pickSequence?: Prisma.SortOrder
+  mapCenterX?: Prisma.SortOrder
+  mapCenterY?: Prisma.SortOrder
+  mapLength?: Prisma.SortOrder
+  mapDepth?: Prisma.SortOrder
+  mapRotation?: Prisma.SortOrder
+  levelNumber?: Prisma.SortOrder
+  slotIndex?: Prisma.SortOrder
 }
 
 export type StorageLocationMaxOrderByAggregateInput = {
@@ -552,6 +739,13 @@ export type StorageLocationMaxOrderByAggregateInput = {
   isPickable?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   pickSequence?: Prisma.SortOrder
+  mapCenterX?: Prisma.SortOrder
+  mapCenterY?: Prisma.SortOrder
+  mapLength?: Prisma.SortOrder
+  mapDepth?: Prisma.SortOrder
+  mapRotation?: Prisma.SortOrder
+  levelNumber?: Prisma.SortOrder
+  slotIndex?: Prisma.SortOrder
   note?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -567,6 +761,13 @@ export type StorageLocationMinOrderByAggregateInput = {
   isPickable?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   pickSequence?: Prisma.SortOrder
+  mapCenterX?: Prisma.SortOrder
+  mapCenterY?: Prisma.SortOrder
+  mapLength?: Prisma.SortOrder
+  mapDepth?: Prisma.SortOrder
+  mapRotation?: Prisma.SortOrder
+  levelNumber?: Prisma.SortOrder
+  slotIndex?: Prisma.SortOrder
   note?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -574,6 +775,13 @@ export type StorageLocationMinOrderByAggregateInput = {
 
 export type StorageLocationSumOrderByAggregateInput = {
   pickSequence?: Prisma.SortOrder
+  mapCenterX?: Prisma.SortOrder
+  mapCenterY?: Prisma.SortOrder
+  mapLength?: Prisma.SortOrder
+  mapDepth?: Prisma.SortOrder
+  mapRotation?: Prisma.SortOrder
+  levelNumber?: Prisma.SortOrder
+  slotIndex?: Prisma.SortOrder
 }
 
 export type StorageLocationScalarRelationFilter = {
@@ -661,6 +869,14 @@ export type StorageLocationUncheckedCreateNestedManyWithoutParentInput = {
 
 export type EnumLocationTypeFieldUpdateOperationsInput = {
   set?: $Enums.LocationType
+}
+
+export type NullableIntFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
 }
 
 export type StorageLocationUpdateOneWithoutChildrenNestedInput = {
@@ -771,6 +987,13 @@ export type StorageLocationCreateWithoutWarehouseInput = {
   isPickable?: boolean
   isActive?: boolean
   pickSequence?: number
+  mapCenterX?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapCenterY?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapLength?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapDepth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapRotation?: number
+  levelNumber?: number | null
+  slotIndex?: number | null
   note?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -792,6 +1015,13 @@ export type StorageLocationUncheckedCreateWithoutWarehouseInput = {
   isPickable?: boolean
   isActive?: boolean
   pickSequence?: number
+  mapCenterX?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapCenterY?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapLength?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapDepth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapRotation?: number
+  levelNumber?: number | null
+  slotIndex?: number | null
   note?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -842,6 +1072,13 @@ export type StorageLocationScalarWhereInput = {
   isPickable?: Prisma.BoolFilter<"StorageLocation"> | boolean
   isActive?: Prisma.BoolFilter<"StorageLocation"> | boolean
   pickSequence?: Prisma.IntFilter<"StorageLocation"> | number
+  mapCenterX?: Prisma.DecimalNullableFilter<"StorageLocation"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapCenterY?: Prisma.DecimalNullableFilter<"StorageLocation"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapLength?: Prisma.DecimalNullableFilter<"StorageLocation"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapDepth?: Prisma.DecimalNullableFilter<"StorageLocation"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapRotation?: Prisma.IntFilter<"StorageLocation"> | number
+  levelNumber?: Prisma.IntNullableFilter<"StorageLocation"> | number | null
+  slotIndex?: Prisma.IntNullableFilter<"StorageLocation"> | number | null
   note?: Prisma.StringNullableFilter<"StorageLocation"> | string | null
   createdAt?: Prisma.DateTimeFilter<"StorageLocation"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"StorageLocation"> | Date | string
@@ -855,6 +1092,13 @@ export type StorageLocationCreateWithoutDefaultForInput = {
   isPickable?: boolean
   isActive?: boolean
   pickSequence?: number
+  mapCenterX?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapCenterY?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapLength?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapDepth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapRotation?: number
+  levelNumber?: number | null
+  slotIndex?: number | null
   note?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -877,6 +1121,13 @@ export type StorageLocationUncheckedCreateWithoutDefaultForInput = {
   isPickable?: boolean
   isActive?: boolean
   pickSequence?: number
+  mapCenterX?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapCenterY?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapLength?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapDepth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapRotation?: number
+  levelNumber?: number | null
+  slotIndex?: number | null
   note?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -911,6 +1162,13 @@ export type StorageLocationUpdateWithoutDefaultForInput = {
   isPickable?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pickSequence?: Prisma.IntFieldUpdateOperationsInput | number
+  mapCenterX?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapCenterY?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapLength?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapDepth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapRotation?: Prisma.IntFieldUpdateOperationsInput | number
+  levelNumber?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  slotIndex?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -933,6 +1191,13 @@ export type StorageLocationUncheckedUpdateWithoutDefaultForInput = {
   isPickable?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pickSequence?: Prisma.IntFieldUpdateOperationsInput | number
+  mapCenterX?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapCenterY?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapLength?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapDepth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapRotation?: Prisma.IntFieldUpdateOperationsInput | number
+  levelNumber?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  slotIndex?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -951,6 +1216,13 @@ export type StorageLocationCreateWithoutChildrenInput = {
   isPickable?: boolean
   isActive?: boolean
   pickSequence?: number
+  mapCenterX?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapCenterY?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapLength?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapDepth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapRotation?: number
+  levelNumber?: number | null
+  slotIndex?: number | null
   note?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -973,6 +1245,13 @@ export type StorageLocationUncheckedCreateWithoutChildrenInput = {
   isPickable?: boolean
   isActive?: boolean
   pickSequence?: number
+  mapCenterX?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapCenterY?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapLength?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapDepth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapRotation?: number
+  levelNumber?: number | null
+  slotIndex?: number | null
   note?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -996,6 +1275,13 @@ export type StorageLocationCreateWithoutParentInput = {
   isPickable?: boolean
   isActive?: boolean
   pickSequence?: number
+  mapCenterX?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapCenterY?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapLength?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapDepth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapRotation?: number
+  levelNumber?: number | null
+  slotIndex?: number | null
   note?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1017,6 +1303,13 @@ export type StorageLocationUncheckedCreateWithoutParentInput = {
   isPickable?: boolean
   isActive?: boolean
   pickSequence?: number
+  mapCenterX?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapCenterY?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapLength?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapDepth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapRotation?: number
+  levelNumber?: number | null
+  slotIndex?: number | null
   note?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1057,6 +1350,13 @@ export type StorageLocationUpdateWithoutChildrenInput = {
   isPickable?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pickSequence?: Prisma.IntFieldUpdateOperationsInput | number
+  mapCenterX?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapCenterY?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapLength?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapDepth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapRotation?: Prisma.IntFieldUpdateOperationsInput | number
+  levelNumber?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  slotIndex?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1079,6 +1379,13 @@ export type StorageLocationUncheckedUpdateWithoutChildrenInput = {
   isPickable?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pickSequence?: Prisma.IntFieldUpdateOperationsInput | number
+  mapCenterX?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapCenterY?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapLength?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapDepth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapRotation?: Prisma.IntFieldUpdateOperationsInput | number
+  levelNumber?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  slotIndex?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1113,6 +1420,13 @@ export type StorageLocationCreateWithoutLocationStocksInput = {
   isPickable?: boolean
   isActive?: boolean
   pickSequence?: number
+  mapCenterX?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapCenterY?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapLength?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapDepth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapRotation?: number
+  levelNumber?: number | null
+  slotIndex?: number | null
   note?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1135,6 +1449,13 @@ export type StorageLocationUncheckedCreateWithoutLocationStocksInput = {
   isPickable?: boolean
   isActive?: boolean
   pickSequence?: number
+  mapCenterX?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapCenterY?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapLength?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapDepth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapRotation?: number
+  levelNumber?: number | null
+  slotIndex?: number | null
   note?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1169,6 +1490,13 @@ export type StorageLocationUpdateWithoutLocationStocksInput = {
   isPickable?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pickSequence?: Prisma.IntFieldUpdateOperationsInput | number
+  mapCenterX?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapCenterY?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapLength?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapDepth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapRotation?: Prisma.IntFieldUpdateOperationsInput | number
+  levelNumber?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  slotIndex?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1191,6 +1519,13 @@ export type StorageLocationUncheckedUpdateWithoutLocationStocksInput = {
   isPickable?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pickSequence?: Prisma.IntFieldUpdateOperationsInput | number
+  mapCenterX?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapCenterY?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapLength?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapDepth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapRotation?: Prisma.IntFieldUpdateOperationsInput | number
+  levelNumber?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  slotIndex?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1209,6 +1544,13 @@ export type StorageLocationCreateWithoutMovementsFromInput = {
   isPickable?: boolean
   isActive?: boolean
   pickSequence?: number
+  mapCenterX?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapCenterY?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapLength?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapDepth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapRotation?: number
+  levelNumber?: number | null
+  slotIndex?: number | null
   note?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1231,6 +1573,13 @@ export type StorageLocationUncheckedCreateWithoutMovementsFromInput = {
   isPickable?: boolean
   isActive?: boolean
   pickSequence?: number
+  mapCenterX?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapCenterY?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapLength?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapDepth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapRotation?: number
+  levelNumber?: number | null
+  slotIndex?: number | null
   note?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1254,6 +1603,13 @@ export type StorageLocationCreateWithoutMovementsToInput = {
   isPickable?: boolean
   isActive?: boolean
   pickSequence?: number
+  mapCenterX?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapCenterY?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapLength?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapDepth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapRotation?: number
+  levelNumber?: number | null
+  slotIndex?: number | null
   note?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1276,6 +1632,13 @@ export type StorageLocationUncheckedCreateWithoutMovementsToInput = {
   isPickable?: boolean
   isActive?: boolean
   pickSequence?: number
+  mapCenterX?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapCenterY?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapLength?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapDepth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapRotation?: number
+  levelNumber?: number | null
+  slotIndex?: number | null
   note?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1310,6 +1673,13 @@ export type StorageLocationUpdateWithoutMovementsFromInput = {
   isPickable?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pickSequence?: Prisma.IntFieldUpdateOperationsInput | number
+  mapCenterX?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapCenterY?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapLength?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapDepth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapRotation?: Prisma.IntFieldUpdateOperationsInput | number
+  levelNumber?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  slotIndex?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1332,6 +1702,13 @@ export type StorageLocationUncheckedUpdateWithoutMovementsFromInput = {
   isPickable?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pickSequence?: Prisma.IntFieldUpdateOperationsInput | number
+  mapCenterX?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapCenterY?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapLength?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapDepth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapRotation?: Prisma.IntFieldUpdateOperationsInput | number
+  levelNumber?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  slotIndex?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1361,6 +1738,13 @@ export type StorageLocationUpdateWithoutMovementsToInput = {
   isPickable?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pickSequence?: Prisma.IntFieldUpdateOperationsInput | number
+  mapCenterX?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapCenterY?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapLength?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapDepth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapRotation?: Prisma.IntFieldUpdateOperationsInput | number
+  levelNumber?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  slotIndex?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1383,6 +1767,13 @@ export type StorageLocationUncheckedUpdateWithoutMovementsToInput = {
   isPickable?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pickSequence?: Prisma.IntFieldUpdateOperationsInput | number
+  mapCenterX?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapCenterY?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapLength?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapDepth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapRotation?: Prisma.IntFieldUpdateOperationsInput | number
+  levelNumber?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  slotIndex?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1401,6 +1792,13 @@ export type StorageLocationCreateWithoutAdjustmentItemsInput = {
   isPickable?: boolean
   isActive?: boolean
   pickSequence?: number
+  mapCenterX?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapCenterY?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapLength?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapDepth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapRotation?: number
+  levelNumber?: number | null
+  slotIndex?: number | null
   note?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1423,6 +1821,13 @@ export type StorageLocationUncheckedCreateWithoutAdjustmentItemsInput = {
   isPickable?: boolean
   isActive?: boolean
   pickSequence?: number
+  mapCenterX?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapCenterY?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapLength?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapDepth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapRotation?: number
+  levelNumber?: number | null
+  slotIndex?: number | null
   note?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1457,6 +1862,13 @@ export type StorageLocationUpdateWithoutAdjustmentItemsInput = {
   isPickable?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pickSequence?: Prisma.IntFieldUpdateOperationsInput | number
+  mapCenterX?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapCenterY?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapLength?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapDepth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapRotation?: Prisma.IntFieldUpdateOperationsInput | number
+  levelNumber?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  slotIndex?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1479,6 +1891,13 @@ export type StorageLocationUncheckedUpdateWithoutAdjustmentItemsInput = {
   isPickable?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pickSequence?: Prisma.IntFieldUpdateOperationsInput | number
+  mapCenterX?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapCenterY?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapLength?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapDepth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapRotation?: Prisma.IntFieldUpdateOperationsInput | number
+  levelNumber?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  slotIndex?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1498,6 +1917,13 @@ export type StorageLocationCreateManyWarehouseInput = {
   isPickable?: boolean
   isActive?: boolean
   pickSequence?: number
+  mapCenterX?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapCenterY?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapLength?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapDepth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapRotation?: number
+  levelNumber?: number | null
+  slotIndex?: number | null
   note?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1511,6 +1937,13 @@ export type StorageLocationUpdateWithoutWarehouseInput = {
   isPickable?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pickSequence?: Prisma.IntFieldUpdateOperationsInput | number
+  mapCenterX?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapCenterY?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapLength?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapDepth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapRotation?: Prisma.IntFieldUpdateOperationsInput | number
+  levelNumber?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  slotIndex?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1532,6 +1965,13 @@ export type StorageLocationUncheckedUpdateWithoutWarehouseInput = {
   isPickable?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pickSequence?: Prisma.IntFieldUpdateOperationsInput | number
+  mapCenterX?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapCenterY?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapLength?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapDepth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapRotation?: Prisma.IntFieldUpdateOperationsInput | number
+  levelNumber?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  slotIndex?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1552,6 +1992,13 @@ export type StorageLocationUncheckedUpdateManyWithoutWarehouseInput = {
   isPickable?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pickSequence?: Prisma.IntFieldUpdateOperationsInput | number
+  mapCenterX?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapCenterY?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapLength?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapDepth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapRotation?: Prisma.IntFieldUpdateOperationsInput | number
+  levelNumber?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  slotIndex?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1566,6 +2013,13 @@ export type StorageLocationCreateManyParentInput = {
   isPickable?: boolean
   isActive?: boolean
   pickSequence?: number
+  mapCenterX?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapCenterY?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapLength?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapDepth?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapRotation?: number
+  levelNumber?: number | null
+  slotIndex?: number | null
   note?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1579,6 +2033,13 @@ export type StorageLocationUpdateWithoutParentInput = {
   isPickable?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pickSequence?: Prisma.IntFieldUpdateOperationsInput | number
+  mapCenterX?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapCenterY?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapLength?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapDepth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapRotation?: Prisma.IntFieldUpdateOperationsInput | number
+  levelNumber?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  slotIndex?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1600,6 +2061,13 @@ export type StorageLocationUncheckedUpdateWithoutParentInput = {
   isPickable?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pickSequence?: Prisma.IntFieldUpdateOperationsInput | number
+  mapCenterX?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapCenterY?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapLength?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapDepth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapRotation?: Prisma.IntFieldUpdateOperationsInput | number
+  levelNumber?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  slotIndex?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1620,6 +2088,13 @@ export type StorageLocationUncheckedUpdateManyWithoutParentInput = {
   isPickable?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pickSequence?: Prisma.IntFieldUpdateOperationsInput | number
+  mapCenterX?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapCenterY?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapLength?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapDepth?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  mapRotation?: Prisma.IntFieldUpdateOperationsInput | number
+  levelNumber?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  slotIndex?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1711,6 +2186,13 @@ export type StorageLocationSelect<ExtArgs extends runtime.Types.Extensions.Inter
   isPickable?: boolean
   isActive?: boolean
   pickSequence?: boolean
+  mapCenterX?: boolean
+  mapCenterY?: boolean
+  mapLength?: boolean
+  mapDepth?: boolean
+  mapRotation?: boolean
+  levelNumber?: boolean
+  slotIndex?: boolean
   note?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1735,6 +2217,13 @@ export type StorageLocationSelectCreateManyAndReturn<ExtArgs extends runtime.Typ
   isPickable?: boolean
   isActive?: boolean
   pickSequence?: boolean
+  mapCenterX?: boolean
+  mapCenterY?: boolean
+  mapLength?: boolean
+  mapDepth?: boolean
+  mapRotation?: boolean
+  levelNumber?: boolean
+  slotIndex?: boolean
   note?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1752,6 +2241,13 @@ export type StorageLocationSelectUpdateManyAndReturn<ExtArgs extends runtime.Typ
   isPickable?: boolean
   isActive?: boolean
   pickSequence?: boolean
+  mapCenterX?: boolean
+  mapCenterY?: boolean
+  mapLength?: boolean
+  mapDepth?: boolean
+  mapRotation?: boolean
+  levelNumber?: boolean
+  slotIndex?: boolean
   note?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1769,12 +2265,19 @@ export type StorageLocationSelectScalar = {
   isPickable?: boolean
   isActive?: boolean
   pickSequence?: boolean
+  mapCenterX?: boolean
+  mapCenterY?: boolean
+  mapLength?: boolean
+  mapDepth?: boolean
+  mapRotation?: boolean
+  levelNumber?: boolean
+  slotIndex?: boolean
   note?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type StorageLocationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "warehouseId" | "code" | "name" | "type" | "parentId" | "isPickable" | "isActive" | "pickSequence" | "note" | "createdAt" | "updatedAt", ExtArgs["result"]["storageLocation"]>
+export type StorageLocationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "warehouseId" | "code" | "name" | "type" | "parentId" | "isPickable" | "isActive" | "pickSequence" | "mapCenterX" | "mapCenterY" | "mapLength" | "mapDepth" | "mapRotation" | "levelNumber" | "slotIndex" | "note" | "createdAt" | "updatedAt", ExtArgs["result"]["storageLocation"]>
 export type StorageLocationInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   warehouse?: boolean | Prisma.WarehouseDefaultArgs<ExtArgs>
   parent?: boolean | Prisma.StorageLocation$parentArgs<ExtArgs>
@@ -1817,6 +2320,13 @@ export type $StorageLocationPayload<ExtArgs extends runtime.Types.Extensions.Int
     isPickable: boolean
     isActive: boolean
     pickSequence: number
+    mapCenterX: runtime.Decimal | null
+    mapCenterY: runtime.Decimal | null
+    mapLength: runtime.Decimal | null
+    mapDepth: runtime.Decimal | null
+    mapRotation: number
+    levelNumber: number | null
+    slotIndex: number | null
     note: string | null
     createdAt: Date
     updatedAt: Date
@@ -2260,6 +2770,13 @@ export interface StorageLocationFieldRefs {
   readonly isPickable: Prisma.FieldRef<"StorageLocation", 'Boolean'>
   readonly isActive: Prisma.FieldRef<"StorageLocation", 'Boolean'>
   readonly pickSequence: Prisma.FieldRef<"StorageLocation", 'Int'>
+  readonly mapCenterX: Prisma.FieldRef<"StorageLocation", 'Decimal'>
+  readonly mapCenterY: Prisma.FieldRef<"StorageLocation", 'Decimal'>
+  readonly mapLength: Prisma.FieldRef<"StorageLocation", 'Decimal'>
+  readonly mapDepth: Prisma.FieldRef<"StorageLocation", 'Decimal'>
+  readonly mapRotation: Prisma.FieldRef<"StorageLocation", 'Int'>
+  readonly levelNumber: Prisma.FieldRef<"StorageLocation", 'Int'>
+  readonly slotIndex: Prisma.FieldRef<"StorageLocation", 'Int'>
   readonly note: Prisma.FieldRef<"StorageLocation", 'String'>
   readonly createdAt: Prisma.FieldRef<"StorageLocation", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"StorageLocation", 'DateTime'>

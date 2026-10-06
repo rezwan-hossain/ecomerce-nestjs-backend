@@ -187,10 +187,13 @@ export class StorageLocationsService {
       await this.assertNoCycle(id, dto.parentId);
     }
 
-    // Deactivating a rack that still holds stock would hide it from
-    // put-away while units sit on it — empty it first.
+    // Deactivating a rack (or anything under it) that still holds stock
+    // would hide units from put-away and picking — empty it first.
     if (dto.isActive === false && location.isActive) {
-      const held = await this.unitsOn(id);
+      const ids = (
+        await this.subtreeByDepth(this.prisma, id, location.warehouseId)
+      ).flat();
+      const held = await this.unitsOn(ids);
       if (held > 0) {
         throw new ConflictException(
           `Location "${location.code}" still holds ${held} unit(s); move them before deactivating`,
@@ -210,13 +213,16 @@ export class StorageLocationsService {
   }
 
   /**
-   * Only for locations created by mistake: anything that ever held stock
-   * is referenced by the ledger and must be deactivated instead.
+   * Removes a location with everything under it (a rack with its shelves
+   * and bins). Refused while any of it holds stock. If any of it has
+   * history — ledger movements, adjustment lines, or a variant's default
+   * rack — it's deactivated instead (placement kept, defaults cleared), so
+   * the audit trail stays intact. Never writes movements.
    */
   async remove(id: string) {
     const location = await this.prisma.storageLocation.findUnique({
       where: { id },
-      select: { code: true },
+      select: { code: true, warehouseId: true },
     });
     if (!location) throw new NotFoundException('Location not found');
     if (location.code === UNASSIGNED_LOCATION_CODE) {
@@ -225,35 +231,107 @@ export class StorageLocationsService {
       );
     }
 
-    try {
-      await this.prisma.$transaction(async (tx) => {
-        // Empty rows left behind by past stock (quantity 0) don't count.
-        await tx.locationStock.deleteMany({
-          where: { locationId: id, quantity: 0 },
-        });
-        await tx.storageLocation.delete({ where: { id } });
-      });
-    } catch (e) {
-      if (e instanceof PrismaClientKnownRequestError && e.code === 'P2003') {
+    return this.prisma.$transaction(async (tx) => {
+      const levels = await this.subtreeByDepth(tx, id, location.warehouseId);
+      const ids = levels.flat();
+
+      const held = await this.unitsOn(ids, tx);
+      if (held > 0) {
         throw new ConflictException(
-          `Location "${location.code}" has stock, movement history or child locations. Deactivate it instead (isActive: false).`,
+          `${location.code} holds ${held} unit(s). Move the ${held} units out first.`,
         );
       }
-      throw e;
-    }
-    return { message: 'Location deleted' };
+
+      const [movement, adjustmentItem, defaultFor] = await Promise.all([
+        tx.inventoryMovement.findFirst({
+          where: {
+            OR: [
+              { fromLocationId: { in: ids } },
+              { toLocationId: { in: ids } },
+            ],
+          },
+          select: { id: true },
+        }),
+        tx.stockAdjustmentItem.findFirst({
+          where: { locationId: { in: ids } },
+          select: { id: true },
+        }),
+        tx.inventoryLevel.findFirst({
+          where: { defaultLocationId: { in: ids } },
+          select: { id: true },
+        }),
+      ]);
+
+      if (movement || adjustmentItem || defaultFor) {
+        await tx.storageLocation.updateMany({
+          where: { id: { in: ids } },
+          data: { isActive: false },
+        });
+        await tx.inventoryLevel.updateMany({
+          where: { defaultLocationId: { in: ids } },
+          data: { defaultLocationId: null },
+        });
+        return {
+          message: `${location.code} has history, so it was deactivated instead of deleted`,
+          result: 'deactivated' as const,
+        };
+      }
+
+      // Zero-quantity rows left by past stock, then children before parents.
+      await tx.locationStock.deleteMany({ where: { locationId: { in: ids } } });
+      for (const depth of [...levels].reverse()) {
+        await tx.storageLocation.deleteMany({ where: { id: { in: depth } } });
+      }
+      return {
+        message: `${location.code} deleted`,
+        result: 'deleted' as const,
+      };
+    });
   }
 
   // ═════════════════════════════════════════════════
   //   HELPERS
   // ═════════════════════════════════════════════════
 
-  private async unitsOn(locationId: string) {
-    const agg = await this.prisma.locationStock.aggregate({
-      where: { locationId },
+  /** Units held at these locations. */
+  private async unitsOn(
+    locationIds: string[],
+    db: Prisma.TransactionClient | PrismaService = this.prisma,
+  ) {
+    const agg = await db.locationStock.aggregate({
+      where: { locationId: { in: locationIds } },
       _sum: { quantity: true },
     });
     return agg._sum.quantity ?? 0;
+  }
+
+  /** The location's subtree as [[id], [children], [grandchildren], …]. */
+  private async subtreeByDepth(
+    db: Prisma.TransactionClient | PrismaService,
+    id: string,
+    warehouseId: string,
+  ): Promise<string[][]> {
+    const all = await db.storageLocation.findMany({
+      where: { warehouseId },
+      select: { id: true, parentId: true },
+    });
+    const children = new Map<string, string[]>();
+    for (const loc of all) {
+      if (!loc.parentId) continue;
+      children.set(loc.parentId, [
+        ...(children.get(loc.parentId) ?? []),
+        loc.id,
+      ]);
+    }
+    const levels: string[][] = [[id]];
+    while (levels.length < 50) {
+      const next = levels[levels.length - 1].flatMap(
+        (p) => children.get(p) ?? [],
+      );
+      if (!next.length) break;
+      levels.push(next);
+    }
+    return levels;
   }
 
   private async assertParent(parentId: string, warehouseId: string) {

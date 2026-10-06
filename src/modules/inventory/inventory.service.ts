@@ -22,10 +22,13 @@ import type {
 import { ProductVariantWhereInput } from 'src/generated/prisma/models/ProductVariant';
 import { InventoryMovementWhereInput } from 'src/generated/prisma/models/InventoryMovement';
 
+import { planPick as planPickLegs, type PickLeg } from './floor-plan/pick-plan';
 import {
   AdjustStockItemDto,
   BulkAdjustStockDto,
   InventoryQueryDto,
+  LocationCountDto,
+  LocationMoveDto,
   MoveStockDto,
   MovementQueryDto,
   ReceiveStockDto,
@@ -82,6 +85,29 @@ export interface LocationMove {
   note?: string | null;
   userId?: string | null;
 }
+
+/** A bin → bin move of one inventory level's stock (rack map). */
+export interface LocationTransfer {
+  inventoryLevelId: string;
+  fromLocationId: string;
+  toLocationId: string;
+  quantity: number;
+  makeDefault?: boolean; // also make the destination the default (if pickable)
+  note?: string | null;
+  userId?: string | null;
+}
+
+/** One counted line of a bin count. */
+export interface CountLine {
+  inventoryLevelId: string;
+  countedQty: number;
+}
+
+/** Roles allowed to approve (and so apply) stock adjustments. */
+const ADJUSTMENT_APPROVER_ROLES = ['ADMIN', 'SUPER_ADMIN'] as const;
+
+/** Location types that never hold stock directly. */
+const NON_STOCK_LOCATION_TYPES = ['ZONE', 'AISLE'] as const;
 
 export interface ReservationLine {
   variantId: string;
@@ -173,7 +199,7 @@ type LevelRow = {
 };
 
 /** Part of a stock change that hits one rack. */
-type Leg = { locationId: string; quantity: number };
+type Leg = PickLeg;
 
 type Movement = Awaited<
   ReturnType<Prisma.TransactionClient['inventoryMovement']['create']>
@@ -561,6 +587,245 @@ export class InventoryService {
     });
   }
 
+  /**
+   * Moves units of one inventory level from one location to another in the
+   * same warehouse (bin → bin on the rack map). onHand is unchanged; writes
+   * one LOCATION_MOVE. Unlike moveStock, the destination must be a leaf
+   * (stock lives in bins, not on racks that have bins).
+   */
+  async moveBetweenLocations(
+    tx: Prisma.TransactionClient,
+    move: LocationTransfer,
+  ) {
+    const { inventoryLevelId, fromLocationId, toLocationId, quantity } = move;
+    if (!Number.isInteger(quantity) || quantity < 1) {
+      throw new BadRequestException('Quantity must be a positive integer');
+    }
+    if (fromLocationId === toLocationId) {
+      throw new BadRequestException(
+        'Source and destination are the same location',
+      );
+    }
+
+    const level = await this.lockLevelById(tx, inventoryLevelId);
+    const locations = await tx.storageLocation.findMany({
+      where: { id: { in: [fromLocationId, toLocationId] } },
+      select: {
+        id: true,
+        code: true,
+        type: true,
+        warehouseId: true,
+        isActive: true,
+        isPickable: true,
+        _count: { select: { children: true } },
+      },
+    });
+    const from = locations.find((l) => l.id === fromLocationId);
+    const to = locations.find((l) => l.id === toLocationId);
+    if (!from) throw new NotFoundException('Source location not found');
+    if (!to) throw new NotFoundException('Destination location not found');
+    for (const loc of [from, to]) {
+      if (loc.warehouseId !== level.warehouseId) {
+        throw new BadRequestException(
+          `${loc.code} is in a different warehouse from this stock`,
+        );
+      }
+    }
+    if (!to.isActive) {
+      throw new BadRequestException(`${to.code} is inactive`);
+    }
+    if (
+      to._count.children > 0 ||
+      (NON_STOCK_LOCATION_TYPES as readonly string[]).includes(to.type)
+    ) {
+      throw new BadRequestException(
+        `${to.code} doesn't hold stock directly. Pick one of its bins.`,
+      );
+    }
+
+    const source = await tx.locationStock.findUnique({
+      where: {
+        inventoryLevelId_locationId: {
+          inventoryLevelId,
+          locationId: fromLocationId,
+        },
+      },
+      select: { quantity: true },
+    });
+    const have = source?.quantity ?? 0;
+    if (quantity > have) {
+      throw new BadRequestException(
+        `${from.code} holds ${have} unit(s) of this SKU; can't move ${quantity}`,
+      );
+    }
+
+    // Source rows are kept at 0 (as everywhere else); remove() cleans them.
+    await this.changeLocationStock(tx, level, fromLocationId, -quantity);
+    await this.changeLocationStock(tx, level, toLocationId, quantity);
+    await tx.inventoryLevel.update({
+      where: { id: level.id },
+      data: {
+        version: { increment: 1 },
+        ...(move.makeDefault &&
+          to.isPickable && {
+            defaultLocationId: toLocationId,
+          }),
+      },
+    });
+
+    const movement = await tx.inventoryMovement.create({
+      data: {
+        inventoryLevelId: level.id,
+        type: 'LOCATION_MOVE',
+        direction: 'INTERNAL',
+        quantity,
+        onHandBefore: level.onHand,
+        onHandAfter: level.onHand,
+        fromLocationId,
+        toLocationId,
+        note: move.note ?? null,
+        performedByUserId: move.userId ?? null,
+      },
+    });
+    const dest = await tx.locationStock.findUnique({
+      where: {
+        inventoryLevelId_locationId: {
+          inventoryLevelId,
+          locationId: toLocationId,
+        },
+      },
+      select: { quantity: true },
+    });
+
+    return {
+      movementId: movement.id,
+      from: { locationId: fromLocationId, quantity: have - quantity },
+      to: { locationId: toLocationId, quantity: dest?.quantity ?? quantity },
+    };
+  }
+
+  // ─── Adjustments ────────────────────────────────
+
+  /**
+   * Applies a PENDING or APPROVED adjustment: one movement per non-zero
+   * item (at the item's location when it has one), then marks it APPLIED.
+   * Cycle-count items with a location are re-based on the location's
+   * current quantity, so a count applied later still lands on the counted
+   * number.
+   */
+  async applyAdjustment(
+    tx: Prisma.TransactionClient,
+    adjustmentId: string,
+    userId?: string | null,
+  ) {
+    // Serialises appliers of the same adjustment.
+    await tx.$queryRaw`
+      SELECT "id" FROM "stock_adjustments" WHERE "id" = ${adjustmentId} FOR UPDATE`;
+    const adjustment = await tx.stockAdjustment.findUnique({
+      where: { id: adjustmentId },
+      include: { items: { orderBy: { id: 'asc' } } },
+    });
+    if (!adjustment) throw new NotFoundException('Adjustment not found');
+    if (adjustment.status !== 'PENDING' && adjustment.status !== 'APPROVED') {
+      throw new ConflictException(
+        `${adjustment.adjustmentNumber} is ${adjustment.status.toLowerCase()} and can't be applied`,
+      );
+    }
+
+    for (const item of adjustment.items) {
+      let delta = item.adjustmentQty;
+      if (
+        adjustment.type === 'CYCLE_COUNT' &&
+        item.locationId &&
+        item.actualQty !== null
+      ) {
+        const level = await this.ensureLevel(
+          tx,
+          item.variantId,
+          item.warehouseId,
+        );
+        const current = await tx.locationStock.findUnique({
+          where: {
+            inventoryLevelId_locationId: {
+              inventoryLevelId: level.id,
+              locationId: item.locationId,
+            },
+          },
+          select: { quantity: true },
+        });
+        const expected = current?.quantity ?? 0;
+        delta = item.actualQty - expected;
+        if (delta !== item.adjustmentQty || expected !== item.expectedQty) {
+          await tx.stockAdjustmentItem.update({
+            where: { id: item.id },
+            data: { expectedQty: expected, adjustmentQty: delta },
+          });
+        }
+      }
+      if (delta === 0) continue;
+
+      await this.applyMovement(tx, {
+        variantId: item.variantId,
+        warehouseId: item.warehouseId,
+        locationId: item.locationId,
+        type: delta > 0 ? 'ADJUSTMENT_INCREASE' : 'ADJUSTMENT_DECREASE',
+        quantity: Math.abs(delta),
+        unitCost: delta > 0 ? item.unitCost : null,
+        referenceType: 'ADJUSTMENT',
+        referenceId: adjustment.id,
+        note: adjustment.note
+          ? `${adjustment.adjustmentNumber}: ${adjustment.note}`
+          : adjustment.adjustmentNumber,
+        userId,
+      });
+    }
+
+    const now = new Date();
+    return tx.stockAdjustment.update({
+      where: { id: adjustment.id },
+      data: {
+        status: 'APPLIED',
+        approvedByUserId: adjustment.approvedByUserId ?? userId ?? null,
+        approvedAt: adjustment.approvedAt ?? now,
+        appliedAt: now,
+      },
+      select: { id: true, adjustmentNumber: true, status: true },
+    });
+  }
+
+  /** Whether this user may approve adjustments (ADMIN / SUPER_ADMIN). */
+  async canApproveAdjustments(
+    tx: Prisma.TransactionClient,
+    userId?: string | null,
+  ): Promise<boolean> {
+    if (!userId) return false;
+    const user = await tx.user.findUnique({
+      where: { id: userId },
+      select: { role: true, isActive: true },
+    });
+    return (
+      !!user &&
+      user.isActive &&
+      (ADJUSTMENT_APPROVER_ROLES as readonly string[]).includes(user.role)
+    );
+  }
+
+  /** "ADJ-2026-00042": next number for the year, serialised by a lock. */
+  async nextAdjustmentNumber(
+    tx: Prisma.TransactionClient,
+    date = new Date(),
+  ): Promise<string> {
+    await tx.$executeRaw`SELECT pg_advisory_xact_lock(hashtext('stock_adjustments.adjustmentNumber'))`;
+    const prefix = `ADJ-${date.getFullYear()}-`;
+    const last = await tx.stockAdjustment.findFirst({
+      where: { adjustmentNumber: { startsWith: prefix } },
+      orderBy: { adjustmentNumber: 'desc' },
+      select: { adjustmentNumber: true },
+    });
+    const n = last ? Number(last.adjustmentNumber.slice(prefix.length)) : 0;
+    return `${prefix}${String((Number.isFinite(n) ? n : 0) + 1).padStart(5, '0')}`;
+  }
+
   // ─── Reservations ───────────────────────────────
 
   /**
@@ -744,9 +1009,11 @@ export class InventoryService {
     orderId: string,
     userId?: string | null,
   ) {
+    // Same order as FloorPlanService.pickRoute, so the route on the map is
+    // what gets picked.
     const active = await tx.stockReservation.findMany({
       where: { orderId, status: 'ACTIVE' },
-      orderBy: { inventoryLevelId: 'asc' },
+      orderBy: [{ inventoryLevelId: 'asc' }, { id: 'asc' }],
     });
 
     for (const r of active) {
@@ -917,6 +1184,120 @@ export class InventoryService {
         : 'Stock already matches count',
       data: movements,
     };
+  }
+
+  /** POST /inventory/locations/:id/moves */
+  async moveFromLocation(
+    fromLocationId: string,
+    dto: LocationMoveDto,
+    actedBy?: string,
+  ) {
+    return this.runInTransaction((tx) =>
+      this.moveBetweenLocations(tx, {
+        ...dto,
+        fromLocationId,
+        userId: actedBy,
+      }),
+    );
+  }
+
+  /**
+   * POST /inventory/locations/:id/counts — a CYCLE_COUNT adjustment for
+   * the lines that differ from what the location holds. Applied right away
+   * when `applyNow` and the acting user may approve; otherwise PENDING.
+   */
+  async countLocation(
+    locationId: string,
+    dto: LocationCountDto,
+    actedBy?: string,
+  ) {
+    return this.runInTransaction(async (tx) => {
+      const location = await tx.storageLocation.findUnique({
+        where: { id: locationId },
+        select: {
+          code: true,
+          type: true,
+          warehouseId: true,
+          _count: { select: { children: true } },
+        },
+      });
+      if (!location) throw new NotFoundException('Location not found');
+      if (
+        location._count.children > 0 ||
+        (NON_STOCK_LOCATION_TYPES as readonly string[]).includes(location.type)
+      ) {
+        throw new BadRequestException(
+          `${location.code} doesn't hold stock directly. Count one of its bins.`,
+        );
+      }
+
+      const ids = dto.lines.map((l) => l.inventoryLevelId);
+      const [levels, stocks] = await Promise.all([
+        tx.inventoryLevel.findMany({
+          where: { id: { in: ids } },
+          select: {
+            id: true,
+            variantId: true,
+            warehouseId: true,
+            unitCost: true,
+          },
+        }),
+        tx.locationStock.findMany({
+          where: { locationId, inventoryLevelId: { in: ids } },
+          select: { inventoryLevelId: true, quantity: true },
+        }),
+      ]);
+      const levelById = new Map(levels.map((l) => [l.id, l]));
+      const held = new Map(stocks.map((s) => [s.inventoryLevelId, s.quantity]));
+
+      const items: Prisma.StockAdjustmentItemCreateWithoutAdjustmentInput[] =
+        [];
+      for (const line of dto.lines) {
+        const level = levelById.get(line.inventoryLevelId);
+        if (!level) {
+          throw new NotFoundException(
+            `Inventory level "${line.inventoryLevelId}" not found`,
+          );
+        }
+        if (level.warehouseId !== location.warehouseId) {
+          throw new BadRequestException(
+            `Inventory level "${level.id}" is in a different warehouse from ${location.code}`,
+          );
+        }
+        const expected = held.get(level.id) ?? 0;
+        if (line.countedQty === expected) continue;
+        items.push({
+          variant: { connect: { id: level.variantId } },
+          warehouse: { connect: { id: level.warehouseId } },
+          location: { connect: { id: locationId } },
+          expectedQty: expected,
+          actualQty: line.countedQty,
+          adjustmentQty: line.countedQty - expected,
+          unitCost: level.unitCost,
+        });
+      }
+      if (!items.length) return { adjustment: null };
+
+      const adjustment = await tx.stockAdjustment.create({
+        data: {
+          adjustmentNumber: await this.nextAdjustmentNumber(tx),
+          type: 'CYCLE_COUNT',
+          reason: 'CYCLE_COUNT',
+          status: 'PENDING',
+          createdByUserId: actedBy ?? null,
+          note: `Count of ${location.code}`,
+          items: { create: items },
+        },
+        select: { id: true, adjustmentNumber: true, status: true },
+      });
+
+      if (dto.applyNow && (await this.canApproveAdjustments(tx, actedBy))) {
+        return {
+          adjustment: await this.applyAdjustment(tx, adjustment.id, actedBy),
+        };
+      }
+      return { adjustment };
+    });
   }
 
   async move(dto: MoveStockDto, actedBy?: string) {
@@ -1250,29 +1631,21 @@ export class InventoryService {
       return [{ locationId: fromLocationId, quantity }];
     }
 
-    const isDefault = (id: string) => (id === level.defaultLocationId ? 0 : 1);
-    rows.sort(
-      (a, b) =>
-        isDefault(a.locationId) - isDefault(b.locationId) ||
-        Number(b.location.isPickable) - Number(a.location.isPickable) ||
-        a.quantity - b.quantity ||
-        a.location.pickSequence - b.location.pickSequence ||
-        a.location.code.localeCompare(b.location.code),
+    // Same plan the pick-route map shows (floor-plan/pick-plan.ts).
+    const { legs, shortfall } = planPickLegs(
+      level,
+      quantity,
+      rows.map((r) => ({
+        locationId: r.locationId,
+        quantity: r.quantity,
+        ...r.location,
+      })),
     );
-
-    const legs: Leg[] = [];
-    let remaining = quantity;
-    for (const row of rows) {
-      if (remaining === 0) break;
-      const take = Math.min(remaining, row.quantity);
-      legs.push({ locationId: row.locationId, quantity: take });
-      remaining -= take;
-    }
-    if (remaining > 0) {
+    if (shortfall > 0) {
       // Racks must always add up to onHand — this means a bug or a manual
       // DB edit, not a user error.
       throw new InternalServerErrorException(
-        `Rack quantities for inventory level ${level.id} don't cover onHand (${remaining} unit(s) short)`,
+        `Rack quantities for inventory level ${level.id} don't cover onHand (${shortfall} unit(s) short)`,
       );
     }
     return legs;

@@ -107,6 +107,37 @@ export const receiveStockSchema = z.object({
 
 export class ReceiveStockDto extends createZodDto(receiveStockSchema) {}
 
+// Bin → bin on the rack map (POST /inventory/locations/:id/moves).
+export const locationMoveSchema = z.object({
+  inventoryLevelId: z.string().uuid(),
+  toLocationId: z.string().uuid(),
+  quantity: z.number().int().positive(),
+  makeDefault: z.boolean().optional().default(false),
+});
+
+export class LocationMoveDto extends createZodDto(locationMoveSchema) {}
+
+// Bin count (POST /inventory/locations/:id/counts).
+export const locationCountSchema = z.object({
+  lines: z
+    .array(
+      z.object({
+        inventoryLevelId: z.string().uuid(),
+        countedQty: z.number().int().nonnegative(),
+      }),
+    )
+    .min(1)
+    .max(200)
+    .refine(
+      (lines) =>
+        new Set(lines.map((l) => l.inventoryLevelId)).size === lines.length,
+      { message: 'Each inventoryLevelId may appear only once' },
+    ),
+  applyNow: z.boolean(),
+});
+
+export class LocationCountDto extends createZodDto(locationCountSchema) {}
+
 // Stock take: set the exact physically counted quantity.
 export const stockCountSchema = z.object({
   warehouseId: z.string().uuid().optional(), // defaults to the default warehouse

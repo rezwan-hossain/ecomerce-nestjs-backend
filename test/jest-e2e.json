@@ -5,5 +5,12 @@
   "testRegex": ".e2e-spec.ts$",
   "transform": {
     "^.+\\.(t|j)s$": "ts-jest"
-  }
+  },
+  "moduleNameMapper": {
+    "^src/(.*)$": "<rootDir>/../src/$1",
+    "^(\\.{1,2}/.*)\\.js$": "$1"
+  },
+  "globalSetup": "<rootDir>/e2e-global-setup.ts",
+  "setupFiles": ["<rootDir>/e2e-env.ts"],
+  "testTimeout": 60000
 }

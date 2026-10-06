@@ -55,6 +55,8 @@ export class StorageLocationsController {
   }
 
   // ── DELETE /api/v1/inventory/locations/:id ──────
+  // Removes the location and its subtree, or deactivates it if it has
+  // history: { result: 'deleted' | 'deactivated' }.
   @Delete(':id')
   remove(@Param('id', ParseUUIDPipe) id: string) {
     return this.locationsService.remove(id);

@@ -38,6 +38,11 @@ model Warehouse {
   // Fulfillment routing: higher priority warehouses are reserved from first
   priority Int @default(0)
 
+  // Floor plan canvas in metres (null = no floor plan yet). Both or neither
+  // (CHECK warehouses_floor_size_check).
+  floorWidth Decimal? @db.Decimal(8, 2) // west to east
+  floorDepth Decimal? @db.Decimal(8, 2) // north to south
+
   inventoryLevels      InventoryLevel[]
   movementsAsSource    InventoryMovement[]   @relation("MovementSourceWarehouse")
   movementsAsDest      InventoryMovement[]   @relation("MovementDestWarehouse")
@@ -145,6 +150,21 @@ model StorageLocation {
   // Walk order for pick lists (lower first)
   pickSequence Int     @default(0)
 
+  // Floor plan placement. Only floor-level items (zones, aisles, racks, docks,
+  // staging and packing areas) are placed; shelves and bins inherit from
+  // their rack. All four null = not on the map (CHECK
+  // storage_locations_map_all_or_none). Layout changes never write movements.
+  mapCenterX  Decimal? @db.Decimal(8, 2) // metres from the west wall
+  mapCenterY  Decimal? @db.Decimal(8, 2) // metres from the north wall
+  mapLength   Decimal? @db.Decimal(8, 2) // along the slots (A → B → C); zones: west-east size
+  mapDepth    Decimal? @db.Decimal(8, 2) // across the rack; zones: north-south size
+  mapRotation Int      @default(0) // clockwise degrees, north up: 0 | 90 | 180 | 270
+
+  // Position inside the parent (NULLs are distinct, so the uniques below
+  // only bind rows that set them)
+  levelNumber Int? // SHELF: 1 = ground level
+  slotIndex   Int? // BIN: 0 = slot A, 1 = slot B, ...
+
   locationStocks  LocationStock[]
   defaultFor      InventoryLevel[]      @relation("DefaultLocation")
   movementsFrom   InventoryMovement[]   @relation("MovementFromLocation")
@@ -158,6 +178,8 @@ model StorageLocation {
 
   @@unique([warehouseId, code])
   @@unique([id, warehouseId]) // target of LocationStock's same-warehouse FK
+  @@unique([parentId, levelNumber])
+  @@unique([parentId, slotIndex])
   @@index([parentId])
   @@index([warehouseId, isActive])
   @@map("storage_locations")

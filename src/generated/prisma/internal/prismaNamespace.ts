@@ -4356,6 +4356,8 @@ export const WarehouseScalarFieldEnum = {
   isActive: 'isActive',
   isDefault: 'isDefault',
   priority: 'priority',
+  floorWidth: 'floorWidth',
+  floorDepth: 'floorDepth',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -4393,6 +4395,13 @@ export const StorageLocationScalarFieldEnum = {
   isPickable: 'isPickable',
   isActive: 'isActive',
   pickSequence: 'pickSequence',
+  mapCenterX: 'mapCenterX',
+  mapCenterY: 'mapCenterY',
+  mapLength: 'mapLength',
+  mapDepth: 'mapDepth',
+  mapRotation: 'mapRotation',
+  levelNumber: 'levelNumber',
+  slotIndex: 'slotIndex',
   note: 'note',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -5284,20 +5293,6 @@ export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel,
 
 
 /**
- * Reference to a field of type 'DateTime'
- */
-export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
-    
-
-
-/**
- * Reference to a field of type 'DateTime[]'
- */
-export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
-    
-
-
-/**
  * Reference to a field of type 'Decimal'
  */
 export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
@@ -5308,6 +5303,20 @@ export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel,
  * Reference to a field of type 'Decimal[]'
  */
 export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>
+    
+
+
+/**
+ * Reference to a field of type 'DateTime'
+ */
+export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+    
+
+
+/**
+ * Reference to a field of type 'DateTime[]'
+ */
+export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
     
 
 
