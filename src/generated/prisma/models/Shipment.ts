@@ -28,21 +28,26 @@ export type AggregateShipment = {
 
 export type ShipmentAvgAggregateOutputType = {
   shippingAmount: runtime.Decimal | null
+  codAmount: runtime.Decimal | null
 }
 
 export type ShipmentSumAggregateOutputType = {
   shippingAmount: runtime.Decimal | null
+  codAmount: runtime.Decimal | null
 }
 
 export type ShipmentMinAggregateOutputType = {
   id: string | null
   orderId: string | null
   status: $Enums.ShipmentStatus | null
-  carrier: string | null
+  carrier: $Enums.CourierCarrier | null
   service: string | null
+  merchantOrderId: string | null
+  consignmentId: string | null
   trackingNumber: string | null
   trackingUrl: string | null
   shippingAmount: runtime.Decimal | null
+  codAmount: runtime.Decimal | null
   shippedAt: Date | null
   deliveredAt: Date | null
   createdAt: Date | null
@@ -53,11 +58,14 @@ export type ShipmentMaxAggregateOutputType = {
   id: string | null
   orderId: string | null
   status: $Enums.ShipmentStatus | null
-  carrier: string | null
+  carrier: $Enums.CourierCarrier | null
   service: string | null
+  merchantOrderId: string | null
+  consignmentId: string | null
   trackingNumber: string | null
   trackingUrl: string | null
   shippingAmount: runtime.Decimal | null
+  codAmount: runtime.Decimal | null
   shippedAt: Date | null
   deliveredAt: Date | null
   createdAt: Date | null
@@ -70,9 +78,12 @@ export type ShipmentCountAggregateOutputType = {
   status: number
   carrier: number
   service: number
+  merchantOrderId: number
+  consignmentId: number
   trackingNumber: number
   trackingUrl: number
   shippingAmount: number
+  codAmount: number
   shippedAt: number
   deliveredAt: number
   metadata: number
@@ -84,10 +95,12 @@ export type ShipmentCountAggregateOutputType = {
 
 export type ShipmentAvgAggregateInputType = {
   shippingAmount?: true
+  codAmount?: true
 }
 
 export type ShipmentSumAggregateInputType = {
   shippingAmount?: true
+  codAmount?: true
 }
 
 export type ShipmentMinAggregateInputType = {
@@ -96,9 +109,12 @@ export type ShipmentMinAggregateInputType = {
   status?: true
   carrier?: true
   service?: true
+  merchantOrderId?: true
+  consignmentId?: true
   trackingNumber?: true
   trackingUrl?: true
   shippingAmount?: true
+  codAmount?: true
   shippedAt?: true
   deliveredAt?: true
   createdAt?: true
@@ -111,9 +127,12 @@ export type ShipmentMaxAggregateInputType = {
   status?: true
   carrier?: true
   service?: true
+  merchantOrderId?: true
+  consignmentId?: true
   trackingNumber?: true
   trackingUrl?: true
   shippingAmount?: true
+  codAmount?: true
   shippedAt?: true
   deliveredAt?: true
   createdAt?: true
@@ -126,9 +145,12 @@ export type ShipmentCountAggregateInputType = {
   status?: true
   carrier?: true
   service?: true
+  merchantOrderId?: true
+  consignmentId?: true
   trackingNumber?: true
   trackingUrl?: true
   shippingAmount?: true
+  codAmount?: true
   shippedAt?: true
   deliveredAt?: true
   metadata?: true
@@ -227,11 +249,14 @@ export type ShipmentGroupByOutputType = {
   id: string
   orderId: string
   status: $Enums.ShipmentStatus
-  carrier: string | null
+  carrier: $Enums.CourierCarrier
   service: string | null
+  merchantOrderId: string | null
+  consignmentId: string | null
   trackingNumber: string | null
   trackingUrl: string | null
   shippingAmount: runtime.Decimal
+  codAmount: runtime.Decimal | null
   shippedAt: Date | null
   deliveredAt: Date | null
   metadata: runtime.JsonValue | null
@@ -266,11 +291,14 @@ export type ShipmentWhereInput = {
   id?: Prisma.StringFilter<"Shipment"> | string
   orderId?: Prisma.StringFilter<"Shipment"> | string
   status?: Prisma.EnumShipmentStatusFilter<"Shipment"> | $Enums.ShipmentStatus
-  carrier?: Prisma.StringNullableFilter<"Shipment"> | string | null
+  carrier?: Prisma.EnumCourierCarrierFilter<"Shipment"> | $Enums.CourierCarrier
   service?: Prisma.StringNullableFilter<"Shipment"> | string | null
+  merchantOrderId?: Prisma.StringNullableFilter<"Shipment"> | string | null
+  consignmentId?: Prisma.StringNullableFilter<"Shipment"> | string | null
   trackingNumber?: Prisma.StringNullableFilter<"Shipment"> | string | null
   trackingUrl?: Prisma.StringNullableFilter<"Shipment"> | string | null
   shippingAmount?: Prisma.DecimalFilter<"Shipment"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  codAmount?: Prisma.DecimalNullableFilter<"Shipment"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shippedAt?: Prisma.DateTimeNullableFilter<"Shipment"> | Date | string | null
   deliveredAt?: Prisma.DateTimeNullableFilter<"Shipment"> | Date | string | null
   metadata?: Prisma.JsonNullableFilter<"Shipment">
@@ -283,11 +311,14 @@ export type ShipmentOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   orderId?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  carrier?: Prisma.SortOrderInput | Prisma.SortOrder
+  carrier?: Prisma.SortOrder
   service?: Prisma.SortOrderInput | Prisma.SortOrder
+  merchantOrderId?: Prisma.SortOrderInput | Prisma.SortOrder
+  consignmentId?: Prisma.SortOrderInput | Prisma.SortOrder
   trackingNumber?: Prisma.SortOrderInput | Prisma.SortOrder
   trackingUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   shippingAmount?: Prisma.SortOrder
+  codAmount?: Prisma.SortOrderInput | Prisma.SortOrder
   shippedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   deliveredAt?: Prisma.SortOrderInput | Prisma.SortOrder
   metadata?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -303,11 +334,14 @@ export type ShipmentWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.ShipmentWhereInput | Prisma.ShipmentWhereInput[]
   orderId?: Prisma.StringFilter<"Shipment"> | string
   status?: Prisma.EnumShipmentStatusFilter<"Shipment"> | $Enums.ShipmentStatus
-  carrier?: Prisma.StringNullableFilter<"Shipment"> | string | null
+  carrier?: Prisma.EnumCourierCarrierFilter<"Shipment"> | $Enums.CourierCarrier
   service?: Prisma.StringNullableFilter<"Shipment"> | string | null
+  merchantOrderId?: Prisma.StringNullableFilter<"Shipment"> | string | null
+  consignmentId?: Prisma.StringNullableFilter<"Shipment"> | string | null
   trackingNumber?: Prisma.StringNullableFilter<"Shipment"> | string | null
   trackingUrl?: Prisma.StringNullableFilter<"Shipment"> | string | null
   shippingAmount?: Prisma.DecimalFilter<"Shipment"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  codAmount?: Prisma.DecimalNullableFilter<"Shipment"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shippedAt?: Prisma.DateTimeNullableFilter<"Shipment"> | Date | string | null
   deliveredAt?: Prisma.DateTimeNullableFilter<"Shipment"> | Date | string | null
   metadata?: Prisma.JsonNullableFilter<"Shipment">
@@ -320,11 +354,14 @@ export type ShipmentOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   orderId?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  carrier?: Prisma.SortOrderInput | Prisma.SortOrder
+  carrier?: Prisma.SortOrder
   service?: Prisma.SortOrderInput | Prisma.SortOrder
+  merchantOrderId?: Prisma.SortOrderInput | Prisma.SortOrder
+  consignmentId?: Prisma.SortOrderInput | Prisma.SortOrder
   trackingNumber?: Prisma.SortOrderInput | Prisma.SortOrder
   trackingUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   shippingAmount?: Prisma.SortOrder
+  codAmount?: Prisma.SortOrderInput | Prisma.SortOrder
   shippedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   deliveredAt?: Prisma.SortOrderInput | Prisma.SortOrder
   metadata?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -344,11 +381,14 @@ export type ShipmentScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"Shipment"> | string
   orderId?: Prisma.StringWithAggregatesFilter<"Shipment"> | string
   status?: Prisma.EnumShipmentStatusWithAggregatesFilter<"Shipment"> | $Enums.ShipmentStatus
-  carrier?: Prisma.StringNullableWithAggregatesFilter<"Shipment"> | string | null
+  carrier?: Prisma.EnumCourierCarrierWithAggregatesFilter<"Shipment"> | $Enums.CourierCarrier
   service?: Prisma.StringNullableWithAggregatesFilter<"Shipment"> | string | null
+  merchantOrderId?: Prisma.StringNullableWithAggregatesFilter<"Shipment"> | string | null
+  consignmentId?: Prisma.StringNullableWithAggregatesFilter<"Shipment"> | string | null
   trackingNumber?: Prisma.StringNullableWithAggregatesFilter<"Shipment"> | string | null
   trackingUrl?: Prisma.StringNullableWithAggregatesFilter<"Shipment"> | string | null
   shippingAmount?: Prisma.DecimalWithAggregatesFilter<"Shipment"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  codAmount?: Prisma.DecimalNullableWithAggregatesFilter<"Shipment"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shippedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Shipment"> | Date | string | null
   deliveredAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Shipment"> | Date | string | null
   metadata?: Prisma.JsonNullableWithAggregatesFilter<"Shipment">
@@ -359,11 +399,14 @@ export type ShipmentScalarWhereWithAggregatesInput = {
 export type ShipmentCreateInput = {
   id?: string
   status?: $Enums.ShipmentStatus
-  carrier?: string | null
+  carrier: $Enums.CourierCarrier
   service?: string | null
+  merchantOrderId?: string | null
+  consignmentId?: string | null
   trackingNumber?: string | null
   trackingUrl?: string | null
   shippingAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  codAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shippedAt?: Date | string | null
   deliveredAt?: Date | string | null
   metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -376,11 +419,14 @@ export type ShipmentUncheckedCreateInput = {
   id?: string
   orderId: string
   status?: $Enums.ShipmentStatus
-  carrier?: string | null
+  carrier: $Enums.CourierCarrier
   service?: string | null
+  merchantOrderId?: string | null
+  consignmentId?: string | null
   trackingNumber?: string | null
   trackingUrl?: string | null
   shippingAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  codAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shippedAt?: Date | string | null
   deliveredAt?: Date | string | null
   metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -391,11 +437,14 @@ export type ShipmentUncheckedCreateInput = {
 export type ShipmentUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumShipmentStatusFieldUpdateOperationsInput | $Enums.ShipmentStatus
-  carrier?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  carrier?: Prisma.EnumCourierCarrierFieldUpdateOperationsInput | $Enums.CourierCarrier
   service?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  merchantOrderId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  consignmentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   trackingNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   trackingUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shippingAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  codAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deliveredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -408,11 +457,14 @@ export type ShipmentUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   orderId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumShipmentStatusFieldUpdateOperationsInput | $Enums.ShipmentStatus
-  carrier?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  carrier?: Prisma.EnumCourierCarrierFieldUpdateOperationsInput | $Enums.CourierCarrier
   service?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  merchantOrderId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  consignmentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   trackingNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   trackingUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shippingAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  codAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deliveredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -424,11 +476,14 @@ export type ShipmentCreateManyInput = {
   id?: string
   orderId: string
   status?: $Enums.ShipmentStatus
-  carrier?: string | null
+  carrier: $Enums.CourierCarrier
   service?: string | null
+  merchantOrderId?: string | null
+  consignmentId?: string | null
   trackingNumber?: string | null
   trackingUrl?: string | null
   shippingAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  codAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shippedAt?: Date | string | null
   deliveredAt?: Date | string | null
   metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -439,11 +494,14 @@ export type ShipmentCreateManyInput = {
 export type ShipmentUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumShipmentStatusFieldUpdateOperationsInput | $Enums.ShipmentStatus
-  carrier?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  carrier?: Prisma.EnumCourierCarrierFieldUpdateOperationsInput | $Enums.CourierCarrier
   service?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  merchantOrderId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  consignmentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   trackingNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   trackingUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shippingAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  codAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deliveredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -455,11 +513,14 @@ export type ShipmentUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   orderId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumShipmentStatusFieldUpdateOperationsInput | $Enums.ShipmentStatus
-  carrier?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  carrier?: Prisma.EnumCourierCarrierFieldUpdateOperationsInput | $Enums.CourierCarrier
   service?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  merchantOrderId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  consignmentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   trackingNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   trackingUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shippingAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  codAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deliveredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -483,9 +544,12 @@ export type ShipmentCountOrderByAggregateInput = {
   status?: Prisma.SortOrder
   carrier?: Prisma.SortOrder
   service?: Prisma.SortOrder
+  merchantOrderId?: Prisma.SortOrder
+  consignmentId?: Prisma.SortOrder
   trackingNumber?: Prisma.SortOrder
   trackingUrl?: Prisma.SortOrder
   shippingAmount?: Prisma.SortOrder
+  codAmount?: Prisma.SortOrder
   shippedAt?: Prisma.SortOrder
   deliveredAt?: Prisma.SortOrder
   metadata?: Prisma.SortOrder
@@ -495,6 +559,7 @@ export type ShipmentCountOrderByAggregateInput = {
 
 export type ShipmentAvgOrderByAggregateInput = {
   shippingAmount?: Prisma.SortOrder
+  codAmount?: Prisma.SortOrder
 }
 
 export type ShipmentMaxOrderByAggregateInput = {
@@ -503,9 +568,12 @@ export type ShipmentMaxOrderByAggregateInput = {
   status?: Prisma.SortOrder
   carrier?: Prisma.SortOrder
   service?: Prisma.SortOrder
+  merchantOrderId?: Prisma.SortOrder
+  consignmentId?: Prisma.SortOrder
   trackingNumber?: Prisma.SortOrder
   trackingUrl?: Prisma.SortOrder
   shippingAmount?: Prisma.SortOrder
+  codAmount?: Prisma.SortOrder
   shippedAt?: Prisma.SortOrder
   deliveredAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -518,9 +586,12 @@ export type ShipmentMinOrderByAggregateInput = {
   status?: Prisma.SortOrder
   carrier?: Prisma.SortOrder
   service?: Prisma.SortOrder
+  merchantOrderId?: Prisma.SortOrder
+  consignmentId?: Prisma.SortOrder
   trackingNumber?: Prisma.SortOrder
   trackingUrl?: Prisma.SortOrder
   shippingAmount?: Prisma.SortOrder
+  codAmount?: Prisma.SortOrder
   shippedAt?: Prisma.SortOrder
   deliveredAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -529,6 +600,7 @@ export type ShipmentMinOrderByAggregateInput = {
 
 export type ShipmentSumOrderByAggregateInput = {
   shippingAmount?: Prisma.SortOrder
+  codAmount?: Prisma.SortOrder
 }
 
 export type ShipmentCreateNestedManyWithoutOrderInput = {
@@ -577,14 +649,21 @@ export type EnumShipmentStatusFieldUpdateOperationsInput = {
   set?: $Enums.ShipmentStatus
 }
 
+export type EnumCourierCarrierFieldUpdateOperationsInput = {
+  set?: $Enums.CourierCarrier
+}
+
 export type ShipmentCreateWithoutOrderInput = {
   id?: string
   status?: $Enums.ShipmentStatus
-  carrier?: string | null
+  carrier: $Enums.CourierCarrier
   service?: string | null
+  merchantOrderId?: string | null
+  consignmentId?: string | null
   trackingNumber?: string | null
   trackingUrl?: string | null
   shippingAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  codAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shippedAt?: Date | string | null
   deliveredAt?: Date | string | null
   metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -595,11 +674,14 @@ export type ShipmentCreateWithoutOrderInput = {
 export type ShipmentUncheckedCreateWithoutOrderInput = {
   id?: string
   status?: $Enums.ShipmentStatus
-  carrier?: string | null
+  carrier: $Enums.CourierCarrier
   service?: string | null
+  merchantOrderId?: string | null
+  consignmentId?: string | null
   trackingNumber?: string | null
   trackingUrl?: string | null
   shippingAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  codAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shippedAt?: Date | string | null
   deliveredAt?: Date | string | null
   metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -640,11 +722,14 @@ export type ShipmentScalarWhereInput = {
   id?: Prisma.StringFilter<"Shipment"> | string
   orderId?: Prisma.StringFilter<"Shipment"> | string
   status?: Prisma.EnumShipmentStatusFilter<"Shipment"> | $Enums.ShipmentStatus
-  carrier?: Prisma.StringNullableFilter<"Shipment"> | string | null
+  carrier?: Prisma.EnumCourierCarrierFilter<"Shipment"> | $Enums.CourierCarrier
   service?: Prisma.StringNullableFilter<"Shipment"> | string | null
+  merchantOrderId?: Prisma.StringNullableFilter<"Shipment"> | string | null
+  consignmentId?: Prisma.StringNullableFilter<"Shipment"> | string | null
   trackingNumber?: Prisma.StringNullableFilter<"Shipment"> | string | null
   trackingUrl?: Prisma.StringNullableFilter<"Shipment"> | string | null
   shippingAmount?: Prisma.DecimalFilter<"Shipment"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  codAmount?: Prisma.DecimalNullableFilter<"Shipment"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shippedAt?: Prisma.DateTimeNullableFilter<"Shipment"> | Date | string | null
   deliveredAt?: Prisma.DateTimeNullableFilter<"Shipment"> | Date | string | null
   metadata?: Prisma.JsonNullableFilter<"Shipment">
@@ -655,11 +740,14 @@ export type ShipmentScalarWhereInput = {
 export type ShipmentCreateManyOrderInput = {
   id?: string
   status?: $Enums.ShipmentStatus
-  carrier?: string | null
+  carrier: $Enums.CourierCarrier
   service?: string | null
+  merchantOrderId?: string | null
+  consignmentId?: string | null
   trackingNumber?: string | null
   trackingUrl?: string | null
   shippingAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  codAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shippedAt?: Date | string | null
   deliveredAt?: Date | string | null
   metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -670,11 +758,14 @@ export type ShipmentCreateManyOrderInput = {
 export type ShipmentUpdateWithoutOrderInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumShipmentStatusFieldUpdateOperationsInput | $Enums.ShipmentStatus
-  carrier?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  carrier?: Prisma.EnumCourierCarrierFieldUpdateOperationsInput | $Enums.CourierCarrier
   service?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  merchantOrderId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  consignmentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   trackingNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   trackingUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shippingAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  codAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deliveredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -685,11 +776,14 @@ export type ShipmentUpdateWithoutOrderInput = {
 export type ShipmentUncheckedUpdateWithoutOrderInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumShipmentStatusFieldUpdateOperationsInput | $Enums.ShipmentStatus
-  carrier?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  carrier?: Prisma.EnumCourierCarrierFieldUpdateOperationsInput | $Enums.CourierCarrier
   service?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  merchantOrderId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  consignmentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   trackingNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   trackingUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shippingAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  codAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deliveredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -700,11 +794,14 @@ export type ShipmentUncheckedUpdateWithoutOrderInput = {
 export type ShipmentUncheckedUpdateManyWithoutOrderInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumShipmentStatusFieldUpdateOperationsInput | $Enums.ShipmentStatus
-  carrier?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  carrier?: Prisma.EnumCourierCarrierFieldUpdateOperationsInput | $Enums.CourierCarrier
   service?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  merchantOrderId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  consignmentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   trackingNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   trackingUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shippingAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  codAmount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deliveredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -720,9 +817,12 @@ export type ShipmentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   status?: boolean
   carrier?: boolean
   service?: boolean
+  merchantOrderId?: boolean
+  consignmentId?: boolean
   trackingNumber?: boolean
   trackingUrl?: boolean
   shippingAmount?: boolean
+  codAmount?: boolean
   shippedAt?: boolean
   deliveredAt?: boolean
   metadata?: boolean
@@ -737,9 +837,12 @@ export type ShipmentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   status?: boolean
   carrier?: boolean
   service?: boolean
+  merchantOrderId?: boolean
+  consignmentId?: boolean
   trackingNumber?: boolean
   trackingUrl?: boolean
   shippingAmount?: boolean
+  codAmount?: boolean
   shippedAt?: boolean
   deliveredAt?: boolean
   metadata?: boolean
@@ -754,9 +857,12 @@ export type ShipmentSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   status?: boolean
   carrier?: boolean
   service?: boolean
+  merchantOrderId?: boolean
+  consignmentId?: boolean
   trackingNumber?: boolean
   trackingUrl?: boolean
   shippingAmount?: boolean
+  codAmount?: boolean
   shippedAt?: boolean
   deliveredAt?: boolean
   metadata?: boolean
@@ -771,9 +877,12 @@ export type ShipmentSelectScalar = {
   status?: boolean
   carrier?: boolean
   service?: boolean
+  merchantOrderId?: boolean
+  consignmentId?: boolean
   trackingNumber?: boolean
   trackingUrl?: boolean
   shippingAmount?: boolean
+  codAmount?: boolean
   shippedAt?: boolean
   deliveredAt?: boolean
   metadata?: boolean
@@ -781,7 +890,7 @@ export type ShipmentSelectScalar = {
   updatedAt?: boolean
 }
 
-export type ShipmentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "orderId" | "status" | "carrier" | "service" | "trackingNumber" | "trackingUrl" | "shippingAmount" | "shippedAt" | "deliveredAt" | "metadata" | "createdAt" | "updatedAt", ExtArgs["result"]["shipment"]>
+export type ShipmentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "orderId" | "status" | "carrier" | "service" | "merchantOrderId" | "consignmentId" | "trackingNumber" | "trackingUrl" | "shippingAmount" | "codAmount" | "shippedAt" | "deliveredAt" | "metadata" | "createdAt" | "updatedAt", ExtArgs["result"]["shipment"]>
 export type ShipmentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   order?: boolean | Prisma.OrderDefaultArgs<ExtArgs>
 }
@@ -801,11 +910,14 @@ export type $ShipmentPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     id: string
     orderId: string
     status: $Enums.ShipmentStatus
-    carrier: string | null
+    carrier: $Enums.CourierCarrier
     service: string | null
+    merchantOrderId: string | null
+    consignmentId: string | null
     trackingNumber: string | null
     trackingUrl: string | null
     shippingAmount: runtime.Decimal
+    codAmount: runtime.Decimal | null
     shippedAt: Date | null
     deliveredAt: Date | null
     metadata: runtime.JsonValue | null
@@ -1238,11 +1350,14 @@ export interface ShipmentFieldRefs {
   readonly id: Prisma.FieldRef<"Shipment", 'String'>
   readonly orderId: Prisma.FieldRef<"Shipment", 'String'>
   readonly status: Prisma.FieldRef<"Shipment", 'ShipmentStatus'>
-  readonly carrier: Prisma.FieldRef<"Shipment", 'String'>
+  readonly carrier: Prisma.FieldRef<"Shipment", 'CourierCarrier'>
   readonly service: Prisma.FieldRef<"Shipment", 'String'>
+  readonly merchantOrderId: Prisma.FieldRef<"Shipment", 'String'>
+  readonly consignmentId: Prisma.FieldRef<"Shipment", 'String'>
   readonly trackingNumber: Prisma.FieldRef<"Shipment", 'String'>
   readonly trackingUrl: Prisma.FieldRef<"Shipment", 'String'>
   readonly shippingAmount: Prisma.FieldRef<"Shipment", 'Decimal'>
+  readonly codAmount: Prisma.FieldRef<"Shipment", 'Decimal'>
   readonly shippedAt: Prisma.FieldRef<"Shipment", 'DateTime'>
   readonly deliveredAt: Prisma.FieldRef<"Shipment", 'DateTime'>
   readonly metadata: Prisma.FieldRef<"Shipment", 'Json'>

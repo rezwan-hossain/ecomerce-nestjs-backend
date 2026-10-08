@@ -255,6 +255,16 @@ export const OrderAddressType = {
 export type OrderAddressType = (typeof OrderAddressType)[keyof typeof OrderAddressType]
 
 
+export const CourierCarrier = {
+  PATHAO: 'PATHAO',
+  REDX: 'REDX',
+  STEADFAST: 'STEADFAST',
+  CARRYBEE: 'CARRYBEE'
+} as const
+
+export type CourierCarrier = (typeof CourierCarrier)[keyof typeof CourierCarrier]
+
+
 export const ShipmentStatus = {
   PENDING: 'PENDING',
   PROCESSING: 'PROCESSING',

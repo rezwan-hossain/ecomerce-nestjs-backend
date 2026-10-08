@@ -688,6 +688,13 @@ export type EnumShipmentStatusFilter<$PrismaModel = never> = {
   not?: Prisma.NestedEnumShipmentStatusFilter<$PrismaModel> | $Enums.ShipmentStatus
 }
 
+export type EnumCourierCarrierFilter<$PrismaModel = never> = {
+  equals?: $Enums.CourierCarrier | Prisma.EnumCourierCarrierFieldRefInput<$PrismaModel>
+  in?: $Enums.CourierCarrier[] | Prisma.ListEnumCourierCarrierFieldRefInput<$PrismaModel>
+  notIn?: $Enums.CourierCarrier[] | Prisma.ListEnumCourierCarrierFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumCourierCarrierFilter<$PrismaModel> | $Enums.CourierCarrier
+}
+
 export type EnumShipmentStatusWithAggregatesFilter<$PrismaModel = never> = {
   equals?: $Enums.ShipmentStatus | Prisma.EnumShipmentStatusFieldRefInput<$PrismaModel>
   in?: $Enums.ShipmentStatus[] | Prisma.ListEnumShipmentStatusFieldRefInput<$PrismaModel>
@@ -696,6 +703,16 @@ export type EnumShipmentStatusWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumShipmentStatusFilter<$PrismaModel>
   _max?: Prisma.NestedEnumShipmentStatusFilter<$PrismaModel>
+}
+
+export type EnumCourierCarrierWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.CourierCarrier | Prisma.EnumCourierCarrierFieldRefInput<$PrismaModel>
+  in?: $Enums.CourierCarrier[] | Prisma.ListEnumCourierCarrierFieldRefInput<$PrismaModel>
+  notIn?: $Enums.CourierCarrier[] | Prisma.ListEnumCourierCarrierFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumCourierCarrierWithAggregatesFilter<$PrismaModel> | $Enums.CourierCarrier
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumCourierCarrierFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumCourierCarrierFilter<$PrismaModel>
 }
 
 export type EnumOrderStatusNullableFilter<$PrismaModel = never> = {
@@ -1528,6 +1545,13 @@ export type NestedEnumShipmentStatusFilter<$PrismaModel = never> = {
   not?: Prisma.NestedEnumShipmentStatusFilter<$PrismaModel> | $Enums.ShipmentStatus
 }
 
+export type NestedEnumCourierCarrierFilter<$PrismaModel = never> = {
+  equals?: $Enums.CourierCarrier | Prisma.EnumCourierCarrierFieldRefInput<$PrismaModel>
+  in?: $Enums.CourierCarrier[] | Prisma.ListEnumCourierCarrierFieldRefInput<$PrismaModel>
+  notIn?: $Enums.CourierCarrier[] | Prisma.ListEnumCourierCarrierFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumCourierCarrierFilter<$PrismaModel> | $Enums.CourierCarrier
+}
+
 export type NestedEnumShipmentStatusWithAggregatesFilter<$PrismaModel = never> = {
   equals?: $Enums.ShipmentStatus | Prisma.EnumShipmentStatusFieldRefInput<$PrismaModel>
   in?: $Enums.ShipmentStatus[] | Prisma.ListEnumShipmentStatusFieldRefInput<$PrismaModel>
@@ -1536,6 +1560,16 @@ export type NestedEnumShipmentStatusWithAggregatesFilter<$PrismaModel = never> =
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumShipmentStatusFilter<$PrismaModel>
   _max?: Prisma.NestedEnumShipmentStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumCourierCarrierWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.CourierCarrier | Prisma.EnumCourierCarrierFieldRefInput<$PrismaModel>
+  in?: $Enums.CourierCarrier[] | Prisma.ListEnumCourierCarrierFieldRefInput<$PrismaModel>
+  notIn?: $Enums.CourierCarrier[] | Prisma.ListEnumCourierCarrierFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumCourierCarrierWithAggregatesFilter<$PrismaModel> | $Enums.CourierCarrier
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumCourierCarrierFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumCourierCarrierFilter<$PrismaModel>
 }
 
 export type NestedEnumOrderStatusNullableFilter<$PrismaModel = never> = {

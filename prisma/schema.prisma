@@ -639,13 +639,22 @@ model Shipment {
 
   status ShipmentStatus @default(PENDING)
 
-  carrier String?
+  carrier CourierCarrier
   service String?
 
+  // Your internal reference sent to the courier
+    merchantOrderId String?
+
+  // Courier/ identifiers
+  consignmentId String?
   trackingNumber String?
   trackingUrl    String?
 
+
   shippingAmount Decimal @default(0) @db.Decimal(12, 2)
+  // Amount the courier should collect
+  codAmount Decimal? @db.Decimal(12, 2)
+
 
   shippedAt   DateTime?
   deliveredAt DateTime?
@@ -659,6 +668,13 @@ model Shipment {
   @@index([trackingNumber])
   @@index([status])
   @@map("shipments")
+}
+
+enum CourierCarrier {
+  PATHAO
+  REDX
+  STEADFAST
+  CARRYBEE
 }
 
 enum ShipmentStatus {
