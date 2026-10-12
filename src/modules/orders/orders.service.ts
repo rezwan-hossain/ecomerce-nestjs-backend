@@ -411,9 +411,12 @@ export class OrdersService {
           status: 'PENDING',
           carrier: dto.carrier,
           service: dto.service,
+          merchantOrderId: dto.merchantOrderId,
+          consignmentId: dto.consignmentId,
           trackingNumber: dto.trackingNumber,
           trackingUrl: dto.trackingUrl,
           shippingAmount: dto.shippingAmount ?? order.shippingAmount,
+          codAmount: dto.codAmount,
           metadata: dto.metadata as Prisma.InputJsonValue | undefined,
         },
       });
@@ -461,12 +464,19 @@ export class OrdersService {
           ...(dto.status && { status: dto.status }),
           ...(dto.carrier !== undefined && { carrier: dto.carrier }),
           ...(dto.service !== undefined && { service: dto.service }),
+          ...(dto.merchantOrderId !== undefined && {
+            merchantOrderId: dto.merchantOrderId,
+          }),
+          ...(dto.consignmentId !== undefined && {
+            consignmentId: dto.consignmentId,
+          }),
           ...(dto.trackingNumber !== undefined && {
             trackingNumber: dto.trackingNumber,
           }),
           ...(dto.trackingUrl !== undefined && {
             trackingUrl: dto.trackingUrl,
           }),
+          ...(dto.codAmount !== undefined && { codAmount: dto.codAmount }),
           ...(dto.metadata !== undefined && {
             metadata: dto.metadata as Prisma.InputJsonValue,
           }),
