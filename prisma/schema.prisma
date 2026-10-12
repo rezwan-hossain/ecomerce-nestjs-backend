@@ -643,18 +643,16 @@ model Shipment {
   service String?
 
   // Your internal reference sent to the courier
-    merchantOrderId String?
+  merchantOrderId String?
 
-  // Courier/ identifiers
-  consignmentId String?
+  // Courier identifiers
+  consignmentId  String?
   trackingNumber String?
   trackingUrl    String?
 
-
-  shippingAmount Decimal @default(0) @db.Decimal(12, 2)
+  shippingAmount Decimal  @default(0) @db.Decimal(12, 2)
   // Amount the courier should collect
-  codAmount Decimal? @db.Decimal(12, 2)
-
+  codAmount      Decimal? @db.Decimal(12, 2)
 
   shippedAt   DateTime?
   deliveredAt DateTime?
