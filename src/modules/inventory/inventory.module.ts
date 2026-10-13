@@ -5,6 +5,8 @@ import { StorageLocationsController } from './storage-locations.controller';
 import { StorageLocationsService } from './storage-locations.service';
 import { FloorPlanController } from './floor-plan.controller';
 import { FloorPlanService } from './floor-plan/floor-plan.service';
+import { WarehousesController } from './warehouses.controller';
+import { WarehousesService } from './warehouses.service';
 import { PrismaModule } from 'src/prisma/prisma.module';
 
 @Module({
@@ -13,8 +15,14 @@ import { PrismaModule } from 'src/prisma/prisma.module';
     InventoryController,
     StorageLocationsController,
     FloorPlanController,
+    WarehousesController,
   ],
-  providers: [InventoryService, StorageLocationsService, FloorPlanService],
+  providers: [
+    InventoryService,
+    StorageLocationsService,
+    FloorPlanService,
+    WarehousesService,
+  ],
   exports: [InventoryService],
 })
 export class InventoryModule {}

@@ -142,7 +142,7 @@ export const MOVEMENT_DIRECTION: Record<MovementType, MovementDirection> = {
 export const UNASSIGNED_LOCATION_CODE = 'UNASSIGNED';
 
 /** Warehouses whose `available` counts towards storefront stock. */
-const SELLABLE_WAREHOUSE_TYPES = ['PHYSICAL', 'STORE'] as const;
+export const SELLABLE_WAREHOUSE_TYPES = ['PHYSICAL', 'STORE'] as const;
 
 /** How long an order may hold stock before the expiry sweep frees it. */
 export const RESERVATION_TTL_MS = 7 * 24 * 60 * 60 * 1000;
