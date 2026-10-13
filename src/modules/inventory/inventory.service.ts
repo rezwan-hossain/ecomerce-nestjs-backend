@@ -23,6 +23,7 @@ import { ProductVariantWhereInput } from 'src/generated/prisma/models/ProductVar
 import { InventoryMovementWhereInput } from 'src/generated/prisma/models/InventoryMovement';
 
 import { planPick as planPickLegs, type PickLeg } from './floor-plan/pick-plan';
+import { nextDocumentNumber } from './documents.util';
 import {
   AdjustStockItemDto,
   BulkAdjustStockDto,
@@ -815,15 +816,7 @@ export class InventoryService {
     tx: Prisma.TransactionClient,
     date = new Date(),
   ): Promise<string> {
-    await tx.$executeRaw`SELECT pg_advisory_xact_lock(hashtext('stock_adjustments.adjustmentNumber'))`;
-    const prefix = `ADJ-${date.getFullYear()}-`;
-    const last = await tx.stockAdjustment.findFirst({
-      where: { adjustmentNumber: { startsWith: prefix } },
-      orderBy: { adjustmentNumber: 'desc' },
-      select: { adjustmentNumber: true },
-    });
-    const n = last ? Number(last.adjustmentNumber.slice(prefix.length)) : 0;
-    return `${prefix}${String((Number.isFinite(n) ? n : 0) + 1).padStart(5, '0')}`;
+    return nextDocumentNumber(tx, 'ADJ', date);
   }
 
   // ─── Reservations ───────────────────────────────

@@ -181,7 +181,7 @@ export const updateThresholdSchema = z.object({
 
 export class UpdateThresholdDto extends createZodDto(updateThresholdSchema) {}
 
-const pagination = {
+export const pagination = {
   page: z.coerce.number().int().min(1).default(1),
   limit: z.coerce.number().int().min(1).max(100).default(20),
 };
@@ -205,7 +205,7 @@ export const inventoryQuerySchema = z.object({
 export class InventoryQueryDto extends createZodDto(inventoryQuerySchema) {}
 
 // "2026-10-02" or "2026-10-02T14:30:00Z" / "...+06:00"
-const isoDateOrDateTime = z.union([
+export const isoDateOrDateTime = z.union([
   z.iso.date(),
   z.iso.datetime({ offset: true }),
 ]);
